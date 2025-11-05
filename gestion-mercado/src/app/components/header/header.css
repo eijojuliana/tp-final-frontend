@@ -1,11 +1,28 @@
 .container {
     display: flex;
-    background-color: var(--color5);
+    background-image: url("https://i.pinimg.com/1200x/58/91/20/589120c15dac8e539d992a5f952f3026.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     align-items: center;
     justify-content: space-between;
     padding: 1rem 5%;
     position: relative;
+    filter: brightness(0.8) contrast(1.1);
+    box-shadow: 0 2px 15px rgba(248, 157, 195, 0.377);
 }
+
+.container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.781); 
+    z-index: -1; 
+}
+
 
 .logo {
     width: 6rem;
@@ -15,10 +32,9 @@
 
 .logo:hover {
     transform: scale(1.10);
-    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.5));
+    filter: drop-shadow(0 0 6px rgba(243, 243, 243, 0.5));
 }
 
-/* Avatar con efecto glow */
 .user-icon {
     border-radius: 50%;
     width: 5.5rem;
@@ -32,7 +48,7 @@
 }
 
 .menu-desplegable {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--color2);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 1rem;

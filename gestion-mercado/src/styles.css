@@ -20,7 +20,7 @@ body, html {
 *, ::before, ::after { box-sizing: border-box; }
 
 main {
-    background-color: var(--color2);
+    background-color: var(--color5);
     min-height: 100%;
 }
 
