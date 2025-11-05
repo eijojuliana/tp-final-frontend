@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Proza+Libre:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+:root {
+    --color1: #FADDD5;
+    --color2: #785D68;
+    --color3: #6D3951;
+    --color4: #4A1B34;
+    --color5: #291C2C;
+    --color6: #130412;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-size: 62.5%;
+    height: 100%;
+}
+
+*, ::before, ::after { box-sizing: border-box; }
+
+main {
+    background-color: var(--color2);
+    min-height: 100%;
+}
+
+a { text-decoration: none; }
+
+li { list-style: none; }
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 3rem;
+    font-weight: 800;
+    font-family: "Kanit", sans-serif;
+}
+
+p, span, label, :placeholder-shown, button, a {
+    font-size: 1.75rem;
+    font-weight: 400;
+    font-family: "Proza Libre", sans-serif;
+    margin: 0;
+}
