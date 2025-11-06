@@ -1,0 +1,10 @@
+<ul>
+  @for(product of products(); track $index) {
+    {{product.nombre}} {{product.categoria}}
+
+    <div class = "actions">
+      <button (click) = "updateProduct(product)">Editar</button>
+      <button (click) = "deleteProduct(product.id)">Eliminar</button>
+    </div>
+  }
+</ul>

@@ -7,7 +7,7 @@ import { Observable, tap } from 'rxjs';
   providedIn: 'root',
 })
 export class ProductService {
-  url = "http://localhost:3000/products"
+  url = "http://localhost:8080/api/productos"
 
   private productState = signal<Producto[]>([]);
   public productos = this.productState.asReadonly();
