@@ -1,0 +1,28 @@
+.tablaPersonas {
+  width: 100%;
+  border-collapse: collapse; /* Para que las líneas de la tabla sean simples */
+  margin-top: 20px;
+}
+
+.tablaPersonas th, .tablaPersonas td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.tablaPersonas th {
+  background-color: #f2f2f2;
+  color: #333;
+  font-weight: bold;
+}
+
+.tablaPersonas tr:nth-child(even) {
+  background-color: #f9f9f9; /* Color de fondo para filas pares */
+}
+
+.alerta-cargando {
+  padding: 10px;
+  background-color: #ffe0b2;
+  border-left: 5px solid #ff9800;
+  color: #333;
+}

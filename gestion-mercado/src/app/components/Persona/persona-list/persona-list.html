@@ -1,0 +1,26 @@
+
+<section class="contenerdorPersonaList">
+
+  
+  <table class="tablaPersoans">
+    <thead class="encabezado">
+      <tr>
+        <th> ID </th>
+        <th> Nombre </th>
+        <th> Edad </th>
+        <th> DNI </th>
+      </tr>
+    </thead>
+    <tbody class="tablaBody">
+      @for (persona of personas(); track $index){
+        <tr>
+          <td>{{ persona.id }}</td>
+          <td>{{ persona.nombre }}</td>
+          <td>{{ persona.edad }}</td>
+          <td>{{ persona.dni }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+</section>
