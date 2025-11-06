@@ -1,6 +1,6 @@
-<h2>{{isEditMode() ? 'Editar Producto' : 'Registrar Producto'}}</h2>
+<h2> {{ isEditMode() ? 'Editar Producto' : 'Registrar Producto' }} </h2>
 
-<form [formGroup]="form" (ngSubmtit)="saveProduct()">
+<form [formGroup]="form" (ngSubmit)="saveProduct()">
   <div>
     <label>Nombre: </label>
     <input type ="text" formControlName="nombre">
@@ -16,7 +16,7 @@
       </button>
   </div>
 
-  @if(isEditMode()){
+  @if (isEditMode()){
         <button type="button" (click)="cancelEdit()">Cancelar</button>
       }
 </form>

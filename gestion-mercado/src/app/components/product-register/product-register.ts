@@ -25,26 +25,21 @@ export class ProductRegister {
 
   constructor() {
     effect(() => {
-      this.productToEdit = this.productService.productToEdit();
-      if(this.productToEdit) {
-        this.isEditMode.set(true);
+      const product = this.productService.productToEdit();
 
+      if (product) {
+        this.productToEdit = product;
+        this.isEditMode.set(true);
         this.form.patchValue({
-          nombre: this.productToEdit.nombre,
-          categoria: this.productToEdit.categoria
+          nombre: product.nombre,
+          categoria: product.categoria
         });
       } else {
         this.isEditMode.set(false);
+        this.productToEdit = null;
         this.form.reset();
       }
-    })
-  }
-
-  handleSubmit() {
-    console.log(this.form.invalid);
-    if(this.form.invalid) return;
-    const product = this.form.value;
-    console.log(product);
+    });
   }
 
   saveProduct() {

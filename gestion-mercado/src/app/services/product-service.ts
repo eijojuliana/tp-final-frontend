@@ -52,7 +52,7 @@ export class ProductService {
     )
   }
 
-  selectUserToEdit(producto:Producto) {
+  selectProductToEdit(producto:Producto) {
     this.productToEditState.set(producto);
   }
 

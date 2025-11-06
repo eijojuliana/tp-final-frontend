@@ -23,7 +23,7 @@ export class ProductList {
   }
 
   updateProduct(producto: any) {
-    this.productService.update(producto);
-    this.router.navigate(['product-register']);
-  }
+  this.productService.selectProductToEdit(producto);
+  this.router.navigate(['product-register/']);
+}
 }
