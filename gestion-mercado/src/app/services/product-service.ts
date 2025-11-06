@@ -51,4 +51,12 @@ export class ProductService {
       })
     )
   }
+
+  selectUserToEdit(producto:Producto) {
+    this.productToEditState.set(producto);
+  }
+
+  clearProductToEdit() {
+    this.productToEditState.set(null)
+  }
 }

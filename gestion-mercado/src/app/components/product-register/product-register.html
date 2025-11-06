@@ -1,0 +1,22 @@
+<h2>{{isEditMode() ? 'Editar Producto' : 'Registrar Producto'}}</h2>
+
+<form [formGroup]="form" (ngSubmtit)="saveProduct()">
+  <div>
+    <label>Nombre: </label>
+    <input type ="text" formControlName="nombre">
+  </div>
+  <div>
+    <label>Categoría: </label>
+    <input type="text" formControlName="categoria">
+  </div>
+
+  <div class = "form-btn">
+    <button type="submit" [disabled]="form.invalid">
+        {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
+      </button>
+  </div>
+
+  @if(isEditMode()){
+        <button type="button" (click)="cancelEdit()">Cancelar</button>
+      }
+</form>
