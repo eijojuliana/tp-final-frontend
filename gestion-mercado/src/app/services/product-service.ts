@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { nuevoProducto, Producto } from '../modules/producto.model';
+import { nuevoProducto, Producto } from '../models/producto.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { Observable, tap } from 'rxjs';
   providedIn: 'root',
 })
 export class ProductService {
-  url = "http://localhost:8080/api/productos"
+  private url = "http://localhost:8080/api/productos"
 
   private productState = signal<Producto[]>([]);
   public productos = this.productState.asReadonly();
@@ -35,18 +35,18 @@ export class ProductService {
     return this.http.delete<Producto>(`${this.url}/${id}`).pipe(
       tap(() => {
         this.productState.update(currentProducts =>
-          currentProducts.filter(product => product.id !== id)
+          currentProducts.filter(product => product.producto_id !== id)
         )
       })
     )
   }
 
   update(productToUpdate:Producto):Observable<Producto> {
-    return this.http.put<Producto>(`${this.url}/${productToUpdate.id}`, productToUpdate).pipe(
+    return this.http.put<Producto>(`${this.url}/${productToUpdate.producto_id}`, productToUpdate).pipe(
       tap(updatedProduct => {
         this.productState.update(currentProduct =>
           currentProduct.map(p =>
-            p.id === updatedProduct.id ? updatedProduct : p)
+            p.producto_id === updatedProduct.producto_id ? updatedProduct : p)
         )
       })
     )
