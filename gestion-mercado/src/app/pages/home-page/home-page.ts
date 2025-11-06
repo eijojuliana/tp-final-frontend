@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { Header } from '../../components/header/header';
-import { Footer } from '../../components/footer/footer';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [Header, Footer],
+  imports: [],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',
 })
