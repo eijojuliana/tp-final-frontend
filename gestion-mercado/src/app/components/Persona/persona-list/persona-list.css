@@ -1,13 +1,14 @@
 .tablaPersonas {
-  width: 100%;
   border-collapse: collapse; /* Para que las líneas de la tabla sean simples */
   margin-top: 20px;
+  
 }
 
 .tablaPersonas th, .tablaPersonas td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
+  
 }
 
 .tablaPersonas th {
