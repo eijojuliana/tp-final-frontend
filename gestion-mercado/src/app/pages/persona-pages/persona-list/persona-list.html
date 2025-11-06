@@ -1,8 +1,8 @@
 
 <section class="contenerdorPersonaList">
 
-  
-  <table class="tablaPersoans">
+
+  <table class="tablaPersonas">
     <thead class="encabezado">
       <tr>
         <th> ID </th>
@@ -14,7 +14,7 @@
     <tbody class="tablaBody">
       @for (persona of personas(); track $index){
         <tr>
-          <td>{{ persona.id }}</td>
+          <td>{{ persona.persona_id }}</td>
           <td>{{ persona.nombre }}</td>
           <td>{{ persona.edad }}</td>
           <td>{{ persona.dni }}</td>

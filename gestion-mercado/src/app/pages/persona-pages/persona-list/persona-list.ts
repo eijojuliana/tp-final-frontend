@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { PersonaService } from '../../persona-service';
+import { PersonaService } from '../../../services/persona-service';
 
 @Component({
   selector: 'app-persona-list',

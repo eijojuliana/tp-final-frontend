@@ -1,14 +1,19 @@
+.contenerdorPersonaList {
+  /* Asegúrate de que no haya un width pequeño aquí */
+  padding: 2rem; /* Opcional: añadir un poco de espacio alrededor */
+}
+
 .tablaPersonas {
   border-collapse: collapse; /* Para que las líneas de la tabla sean simples */
   margin-top: 20px;
-  
+  width: 100%;
 }
 
 .tablaPersonas th, .tablaPersonas td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
-  
+
 }
 
 .tablaPersonas th {

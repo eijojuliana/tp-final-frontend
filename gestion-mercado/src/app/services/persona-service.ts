@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class PersonaService {
-  
+
   private apiUrl = 'http://localhost:8080/api/personas';
 
   private personasState = signal<Persona[]>([]);
@@ -20,7 +20,10 @@ export class PersonaService {
 
   private load() {
     this.http.get<Persona[]>(this.apiUrl).subscribe(
-      data => this.personasState.set(data)
+      data => {
+        console.log(data)
+        this.personasState.set(data)
+      }
     );
   }
 
