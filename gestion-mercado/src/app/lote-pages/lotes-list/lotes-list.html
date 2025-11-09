@@ -1,0 +1,35 @@
+<h2>Listado de Lotes</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Producto</th>
+      <th>Categoría</th>
+      <th>Cantidad Disponible</th>
+      <th>Costo Unitario</th>
+      <th>Fecha de Ingreso</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for(lote of lotes(); track $index) {
+      <tr>
+        <td>{{ lote.lote_id }}</td>
+
+        <td>{{ lote.producto.nombre }}</td>
+        <td>{{ lote.producto.categoria }}</td>
+
+        <td>{{ lote.cantidadDisponible }}</td>
+        <td>${{ lote.costoUnitario }}</td>
+        <td>{{ lote.fechaIngreso }}</td>
+
+        <td>
+          <button type="button" (click)="updateLote(lote)">Editar</button>
+          <button type="button" (click)="deleteLote(lote.lote_id)">Eliminar</button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
