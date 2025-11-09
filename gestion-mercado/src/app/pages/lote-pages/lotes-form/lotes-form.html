@@ -1,0 +1,43 @@
+<h2> {{ isEditMode() ? 'Editar Lote' : 'Registrar Lote' }} </h2>
+
+<form [formGroup]="form" (ngSubmit)="saveLote()">
+
+  <div>
+    <label>Producto: </label>
+    <select formControlName="producto">
+      <option [ngValue]="null" disabled selected>Seleccione un producto</option>
+
+      @for(prod of productos(); track $index) {
+        <option [ngValue]="prod">
+          {{ prod.nombre }} ({{ prod.categoria }})
+        </option>
+      }
+    </select>
+  </div>
+
+  <div>
+    <label>Cantidad Disponible: </label>
+    <input type="number" formControlName="cantidadDisponible">
+  </div>
+
+  <div>
+    <label>Costo Unitario: </label>
+    <input type="number" formControlName="costoUnitario">
+  </div>
+
+  <div>
+    <label>Fecha de Ingreso: </label>
+    <input type="date" formControlName="fechaIngreso">
+  </div>
+
+  <div class="botones">
+    <button type="submit" [disabled]="form.invalid">
+      {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
+    </button>
+
+    @if (isEditMode()) {
+      <button type="button" (click)="cancelEdit()">Cancelar</button>
+    }
+  </div>
+
+</form>

@@ -5,7 +5,8 @@ import { HomePage } from './pages/home-page/home-page';
 import { ProductList } from './pages/product-pages/product-list/product-list';
 import { PersonaList } from './pages/persona-pages/persona-list/persona-list';
 import { ProductRegister } from './components/product-register/product-register';
-import { LotesList } from './lote-pages/lotes-list/lotes-list';
+import { LotesList } from './pages/lote-pages/lotes-list/lotes-list';
+import { LotesForm } from './pages/lote-pages/lotes-form/lotes-form';
 
 export const routes: Routes = [
     // Ruta por defecto que dirige a /login
@@ -21,6 +22,7 @@ export const routes: Routes = [
 
     // Rutas lotes
     { path:'lotes', component: LotesList },
+    { path:'lotes-form', component: LotesForm },
 
     { path: 'personas', component: PersonaList },
 ];
