@@ -24,6 +24,6 @@ export class ProductList {
 
   updateProduct(producto: any) {
   this.productService.selectProductToEdit(producto);
-  this.router.navigate(['product-register/']);
+  this.router.navigate(['/product-register']);
 }
 }

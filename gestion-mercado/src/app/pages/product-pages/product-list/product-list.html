@@ -6,8 +6,8 @@
     <p>{{product.categoria}}</p>
 
     <div class = "actions">
-      <button (click) = "updateProduct(product)">Editar</button>
-      <button (click) = "deleteProduct(product.producto_id)">Eliminar</button>
+      <button type="button" (click)="updateProduct(product)">Editar</button>
+      <button type="button" (click)="deleteProduct(product.producto_id)">Eliminar</button>
     </div>
   }
 </ul>

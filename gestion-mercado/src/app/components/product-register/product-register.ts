@@ -25,18 +25,16 @@ export class ProductRegister {
 
   constructor() {
     effect(() => {
-      const product = this.productService.productToEdit();
+      this.productToEdit = this.productService.productToEdit();
 
-      if (product) {
-        this.productToEdit = product;
+      if (this.productToEdit) {
         this.isEditMode.set(true);
         this.form.patchValue({
-          nombre: product.nombre,
-          categoria: product.categoria
+          nombre: this.productToEdit.nombre,
+          categoria: this.productToEdit.categoria
         });
       } else {
         this.isEditMode.set(false);
-        this.productToEdit = null;
         this.form.reset();
       }
     });
@@ -52,14 +50,15 @@ export class ProductRegister {
       this.productService.update(updatedProduct).subscribe(() => {
         console.log("Producto Actualizado");
         this.productService.clearProductToEdit();
+        this.router.navigate(['/products'])
       });
     } else {
       this.productService.post(formValue).subscribe(() => {
         console.log("Producto Registrado");
         this.form.reset();
+        this.router.navigate(['/products'])
       })
     }
-    this.router.navigate(['/products'])
   }
 
   cancelEdit() {

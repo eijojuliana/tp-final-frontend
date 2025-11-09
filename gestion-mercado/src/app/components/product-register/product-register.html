@@ -10,13 +10,13 @@
     <input type="text" formControlName="categoria">
   </div>
 
-  <div class = "form-btn">
+  <div class = "botones">
     <button type="submit" [disabled]="form.invalid">
         {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
       </button>
-  </div>
 
-  @if (isEditMode()){
+      @if (isEditMode()){
         <button type="button" (click)="cancelEdit()">Cancelar</button>
       }
+  </div>
 </form>

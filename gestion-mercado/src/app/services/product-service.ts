@@ -18,9 +18,9 @@ export class ProductService {
   constructor(private http: HttpClient) { this.load(); }
 
   load() {
-    this.http.get<Producto[]>(this.url).subscribe(data => {
-      this.productState.set(data);
-    })
+    this.http.get<Producto[]>(this.url).subscribe(data =>
+      this.productState.set(data)
+    )
   }
 
   post(product: nuevoProducto):Observable<Producto> {
