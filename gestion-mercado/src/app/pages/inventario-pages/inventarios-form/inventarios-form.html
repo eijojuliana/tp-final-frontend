@@ -1,0 +1,46 @@
+<h2>{{ isEditMode() ? 'Editar Inventario' : 'Registrar Inventario' }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="saveInventario()">
+  <div class = "campo">
+    <label>Producto:</label>
+    <select formControlName="productoId">
+      <option [ngValue]="0" disabled selected>Seleccione un producto</option>
+
+      @for(p of productos(); track $index) {
+        <option [ngValue]="p.producto_id">
+          {{ p.nombre }} ({{ p.categoria }} )
+        </option>
+      }
+    </select>
+  </div>
+
+  <div class = "campo">
+    <label>Cantidad:</label>
+    <input type="number" formControlName="cantidad">
+  </div>
+
+  <div class = "campo">
+    <label>Stock Mínimo:</label>
+    <input type="number" formControlName="stockMin">
+  </div>
+
+  <div class = "campo">
+    <label>Precio Venta:</label>
+    <input type="number" formControlName="precioVenta" step="0.01">
+  </div>
+
+  <div class = "campo">
+    <label>Costo Adquisición:</label>
+    <input type="number" formControlName="costoAdquisicion" step="0.01">
+  </div>
+
+  <div class="botones">
+    <button type="submit" [disabled]="form.invalid">
+      {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
+    </button>
+
+    @if (isEditMode()) {
+      <button type="button" (click)="cancelarUpdate()">Cancelar</button>
+    }
+  </div>
+</form>
