@@ -9,8 +9,11 @@ export interface Lote {
 }
 
 export interface newLote {
-  producto: Producto,
-  cantidadDisponible: number,
-  costoUnitario: number,
+  producto: {
+    nombre: string;
+    categoria: string;
+  };
+  cantidadDisponible: number;
+  costoUnitario: number;
   fechaIngreso: string;
 }

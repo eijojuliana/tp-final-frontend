@@ -42,8 +42,8 @@ export class LoteService {
   }
 
   update(lote:Lote):Observable<Lote> {
-    return this.http.put<Lote>(`${this.url}\${lote.id_lote}`, lote).pipe(
-      tap(updatedLote => 
+    return this.http.put<Lote>(`${this.url}/${lote.lote_id}`, lote).pipe(
+      tap(updatedLote =>
         this.loteState.update(currentLotes =>
           currentLotes.map(l => l.lote_id === updatedLote.lote_id ? updatedLote : l)
         )
@@ -51,7 +51,7 @@ export class LoteService {
     )
   }
 
-  // METODOS PARA EDITAR DESPUES 
+  // METODOS PARA EDITAR DESPUES
   seleccionarLoteToEdit(lote:Lote) {
     this.loteToEditState.set(lote);
   }

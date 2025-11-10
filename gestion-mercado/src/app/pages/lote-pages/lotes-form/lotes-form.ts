@@ -38,7 +38,7 @@ export class LotesForm {
 
       if (this.loteToEdit) {
         this.isEditMode.set(true);
-        
+
         this.form.patchValue({
           producto: this.loteToEdit.producto,
           cantidadDisponible: this.loteToEdit.cantidadDisponible,
@@ -55,19 +55,29 @@ export class LotesForm {
   saveLote() {
     if (this.form.invalid) return;
 
-    const formValue: newLote = this.form.getRawValue();
+    const formValue = this.form.getRawValue();
+
+    // CAMBIAMOS LA FECHA yyyy-MM-dd A dd/MM/yyyy
+    const fechaObj = new Date(formValue.fechaIngreso);
+    const fechaFormateada =
+      fechaObj.getDate().toString().padStart(2, '0') + '/' +
+      (fechaObj.getMonth() + 1).toString().padStart(2, '0') + '/' +
+      fechaObj.getFullYear();
+
+    const dto = {
+      producto: formValue.producto,
+      cantidadDisponible: formValue.cantidadDisponible,
+      costoUnitario: formValue.costoUnitario,
+      fechaIngreso: fechaFormateada
+    };
 
     if (this.isEditMode() && this.loteToEdit) {
-      const updatedLote = { ...this.loteToEdit, ...formValue };
-
-      this.loteService.update(updatedLote).subscribe(() => {
-        console.log("Lote actualizado");
+      this.loteService.update({ ...this.loteToEdit, ...dto }).subscribe(() => {
         this.loteService.limpiarLoteToEdit();
         this.router.navigate(['/lotes']);
       });
     } else {
-      this.loteService.post(formValue).subscribe(() => {
-        console.log("Lote registrado");
+      this.loteService.post(dto).subscribe(() => {
         this.form.reset();
         this.router.navigate(['/lotes']);
       });
