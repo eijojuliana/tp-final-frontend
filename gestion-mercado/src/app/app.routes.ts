@@ -7,6 +7,7 @@ import { PersonaList } from './pages/persona-pages/persona-list/persona-list';
 import { ProductRegister } from './components/product-register/product-register';
 import { LotesList } from './pages/lote-pages/lotes-list/lotes-list';
 import { LotesForm } from './pages/lote-pages/lotes-form/lotes-form';
+import { InventariosList } from './pages/inventario-pages/inventarios-list/inventarios-list';
 
 export const routes: Routes = [
     // Ruta por defecto que dirige a /login
@@ -23,6 +24,9 @@ export const routes: Routes = [
     // Rutas lotes
     { path:'lotes', component: LotesList },
     { path:'lotes-form', component: LotesForm },
+
+    // Rutas inventarios
+    { path:'inventarios', component: InventariosList},
 
     { path: 'personas', component: PersonaList },
 ];
