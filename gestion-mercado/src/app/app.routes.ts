@@ -9,6 +9,7 @@ import { LotesList } from './pages/lote-pages/lotes-list/lotes-list';
 import { LotesForm } from './pages/lote-pages/lotes-form/lotes-form';
 import { InventariosList } from './pages/inventario-pages/inventarios-list/inventarios-list';
 import { InventariosForm } from './pages/inventario-pages/inventarios-form/inventarios-form';
+import { PersonaForm } from './pages/persona-pages/persona-form/persona-form';
 
 export const routes: Routes = [
     // Ruta por defecto que dirige a /login
@@ -31,6 +32,7 @@ export const routes: Routes = [
     { path:'inventarios-form', component:InventariosForm},
 
     { path: 'personas', component: PersonaList },
+    { path:'persona-form',component:PersonaForm}
 ];
 
 @NgModule({
