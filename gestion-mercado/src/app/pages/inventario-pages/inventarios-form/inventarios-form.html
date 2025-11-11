@@ -3,7 +3,7 @@
 <form [formGroup]="form" (ngSubmit)="saveInventario()">
   <div class = "campo">
     <label>Producto:</label>
-    <select formControlName="productoId">
+    <select formControlName="producto_id">
       <option [ngValue]="0" disabled selected>Seleccione un producto</option>
 
       @for(p of productos(); track $index) {

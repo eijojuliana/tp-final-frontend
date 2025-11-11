@@ -22,7 +22,7 @@ export class InventariosForm {
   private inventarioToEdit: Inventario | null = null;
 
   form = this.fb.nonNullable.group({
-    productoId: [0, Validators.required],
+    producto_id: [0, Validators.required],
     cantidad: [0, Validators.required],
     stockMin: [0, Validators.required],
     precioVenta: [0, Validators.required],
@@ -37,7 +37,7 @@ export class InventariosForm {
         this.isEditMode.set(true);
 
         this.form.patchValue({
-          productoId: this.inventarioToEdit.productoId,
+          producto_id: this.inventarioToEdit.producto_id,
           cantidad: this.inventarioToEdit.cantidad,
           stockMin: this.inventarioToEdit.stockMin,
           precioVenta: this.inventarioToEdit.precioVenta,
@@ -54,7 +54,7 @@ export class InventariosForm {
     if (this.form.invalid) return;
 
     const formValue = {...this.form.getRawValue(),
-      productoId: Number(this.form.value.productoId),
+      producto_id: Number(this.form.value.producto_id),
       cantidad: Number(this.form.value.cantidad),
       stockMin: Number(this.form.value.stockMin),
       precioVenta: Number(this.form.value.precioVenta),
