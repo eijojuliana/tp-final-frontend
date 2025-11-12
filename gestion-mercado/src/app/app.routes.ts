@@ -1,10 +1,8 @@
 import { RouterModule, Routes } from '@angular/router';
 import { LoginLayout } from './auth/login-layout/login-layout';
 import { NgModule } from '@angular/core';
-import { HomePage } from './pages/home-page/home-page';
 import { ProductList } from './pages/product-pages/product-list/product-list';
 import { PersonaList } from './pages/persona-pages/persona-list/persona-list';
-import { ProductRegister } from './components/product-register/product-register';
 import { LotesList } from './pages/lote-pages/lotes-list/lotes-list';
 import { LotesForm } from './pages/lote-pages/lotes-form/lotes-form';
 import { InventariosList } from './pages/inventario-pages/inventarios-list/inventarios-list';
@@ -12,33 +10,36 @@ import { InventariosForm } from './pages/inventario-pages/inventarios-form/inven
 import { PersonaForm } from './pages/persona-pages/persona-form/persona-form';
 import { CuentasBancariasList } from './pages/cuentaBancaria-pages/cuentas-bancarias-list/cuentas-bancarias-list';
 import { CuentasBancariasForm } from './pages/cuentaBancaria-pages/cuentas-bancarias-form/cuentas-bancarias-form';
+import { MenuPage } from './pages/menu-page/menu-page';
+import { ProductRegister } from './pages/product-pages/product-form/product-form';
 
 export const routes: Routes = [
-    // Ruta por defecto que dirige a /login
+  // Ruta por defecto que dirige a /login
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-    // Ruta del login
+  // Ruta del login
   { path: 'login', component: LoginLayout },
-    // Ruta para página principal
-    { path: 'home', component: HomePage },
+  // Ruta para página principal
+  { path: 'menu', component: MenuPage },
 
-    // Rutas productos
-    { path: 'products', component: ProductList},
-    { path: 'product-register', component: ProductRegister},
+  // Rutas productos
+  { path: 'menu/productos', component: ProductList},
+  { path: 'menu/productos/form', component: ProductRegister},
 
-    // Rutas lotes
-    { path:'lotes', component: LotesList },
-    { path:'lotes-form', component: LotesForm },
+  // Rutas lotes
+  { path:'menu/lotes', component: LotesList },
+  { path:'menu/lotes/form', component: LotesForm },
 
-    // Rutas inventarios
-    { path:'inventarios', component: InventariosList},
-    { path:'inventarios-form', component:InventariosForm},
+  // Rutas inventarios
+  { path:'menu/inventarios', component: InventariosList},
+  { path:'menu/inventarios/form', component:InventariosForm},
 
-    { path: 'personas', component: PersonaList },
-    { path:'persona-form',component:PersonaForm},
+  // Rutas personas
+  { path:'menu/personas', component: PersonaList },
+  { path:'menu/personas/form',component:PersonaForm},
 
-    // Rutas de Cutnas Bancarias
-    {path:'cuentas-bancarias', component: CuentasBancariasList},
-    {path:'cuentas-bancarias-form', component: CuentasBancariasForm}
+  // Rutas de Cuentas Bancarias
+  {path:'menu/cuentas-bancarias', component: CuentasBancariasList},
+  {path:'menu/cuentas-bancarias/form', component: CuentasBancariasForm}
 ];
 
 @NgModule({

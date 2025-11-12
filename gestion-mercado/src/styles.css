@@ -8,6 +8,18 @@
     --color4: #4A1B34;
     --color5: #291C2C;
     --color6: #130412;
+    /*Otros*/
+    --blanco: white;
+    --blanco-noFulminanteDeOjos: rgb(187, 187, 187);
+    --blanco-semitrans: rgba(255, 255, 255, 0.274);
+    --negro: black;
+    --negro-semitrans: rgba(0, 0, 0, 0.322);
+    --gris: grey;
+
+    --amarillo: rgb(255, 196, 0);
+    --verde: rgb(61, 145, 13);
+    --azul: rgb(27, 65, 190);
+    --rojo: rgb(177, 18, 18);
 }
 
 body, html {
@@ -20,7 +32,8 @@ body, html {
 *, ::before, ::after { box-sizing: border-box; }
 
 main {
-    background-color: var(--color5);
+    background-color: #140f14;
+    padding: 1rem 5%;
     min-height: 100%;
 }
 

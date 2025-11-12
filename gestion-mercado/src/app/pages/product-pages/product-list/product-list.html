@@ -1,5 +1,9 @@
 <h2>PRODUCTOS</h2>
 
+<div class="botones">
+  <button type="button" class="btnAgregar" routerLink="/menu/productos/form"> Agregar </button>
+</div>
+
 <ul>
   @for(product of products(); track $index) {
     <p>{{product.nombre}}</p>

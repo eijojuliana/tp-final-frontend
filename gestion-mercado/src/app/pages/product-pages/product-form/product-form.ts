@@ -1,14 +1,15 @@
-import { Producto, nuevoProducto } from './../../models/producto.model';
-import { ProductService } from './../../services/product-service';
+
 import { Component, effect, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
+import { ProductService } from '../../../services/product-service';
+import { nuevoProducto, Producto } from '../../../models/producto.model';
 
 @Component({
-  selector: 'app-product-register',
+  selector: 'app-product-form',
   imports: [ReactiveFormsModule],
-  templateUrl: './product-register.html',
-  styleUrl: './product-register.css',
+  templateUrl: './product-form.html',
+  styleUrl: './product-form.css',
 })
 export class ProductRegister {
   private fb = inject(FormBuilder);

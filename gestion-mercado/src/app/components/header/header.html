@@ -3,35 +3,41 @@
 </head>
 <header>
   <nav class="container">
-    <img src="https://i.pinimg.com/736x/97/b1/70/97b170d2f8f2dea37c4c465c8c9ceb14.jpg" alt="logo" class = "logo">
+    <div class="header-izq">
+      <img src="https://i.pinimg.com/736x/97/b1/70/97b170d2f8f2dea37c4c465c8c9ceb14.jpg" alt="logo" class = "logo">
+    </div>
 
-    <img src="https://i.pinimg.com/736x/1f/9a/91/1f9a91d7e4bce09f89e82c89e9d40e8c.jpg" alt="" 
-         class = "user-icon icono-perfil-principal" 
-         (click)="toggleMenu()">
+    <div class="header-der">
+      <a routerLink="/menu"> <h1> USEN EL MENU </h1> </a>
 
-    <div class = "menu-desplegable" 
-         [ngClass]="{'abrir-menu': menuAbierto}">
-      <div class = "contenedor-menu">
-        <div class = "user-info">
-          <img src="https://i.pinimg.com/736x/1f/9a/91/1f9a91d7e4bce09f89e82c89e9d40e8c.jpg" alt="" class = "user-icon">
-          <h2>Nombre de Usuario</h2>
-        </div>
-        <hr>
-        <div class="opciones-menu">
-          <div>
-            <span class="material-symbols-outlined">home</span>
-            <p>Inicio</p>
-            <span>></span>
+      <img src="https://i.pinimg.com/736x/1f/9a/91/1f9a91d7e4bce09f89e82c89e9d40e8c.jpg" alt=""
+          class = "user-icon icono-perfil-principal"
+          (click)="toggleMenu()">
+
+      <div class = "menu-desplegable"
+          [ngClass]="{'abrir-menu': menuAbierto}">
+        <div class = "contenedor-menu">
+          <div class = "user-info">
+            <img src="https://i.pinimg.com/736x/1f/9a/91/1f9a91d7e4bce09f89e82c89e9d40e8c.jpg" alt="" class = "user-icon">
+            <h2>Nombre de Usuario</h2>
           </div>
-          <div>
-            <span class="material-symbols-outlined">person_pin</span>
-            <p>Ver perfil</p>
-            <span>></span>
-          </div>
-          <div>
-            <span class="material-symbols-outlined">logout</span>
-            <p>Cerrar Sesión</p>
-            <span>></span>
+          <hr>
+          <div class="opciones-menu">
+            <div>
+              <span class="material-symbols-outlined">home</span>
+              <p>Inicio</p>
+              <span>></span>
+            </div>
+            <div>
+              <span class="material-symbols-outlined">person_pin</span>
+              <p>Ver perfil</p>
+              <span>></span>
+            </div>
+            <div>
+              <span class="material-symbols-outlined">logout</span>
+              <p>Cerrar Sesión</p>
+              <span>></span>
+            </div>
           </div>
         </div>
       </div>
