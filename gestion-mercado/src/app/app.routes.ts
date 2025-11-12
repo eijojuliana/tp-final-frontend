@@ -10,6 +10,8 @@ import { LotesForm } from './pages/lote-pages/lotes-form/lotes-form';
 import { InventariosList } from './pages/inventario-pages/inventarios-list/inventarios-list';
 import { InventariosForm } from './pages/inventario-pages/inventarios-form/inventarios-form';
 import { PersonaForm } from './pages/persona-pages/persona-form/persona-form';
+import { CuentasBancariasList } from './pages/cuentaBancaria-pages/cuentas-bancarias-list/cuentas-bancarias-list';
+import { CuentasBancariasForm } from './pages/cuentaBancaria-pages/cuentas-bancarias-form/cuentas-bancarias-form';
 
 export const routes: Routes = [
     // Ruta por defecto que dirige a /login
@@ -32,7 +34,11 @@ export const routes: Routes = [
     { path:'inventarios-form', component:InventariosForm},
 
     { path: 'personas', component: PersonaList },
-    { path:'persona-form',component:PersonaForm}
+    { path:'persona-form',component:PersonaForm},
+
+    // Rutas de Cutnas Bancarias
+    {path:'cuentas-bancarias', component: CuentasBancariasList},
+    {path:'cuentas-bancarias-form', component: CuentasBancariasForm}
 ];
 
 @NgModule({

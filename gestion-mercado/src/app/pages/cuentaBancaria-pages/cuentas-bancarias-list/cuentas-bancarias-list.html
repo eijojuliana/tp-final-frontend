@@ -1,0 +1,27 @@
+
+<h2>Listado de Cuentas Bancarias</h2>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>CBU</th>
+      <th>Saldo</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (c of cuentasBancarias(); track $index) {
+      <tr>
+        <td>{{c.cuentaBancariaId}}</td>
+        <td>{{c.cbu}}</td>
+        <td>{{c.saldo}}</td>
+
+        <td>
+          <button type="button" (click)="deleteCuentaBancaria(c.cuentaBancariaId)">Eliminar</button>
+          <button type="button" (click)="updateCuentaBancaria(c)">Editar</button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
