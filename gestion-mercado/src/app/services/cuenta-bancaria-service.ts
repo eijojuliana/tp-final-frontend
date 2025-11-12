@@ -13,7 +13,7 @@ export class CuentaBancariaService {
   public cuentasBancarias = this.cuentaBancariaState.asReadonly();
 
   private cuentaBancariaToEditState = signal<CuentaBancaria | null>(null);
-  private cuentaBancariaToEdit = this.cuentaBancariaToEditState.asReadonly();
+  public cuentaBancariaToEdit = this.cuentaBancariaToEditState.asReadonly();
 
   constructor(private http:HttpClient) { this.load(); }
 

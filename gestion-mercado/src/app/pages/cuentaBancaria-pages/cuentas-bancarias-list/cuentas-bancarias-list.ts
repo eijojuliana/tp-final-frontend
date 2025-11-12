@@ -24,7 +24,6 @@ export class CuentasBancariasList {
 
   updateCuentaBancaria(cuentaBancaria:CuentaBancaria) {
     this.cuentaBancariaService.seleccionarCuentaBancariaToEdit(cuentaBancaria);
-    this.router.navigate(['/cuentas-bancarias-form']);
+    this.router.navigate(['menu/cuentas-bancarias/form']);
   }
-
 }
