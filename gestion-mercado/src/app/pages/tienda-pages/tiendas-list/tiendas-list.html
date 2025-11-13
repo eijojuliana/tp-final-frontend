@@ -1,0 +1,17 @@
+<h2>Tienda</h2>
+
+<div>
+  @for (t of tienda(); track $index) {
+  <div>
+    <h3>{{t.nombre}}</h3>
+    <h4>{{t.duenio}}</h4>
+    <p>{{t.direccion}}</p>
+    <p>${{t.caja}}</p>
+  </div>
+
+  <div class="actions">
+      <button (click)="updateTienda(t)">Editar</button>
+      <button (click)="deleteTienda(t.tiendaId)">Eliminar</button>
+    </div>
+  }
+</div>

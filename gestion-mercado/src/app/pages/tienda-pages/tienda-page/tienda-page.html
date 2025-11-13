@@ -1,0 +1,11 @@
+<div class="tienda-page-layout">
+    <div class="tienda-list-panel">
+        <app-tiendas-list></app-tiendas-list>
+    </div>
+
+    @if (tiendaToEdit()) {
+        <div class="tienda-form-panel">
+            <app-tiendas-form></app-tiendas-form>
+        </div>
+    }
+</div>
