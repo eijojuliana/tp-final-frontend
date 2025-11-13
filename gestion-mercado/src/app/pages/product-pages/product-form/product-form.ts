@@ -51,19 +51,19 @@ export class ProductRegister {
       this.productService.update(updatedProduct).subscribe(() => {
         console.log("Producto Actualizado");
         this.productService.clearProductToEdit();
-        this.router.navigate(['/products'])
+        this.router.navigate(['/menu/productos'])
       });
     } else {
       this.productService.post(formValue).subscribe(() => {
         console.log("Producto Registrado");
         this.form.reset();
-        this.router.navigate(['/products'])
+        this.router.navigate(['/menu/productos'])
       })
     }
   }
 
   cancelEdit() {
     this.productService.clearProductToEdit();
-    this.router.navigate(['/products']);
+    this.router.navigate(['/menu/productos']);
   }
 }
