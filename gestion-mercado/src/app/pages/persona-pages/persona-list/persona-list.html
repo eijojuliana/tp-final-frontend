@@ -1,11 +1,9 @@
-
-<section class="contenerdorPersonaList">
-
+<section class="list-container">
   <div class="botones">
-    <button type="button" class="btnAgregar" routerLink="/menu/personas/form"> Agregar </button>
+    <button type="button" class="btn-agregar" routerLink="/menu/personas/form"> Agregar </button>
   </div>
 
-  <table class="tablaPersonas">
+  <table class="tabla">
     <thead class="encabezado">
       <tr>
         <th> ID </th>
@@ -14,6 +12,7 @@
         <th> DNI </th>
       </tr>
     </thead>
+
     <tbody class="tablaBody">
       @for (persona of personas(); track $index){
         <tr>
@@ -24,6 +23,6 @@
         </tr>
       }
     </tbody>
-  </table>
 
+  </table>
 </section>

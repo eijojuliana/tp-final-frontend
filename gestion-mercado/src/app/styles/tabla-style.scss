@@ -1,0 +1,67 @@
+
+// Contenedor principal
+.list-container {
+  padding: 2rem;
+}
+
+// botones
+.botones {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+// Botón de agregar
+.btn-agregar {
+  padding: 0.5rem 1rem;
+  background-color: var(--rosa);
+  color: var(--blanco);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+
+  &:hover {
+    background-color: var(--rosa-oscuro);
+  }
+}
+
+.tabla {
+  border-collapse: collapse;
+  margin-top: 20px;
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+// Estilos para encabezados
+.tabla th,
+.tabla td {
+  border: 1px solid #ddd;
+  padding: 12px 15px;
+  text-align: left;
+}
+
+// Estilos para el encabezado de la tabla
+.encabezado {
+  background-color: #f2f2f2;
+  color: #333;
+  font-weight: bold;
+}
+
+
+.tabla tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.tabla tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+// Estilo de alerta (ej: para cargando/error)
+.alert-box {
+  padding: 10px;
+  background-color: #ffe0b2;
+  border-left: 5px solid #ff9800;
+  color: #333;
+  margin-top: 1rem;
+}

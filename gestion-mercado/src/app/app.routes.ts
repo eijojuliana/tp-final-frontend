@@ -13,6 +13,8 @@ import { CuentasBancariasForm } from './pages/cuentaBancaria-pages/cuentas-banca
 import { MenuPage } from './pages/menu-page/menu-page';
 import { ProductRegister } from './pages/product-pages/product-form/product-form';
 import { TiendaPage } from './pages/tienda-pages/tienda-page/tienda-page';
+import { UsuariosList } from './pages/usuarios-pages/usuarios-list/usuarios-list';
+import { UsuarioForm } from './pages/usuarios-pages/usuario-form/usuario-form';
 
 export const routes: Routes = [
   // Ruta por defecto que dirige a /login
@@ -42,7 +44,12 @@ export const routes: Routes = [
   {path:'menu/cuentas-bancarias', component: CuentasBancariasList},
   {path:'menu/cuentas-bancarias/form', component: CuentasBancariasForm},
 
-  { path:'menu/tienda-page', component: TiendaPage }
+  // Rutas de la Tienda
+  { path:'menu/tienda-page', component: TiendaPage },
+
+  // Rutas usuarios
+  {path:'menu/usuarios', component: UsuariosList},
+  {path:'menu/usuarios/form', component: UsuarioForm},
 ];
 
 @NgModule({

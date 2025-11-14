@@ -1,0 +1,9 @@
+
+
+
+Creamos una carpeta styles porque teniamos un problema.
+Muchos css se repetían, entonces si yo copiaba y pegaba los css iba a ser repetición de "código".
+Para evitar esto y que un solo cambio en las tablas refleje todos los estilos de tablas,
+decidimos investigar como "Extender" estilos.
+
+Por eso la carpeta styles.
