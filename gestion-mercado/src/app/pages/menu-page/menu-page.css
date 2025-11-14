@@ -1,14 +1,13 @@
 .menus {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 18dvw);
+  grid-template-columns: repeat(auto-fit, 15dvw);
   justify-content: space-around;
-  gap: 4rem;
 }
 
 .card {
   position: relative; /* Establece el marco de referencia para las imágenes internas */
-  width: 18dvw;
-  height: 22dvw;
+  width: 13dvw;
+  height: 17dvw;
 }
 
 .card a div {
@@ -16,6 +15,7 @@
   width: 100%;
   height: 100%;
   border-radius: 3rem;
+  box-shadow: var(--sombra-default);
 }
 
 .icon-container {
@@ -33,8 +33,9 @@
 
 .icon {
   /* Tamaño del icon */
-    width: 10dvw;
-    height: 10dvw;
+  width: 8dvw;
+  height: 8dvw;
+  filter: drop-shadow(0 0.41dvw 1px rgba(0, 0, 0, 0.2));
 }
 
 .card p {
@@ -43,17 +44,41 @@
 }
 
 /*COLORES PARA LOS RECUADROS*/
-.card a .personas {
+#personas .personas-recuadro {
   background-color: var(--amarillo);
+  box-shadow: var(--sombra-amarilla);
+  filter: drop-shadow(0 0.6dvw 0px var(--amarillo-oscuro));
 }
-.card a .productos {
+#personas .icon {
+  filter: drop-shadow(0 0.4dvw 0px var(--amarillo-clarito));
+}
+
+#productos .productos-recuadro {
   background-color: var(--verde);
+  box-shadow: var(--sombra-verde);
+  filter: drop-shadow(0 0.6dvw 0px var(--verde-oscuro));
 }
-.card a .usuarios {
+#productos .icon {
+  filter: drop-shadow(0 0.4dvw 0px var(--verde-clarito));
+}
+
+
+#usuarios a .usuarios-recuadro {
   background-color: var(--azul);
+  box-shadow: var(--sombra-azul);
+  filter: drop-shadow(0 0.6dvw 0px var(--azul-oscuro));
 }
-.card a .tienda {
+#usuarios .icon {
+  filter: drop-shadow(0 0.4dvw 0px var(--azul-clarito));
+}
+
+#tienda a .tienda-recuadro {
   background-color: var(--rojo);
+  box-shadow: var(--sombra-roja);
+  filter: drop-shadow(0 0.6dvw 0px var(--rojo-oscuro));
+}
+#tienda .icon {
+  filter: drop-shadow(0 0.4dvw 0px var(--rojo-clarito));
 }
 
 h1, h2, p {

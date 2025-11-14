@@ -16,10 +16,24 @@
     --negro-semitrans: rgba(0, 0, 0, 0.322);
     --gris: grey;
 
-    --amarillo: rgb(255, 196, 0);
+    --amarillo: rgb(233, 191, 6);
+    --amarillo-clarito: rgb(243, 216, 62);
+    --amarillo-oscuro: rgb(146, 95, 0);
     --verde: rgb(61, 145, 13);
+    --verde-clarito: rgb(102, 173, 61);
+    --verde-oscuro: rgb(38, 94, 6);/*editar*/
     --azul: rgb(27, 65, 190);
+    --azul-clarito: rgb(74, 101, 190);
+    --azul-oscuro: rgb(16, 45, 143);/*editar*/
     --rojo: rgb(177, 18, 18);
+    --rojo-clarito: rgb(179, 58, 58);
+    --rojo-oscuro: rgb(122, 11, 11);/*editar*/
+
+    --negro-semitrans: rgba(255, 255, 255, 0.1);
+    --amarillo-semitrans: rgba(255, 196, 0, 0.1);
+    --verde-semitrans: rgba(61, 145, 13, 0.1);
+    --azul-semitrans: rgba(27, 65, 190, 0.1);
+    --rojo-semitrans: rgba(177, 18, 18, 0.1);
 }
 
 body, html {
