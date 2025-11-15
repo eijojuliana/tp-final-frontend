@@ -1,7 +1,8 @@
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TiendaService } from './../../../services/tienda-service';
 import { Component, effect, inject, signal } from '@angular/core';
-import { Tienda } from '../../../models/tienda.model';
+import { NewTienda, Tienda } from '../../../models/tienda.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tiendas-form',
@@ -12,14 +13,16 @@ import { Tienda } from '../../../models/tienda.model';
 export class TiendasForm {
   private tiendaService = inject(TiendaService);
   private fb = inject(FormBuilder);
+  private router = inject(Router);
 
+  isEditMode = signal(false);
   tiendaToEdit: Tienda | null = null;
 
   form = this.fb.nonNullable.group({
     nombre: ['', [Validators.required]],
     direccion: ['', [Validators.required]],
     caja: [0, [Validators.required]],
-    duenio: [0, [Validators.required]]
+    duenioDni: []
   });
 
   constructor() {
@@ -27,25 +30,37 @@ export class TiendasForm {
       this.tiendaToEdit = this.tiendaService.tiendaToEdit();
 
       if (this.tiendaToEdit) {
+        this.isEditMode = signal(true);
         this.form.patchValue({
           nombre: this.tiendaToEdit.nombre,
           direccion: this.tiendaToEdit.direccion,
           caja: this.tiendaToEdit.caja,
-          duenio: this.tiendaToEdit.duenio
         });
+      } else {
+        this.isEditMode = signal(false);
+        this.form .reset();
       }
     });
   }
 
   saveTienda() {
-    if (this.form.invalid || !this.tiendaToEdit) return;
+    if (this.form.invalid) return;
 
-    const updatedTienda: Tienda = {...this.tiendaToEdit,...this.form.getRawValue()};
+    const formValue = this.form.getRawValue() as NewTienda;
 
-    this.tiendaService.update(updatedTienda).subscribe(() => {
-      console.log('Tienda Actualizada');
-      this.tiendaService.limpiarTiendaToEdit();
-    });
+    if(this.isEditMode() && this.tiendaToEdit) {
+      const tiendaId = this.tiendaToEdit.tiendaId;
+      this.tiendaService.update(formValue,tiendaId).subscribe(() => {
+        console.log('Tienda Actualizada');
+        this.tiendaService.limpiarTiendaToEdit();
+      });
+    } else {
+      this.tiendaService.post(formValue).subscribe(() => {
+        console.log("Producto Registrado");
+        this.form.reset();
+        this.router.navigate(['/menu/productos'])
+      })
+    }
   }
 
   cancelarUpdate() {

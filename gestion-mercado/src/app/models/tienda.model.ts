@@ -3,12 +3,12 @@ export interface Tienda {
   nombre: string,
   direccion: string,
   caja: number,
-  duenio: number,
+  duenio: string,
 }
 
-export interface newTienda {
+export interface NewTienda {
   nombre: string,
   direccion: string,
   caja: number,
-  duenio: number,
+  duenioDni?: number,
 }

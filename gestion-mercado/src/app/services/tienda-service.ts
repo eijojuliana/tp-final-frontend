@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { newTienda, Tienda } from '../models/tienda.model';
+import { NewTienda, Tienda } from '../models/tienda.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 
@@ -23,7 +23,7 @@ export class TiendaService {
     )
   }
 
-  post(tienda:newTienda):Observable<Tienda> {
+  post(tienda:NewTienda):Observable<Tienda> {
     return this.http.post<Tienda>(this.url, tienda).pipe(
       tap(newTienda => {
         this.tiendaState.update(currentTiendas => [...currentTiendas, newTienda]);
@@ -41,8 +41,8 @@ export class TiendaService {
     )
   }
 
-  update(tienda:Tienda):Observable<Tienda> {
-    return this.http.put<Tienda>(`${this.url}/${tienda.tiendaId}`, tienda).pipe(
+  update(tienda:NewTienda, tiendaId:number):Observable<Tienda> {
+    return this.http.put<Tienda>(`${this.url}/${tiendaId}`, tienda).pipe(
       tap(tiendaUpdated => {
         this.tiendaState.update(currentTiendas =>
           currentTiendas.map(t => t.tiendaId === tiendaUpdated.tiendaId ? tiendaUpdated : t)
