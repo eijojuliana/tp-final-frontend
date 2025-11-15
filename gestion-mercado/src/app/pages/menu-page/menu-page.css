@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, 15dvw);
   justify-content: space-around;
+  gap: 4rem 0rem;
 }
 
 .card {
