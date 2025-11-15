@@ -25,10 +25,8 @@ export class CuentaBancariaService {
 
   post(cuentaBancaria:newCuentaBancaria):Observable<CuentaBancaria> {
     return this.http.post<CuentaBancaria>(this.url, cuentaBancaria).pipe(
-      tap(newCuentaBancaria => {
-        this.cuentaBancariaState.update(currentCuentas => [...currentCuentas, newCuentaBancaria])
-      })
-    )
+      tap( () => this.load() )
+    );
   }
 
   delete(id:number):Observable<CuentaBancaria> {
@@ -38,16 +36,13 @@ export class CuentaBancariaService {
           currentCuentas.filter(c => c.cuentaBancariaId !== id)
         )
       })
-    )
+    );
   }
 
   update(cuentaBancaria:CuentaBancaria):Observable<CuentaBancaria> {
     return this.http.put<CuentaBancaria>(`${this.url}/${cuentaBancaria.cuentaBancariaId}`, cuentaBancaria).pipe(
-      tap(updatedCuenta => {
-        this.cuentaBancariaState.update(currentCuentas =>
-          currentCuentas.map(c => c.cuentaBancariaId === updatedCuenta.cuentaBancariaId ? updatedCuenta : c))
-      })
-    )
+      tap( () => this.load() )
+    );
   }
 
   seleccionarCuentaBancariaToEdit(cuentaBancaria:CuentaBancaria) {

@@ -33,10 +33,8 @@ export class DuenioService {
 
   post(duenio:NewDuenio) :Observable<Duenio>{
     return this.http.post<Duenio>(this.apiUrl,duenio).pipe(
-    tap(newDuenio =>{
-       this.dueniosState.update(currentDuenio => [...currentDuenio,newDuenio])
-      })
-    )
+      tap( () => this.load() )
+    );
   }
 
   delete(id:number):Observable<Duenio>{
@@ -46,18 +44,13 @@ export class DuenioService {
           currentDuenio.filter(duenio => duenio.duenioId !== id )
         )
       })
-    )
+    );
   }
 
   update (duenioToUpdate:Duenio):Observable<Duenio>{
     return this.http.put<Duenio>(`${this.apiUrl}/${duenioToUpdate.duenioId}`,duenioToUpdate).pipe(
-      tap(updatedDuenio => {
-        this.dueniosState.update(currentDuenio =>
-             currentDuenio.map(p=>
-              p.duenioId=== updatedDuenio.duenioId ? updatedDuenio:p)
-        )
-      })
-    )
+      tap( () => this.load() )
+    );
   }
 
   selectDuenioToEdit(duenio:Duenio){

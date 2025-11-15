@@ -25,10 +25,8 @@ export class EmpleadoService {
 
   agregar(empleado:NewEmpleado): Observable<Empleado>{
     return this.httpClient.post<Empleado>(this.apiurl,empleado).pipe(
-      tap(
-        newEmpleado => this.state.update(currentEmpleados => [...currentEmpleados,newEmpleado])
-      )
-    )
+      tap( () => this.load() )
+    );
   }
 
   eliminar(id:number): Observable<Empleado>{
@@ -45,13 +43,8 @@ export class EmpleadoService {
 
   update(empleado :Empleado): Observable<Empleado>{
     return this.httpClient.put<Empleado>(`${this.apiurl} / ${empleado.empleadoId}`,empleado).pipe(
-     tap(
-      updateEmpleado => this.state.update(currentEmpleado =>
-        currentEmpleado.map( p =>
-           p.empleadoId === updateEmpleado.empleadoId ? updateEmpleado:p )
-      )
-     )
-    )
+     tap( () => this.load() )
+    );
   }
 
   selectEmpleadoToEdit(empleado:Empleado){

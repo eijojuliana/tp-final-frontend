@@ -24,9 +24,7 @@ export class UsuarioService {
 
   post(usuario:NewUsuario):Observable<Usuario>{
     return this.http.post<Usuario>(this.url,usuario).pipe(
-      tap(
-        newUsuario => this.usuariosState.update( usuarios => [...usuarios,newUsuario])
-      )
+      tap( () => this.load() )
     );
   }
 }

@@ -25,10 +25,8 @@ export class ProductService {
 
   post(product: nuevoProducto):Observable<Producto> {
     return this.http.post<Producto>(this.url, product).pipe(
-      tap(nuevoProducto => {
-        this.productState.update(currentProducts => [...currentProducts, nuevoProducto]);
-      })
-    )
+      tap( () => this.load() )
+    );
   }
 
   delete(id:number):Observable<Producto> {
@@ -38,18 +36,13 @@ export class ProductService {
           currentProducts.filter(product => product.producto_id !== id)
         )
       })
-    )
+    );
   }
 
   update(productToUpdate:Producto):Observable<Producto> {
     return this.http.put<Producto>(`${this.url}/${productToUpdate.producto_id}`, productToUpdate).pipe(
-      tap(updatedProduct => {
-        this.productState.update(currentProduct =>
-          currentProduct.map(p =>
-            p.producto_id === updatedProduct.producto_id ? updatedProduct : p)
-        )
-      })
-    )
+      tap( () => this.load() )
+    );
   }
 
   selectProductToEdit(producto:Producto) {

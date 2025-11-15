@@ -25,10 +25,8 @@ export class LoteService {
 
   post(lote:newLote):Observable<Lote> {
     return this.http.post<Lote>(this.url, lote).pipe(
-      tap(newLote => {
-        this.loteState.update(currentLotes => [...currentLotes, newLote])
-      })
-    )
+      tap( () => this.load() )
+    );
   }
 
   delete(id:number):Observable<Lote> {
@@ -43,12 +41,8 @@ export class LoteService {
 
   update(lote:Lote):Observable<Lote> {
     return this.http.put<Lote>(`${this.url}/${lote.lote_id}`, lote).pipe(
-      tap(updatedLote =>
-        this.loteState.update(currentLotes =>
-          currentLotes.map(l => l.lote_id === updatedLote.lote_id ? updatedLote : l)
-        )
-      )
-    )
+      tap( () => this.load() )
+    );
   }
 
   // METODOS PARA EDITAR DESPUES

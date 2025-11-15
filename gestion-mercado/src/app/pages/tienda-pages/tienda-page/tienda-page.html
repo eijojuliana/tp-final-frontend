@@ -3,9 +3,10 @@
         <app-tiendas-list></app-tiendas-list>
     </div>
 
-    @if (tiendaToEdit()) {
-        <div class="tienda-form-panel">
-            <app-tiendas-form></app-tiendas-form>
-        </div>
+    @if (tiendaToEdit() || !tiendaCreada()) {
+      
+      <div class="tienda-form-panel">
+          <app-tiendas-form></app-tiendas-form>
+      </div>
     }
 </div>

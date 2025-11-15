@@ -21,15 +21,13 @@ export class ClienteService {
   load(){
     this.httpClient.get<Cliente[]>(this.apiurls).subscribe(
       data => this.state.set(data)
-    )
+    );
   }
 
   agregar(cliente:NewCliente): Observable<Cliente>{
     return this.httpClient.post<Cliente>(this.apiurls,cliente).pipe(
-      tap(
-        data => this.state.update(currentCliente => [...currentCliente,data])
-      )
-    )
+      tap( () => this.load() )
+    );
   }
 
   eliminar(id:number) : Observable<Cliente>{
@@ -39,17 +37,13 @@ export class ClienteService {
           currentCliente.filter(nuevoCliente => nuevoCliente.clienteId!=id)
         )
       )
-    )
+    );
   }
 
   modificar(cliente:Cliente): Observable<Cliente>{
     return this.httpClient.put<Cliente>(`${this.apiurls}/${cliente.clienteId}`,cliente).pipe(
-      tap( clienteActualizado =>
-       this.state.update(currentClientes => currentClientes.map(
-        c => c.clienteId ===  clienteActualizado.clienteId ? clienteActualizado : c
-       ))
-      )
-    )
+      tap( () => this.load() )
+    );
   }
 
   selectClienteToEdit(cliente:Cliente){

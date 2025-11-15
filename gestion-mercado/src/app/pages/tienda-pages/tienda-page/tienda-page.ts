@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { TiendaService } from '../../../services/tienda-service';
 import { TiendasList } from "../tiendas-list/tiendas-list";
 import { TiendasForm } from "../tiendas-form/tiendas-form";
@@ -12,4 +12,5 @@ import { TiendasForm } from "../tiendas-form/tiendas-form";
 export class TiendaPage {
   private tiendaService = inject(TiendaService);
   public tiendaToEdit = this.tiendaService.tiendaToEdit;
+  public tiendaCreada = signal(this.tiendaService.tiendas.length > 0);
 }

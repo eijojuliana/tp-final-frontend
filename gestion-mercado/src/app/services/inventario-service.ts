@@ -25,10 +25,8 @@ export class InventarioService {
 
   post(inventario:newInventario):Observable<Inventario> {
     return this.http.post<Inventario>(this.url, inventario).pipe(
-      tap(newInventario => {
-        this.inventarioState.update(currentInventarios => [...currentInventarios, newInventario])
-      })
-    )
+      tap( () => this.load() )
+    );
   }
 
   delete(id:number):Observable<Inventario> {
@@ -43,12 +41,8 @@ export class InventarioService {
 
   update(inventario:Inventario):Observable<Inventario> {
     return this.http.put<Inventario>(`${this.url}/${inventario.inventario_id}`, inventario).pipe(
-      tap(updatedInventario => {
-        this.inventarioState.update(currentInventarios =>
-          currentInventarios.map(i => i.inventario_id === updatedInventario.inventario_id ? updatedInventario : i)
-        )
-      })
-    )
+      tap( () => this.load() )
+    );
   }
 
   // MÉTODOS DE DSP JE

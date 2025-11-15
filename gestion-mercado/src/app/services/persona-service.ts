@@ -34,20 +34,14 @@ export class PersonaService {
 
   post(persona:NewPersona) :Observable<Persona>{
     return this.http.post<Persona>(this.apiUrl,persona).pipe(
-    tap(newPersona =>{
-       this.personasState.update(currentPersona => [...currentPersona,newPersona])
-      })
-    )
+    tap( () => this.load() )
+    );
   }
 
   delete(id:number):Observable<Persona>{
     return this.http.delete<Persona>(`${this.apiUrl}/${id}`).pipe(
-      tap(()=> {
-        this.personasState.update(currentPersona =>
-          currentPersona.filter(persona => persona.personaId !== id )
-        )
-      })
-    )
+      tap( () => this.load() )
+    );
   }
 
   update (personaToUpdate:Persona):Observable<Persona>{

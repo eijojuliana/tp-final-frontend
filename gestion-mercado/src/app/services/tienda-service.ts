@@ -25,10 +25,8 @@ export class TiendaService {
 
   post(tienda:NewTienda):Observable<Tienda> {
     return this.http.post<Tienda>(this.url, tienda).pipe(
-      tap(newTienda => {
-        this.tiendaState.update(currentTiendas => [...currentTiendas, newTienda]);
-      })
-    )
+      tap ( () => this.load() )
+    );
   }
 
   delete(id:number):Observable<Tienda> {
@@ -43,12 +41,8 @@ export class TiendaService {
 
   update(tienda:NewTienda, tiendaId:number):Observable<Tienda> {
     return this.http.put<Tienda>(`${this.url}/${tiendaId}`, tienda).pipe(
-      tap(tiendaUpdated => {
-        this.tiendaState.update(currentTiendas =>
-          currentTiendas.map(t => t.tiendaId === tiendaUpdated.tiendaId ? tiendaUpdated : t)
-        )
-      })
-    )
+      tap( () => this.load() )
+    );
   }
 
   seleccionarTiendaToEdit(tienda:Tienda) {
