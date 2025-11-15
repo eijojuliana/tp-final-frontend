@@ -19,6 +19,8 @@ import { DueniosList } from './pages/duenios-pages/duenios-list/duenios-list';
 import { DuenioForm } from './pages/duenios-pages/duenio-form/duenio-form';
 import { EmpleadoList } from './pages/empleado-pages/empleado-list/empleado-list';
 import { EmpleadoForm } from './pages/empleado-pages/empleado-form/empleado-form';
+import { ClienteForm } from './pages/cliente-pages/cliente-form/cliente-form';
+import { ClienteList } from './pages/cliente-pages/cliente-list/cliente-list';
 
 export const routes: Routes = [
   // Ruta por defecto que dirige a /login
@@ -62,6 +64,10 @@ export const routes: Routes = [
   //Rutas empleados
   { path: 'menu/empleados', component: EmpleadoList},
   { path: 'menu/empleados/form', component: EmpleadoForm},
+
+  //Rutas clientes
+  { path: 'menu/clientes', component: ClienteList},
+  { path: 'menu/clientes/form', component: ClienteForm},
 ];
 
 @NgModule({
