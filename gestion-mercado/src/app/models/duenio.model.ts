@@ -7,5 +7,6 @@ export interface Duenio extends Persona {
 }
 
 export interface NewDuenio extends NewPersona{
-  usuario: NewUsuario
+  email:string,
+  contraseña:string
 }

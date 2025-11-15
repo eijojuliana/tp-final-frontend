@@ -1,11 +1,11 @@
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LoteService } from '../../../services/lote-service';
 import { Component, inject } from '@angular/core';
 import { Lote } from '../../../models/lote.model';
 
 @Component({
   selector: 'app-lotes-list',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './lotes-list.html',
   styleUrl: './lotes-list.css',
 })
@@ -24,6 +24,6 @@ export class LotesList {
 
   updateLote(lote:Lote) {
     this.loteService.seleccionarLoteToEdit(lote);
-    this.router.navigate(['/lotes-form']);
+    this.router.navigate(['/menu/lotes/form']);
   }
 }

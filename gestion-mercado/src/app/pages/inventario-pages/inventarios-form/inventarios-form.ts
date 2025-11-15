@@ -67,18 +67,17 @@ export class InventariosForm {
 
       this.inventarioService.update(updated).subscribe(() => {
         this.inventarioService.limpiarInventarioToEdit();
-        this.router.navigate(['/inventarios']);
       });
     } else {
       this.inventarioService.post(formValue).subscribe(() => {
         this.form.reset();
-        this.router.navigate(['/inventarios']);
       });
     }
+    this.router.navigate(['/menu/inventarios']);
   }
 
   cancelarUpdate() {
     this.inventarioService.limpiarInventarioToEdit();
-    this.router.navigate(['/inventarios']);
+    this.router.navigate(['/menu/inventarios']);
   }
 }

@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { CuentaBancariaService } from '../../../services/cuenta-bancaria-service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CuentaBancaria } from '../../../models/cuentaBancaria.model';
 
 @Component({
   selector: 'app-cuentas-bancarias-list',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './cuentas-bancarias-list.html',
   styleUrl: './cuentas-bancarias-list.css',
 })

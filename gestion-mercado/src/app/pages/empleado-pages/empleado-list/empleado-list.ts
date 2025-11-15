@@ -1,10 +1,11 @@
+import { RouterLink } from '@angular/router';
 import { EmpleadoService } from './../../../services/empleado-service';
 import { Component, inject } from '@angular/core';
 
 
 @Component({
   selector: 'app-empleado-list',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './empleado-list.html',
   styleUrl: './empleado-list.css',
 })

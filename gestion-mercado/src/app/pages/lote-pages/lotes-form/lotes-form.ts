@@ -74,18 +74,17 @@ export class LotesForm {
     if (this.isEditMode() && this.loteToEdit) {
       this.loteService.update({ ...this.loteToEdit, ...dto }).subscribe(() => {
         this.loteService.limpiarLoteToEdit();
-        this.router.navigate(['/lotes']);
       });
     } else {
       this.loteService.post(dto).subscribe(() => {
         this.form.reset();
-        this.router.navigate(['/lotes']);
       });
     }
+    this.router.navigate(['/menu/lotes']);
   }
 
   cancelEdit() {
     this.loteService.limpiarLoteToEdit();
-    this.router.navigate(['/lotes']);
+    this.router.navigate(['/menu/lotes']);
   }
 }

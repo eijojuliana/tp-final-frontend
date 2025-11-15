@@ -1,11 +1,10 @@
 import { ProductService } from '../../../services/product-service';
 import { Component, inject } from '@angular/core';
-import { ReactiveFormsModule } from "@angular/forms";
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
-  imports: [ReactiveFormsModule],
+  imports: [RouterLink],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })

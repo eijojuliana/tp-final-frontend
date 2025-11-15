@@ -1,39 +1,41 @@
-<h2>Listado de Lotes</h2>
+<section class="list-container">
+  <h2>Listado de Lotes</h2>
 
-<div class="botones">
-    <button type="button" class="btnAgregar" routerLink="/menu/lotes/form"> Agregar </button>
-</div>
+  <div class="botones">
+      <button type="button" class="btn-agregar" routerLink="/menu/lotes/form"> Agregar </button>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Producto</th>
-      <th>Categoría</th>
-      <th>Cantidad Disponible</th>
-      <th>Costo Unitario</th>
-      <th>Fecha de Ingreso</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    @for(lote of lotes(); track $index) {
+  <table class="tabla">
+    <thead class="encabezado">
       <tr>
-        <td>{{ lote.lote_id }}</td>
-
-        <td>{{ lote.producto.nombre }}</td>
-        <td>{{ lote.producto.categoria }}</td>
-
-        <td>{{ lote.cantidadDisponible }}</td>
-        <td>${{ lote.costoUnitario }}</td>
-        <td>{{ lote.fechaIngreso }}</td>
-
-        <td>
-          <button type="button" (click)="updateLote(lote)">Editar</button>
-          <button type="button" (click)="deleteLote(lote.lote_id)">Eliminar</button>
-        </td>
+        <th>ID</th>
+        <th>Producto</th>
+        <th>Categoría</th>
+        <th>Cantidad Disponible</th>
+        <th>Costo Unitario</th>
+        <th>Fecha de Ingreso</th>
+        <th>Acciones</th>
       </tr>
-    }
-  </tbody>
-</table>
+    </thead>
+
+    <tbody class="tablaBody">
+      @for(lote of lotes(); track $index) {
+        <tr>
+          <td>{{ lote.lote_id }}</td>
+
+          <td>{{ lote.producto.nombre }}</td>
+          <td>{{ lote.producto.categoria }}</td>
+
+          <td>{{ lote.cantidadDisponible }}</td>
+          <td>${{ lote.costoUnitario }}</td>
+          <td>{{ lote.fechaIngreso }}</td>
+
+          <td class="botones">
+            <button class="btnEliminar" type="button" (click)="deleteLote(lote.lote_id)">Eliminar</button>
+            <button class="btnEditar" type="button" (click)="updateLote(lote)">Editar</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>

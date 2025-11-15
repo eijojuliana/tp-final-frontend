@@ -1,1 +1,35 @@
-<p>duenio-form works!</p>
+<h2> {{isEditMode() ? 'Editar Duenio' : 'Registrar Duenio'}} </h2>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+ <div>
+    <label> Nombre: </label>
+    <input type="text" formControlName="nombre">
+ </div>
+ <div>
+   <label> Dni: </label>
+    <input type="number" formControlName="dni">
+ </div>
+ <div>
+   <label> Edad: </label>
+    <input type="number" formControlName="edad">
+ </div>
+ <div>
+   <label> Email: </label>
+    <input type="text" formControlName="email">
+ </div>
+ <div>
+   <label> Contraseña: </label>
+    <input type="text" formControlName="contraseña">
+ </div>
+
+ <div class="botones">
+  <button type="submit"[disabled]="form.invalid">
+   {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
+  </button>
+
+  @if (isEditMode()) {
+    <button type="button" (click)="cancelEdit()" >Cancelar</button>
+  }
+ </div>
+
+</form>

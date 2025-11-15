@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { InventarioService } from '../../../services/inventario-service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Inventario } from '../../../models/inventario.model';
 
 @Component({
   selector: 'app-inventarios-list',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './inventarios-list.html',
   styleUrl: './inventarios-list.css',
 })
@@ -24,6 +24,6 @@ export class InventariosList {
 
   updateInventario(inventario:Inventario) {
     this.inventarioService.seleccionarInventarioToEdit(inventario);
-    this.router.navigate(['/inventarios-form']);
+    this.router.navigate(['/menu/inventarios/form']);
   }
 }

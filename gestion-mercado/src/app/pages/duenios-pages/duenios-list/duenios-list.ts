@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { DuenioService } from '../../../services/duenio-service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-duenio-list',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './duenios-list.html',
   styleUrl: './duenios-list.css',
 })

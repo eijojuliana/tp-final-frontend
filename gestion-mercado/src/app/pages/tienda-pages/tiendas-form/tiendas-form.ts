@@ -51,16 +51,16 @@ export class TiendasForm {
     if(this.isEditMode() && this.tiendaToEdit) {
       const tiendaId = this.tiendaToEdit.tiendaId;
       this.tiendaService.update(formValue,tiendaId).subscribe(() => {
-        console.log('Tienda Actualizada');
+        console.log('Tienda Actualizado');
         this.tiendaService.limpiarTiendaToEdit();
       });
     } else {
       this.tiendaService.post(formValue).subscribe(() => {
-        console.log("Producto Registrado");
+        console.log("Tienda Registrado");
         this.form.reset();
-        this.router.navigate(['/menu/productos'])
       })
     }
+    this.router.navigate(['/menu/tienda'])
   }
 
   cancelarUpdate() {

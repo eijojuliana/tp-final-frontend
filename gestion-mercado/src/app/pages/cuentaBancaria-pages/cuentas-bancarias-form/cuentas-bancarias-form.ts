@@ -51,14 +51,13 @@ export class CuentasBancariasForm {
 
       this.cuentaBancariaService.update(cuentaBancariaUpdated).subscribe(() => {
         console.log("Cuenta Bancaria Actualizada");
-        this.router.navigate(['/menu/cuentas-bancarias']);
       })
     } else {
       this.cuentaBancariaService.post(nuevosValores).subscribe(() => {
         console.log("Cuenta Bancaria Registrada");
-        this.router.navigate(['/menu/cuentas-bancarias']);
       })
     }
+    this.router.navigate(['/menu/cuentas-bancarias']);
   }
 
   cancelarUpdate() {
