@@ -1,5 +1,5 @@
 import { NewPersona, Persona } from "./persona.model";
-import { NewUsuario, Usuario } from "./usuario.model";
+import { NewUsuario } from "./usuario.model";
 
 export interface Duenio extends Persona {
   duenioId: number,

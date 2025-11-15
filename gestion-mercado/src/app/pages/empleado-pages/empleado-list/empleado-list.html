@@ -1,0 +1,36 @@
+<section class="list-container">
+  <div class="botones">
+    <button type="button" class="btn-agregar" routerLink="/menu/empleados/form">Agregar</button>
+  </div>
+
+   <table class="tabla">
+    <thead class="encabezado">
+      <tr>
+        <th> ID Persona </th>
+        <th> ID Empleado </th>
+        <th> Nombre </th>
+        <th> Edad </th>
+        <th> DNI </th>
+        <th> Email </th>
+        <th> Acciones </th>
+      </tr>
+    </thead>
+
+    <tbody class="tablaBody">
+      @for (empleado of empleados(); track $index){
+        <tr>
+          <td>{{ empleado.personaId }}</td>
+          <td>{{ empleado.empleadoId }}</td>
+          <td>{{ empleado.nombre }}</td>
+          <td>{{ empleado.edad }}</td>
+          <td>{{ empleado.dni }}</td>
+          <td>{{ empleado.email }}</td>
+          <td class="botones">
+            <button class="btnEliminar"> Eliminar </button>
+            <button class="btnEditar"> Editar </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>
