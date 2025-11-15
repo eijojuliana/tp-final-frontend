@@ -1,14 +1,14 @@
 
 export interface Persona {
 
-  persona_id: number,
+  personaId: number,
   nombre: string,
   dni: number,
   edad: number
 
 }
 
-export interface newPersona {
+export interface NewPersona {
 
   nombre: string,
   dni: number,

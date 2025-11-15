@@ -1,29 +1,35 @@
 <section class="list-container">
   <div class="botones">
-    <button type="button" class="btn-agregar" routerLink="/menu/personas/form"> Agregar </button>
+    <button type="button" class="btn-agregar" routerLink="/menu/duenios/form"> Agregar </button>
   </div>
 
   <table class="tabla">
     <thead class="encabezado">
       <tr>
-        <th> ID </th>
+        <th> ID Persona </th>
+        <th> ID Duenio </th>
         <th> Nombre </th>
         <th> Edad </th>
         <th> DNI </th>
+        <th> Email </th>
+        <th> Acciones </th>
       </tr>
     </thead>
 
     <tbody class="tablaBody">
-      @for (persona of personas(); track $index){
+      @for (duenio of duenios(); track $index){
         <tr>
-          <td>{{ persona.personaId }}</td>
-          <td>{{ persona.nombre }}</td>
-          <td>{{ persona.edad }}</td>
-          <td>{{ persona.dni }}</td>
+          <td>{{ duenio.personaId }}</td>
+          <td>{{ duenio.duenioId }}</td>
+          <td>{{ duenio.nombre }}</td>
+          <td>{{ duenio.edad }}</td>
+          <td>{{ duenio.dni }}</td>
+          <td>{{ duenio.email }}</td>
           <td class="botones">
             <button class="btnEliminar"> Eliminar </button>
             <button class="btnEditar"> Editar </button>
           </td>
+
         </tr>
       }
     </tbody>

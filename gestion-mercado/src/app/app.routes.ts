@@ -15,6 +15,8 @@ import { ProductRegister } from './pages/product-pages/product-form/product-form
 import { TiendaPage } from './pages/tienda-pages/tienda-page/tienda-page';
 import { UsuariosList } from './pages/usuarios-pages/usuarios-list/usuarios-list';
 import { UsuarioForm } from './pages/usuarios-pages/usuario-form/usuario-form';
+import { DueniosList } from './pages/duenios-pages/duenios-list/duenios-list';
+import { DuenioForm } from './pages/duenios-pages/duenio-form/duenio-form';
 
 export const routes: Routes = [
   // Ruta por defecto que dirige a /login
@@ -45,11 +47,15 @@ export const routes: Routes = [
   {path:'menu/cuentas-bancarias/form', component: CuentasBancariasForm},
 
   // Rutas de la Tienda
-  { path:'menu/tienda-page', component: TiendaPage },
+  { path:'menu/tienda', component: TiendaPage },
 
   // Rutas usuarios
   {path:'menu/usuarios', component: UsuariosList},
   {path:'menu/usuarios/form', component: UsuarioForm},
+
+  // Rutas duenios
+  {path:'menu/duenios', component: DueniosList},
+  {path:'menu/duenios/form', component: DuenioForm},
 ];
 
 @NgModule({

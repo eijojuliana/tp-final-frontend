@@ -2,7 +2,7 @@ import { Component,effect,inject,signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PersonaService } from '../../../services/persona-service';
 import { Router } from '@angular/router';
-import { newPersona, Persona } from '../../../models/persona.model';
+import { NewPersona, Persona } from '../../../models/persona.model';
 
 @Component({
   selector: 'app-persona-form',
@@ -45,7 +45,7 @@ export class PersonaForm {
   savePersona(){
      if(this.form.invalid) return;
 
-     const formValue : newPersona = this.form.getRawValue();
+     const formValue : NewPersona = this.form.getRawValue();
 
      if(this.isEditMode() && this.personaToEdit){
        const updatePersona= {...this.personaToEdit,...formValue};

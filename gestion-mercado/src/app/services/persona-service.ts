@@ -1,4 +1,4 @@
-import { newPersona } from './../models/persona.model';
+import { NewPersona } from './../models/persona.model';
 import { Injectable, signal } from '@angular/core';
 import { Persona } from '../models/persona.model';
 import { HttpClient } from '@angular/common/http';
@@ -32,7 +32,7 @@ export class PersonaService {
     );
   }
 
-  post(persona:newPersona) :Observable<Persona>{
+  post(persona:NewPersona) :Observable<Persona>{
     return this.http.post<Persona>(this.apiUrl,persona).pipe(
     tap(newPersona =>{
        this.personasState.update(currentPersona => [...currentPersona,newPersona])
@@ -44,18 +44,18 @@ export class PersonaService {
     return this.http.delete<Persona>(`${this.apiUrl}/${id}`).pipe(
       tap(()=> {
         this.personasState.update(currentPersona =>
-          currentPersona.filter(persona => persona.persona_id !== id )
+          currentPersona.filter(persona => persona.personaId !== id )
         )
       })
     )
   }
 
   update (personaToUpdate:Persona):Observable<Persona>{
-    return this.http.put<Persona>(`${this.apiUrl}/${personaToUpdate.persona_id}`,personaToUpdate).pipe(
+    return this.http.put<Persona>(`${this.apiUrl}/${personaToUpdate.personaId}`,personaToUpdate).pipe(
       tap(updatedPersona => {
         this.personasState.update(currentPersona =>
              currentPersona.map(p=>
-              p.persona_id=== updatedPersona.persona_id ? updatedPersona:p)
+              p.personaId=== updatedPersona.personaId ? updatedPersona:p)
         )
       })
     )
