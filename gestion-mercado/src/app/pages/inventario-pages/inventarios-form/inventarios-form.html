@@ -12,26 +12,41 @@
         </option>
       }
     </select>
+    @if (form.get('producto_id')?.invalid && form.get('producto_id')?.touched) {
+      <span class = "error">El producto es requerido.</span>
+    }
   </div>
 
   <div class = "campo">
     <label>Cantidad:</label>
     <input type="number" formControlName="cantidad">
+    @if (form.get('cantidad')?.invalid && form.get('cantidad')?.touched) {
+      <span class = "error">La cantidad del Inventario es requerida.</span>
+    }
   </div>
 
   <div class = "campo">
     <label>Stock Mínimo:</label>
     <input type="number" formControlName="stockMin">
+    @if (form.get('stockMin')?.invalid && form.get('stockMin')?.touched) {
+      <span class = "error">El stock mínimo es requerido.</span>
+    }
   </div>
 
   <div class = "campo">
     <label>Precio Venta:</label>
     <input type="number" formControlName="precioVenta" step="0.01">
+    @if (form.get('precioVenta')?.invalid && form.get('precioVenta')?.touched) {
+      <span class = "error">El precio de venta debe ser superior a cero (0)</span>
+    }
   </div>
 
   <div class = "campo">
     <label>Costo Adquisición:</label>
     <input type="number" formControlName="costoAdquisicion" step="0.01">
+    @if (form.get('costoAdquisicion')?.invalid && form.get('costoAdquisicion')?.touched) {
+      <span class = "error">El costo de adquisición debe ser superior a cero (0).</span>
+    }
   </div>
 
   <div class="botones">

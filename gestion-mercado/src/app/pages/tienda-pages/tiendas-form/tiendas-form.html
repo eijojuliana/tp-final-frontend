@@ -1,21 +1,33 @@
 <h2> {{ isEditMode() ? 'Editar Tienda' : 'Registrar Tienda' }} </h2>
 
 <form [formGroup]="form" (ngSubmit)="saveTienda()">
-  <div>
+  <div class = "campo">
     <label>Nombre: </label>
     <input type="text" formControlName="nombre" />
+    @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
+      <span class = "error">El nombre de la Tienda es requerido.</span>
+    }
   </div>
-  <div>
+  <div class = "campo">
     <label>Dirección: </label>
     <input type="text" formControlName="direccion" />
+    @if (form.get('direccion')?.invalid && form.get('direccion')?.touched) {
+      <span class = "error">La dirección es requerida.</span>
+    }
   </div>
-  <div>
+  <div class = "campo">
     <label>Caja: </label>
     <input type="number" formControlName="caja" />
+    @if (form.get('caja')?.invalid && form.get('caja')?.touched) {
+      <span class = "error">El monto de caja es requerido.</span>
+    }
   </div>
-  <div>
+  <div class = "campo">
     <label>Dni del Dueño: </label>
-    <input type="number" formControlName="duenioDni" />
+    <input type="number" formControlName="duenioDni" min = 0/>
+    @if (form.get('duenioDni')?.invalid && form.get('duenioDni')?.touched) {
+      <span class = "error">El dueño es requerido.</span>
+    }
   </div>
 
   <div class="botones">

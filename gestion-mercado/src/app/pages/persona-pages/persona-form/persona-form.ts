@@ -20,8 +20,8 @@ export class PersonaForm {
 
   form = this.fb.nonNullable.group({
     nombre: ['', [Validators.required]],
-    dni: [0, [Validators.required]],
-    edad: [0, [Validators.required]],
+    dni: [0, [Validators.required, Validators.pattern(/^\d{7,}$/)]],
+    edad: [0, [Validators.required, Validators.min(18)]],
   });
 
   constructor() {

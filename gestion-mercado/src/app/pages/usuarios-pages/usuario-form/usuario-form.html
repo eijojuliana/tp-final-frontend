@@ -4,10 +4,16 @@
  <div>
     <label>Email: </label>
     <input type="text" formControlName="email">
+    @if (form.get('email')?.invalid && form.get('email')?.touched) {
+      <span class = "error">El email es requerido en el formato correcto.</span>
+    }
  </div>
  <div>
    <label>Contraseña: </label>
     <input type="text" formControlName="contraseña">
+    @if (form.get('contraseña')?.invalid && form.get('contraseña')?.touched) {
+      <span class = "error">La contraseña es requerida.</span>
+    }
  </div>
 
  <div class="botones">

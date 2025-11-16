@@ -1,13 +1,19 @@
 <h2> {{ isEditMode() ? 'Editar Producto' : 'Registrar Producto' }} </h2>
 
 <form [formGroup]="form" (ngSubmit)="saveProduct()">
-  <div>
+  <div class = "campo">
     <label>Nombre: </label>
     <input type ="text" formControlName="nombre">
+    @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
+      <span class = "error">El nombre del producto es requerido.</span>
+    }
   </div>
-  <div>
+  <div class = "campo">
     <label>Categoría: </label>
     <input type="text" formControlName="categoria">
+    @if (form.get('categoria')?.invalid && form.get('categoria')?.touched) {
+      <span class = "error">La categoría del producto es requerido.</span>
+    }
   </div>
 
   <div class = "botones">

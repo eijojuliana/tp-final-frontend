@@ -28,7 +28,7 @@ export class LotesForm {
   form = this.fb.nonNullable.group({
     producto: [undefined as unknown as Producto, Validators.required],
     cantidadDisponible: [0, Validators.required],
-    costoUnitario: [0, Validators.required],
+    costoUnitario: [0, [Validators.required, Validators.min(1)]],
     fechaIngreso: ['', Validators.required],
   });
 

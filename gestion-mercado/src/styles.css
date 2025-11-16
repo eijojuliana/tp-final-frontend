@@ -71,3 +71,26 @@ p, span, label, :placeholder-shown, button, a, th, td {
     font-family: "Proza Libre", sans-serif;
     margin: 0;
 }
+
+/* --- pruebas para form (los demonios de mi cabeza debaten si esto va acá o en cada form.css debido a que sería código repetido) ---*/
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-left: 2rem;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+}
+.error {
+  background-color: var(--rojo-semitrans);
+  color: var(--rojo-clarito);
+  border: solid var(--rojo-clarito) 0.25rem;
+  border-radius: 2.5rem;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+}

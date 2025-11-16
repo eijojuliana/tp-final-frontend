@@ -22,11 +22,11 @@ export class InventariosForm {
   private inventarioToEdit: Inventario | null = null;
 
   form = this.fb.nonNullable.group({
-    producto_id: [0, Validators.required],
+    producto_id: [0, [Validators.required, Validators.min(1)]],
     cantidad: [0, Validators.required],
     stockMin: [0, Validators.required],
-    precioVenta: [0, Validators.required],
-    costoAdquisicion: [0, Validators.required],
+    precioVenta: [0, [Validators.required, Validators.min(0.01)]],
+    costoAdquisicion: [0, [Validators.required, Validators.min(0.01)]]
   });
 
   constructor() {

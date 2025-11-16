@@ -20,7 +20,7 @@ export class CuentasBancariasForm {
   private cuentaBancariaToEdit: CuentaBancaria | null = null
 
   form = this.fb.nonNullable.group({
-    cbu: [0, [Validators.required]],
+    cbu: [0, [Validators.required, Validators.min(1)]],
     saldo: [0, [Validators.required]]
   });
 
