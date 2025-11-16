@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { TiendaService } from '../../../services/tienda-service';
 import { Router } from '@angular/router';
 import { Tienda } from '../../../models/tienda.model';
@@ -10,6 +10,7 @@ import { Tienda } from '../../../models/tienda.model';
   styleUrl: './tiendas-list.css',
 })
 export class TiendasList {
+
   private tiendaService = inject(TiendaService);
   public tienda = this.tiendaService.tiendas;
 

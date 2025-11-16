@@ -45,26 +45,26 @@
 }
 
 /*COLORES PARA LOS RECUADROS*/
-#personas .personas-recuadro {
+#personas .recuadro, #duenios .recuadro, #empleados .recuadro, #clientes .recuadro {
   background-color: var(--amarillo);
   box-shadow: var(--sombra-amarilla);
   filter: drop-shadow(0 0.6dvw 0px var(--amarillo-oscuro));
 }
-#personas .icon {
+#personas .icon, #duenios .icon, #empleados .icon, #clientes .icon {
   filter: drop-shadow(0 0.4dvw 0px var(--amarillo-clarito));
 }
 
-#productos .productos-recuadro {
+#productos .recuadro, #lotes .recuadro, #inventarios .recuadro {
   background-color: var(--verde);
   box-shadow: var(--sombra-verde);
   filter: drop-shadow(0 0.6dvw 0px var(--verde-oscuro));
 }
-#productos .icon {
+#productos .icon, #lotes .icon, #inventarios .icon {
   filter: drop-shadow(0 0.4dvw 0px var(--verde-clarito));
 }
 
 
-#usuarios a .usuarios-recuadro {
+#usuarios .recuadro {
   background-color: var(--azul);
   box-shadow: var(--sombra-azul);
   filter: drop-shadow(0 0.6dvw 0px var(--azul-oscuro));
@@ -73,7 +73,7 @@
   filter: drop-shadow(0 0.4dvw 0px var(--azul-clarito));
 }
 
-#tienda a .tienda-recuadro {
+#tienda .recuadro {
   background-color: var(--rojo);
   box-shadow: var(--sombra-roja);
   filter: drop-shadow(0 0.6dvw 0px var(--rojo-oscuro));
