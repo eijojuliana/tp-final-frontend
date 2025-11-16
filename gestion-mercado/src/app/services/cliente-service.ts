@@ -31,7 +31,7 @@ export class ClienteService {
   }
 
   eliminar(id:number) : Observable<Cliente>{
-    return this.httpClient.delete<Cliente>(`${this.apiurls} / ${id}`).pipe(
+    return this.httpClient.delete<Cliente>(`${this.apiurls}/${id}`).pipe(
       tap(
         () => this.state.update(currentCliente =>
           currentCliente.filter(nuevoCliente => nuevoCliente.clienteId!=id)

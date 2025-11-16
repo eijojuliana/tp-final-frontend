@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { ClienteService } from '../../../services/cliente-service';
 import { Router, RouterLink } from '@angular/router';
 
@@ -14,6 +14,19 @@ clientes=this.service.clientes;
 router=inject(Router);
 
 
+ filtro = signal('');
+  atributo = signal<'nombre' | 'dni'|'edad'>('nombre');
+
+  clientesFiltrados = computed(() => {
+    const f = this.filtro().toLowerCase().trim();
+    const attr = this.atributo();
+
+    return this.clientes().filter(c =>
+      String((c as any)[attr]).toLowerCase().includes(f)
+    );
+  });
+
+
 eliminarCliente(id:number){
   if(confirm("¿Desea eliminar este cliente?")){
   this.service.eliminar(id).subscribe(()=>{
@@ -22,10 +35,10 @@ eliminarCliente(id:number){
   }
 }
 
-
-
-
-
+modificarCliente(cliente:any){
+  this.service.selectClienteToEdit(cliente);
+  this.router.navigate(['menu/clientes/form']);
+}
 
 
 
