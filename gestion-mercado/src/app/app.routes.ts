@@ -23,6 +23,8 @@ import { ClienteForm } from './pages/cliente-pages/cliente-form/cliente-form';
 import { ClienteList } from './pages/cliente-pages/cliente-list/cliente-list';
 import { TransaccionesList } from './pages/transacciones-pages/transacciones-list/transacciones-list';
 import { TransaccionForm } from './pages/transacciones-pages/transaccion-form/transaccion-form';
+import { PedidosList } from './pages/pedido-pages/pedidos-list/pedidos-list';
+import { PedidosForm } from './pages/pedido-pages/pedidos-form/pedidos-form';
 
 export const routes: Routes = [
   // Ruta por defecto que dirige a /login
@@ -71,9 +73,13 @@ export const routes: Routes = [
   { path: 'menu/clientes', component: ClienteList},
   { path: 'menu/clientes/form', component: ClienteForm},
 
-  //Rutas clientes
+  //Rutas transacciones
   { path: 'menu/transacciones', component: TransaccionesList},
   { path: 'menu/transacciones/form', component: TransaccionForm},
+
+  //Rutas pedidos
+  { path: 'menu/pedidos', component: PedidosList},
+  { path: 'menu/pedidos/form', component: PedidosForm},
 ];
 
 @NgModule({

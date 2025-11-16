@@ -73,12 +73,12 @@
   filter: drop-shadow(0 0.4dvw 0px var(--azul-clarito));
 }
 
-#tienda .recuadro {
+#tienda .recuadro, #pedidos .recuadro {
   background-color: var(--rojo);
   box-shadow: var(--sombra-roja);
   filter: drop-shadow(0 0.6dvw 0px var(--rojo-oscuro));
 }
-#tienda .icon {
+#tienda .icon, #pedidos .icon {
   filter: drop-shadow(0 0.4dvw 0px var(--rojo-clarito));
 }
 

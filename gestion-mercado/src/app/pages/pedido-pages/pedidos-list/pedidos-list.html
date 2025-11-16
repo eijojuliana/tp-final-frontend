@@ -1,0 +1,38 @@
+<section class="list-container">
+  <div class="botones">
+    <button type="button" class="btn-agregar" routerLink="/menu/pedidos/form"> Registrar PEDIDO </button>
+  </div>
+
+  <table class="tabla">
+    <thead class="encabezado">
+      <tr>
+        <th> Pedido ID </th>
+        <th> Transacción ID </th>
+        <th> Tipo </th>
+        <th> Fecha </th>
+        <th> Tipo Pedido </th>
+        <th> Total </th>
+        <th> Acciones </th>
+      </tr>
+    </thead>
+
+    <tbody class="tablaBody">
+      @for (pedido of pedidos(); track $index){
+        <tr>
+          <td>{{ pedido.pedidoId }}</td>
+          <td>{{ pedido.transaccion.transaccion_id}}</td>
+          <td>{{ pedido.transaccion.tipo }}</td>
+          <td>{{ pedido.transaccion.fecha }}</td>
+          <td>{{ pedido.tipo }}</td>
+          <td>{{ pedido.transaccion.monto }}</td>
+          <td class="botones">
+            <button class="btnDetalle"> Detalle </button>
+            <button class="btnEliminar"> Eliminar </button>
+            <button class="btnEditar"> Editar </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+
+  </table>
+</section>

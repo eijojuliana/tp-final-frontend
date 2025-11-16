@@ -1,0 +1,55 @@
+<h2> {{ isEditMode() ? 'Editar Lote' : 'Registrar Lote' }} </h2>
+
+<form [formGroup]="form" (ngSubmit)="savePedido()">
+
+  <div>
+    <label>Tipo de Pedido: </label>
+    <select formControlName="tipoPedido">
+      <option [ngValue]="null" disabled selected>Seleccione el Tipo</option>
+      <option value="COMPRA">COMPRA</option>
+      <option value="VENTA">VENTA</option>
+    </select>
+  </div>
+
+  <div class="campo">
+    <label>Método de Pago: </label>
+    <select formControlName="tipoTransaccion">
+      <option [ngValue]="null" disabled selected>Seleccione el Método</option>
+      <option value="EFECTIVO">EFECTIVO</option>
+      <option value="DEBITO">DÉBITO</option>
+      </select>
+  </div>
+
+  <div class="campo">
+    <label>
+      @if (form.get('tipoPedido')?.value === 'VENTA') { Cliente:}
+      @else { Cuenta Bancaria (Tienda): }
+    </label>
+    <input type="number" formControlName="origen_id">
+  </div>
+
+  @if (form.get('tipoPedido')?.value === 'COMPRA') {
+    <div class="campo">
+      <label>Proveedor:</label>
+      <select formControlName="destino_id">
+        <option [ngValue]="null" disabled selected>Seleccione un proveedor</option>
+        @for(prov of proveedores(); track $index) {
+          <option [ngValue]="prov.proveedorId">
+            {{ prov.nombre }}
+          </option>
+        }
+      </select>
+    </div>
+  }
+
+  <div class="botones">
+    <button type="submit" [disabled]="form.invalid">
+      {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
+    </button>
+
+    @if (isEditMode()) {
+      <button type="button" (click)="cancelEdit()">Cancelar</button>
+    }
+  </div>
+
+</form>
