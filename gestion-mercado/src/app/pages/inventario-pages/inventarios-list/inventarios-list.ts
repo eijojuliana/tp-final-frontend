@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { InventarioService } from '../../../services/inventario-service';
 import { Router, RouterLink } from '@angular/router';
 import { Inventario } from '../../../models/inventario.model';
@@ -13,6 +13,18 @@ export class InventariosList {
   private inventarioService = inject(InventarioService);
   private router = inject(Router);
   inventarios = this.inventarioService.inventarios;
+
+  filtro = signal('');
+  atributo = signal<'cantidad' | 'producto_id' | 'stockMin' | 'precioVenta' | 'costoAdquisición'>('cantidad');
+
+  inventariosFiltrados = computed(() => {
+    const f = this.filtro().toLowerCase().trim();
+    const attr = this.atributo();
+
+    return this.inventarios().filter(i => {
+      return String((i as any)[attr]).toLowerCase().includes(f);
+    });
+  });
 
   deleteInventario(id:number) {
     if(confirm("¿Desea eliminar?")) {

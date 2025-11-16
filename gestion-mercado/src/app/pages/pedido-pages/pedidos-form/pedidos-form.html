@@ -1,14 +1,17 @@
-<h2> {{ isEditMode() ? 'Editar Lote' : 'Registrar Lote' }} </h2>
+<h2> {{ isEditMode() ? 'Editar Pedido' : 'Registrar Pedido' }} </h2>
 
 <form [formGroup]="form" (ngSubmit)="savePedido()">
 
-  <div>
+  <div class = "campo">
     <label>Tipo de Pedido: </label>
     <select formControlName="tipoPedido">
       <option [ngValue]="null" disabled selected>Seleccione el Tipo</option>
       <option value="COMPRA">COMPRA</option>
       <option value="VENTA">VENTA</option>
     </select>
+    @if (form.get('tipoPedido')?.invalid && form.get('tipoPedido')?.touched) {
+      <span class = "error">El tipo de pedido es requerido.</span>
+    }
   </div>
 
   <div class="campo">
@@ -18,6 +21,9 @@
       <option value="EFECTIVO">EFECTIVO</option>
       <option value="DEBITO">DÉBITO</option>
       </select>
+      @if (form.get('tipoTransaccion')?.invalid && form.get('tipoTransaccion')?.touched) {
+      <span class = "error">El tipo de transaccion es requerido.</span>
+    }
   </div>
 
   <div class="campo">
@@ -26,6 +32,9 @@
       @else { Cuenta Bancaria (Tienda): }
     </label>
     <input type="number" formControlName="origen_id">
+    @if (form.get('origen_id')?.invalid && form.get('origen_id')?.touched) {
+      <span class = "error">La cuenta de origen es requerida.</span>
+    }
   </div>
 
   @if (form.get('tipoPedido')?.value === 'COMPRA') {
@@ -39,6 +48,9 @@
           </option>
         }
       </select>
+      @if (form.get('destino_id')?.invalid && form.get('destino_id')?.touched) {
+      <span class = "error">La cuenta de destino es requerida.</span>
+      }
     </div>
   }
 

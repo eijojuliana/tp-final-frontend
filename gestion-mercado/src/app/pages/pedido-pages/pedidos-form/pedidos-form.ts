@@ -27,7 +27,7 @@ export class PedidosForm {
     tipoPedido: [undefined as unknown as 'COMPRA' | 'VENTA', [Validators.required]],
     tipoTransaccion: [undefined as unknown as 'EFECTIVO' | 'DEBITO', [Validators.required]],
     origen_id: [],
-    destino_id: [0, [Validators.required]],
+    destino_id: [0, [Validators.required, Validators.min(0)]],
   });
 
   constructor() {
