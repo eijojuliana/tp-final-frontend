@@ -5,21 +5,21 @@
     <label>Nombre: </label>
     <input type="text" formControlName="nombre">
     @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
-      <span class = "error">El nombre de la persona es requerido.</span>
+      <span class = "error">El campo no puede estar vacio ni contener caracteres no alfabeticos.</span>
     }
   </div>
   <div class = "campo">
     <label>Dni: </label>
     <input type="number" formControlName="dni">
     @if (form.get('dni')?.invalid && form.get('dni')?.touched) {
-      <span class = "error">El DNI debe tener al menos 7 dígitos</span>
+      <span class = "error">El DNI debe tener enter 6 y 9 digitos</span>
     }
   </div>
   <div class = "campo">
     <label>Edad: </label>
     <input type="number" formControlName="edad">
     @if (form.get('edad')?.invalid && form.get('edad')?.touched) {
-      <span class = "error">La persona debe ser mayor de edad (18).</span>
+      <span class = "error">La persona debe tener entre 18 y 120 años.</span>
     }
   </div>
 

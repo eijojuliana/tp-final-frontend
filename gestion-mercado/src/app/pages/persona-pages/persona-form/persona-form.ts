@@ -19,9 +19,9 @@ export class PersonaForm {
   private personaToEdit: Persona | null = null;
 
   form = this.fb.nonNullable.group({
-    nombre: ['', [Validators.required]],
-    dni: [0, [Validators.required, Validators.pattern(/^\d{7,}$/)]],
-    edad: [0, [Validators.required, Validators.min(18)]],
+    nombre: ['', [Validators.required,Validators.pattern(/^[A-Za-zÁÉÍÓÚÜáéíóúüÑñ\s]+$/)]],
+    dni: [0, [Validators.required, Validators.pattern(/^\d{6,9}$/)]],
+    edad: [0, [Validators.required, Validators.min(18),Validators.max(120)]],
   });
 
   constructor() {

@@ -13,16 +13,25 @@
       </tr>
     </thead>
 
+    <select (change)="atributo.set($any($event.target).value)">
+  <option value="nombre">Nombre</option>
+  <option value="dni">Edad</option>
+  <option value="edad">Dni</option>
+
+</select>
+
+<input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)">
+
     <tbody class="tablaBody">
-      @for (persona of personas(); track $index){
+      @for (persona of personasFiltradas(); track $index){
         <tr>
           <td>{{ persona.personaId }}</td>
           <td>{{ persona.nombre }}</td>
           <td>{{ persona.edad }}</td>
           <td>{{ persona.dni }}</td>
           <td class="botones">
-            <button class="btnEliminar"> Eliminar </button>
-            <button class="btnEditar"> Editar </button>
+            <button class="btnEliminar" (click)="deletePersona(persona.personaId)"> Eliminar </button>
+            <button class="btnEditar" (click)="updatePersona(persona)"> Editar </button>
           </td>
         </tr>
       }

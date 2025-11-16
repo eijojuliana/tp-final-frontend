@@ -25,7 +25,7 @@
           <td>{{ cliente.edad }}</td>
           <td>{{ cliente.dni }}</td>
           <td class="botones">
-            <button class="btnEliminar"> Eliminar </button>
+            <button class="btnEliminar" (click)="eliminarCliente(cliente.clienteId)"> Eliminar </button>
             <button class="btnEditar"> Editar </button>
           </td>
 

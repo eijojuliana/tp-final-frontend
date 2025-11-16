@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ClienteService } from '../../../services/cliente-service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cliente-list',
@@ -11,4 +11,23 @@ import { RouterLink } from '@angular/router';
 export class ClienteList {
 service=inject(ClienteService);
 clientes=this.service.clientes;
+router=inject(Router);
+
+
+eliminarCliente(id:number){
+  if(confirm("¿Desea eliminar este cliente?")){
+  this.service.eliminar(id).subscribe(()=>{
+  console.log(`Cliente con el id:${id} eliminado`);
+  })
+  }
+}
+
+
+
+
+
+
+
+
+
 }

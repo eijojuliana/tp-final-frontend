@@ -39,19 +39,18 @@ export class PersonaService {
   }
 
   delete(id:number):Observable<Persona>{
+    console.log(id);
     return this.http.delete<Persona>(`${this.apiUrl}/${id}`).pipe(
-      tap( () => this.load() )
+      tap( () =>{
+         this.personasState.update(currentPersonas=>
+        currentPersonas.filter(persona=>
+          persona.personaId!==id))})
     );
   }
 
   update (personaToUpdate:Persona):Observable<Persona>{
     return this.http.put<Persona>(`${this.apiUrl}/${personaToUpdate.personaId}`,personaToUpdate).pipe(
-      tap(updatedPersona => {
-        this.personasState.update(currentPersona =>
-             currentPersona.map(p=>
-              p.personaId=== updatedPersona.personaId ? updatedPersona:p)
-        )
-      })
+      tap(()=>this.load())
     )
   }
 
