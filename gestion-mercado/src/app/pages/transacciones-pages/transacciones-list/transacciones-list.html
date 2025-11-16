@@ -1,0 +1,37 @@
+<section class="list-container">
+  <div class="botones">
+    <button type="button" class="btn-agregar" routerLink="/menu/personas/form"> Agregar </button>
+  </div>
+
+  <table class="tabla">
+    <thead class="encabezado">
+      <tr>
+        <th> ID </th>
+        <th> Tipo </th>
+        <th> ID Origen </th>
+        <th> ID Destino </th>
+        <th> Monto </th>
+        <th> Fecha </th>
+        <th> Acciones </th>
+      </tr>
+    </thead>
+
+    <tbody class="tablaBody">
+      @for (transaccion of transacciones(); track $index){
+        <tr>
+          <td>{{ transaccion.transaccion_id }}</td>
+          <td>{{ transaccion.tipo }}</td>
+          <td>{{ transaccion.origen_id }}</td>
+          <td>{{ transaccion.destino_id }}</td>
+          <td>{{ transaccion.monto }}</td>
+          <td>{{ transaccion.fecha }}</td>
+          <td class="botones">
+            <button class="btnEliminar"> Eliminar </button>
+            <button class="btnEditar"> Editar </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+
+  </table>
+</section>
