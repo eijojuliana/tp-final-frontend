@@ -1,0 +1,52 @@
+<form>
+
+  <div class="campo">
+    <label for="productoId">Producto ID:</label>
+    <input type="number" id="productoId" [(ngModel)]="nuevoDetalle.productoId" name="productoId">
+  </div>
+
+  <div class="campo">
+    <label for="cantidad">Cantidad:</label>
+    <input type="number" id="cantidad" [(ngModel)]="nuevoDetalle.cantidad" name="cantidad">
+  </div>
+
+  @if (pedido.tipo === 'COMPRA') {
+    <div class="campo">
+      <label for="costoUnitario">Costo Unitario:</label>
+      <input type="number" id="costoUnitario" [(ngModel)]="nuevoDetalle.costoUnitario" name="costoUnitario">
+    </div>
+  }
+
+  <button type="button" (click)="agregarDetalle()">Agregar Detalle</button>
+</form>
+
+@if (detallesPedido().length > 0) {
+  <hr>
+  <h3>Detalles Cargados ({{ detallesPedido().length }})</h3>
+  <table class="tabla">
+    <thead class="encabezado">
+      <tr>
+        <th>ID</th>
+        <th>Código Producto</th>
+        <th>Nombre</th>
+        <th>Cantidad</th>
+        <th>Subtotal</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody class="tablaBody">
+      @for (detalle of detallesPedido(); track detalle.producto_id) {
+        <tr>
+          <td>{{ detalle.detallePedidoId }}</td>
+          <td>{{ detalle.producto_id }}</td>
+          <td>{{ detalle.producto_nombre }}</td>
+          <td>{{ detalle.cantidad }}</td>
+          <td>{{ detalle.subtotal }}</td>
+          <td class="botones">
+            <button (click)="eliminarDetalle(detalle.detallePedidoId)">Eliminar</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}

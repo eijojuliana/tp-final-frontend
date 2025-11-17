@@ -1,0 +1,30 @@
+main {
+  background-color: white;
+  display: flex;
+}
+
+.form {
+  background-color: rgb(227, 196, 255);
+  flex: 1;
+  align-items: center;
+}
+
+.form div {
+  width: 100%;
+}
+
+.detalles {
+  background-color: rgb(219, 188, 245);
+  flex: 3;
+}
+
+.detalles div {
+  height: 40dvh;
+  border-style: solid;
+  border-width: 0.1rem;
+}
+
+.detalles button {
+  display: flex;
+  justify-self: end;
+}

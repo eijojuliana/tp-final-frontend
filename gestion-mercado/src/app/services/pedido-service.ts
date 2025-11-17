@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { Observable, of, tap } from 'rxjs';
+import { Observable, of, switchMap, tap } from 'rxjs';
 import { Pedido, NewPedido } from '../models/pedido.model';
 import { HttpClient } from '@angular/common/http';
 

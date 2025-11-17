@@ -25,10 +25,12 @@
           <td>{{ pedido.transaccion.fecha }}</td>
           <td>{{ pedido.tipo }}</td>
           <td>{{ pedido.transaccion.monto }}</td>
-          <td class="botones">
-            <button class="btnDetalle"> Detalle </button>
-            <button class="btnEliminar"> Eliminar </button>
-            <button class="btnEditar"> Editar </button>
+          <td class="celda-acciones">
+            <div class="botones">
+              <button class="btnDetalle"> Detalle </button>
+              <button class="btnEliminar" (click)="deletePedido(pedido.pedidoId)"> Eliminar </button>
+              <button class="btnEditar" (click)="updatePedido(pedido)"> Editar </button>
+            </div>
           </td>
         </tr>
       }

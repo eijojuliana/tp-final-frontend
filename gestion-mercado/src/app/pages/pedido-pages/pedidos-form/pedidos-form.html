@@ -1,67 +1,92 @@
-<h2> {{ isEditMode() ? 'Editar Pedido' : 'Registrar Pedido' }} </h2>
+<main>
+  <section class="form">
 
-<form [formGroup]="form" (ngSubmit)="savePedido()">
+    <h2> Pedido </h2>
 
-  <div class = "campo">
-    <label>Tipo de Pedido: </label>
-    <select formControlName="tipoPedido">
-      <option [ngValue]="null" disabled selected>Seleccione el Tipo</option>
-      <option value="COMPRA">COMPRA</option>
-      <option value="VENTA">VENTA</option>
-    </select>
-    @if (form.get('tipoPedido')?.invalid && form.get('tipoPedido')?.touched) {
-      <span class = "error">El tipo de pedido es requerido.</span>
-    }
-  </div>
-
-  <div class="campo">
-    <label>Método de Pago: </label>
-    <select formControlName="tipoTransaccion">
-      <option [ngValue]="null" disabled selected>Seleccione el Método</option>
-      <option value="EFECTIVO">EFECTIVO</option>
-      <option value="DEBITO">DÉBITO</option>
-      </select>
-      @if (form.get('tipoTransaccion')?.invalid && form.get('tipoTransaccion')?.touched) {
-      <span class = "error">El tipo de transaccion es requerido.</span>
-    }
-  </div>
-
-  <div class="campo">
-    <label>
-      @if (form.get('tipoPedido')?.value === 'VENTA') { Cliente:}
-      @else { Cuenta Bancaria (Tienda): }
-    </label>
-    <input type="number" formControlName="origen_id">
-    @if (form.get('origen_id')?.invalid && form.get('origen_id')?.touched) {
-      <span class = "error">La cuenta de origen es requerida.</span>
-    }
-  </div>
-
-  @if (form.get('tipoPedido')?.value === 'COMPRA') {
-    <div class="campo">
-      <label>Proveedor:</label>
-      <select formControlName="destino_id">
-        <option [ngValue]="null" disabled selected>Seleccione un proveedor</option>
-        @for(prov of proveedores(); track $index) {
-          <option [ngValue]="prov.proveedorId">
-            {{ prov.nombre }}
-          </option>
+    <form [formGroup]="form" (ngSubmit)="savePedido()">
+      <div class="campo">
+        <label>Tipo de Pedido: </label>
+        <select formControlName="tipoPedido">
+          <option [ngValue]="null" disabled selected>Seleccione el Tipo</option>
+          <option value="COMPRA">COMPRA</option>
+          <option value="VENTA">VENTA</option>
+        </select>
+        @if (form.get('tipoPedido')?.invalid && form.get('tipoPedido')?.touched) {
+          <span class="error">El tipo de pedido es requerido.</span>
         }
-      </select>
-      @if (form.get('destino_id')?.invalid && form.get('destino_id')?.touched) {
-      <span class = "error">La cuenta de destino es requerida.</span>
+      </div>
+
+      <div class="campo">
+        <label>Método de Pago: </label>
+        <select formControlName="tipoTransaccion">
+          <option [ngValue]="null" disabled selected>Seleccione el Método</option>
+          <option value="EFECTIVO">EFECTIVO</option>
+          <option value="DEBITO">DÉBITO</option>
+        </select>
+        @if (form.get('tipoTransaccion')?.invalid && form.get('tipoTransaccion')?.touched) {
+          <span class="error">El tipo de transaccion es requerido.</span>
+        }
+      </div>
+
+      @if (form.get('tipoTransaccion')?.value !== 'EFECTIVO' || form.get('tipoPedido')?.value === 'VENTA'){
+      <div class="campo">
+        <label>
+          @if (form.get('tipoPedido')?.value === 'VENTA') {
+            ID del Cliente(cambiar a dni):
+          }
+          @else {
+            Cuenta Bancaria(Tienda):
+          }
+        </label>
+        <input type="number" formControlName="origen_id" />
+        @if (form.get('origen_id')?.invalid && form.get('origen_id')?.touched) {
+          <span class="error">La cuenta de origen es requerida.</span>
+        }
+      </div>
       }
-    </div>
-  }
 
-  <div class="botones">
-    <button type="submit" [disabled]="form.invalid">
-      {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
-    </button>
+      @if (form.get('tipoPedido')?.value === 'COMPRA') {
+        <div class="campo">
+          <label>Proveedor:</label>
+          <select formControlName="destino_id">
+            <option [ngValue]="null" disabled selected>Seleccione un proveedor</option>
+            @for(prov of proveedores(); track $index) {
+            <option [ngValue]="prov.proveedorId">
+              {{ prov.nombre }}
+            </option>
+            }
+          </select>
+          @if (form.get('destino_id')?.invalid && form.get('destino_id')?.touched) {
+          <span class="error">La cuenta de destino es requerida.</span>
+          }
+        </div>
+      }
 
-    @if (isEditMode()) {
-      <button type="button" (click)="cancelEdit()">Cancelar</button>
+      <div class="botones">
+        <button type="submit" [disabled]="form.invalid">
+          {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
+        </button>
+
+        @if (isEditMode()) {
+        <button type="button" (click)="cancelEdit()">Cancelar</button>
+        }
+      </div>
+    </form>
+  </section>
+
+  <section class="detalles">
+    @if (pedidoCreado(); as pedido) {
+      <h2>Detalles del Pedido {{ pedido.pedidoId }}</h2>
+      <!-- Componente de detalles se inicializa con el ID del pedido creado -->
+      <app-detalles-pedido [pedido]="pedido"></app-detalles-pedido>
+
+      <div class="botones-detalles">
+        <button type="button" (click)="cancelarCreacion()">Finalizar Pedido</button>
+      </div>
     }
-  </div>
-
-</form>
+    @else {
+      <h2>Detalles</h2>
+      <p>Primero debe registrar el pedido para poder agregar detalles.</p>
+    }
+  </section>
+</main>

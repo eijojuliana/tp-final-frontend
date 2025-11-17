@@ -13,6 +13,7 @@
 
 <ul>
   @for(product of productsFiltrados(); track $index) {
+    <p> Código producto: {{product.producto_id}}</p>
     <p>{{product.nombre}}</p>
     <p>{{product.categoria}}</p>
 

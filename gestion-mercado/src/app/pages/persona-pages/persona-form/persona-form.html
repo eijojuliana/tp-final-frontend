@@ -1,6 +1,7 @@
 <h2> {{isEditMode() ? 'Editar Persona' : 'Registrar Persona'}} </h2>
 
 <form [formGroup]="form" (ngSubmit)="savePersona()">
+
   <div class = "campo">
     <label>Nombre: </label>
     <input type="text" formControlName="nombre">
@@ -8,6 +9,7 @@
       <span class = "error">El campo no puede estar vacio ni contener caracteres no alfabeticos.</span>
     }
   </div>
+
   <div class = "campo">
     <label>Dni: </label>
     <input type="number" formControlName="dni">
@@ -15,6 +17,7 @@
       <span class = "error">El DNI debe tener enter 6 y 9 digitos</span>
     }
   </div>
+
   <div class = "campo">
     <label>Edad: </label>
     <input type="number" formControlName="edad">

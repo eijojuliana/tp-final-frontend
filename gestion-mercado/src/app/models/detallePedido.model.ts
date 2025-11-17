@@ -1,9 +1,10 @@
 export interface DetallePedido {
   detallePedidoId:number,
-  productoId: number,
+  producto_id: number,
   producto_nombre: string,
   cantidad: number,
-  costoUnitarioCompra?: number
+  costoUnitarioCompra?: number,
+  subtotal: number
 }
 
 export interface NewDetallePedido {
