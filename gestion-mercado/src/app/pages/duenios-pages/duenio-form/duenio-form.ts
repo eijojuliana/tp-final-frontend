@@ -26,7 +26,7 @@ export class DuenioForm {
     dni: [0, [Validators.required, Validators.min(1)]],
     edad: [0, [Validators.required, Validators.min(18)]],
     email: ['', [Validators.required, Validators.email]],
-    contraseña: ['', [Validators.required]],
+    contraseña: [''],
   });
 
   constructor() {
@@ -39,6 +39,7 @@ export class DuenioForm {
           nombre: this.duenioToEdit.nombre,
           dni: this.duenioToEdit.dni,
           edad: this.duenioToEdit.edad,
+          email:this.duenioToEdit.email
         });
       } else {
         this.isEditMode.set(false);
