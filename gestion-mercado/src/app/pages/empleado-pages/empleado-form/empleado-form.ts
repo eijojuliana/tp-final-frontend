@@ -23,7 +23,8 @@ export class EmpleadoForm {
     nombre:['',[Validators.required,Validators.maxLength(20),Validators.pattern(/^[A-Za-zÁÉÍÓÚÜáéíóúüÑñ\s]+$/)]],
     dni:[0,[Validators.required,Validators.pattern(/^\d{6,9}$/)]],
     edad:[0,[Validators.required,Validators.min(18),Validators.max(120)]],
-    email:['',[Validators.required,Validators.email]]
+    email:['',[Validators.required,Validators.email]],
+    contraseña: ['']
   })
 
 

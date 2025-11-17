@@ -29,6 +29,13 @@
       <span class = "error">El email debe ser valido.</span>
     }
   </div>
+  <div class = "campo">
+    <label>Contraseña: </label>
+    <input type="text" formControlName="contraseña">
+    @if (form.get('contraseña')?.invalid && form.get('contraseña')?.touched) {
+      <span class = "error">La contraseña no debe estar vacia.</span>
+    }
+  </div>
 
   <div class="botones">
     <button type="submit"[disabled]="form.invalid">
