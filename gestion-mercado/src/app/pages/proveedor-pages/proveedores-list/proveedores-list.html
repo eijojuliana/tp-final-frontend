@@ -1,6 +1,6 @@
 <section class="list-container">
   <div class="botones">
-    <button type="button" class="btn-agregar" routerLink="/menu/clientes/form">Agregar</button>
+    <button type="button" class="btn-agregar" routerLink="/menu/proveedores/form">Agregar</button>
     <select (change)="atributo.set($any($event.target).value)">
       <option value="nombre">Nombre</option>
       <option value="dni">Dni</option>
@@ -14,26 +14,27 @@
     <thead class="encabezado">
       <tr>
         <th>ID Persona</th>
-        <th>ID Cliente</th>
+        <th>ID Proveedor</th>
         <th>Nombre</th>
         <th>Edad</th>
         <th>DNI</th>
         <th>Email</th>
-        <th>Acciones</th>
       </tr>
     </thead>
 
     <tbody class="tablaBody">
-      @for (cliente of clientesFiltrados(); track $index){
+      @for (proveedor of proveedoresFiltrados(); track $index){
       <tr>
-        <td>{{ cliente.personaId }}</td>
-        <td>{{ cliente.clienteId }}</td>
-        <td>{{ cliente.nombre }}</td>
-        <td>{{ cliente.edad }}</td>
-        <td>{{ cliente.dni }}</td>
+        <td>{{ proveedor.personaId }}</td>
+        <td>{{ proveedor.proveedorId }}</td>
+        <td>{{ proveedor.nombre }}</td>
+        <td>{{ proveedor.edad }}</td>
+        <td>{{ proveedor.dni }}</td>
         <td class="botones">
-          <button class="btnEliminar" (click)="eliminarCliente(cliente.clienteId)">Eliminar</button>
-          <button class="btnEditar" (click)="modificarCliente(cliente)">Editar</button>
+          <button class="btnEliminar" (click)="eliminarProveedor(proveedor.proveedorId)">
+            Eliminar
+          </button>
+          <button class="btnEditar" (click)="modificarProveedor(proveedor)">Editar</button>
         </td>
       </tr>
       }

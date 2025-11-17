@@ -25,6 +25,8 @@ import { TransaccionesList } from './pages/transacciones-pages/transacciones-lis
 import { TransaccionForm } from './pages/transacciones-pages/transaccion-form/transaccion-form';
 import { PedidosList } from './pages/pedido-pages/pedidos-list/pedidos-list';
 import { PedidosForm } from './pages/pedido-pages/pedidos-form/pedidos-form';
+import { ProveedoresList } from './pages/proveedor-pages/proveedores-list/proveedores-list';
+import { ProveedoresForm } from './pages/proveedor-pages/proveedores-form/proveedores-form';
 
 export const routes: Routes = [
   // Ruta por defecto que dirige a /login
@@ -80,6 +82,11 @@ export const routes: Routes = [
   //Rutas pedidos
   { path: 'menu/pedidos', component: PedidosList},
   { path: 'menu/pedidos/form', component: PedidosForm},
+
+  //Rutas proveedores
+  {path: 'menu/proveedores', component: ProveedoresList},
+  {path: 'menu/proveedores/form', component: ProveedoresForm},
+
 ];
 
 @NgModule({
