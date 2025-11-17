@@ -8,4 +8,5 @@ export interface Empleado extends Persona{
 
 export interface NewEmpleado extends NewPersona{
   email:string
+  contraseña:string
 }
