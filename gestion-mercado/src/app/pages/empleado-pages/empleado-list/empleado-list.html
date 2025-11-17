@@ -3,6 +3,15 @@
     <button type="button" class="btn-agregar" routerLink="/menu/empleados/form">Agregar</button>
   </div>
 
+  <select (change)="atributo.set($any($event.target).value)">
+  <option value="nombre">Nombre</option>
+  <option value="dni">Dni</option>
+  <option value="edad">Edad</option>
+  <option value="email">Email</option>
+</select>
+
+<input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)">
+
    <table class="tabla">
     <thead class="encabezado">
       <tr>
@@ -17,7 +26,7 @@
     </thead>
 
     <tbody class="tablaBody">
-      @for (empleado of empleados(); track $index){
+      @for (empleado of empleadosFiltrados(); track $index){
         <tr>
           <td>{{ empleado.personaId }}</td>
           <td>{{ empleado.empleadoId }}</td>
@@ -26,8 +35,8 @@
           <td>{{ empleado.dni }}</td>
           <td>{{ empleado.email }}</td>
           <td class="botones">
-            <button class="btnEliminar"> Eliminar </button>
-            <button class="btnEditar"> Editar </button>
+            <button class="btnEliminar" (click)="eliminarEmpleado(empleado.empleadoId)"> Eliminar </button>
+            <button class="btnEditar" (click)="modificarEmpleado(empleado)"> Editar </button>
           </td>
         </tr>
       }
