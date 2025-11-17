@@ -1,67 +1,265 @@
 
-// Contenedor principal
 .list-container {
   padding: 2rem;
+  background-color: #2c292a;
+  min-height: 100vh;
 }
 
-// botones
+/* Contenedor de botones y filtros */
 .botones {
   margin-bottom: 1.5rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
-// Botón de agregar
+/* Botón agregar/registrar */
 .btn-agregar {
-  padding: 0.5rem 1rem;
-  background-color: var(--rosa);
-  color: var(--blanco);
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
+  font-weight: 600;
   cursor: pointer;
-  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(255, 154, 158, 0.3);
+}
 
-  &:hover {
-    background-color: var(--rosa-oscuro);
+.btn-agregar:hover {
+  background: linear-gradient(135deg, #ff6b81 0%, #fda4ba 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 154, 158, 0.4);
+}
+
+/* Contenedor de filtros */
+.filter-container {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex: 1;
+  max-width: 500px;
+}
+
+/* Select de filtros */
+select {
+  padding: 0.6rem 1rem;
+  border: 2px solid #ffc5d0;
+  border-radius: 8px;
+  background-color: white;
+  color: #d4567f;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+  min-width: 120px;
+}
+
+select:hover {
+  border-color: #ff9fb0;
+}
+
+select:focus {
+  border-color: #ff7b96;
+  box-shadow: 0 0 0 3px rgba(255, 154, 158, 0.1);
+}
+
+/* Input de búsqueda */
+input[type="text"] {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border: 2px solid #ffc5d0;
+  border-radius: 8px;
+  background-color: white;
+  color: #d4567f;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+input[type="text"]::placeholder {
+  color: #ffb3c1;
+}
+
+input[type="text"]:hover {
+  border-color: #ff9fb0;
+}
+
+input[type="text"]:focus {
+  border-color: #ff7b96;
+  box-shadow: 0 0 0 3px rgba(255, 154, 158, 0.1);
+}
+
+/* Tabla */
+.tabla {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(255, 182, 193, 0.15);
+}
+
+.encabezado {
+  background: linear-gradient(135deg, #ffa6c9 0%, #ffb7d5 100%);
+  color: white;
+}
+
+.encabezado th {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.tablaBody tr {
+  border-bottom: 1px solid #ffe4ed;
+  transition: background-color 0.2s ease;
+}
+
+.tablaBody tr:hover {
+  background-color: #fff5f8;
+}
+
+.tablaBody tr:last-child {
+  border-bottom: none;
+}
+
+.tablaBody td {
+  padding: 1rem 1.25rem;
+  font-size: 0.9rem;
+  color: #8b5a6f;
+}
+
+/* Celda de acciones con ancho fijo más amplio */
+.celda-acciones {
+  width: 280px;
+  min-width: 280px;
+  padding: 0.75rem 1rem;
+}
+
+.celda-acciones .botones {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  margin: 0;
+}
+
+/* Botones dentro de la tabla (para persona-list que tiene .botones en td) */
+.tablaBody td.botones {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  width: 220px;
+  min-width: 220px;
+}
+
+/* Botones de acción */
+.btnDetalle,
+.btnEliminar,
+.btnEditar {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex: 0 0 auto;
+  color: white;
+}
+
+.btnDetalle {
+  background: linear-gradient(135deg, #e0a9d5 0%, #f3c9e8 100%);
+}
+
+.btnDetalle:hover {
+  background: linear-gradient(135deg, #d087c5 0%, #e5b3da 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(224, 169, 213, 0.4);
+}
+
+.btnEliminar {
+  background: linear-gradient(135deg, #ff7b9c 0%, #ff9fb0 100%);
+}
+
+.btnEliminar:hover {
+  background: linear-gradient(135deg, #ff5a82 0%, #ff7b96 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(255, 123, 156, 0.4);
+}
+
+.btnEditar {
+  background: linear-gradient(135deg, #ffb3d9 0%, #ffc9e5 100%);
+}
+
+.btnEditar:hover {
+  background: linear-gradient(135deg, #ff9ac9 0%, #ffb3d9 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(255, 179, 217, 0.4);
+}
+
+/* Responsive */
+@media screen and (max-width: 1200px) {
+  .celda-acciones,
+  .tablaBody td.botones {
+    width: 250px;
+    min-width: 250px;
+  }
+
+  .btnDetalle,
+  .btnEliminar,
+  .btnEditar {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
   }
 }
 
-.tabla {
-  border-collapse: collapse;
-  margin-top: 20px;
-  width: 100%;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+@media screen and (max-width: 768px) {
+  .list-container {
+    padding: 1rem;
+  }
 
-// Estilos para encabezados
-.tabla th,
-.tabla td {
-  border: 1px solid #ddd;
-  padding: 12px 15px;
-  text-align: left;
-}
+  .botones {
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-// Estilos para el encabezado de la tabla
-.encabezado {
-  background-color: #f2f2f2;
-  color: #333;
-  font-weight: bold;
-}
+  .filter-container {
+    max-width: 100%;
+  }
 
+  .tabla {
+    font-size: 0.85rem;
+  }
 
-.tabla tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
+  .encabezado th,
+  .tablaBody td {
+    padding: 0.75rem 0.5rem;
+  }
 
-.tabla tbody tr:hover {
-  background-color: #f1f1f1;
-}
+  .celda-acciones,
+  .tablaBody td.botones {
+    width: 200px;
+    min-width: 200px;
+    gap: 0.3rem;
+  }
 
-// Estilo de alerta (ej: para cargando/error)
-.alert-box {
-  padding: 10px;
-  background-color: #ffe0b2;
-  border-left: 5px solid #ff9800;
-  color: #333;
-  margin-top: 1rem;
+  .btnDetalle,
+  .btnEliminar,
+  .btnEditar {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.75rem;
+  }
 }
