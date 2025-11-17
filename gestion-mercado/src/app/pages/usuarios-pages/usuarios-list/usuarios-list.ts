@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { UsuarioService } from '../../../services/usuario-service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-usuarios-list',
@@ -9,6 +9,53 @@ import { RouterLink } from '@angular/router';
   styleUrl: './usuarios-list.css',
 })
 export class UsuariosList {
+
   private usuarioService = inject(UsuarioService);
   public usuarios = this.usuarioService.usuarios;
+  router=inject(Router)
+
+  filtro = signal('');
+  atributo = signal<'email'>('email');
+
+  usuariosFiltrados = computed(() => {
+    const f = this.filtro().toLowerCase().trim();
+    const attr = this.atributo();
+
+    return this.usuarios().filter((u) =>
+      String((u as any)[attr])
+        .toLowerCase()
+        .includes(f)
+    );
+  });
+
+  eliminarUsuario(id: number) {
+    if (confirm('Desea eliminar este usuario?')) {
+      this.usuarioService.delete(id).subscribe(() => console.log(`Usuario con id ${id} eliminado.`));
+    }
+  }
+
+  modificarUsuario(usuario: any) {
+    this.usuarioService.selectUsuarioToEdit(usuario);
+    this.router.navigate(['menu/usuarios/form']);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

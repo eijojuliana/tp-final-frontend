@@ -61,8 +61,6 @@ export class DuenioForm {
         contraseña: formValue.contraseña,
 
     };
-    alert(formValue.contraseña)
-    console.log(dto);
 
     if (this.isEditMode() && this.duenioToEdit) {
 

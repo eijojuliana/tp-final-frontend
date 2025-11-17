@@ -1,5 +1,5 @@
 import { Usuario } from './../../../models/usuario.model';
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsuarioService } from '../../../services/usuario-service';
 import { Router } from '@angular/router';
@@ -21,8 +21,25 @@ export class UsuarioForm {
 
   form = this.fb.nonNullable.group({
     email: ['',Validators.required],
-    contraseña: ['',Validators.required],
+    contraseña: [''],
   });
+
+  constructor() {
+    effect(() => {
+      this.usuarioToEdit = this.usuarioService.usuarioToEdit();
+
+      if (this.usuarioToEdit) {
+        this.editMode.set(true);
+        this.form.patchValue({
+          email:this.usuarioToEdit.email
+        });
+      } else {
+        this.editMode.set(false);
+        this.form.reset();
+      }
+    });
+  }
+
 
   save(){
     if(this.form.invalid) return;
@@ -36,7 +53,12 @@ export class UsuarioForm {
     };
 
     if(this.editMode() && this.usuarioToEdit){
-      //editar
+
+      const updatedUsuario = { ...this.usuarioToEdit, ...dto };
+      this.usuarioService.update(updatedUsuario).subscribe(() => {
+        console.log('Usuario Actualizado');
+        this.usuarioService.clearUsuarioToEdit();
+      });
     } else {
        this.usuarioService.post(dto).subscribe( () => {
         console.log("Usuario Agregado.");
@@ -45,4 +67,13 @@ export class UsuarioForm {
     }
     this.router.navigate(['/menu/usuarios']);
   }
+
+ cancelEdit() {
+    this.usuarioService.clearUsuarioToEdit();
+    this.router.navigate(['/menu/usuarios']);
+  }
+
+
 }
+
+
