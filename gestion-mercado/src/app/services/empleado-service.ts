@@ -12,6 +12,7 @@ export class EmpleadoService {
   private state=signal<Empleado[]>([]);
   private empleadoToEditToState=signal<Empleado | null> (null);
   public empleados=this.state.asReadonly();
+  public empleadoToEdit=this.empleadoToEditToState.asReadonly();
 
   constructor(private httpClient:HttpClient){
     this.load()
@@ -30,7 +31,7 @@ export class EmpleadoService {
   }
 
   eliminar(id:number): Observable<Empleado>{
-    return this.httpClient.delete<Empleado>(`${this.apiurl} / ${id}`).pipe(
+    return this.httpClient.delete<Empleado>(`${this.apiurl}/${id}`).pipe(
       tap(
         () => this.state.update(currentEmpleado =>
           currentEmpleado.filter(empleado =>
@@ -42,7 +43,7 @@ export class EmpleadoService {
   }
 
   update(empleado :Empleado): Observable<Empleado>{
-    return this.httpClient.put<Empleado>(`${this.apiurl} / ${empleado.empleadoId}`,empleado).pipe(
+    return this.httpClient.put<Empleado>(`${this.apiurl}/${empleado.empleadoId}`,empleado).pipe(
      tap( () => this.load() )
     );
   }
