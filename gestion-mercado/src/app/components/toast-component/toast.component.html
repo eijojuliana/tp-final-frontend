@@ -1,0 +1,9 @@
+<div class="toast-container">
+  <div
+    class="toast"
+    *ngFor="let t of toast.toasts()"
+    [style.background]="t.type === 'error' ? '#e74c3c' : '#2ecc71'"
+  >
+    {{ t.message }}
+  </div>
+</div>

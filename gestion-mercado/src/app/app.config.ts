@@ -2,9 +2,10 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessC
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors } from '@angular/common/http';
-import { BasicAuthInterceptor, BasicAuthInterceptorFn } from './auth/basic-auth.interceptor';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { BasicAuthInterceptorFn } from './auth/basic-auth.interceptor';
 import { AuthService } from './auth/auth.service';
+import { errorInterceptor} from './interceptors/error.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,7 +14,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(
       withInterceptors([
-        BasicAuthInterceptorFn
+        BasicAuthInterceptorFn,
+        errorInterceptor
       ])
     ),
     AuthService,
