@@ -1,0 +1,349 @@
+/* Contenedor principal */
+.list-container {
+  padding: 2rem;
+  background-color: #fcf1f1;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Encabezado */
+h2 {
+  text-align: center;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #ffb3d9;
+  margin-bottom: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 4px rgba(255, 166, 201, 0.15);
+}
+
+/* Contenedor de filtros y búsqueda */
+.filter-search-container {
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 600px;
+  width: 100%;
+}
+
+/* Select de filtros */
+select {
+  padding: 0.6rem 1rem;
+  border: 2px solid #ffc5d0;
+  border-radius: 8px;
+  background-color: white;
+  color: #d4567f;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+  min-width: 140px;
+}
+
+select:hover {
+  border-color: #ff9fb0;
+}
+
+select:focus {
+  border-color: #ff7b96;
+  box-shadow: 0 0 0 3px rgba(255, 154, 158, 0.06);
+}
+
+/* Input de búsqueda */
+input[type="text"] {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border: 2px solid #ffc5d0;
+  border-radius: 8px;
+  background-color: white;
+  color: #d4567f;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  outline: none;
+  min-width: 200px;
+}
+
+input[type="text"]::placeholder {
+  color: #ffb3c1;
+}
+
+input[type="text"]:hover {
+  border-color: #ff9fb0;
+}
+
+input[type="text"]:focus {
+  border-color: #ff7b96;
+  box-shadow: 0 0 0 3px rgba(255, 154, 158, 0.06);
+}
+
+/* Contenedor del botón agregar */
+.botones {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2.5rem;
+}
+
+/* Botón agregar */
+.btnAgregar {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(255, 154, 158, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btnAgregar:hover {
+  background: linear-gradient(135deg, #ff6b81 0%, #fda4ba 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 154, 158, 0.4);
+}
+
+/* Lista de productos - Grid de 2 columnas */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  padding-bottom: 2rem;
+  max-width: 1000px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Tarjeta de producto - CON BORDE como en la presentación */
+ul li {
+  background-color: #f5efe0;
+  border: 5px solid #ffa6c9;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(255, 166, 201, 0.12);
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 180px;
+}
+
+/* Flores decorativas (menos intrusivas) */
+ul li::before {
+  content: '🌸';
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 1.6rem;
+  opacity: 0.18;
+}
+
+ul li::after {
+  content: '🌼';
+  position: absolute;
+  bottom: 12px;
+  left: 18px;
+  font-size: 1.5rem;
+  transform: rotate(-18deg);
+  opacity: 0.16;
+}
+
+ul li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 166, 201, 0.18);
+  border-color: #ff7b9c;
+}
+
+/* Código del producto */
+ul li p.codigo {
+  font-size: 0.85rem;
+  color: #8b5a6f;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px dashed #ffc5d0;
+}
+
+/* Nombre del producto */
+ul li p.nombre {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #d4567f;
+  margin: 0.6rem 0;
+  line-height: 1.15;
+}
+
+/* Categoría */
+ul li p.categoria {
+  font-size: 1.05rem;
+  color: #ff9fb0;
+  font-weight: 600;
+  margin-bottom: auto;
+  padding: 0.45rem 0.85rem;
+  background-color: rgba(255, 182, 193, 0.12);
+  border-radius: 8px;
+  display: inline-block;
+  width: fit-content;
+}
+
+/* Contenedor de acciones */
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 3px dashed #ffe4ed;
+}
+
+/* Botones de acción */
+.actions button {
+  flex: 1;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: white;
+}
+
+.actions button.edit {
+  background: linear-gradient(135deg, #e0a9d5 0%, #f3c9e8 100%);
+}
+
+.actions button.edit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(224, 169, 213, 0.22);
+}
+
+.actions button.delete {
+  background: linear-gradient(135deg, #ff7b9c 0%, #ff9fb0 100%);
+}
+
+.actions button.delete:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 123, 156, 0.22);
+}
+
+/* Ajustes internos de la tarjeta para más parecido a la presentación */
+ul li .card-top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+ul li .card-top img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 3px solid rgba(255,166,201,0.08);
+}
+
+/* Responsive */
+@media screen and (max-width: 1200px) {
+  ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  ul li {
+    padding: 1.75rem;
+  }
+
+  ul li p.nombre {
+    font-size: 1.6rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .list-container {
+    padding: 1rem;
+    align-items: stretch;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  ul {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin: 0 auto;
+    max-width: 680px;
+  }
+
+  .filter-search-container {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 100%;
+  }
+
+  select,
+  input[type="text"] {
+    width: 100%;
+  }
+
+  .btnAgregar {
+    width: 100%;
+  }
+
+  ul li {
+    padding: 1.4rem;
+  }
+
+  ul li p.nombre {
+    font-size: 1.4rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .actions button {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  h2 {
+    font-size: 2rem;
+  }
+
+  ul li {
+    border-width: 4px;
+  }
+
+  ul li p.codigo {
+    font-size: 0.75rem;
+  }
+
+  ul li p.nombre {
+    font-size: 1.2rem;
+  }
+
+  ul li p.categoria {
+    font-size: 0.95rem;
+  }
+}
+

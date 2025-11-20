@@ -1,25 +1,36 @@
-<h2>PRODUCTOS</h2>
+<div class="list-container">
+  <h2>PRODUCTOS</h2>
 
-<select (change)="atributo.set($any($event.target).value)">
-  <option value="nombre">Nombre</option>
-  <option value="categoria">Categoría</option>
-</select>
+  <div class="filter-search-container">
+    <select (change)="atributo.set($any($event.target).value)">
+      <option value="nombre">Nombre</option>
+      <option value="categoria">Categoría</option>
+    </select>
 
-<input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)">
+    <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)">
+  </div>
 
-<div class="botones">
-  <button type="button" class="btnAgregar" routerLink="/menu/productos/form"> Agregar </button>
+  <div class="botones">
+    <button type="button" class="btnAgregar" routerLink="/menu/productos/form">Agregar</button>
+  </div>
+
+  <ul>
+    @for(product of productsFiltrados(); track $index) {
+      <li>
+        <div class="card-top">
+         <img src="/assets/images/productos-icon.png" alt="{{product.nombre}}">
+          <div class="card-text">
+            <p class="codigo">Código producto: {{product.producto_id}}</p>
+            <p class="nombre">{{product.nombre}}</p>
+            <p class="categoria">{{product.categoria}}</p>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="edit" (click)="updateProduct(product)">Editar</button>
+          <button type="button" class="delete" (click)="deleteProduct(product.producto_id)">Eliminar</button>
+        </div>
+      </li>
+    }
+  </ul>
 </div>
-
-<ul>
-  @for(product of productsFiltrados(); track $index) {
-    <p> Código producto: {{product.producto_id}}</p>
-    <p>{{product.nombre}}</p>
-    <p>{{product.categoria}}</p>
-
-    <div class = "actions">
-      <button type="button" (click)="updateProduct(product)">Editar</button>
-      <button type="button" (click)="deleteProduct(product.producto_id)">Eliminar</button>
-    </div>
-  }
-</ul>
