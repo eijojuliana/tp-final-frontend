@@ -18,7 +18,7 @@
     @for(product of productsFiltrados(); track $index) {
       <li>
         <div class="card-top">
-         <img src="/assets/images/productos-icon.png" alt="{{product.nombre}}">
+         <img src={{product.url}} alt="{{product.nombre}}">
           <div class="card-text">
             <p class="codigo">Código producto: {{product.producto_id}}</p>
             <p class="nombre">{{product.nombre}}</p>

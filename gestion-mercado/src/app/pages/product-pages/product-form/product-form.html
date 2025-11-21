@@ -17,6 +17,13 @@
           <span class = "error">La categoría del producto es requerido.</span>
         }
       </div>
+      <div class = "campo">
+        <label> Url imagen del producto: </label>
+        <input type="url" formControlName="url">
+        @if (form.get('url')?.invalid && form.get('url')?.touched) {
+          <span class = "error">La url del producto debe ser valida.</span>
+        }
+      </div>
 
       <div class = "botones">
         <button type="submit" [disabled]="form.invalid">

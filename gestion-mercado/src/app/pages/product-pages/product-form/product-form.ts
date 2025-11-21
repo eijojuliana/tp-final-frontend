@@ -23,7 +23,8 @@ export class ProductRegister {
 
   form = this.fb.nonNullable.group({
     nombre: ['', [Validators.required]],
-    categoria: ['', [Validators.required]]
+    categoria: ['', [Validators.required]],
+    url: ['', [Validators.required]]
   });
 
   constructor() {
@@ -34,7 +35,8 @@ export class ProductRegister {
         this.isEditMode.set(true);
         this.form.patchValue({
           nombre: this.productToEdit.nombre,
-          categoria: this.productToEdit.categoria
+          categoria: this.productToEdit.categoria,
+          url: this.productToEdit.url,
         });
       } else {
         this.isEditMode.set(false);
