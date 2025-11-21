@@ -2,7 +2,7 @@
   <div class="login-formulario">
     <h2>Mercado del Cerezo</h2>
     <form (ngSubmit)="login()">
-      
+
       <div class="inputs">
         <label for="username">Usuario:</label>
         <input type="text" id="username" name="username" placeholder="Ingresa tu usuario" [(ngModel)]="username" required>
@@ -14,6 +14,9 @@
       </div>
 
       <button type="submit" class="btn-add">Ingresar</button>
+
+      <!-- Mensaje de error -->
+      <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
     </form>
   </div>
 </div>
