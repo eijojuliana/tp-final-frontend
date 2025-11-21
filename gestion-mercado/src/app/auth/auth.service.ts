@@ -3,41 +3,53 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  // Almacena las credenciales validadas. ¡Recuerda las notas de seguridad!
-  private userCreds: { username: string, password: string } | null = null;
 
-    // Rol actual simplificado: 'ADMIN' | 'DUENIO' | 'EMPLEADO' | null
+
+ private STORAGE_CREDS = 'authCreds';
+  private STORAGE_ROLE = 'authRole';
+
+  private userCreds: { username: string; password: string } | null = null;
   private currentRole: string | null = null;
 
-
   constructor() {
+    // Levantar de localStorage si ya había sesión guardada
+    const storedCreds = localStorage.getItem(this.STORAGE_CREDS);
+    const storedRole = localStorage.getItem(this.STORAGE_ROLE);
 
+    if (storedCreds) {
+      this.userCreds = JSON.parse(storedCreds);
+    }
+    if (storedRole) {
+      this.currentRole = storedRole;
+    }
   }
 
-
-
-
-  // Guarda las credenciales después de un login exitoso
   setCredentials(username: string, password: string): void {
     this.userCreds = { username, password };
+    localStorage.setItem(this.STORAGE_CREDS, JSON.stringify(this.userCreds));
   }
 
   clearCredentials(): void {
     this.userCreds = null;
     this.currentRole = null;
+    localStorage.removeItem(this.STORAGE_CREDS);
+    localStorage.removeItem(this.STORAGE_ROLE);
   }
 
   isLoggedIn(): boolean {
     return this.userCreds !== null;
   }
 
-// ---- Manejo de roles ----
+  // ---- roles ----
   setRoleFromBackendRoles(rolesFromBackend: string[]): void {
-    // rolesFromBackend = ['ROLE_ADMIN', 'ROLE_DUENIO', ...]
     const cleaned = rolesFromBackend.map(r => r.replace('ROLE_', ''));
-
-    // Me quedo con el primero como rol principal
     this.currentRole = cleaned[0] ?? null;
+
+    if (this.currentRole) {
+      localStorage.setItem(this.STORAGE_ROLE, this.currentRole);
+    } else {
+      localStorage.removeItem(this.STORAGE_ROLE);
+    }
   }
 
   getRole(): string | null {
@@ -49,20 +61,16 @@ export class AuthService {
     return rolesPermitidos.includes(this.currentRole);
   }
 
-
-
-  // Genera el valor del encabezado Authorization: Basic [Base64(usuario:contraseña)].
+  // ---- Basic Auth header para el interceptor ----
   getAuthHeaderValue(): string | null {
     if (this.userCreds) {
-      // 1. Concatena el usuario y la contraseña: 'usuario:contraseña'
       const authString = `${this.userCreds.username}:${this.userCreds.password}`;
-
-      // 2. Codifica en Base64. btoa() es una función nativa de JS.
       const base64Auth = btoa(authString);
-
-      // 3. Devuelve el encabezado completo.
       return `Basic ${base64Auth}`;
     }
     return null;
   }
+
+
+  
 }
