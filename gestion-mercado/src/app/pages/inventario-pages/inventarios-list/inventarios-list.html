@@ -1,47 +1,47 @@
-<h2>Inventario</h2>
+<section class="list-container">
+  <h2>Inventario</h2>
+  <div class="botones">
+    <button type="button" class="btn-agregar" routerLink="/menu/inventarios/form"> Agregar </button>
 
-<select (change)="atributo.set($any($event.target).value)">
-  <option value="cantidad">Cantidad</option>
-  <option value="producto_id">Producto ID</option>
-  <option value="stockMin">StocK Mínimo</option>
-  <option value="precioVenta">Precio Venta</option>
-  <option value="costoAdquisicion">Costo Adquisicón</option>
-</select>
+    <select (change)="atributo.set($any($event.target).value)">
+      <option value="cantidad">Cantidad</option>
+      <option value="producto_id">Producto ID</option>
+      <option value="stockMin">StocK Mínimo</option>
+      <option value="precioVenta">Precio Venta</option>
+      <option value="costoAdquisicion">Costo Adquisicón</option>
+    </select>
+    <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)">
+  </div>
 
-<input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)">
-
-<div class="botones">
-  <button type="button" class="btnAgregar" routerLink="/menu/inventarios/form"> Agregar </button>
-</div>
-
-<table border="1">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Producto ID</th>
-      <th>Cantidad</th>
-      <th>Stock Mínimo</th>
-      <th>Precio Venta</th>
-      <th>Costo Adquisición</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    @for (i of inventariosFiltrados(); track $index) {
+  <table class="tabla">
+    <thead class="encabezado">
       <tr>
-        <td>{{ i.inventario_id }}</td>
-        <td>{{ i.producto_id }}</td>
-        <td>{{ i.cantidad }}</td>
-        <td>{{ i.stockMin }}</td>
-        <td>{{ i.precioVenta }}</td>
-        <td>{{ i.costoAdquisicion }}</td>
-
-        <td>
-          <button type="button" (click)="deleteInventario(i.inventario_id)">Eliminar</button>
-          <button type="button" (click)="updateInventario(i)">Editar</button>
-        </td>
+        <th>ID</th>
+        <th>Producto ID</th>
+        <th>Cantidad</th>
+        <th>Stock Mínimo</th>
+        <th>Precio Venta</th>
+        <th>Costo Adquisición</th>
+        <th>Acciones</th>
       </tr>
-    }
-  </tbody>
-</table>
+    </thead>
+
+    <tbody class="tablaBody">
+      @for (i of inventariosFiltrados(); track $index) {
+        <tr>
+          <td>{{ i.inventario_id }}</td>
+          <td>{{ i.producto_id }}</td>
+          <td>{{ i.cantidad }}</td>
+          <td>{{ i.stockMin }}</td>
+          <td>{{ i.precioVenta }}</td>
+          <td>{{ i.costoAdquisicion }}</td>
+
+          <td class="botones">
+            <button class="btnEliminar" (click)="deleteInventario(i.inventario_id)">Eliminar</button>
+            <button class="btnEditar" (click)="updateInventario(i)">Editar</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>

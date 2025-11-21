@@ -1,0 +1,24 @@
+@import '../../../styles/form-style.scss';
+
+.form-container::before {
+  background-image: url('/assets/images/shop-wallpaper.jpg');
+}
+
+.image {
+  display: flex;
+  position: relative;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.image img {
+  width: 30rem;
+  max-width: 100%;
+}
+
+@media screen and (max-width: 1024px) {
+    .image img {
+        max-width: 400px;
+    }
+}

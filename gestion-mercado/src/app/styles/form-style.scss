@@ -1,0 +1,180 @@
+
+.form-container {
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 3rem;
+  padding-left: 5%;
+  position: relative;
+  background: linear-gradient(135deg, #2c1b2e 0%, #1a0e1f 50%, #2c1b2e 100%);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    z-index: 0;
+    pointer-events: none;
+  }
+}
+
+/* Tarjeta Glassmorphism */
+.card {
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 3rem;
+  width: 100%;
+  max-width: 600px;
+  box-shadow:
+    0 8px 32px rgba(255, 182, 193, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+
+  h2 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    font-size: 3rem;
+    letter-spacing: 1px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+/* Inputs y Labels */
+.campo {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.5rem;
+
+  label {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="password"],
+  input[type="date"],
+  select {
+    padding: 1rem 1.25rem;
+    border: 2px solid rgba(255, 197, 208, 0.3);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    outline: none;
+    font-family: "Proza Libre", sans-serif;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    &:hover {
+      border-color: rgba(255, 159, 176, 0.5);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    &:focus {
+      border-color: #ffa6c9;
+      background: rgba(255, 255, 255, 0.18);
+      box-shadow: 0 0 0 3px rgba(255, 166, 201, 0.2);
+    }
+  }
+}
+
+/* Botones */
+.botones {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: center;
+
+  button {
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: "Proza Libre", sans-serif;
+
+    &.btn-submit {
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+      color: white;
+      box-shadow: 0 4px 15px rgba(255, 154, 158, 0.3);
+      min-width: 150px;
+
+      &:hover:not(:disabled) {
+        background: linear-gradient(135deg, #ff6b81 0%, #fda4ba 100%);
+        transform: translateY(-2px);
+      }
+
+      &:disabled {
+        background: rgba(255, 154, 158, 0.3);
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+    }
+
+    &.btn-cancel {
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        border: 2px solid rgba(255, 182, 193, 0.3);
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 182, 193, 0.5);
+            transform: translateY(-2px);
+        }
+    }
+  }
+}
+
+/* Mensajes de error */
+.error {
+  background: rgba(255, 123, 156, 0.15);
+  color: #ffb3c1;
+  border: 2px solid rgba(255, 123, 156, 0.4);
+  border-radius: 12px;
+  font-size: 1.3rem;
+  padding: 0.75rem 1rem;
+  margin-top: 0.25rem;
+  backdrop-filter: blur(10px);
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .form-container {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .card {
+    padding: 2rem 1.5rem;
+  }
+
+  .botones {
+    flex-direction: column;
+    button { width: 100%; }
+  }
+}

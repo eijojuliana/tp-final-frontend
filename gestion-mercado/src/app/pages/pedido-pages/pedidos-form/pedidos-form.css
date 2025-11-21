@@ -20,8 +20,6 @@ main {
 
 .detalles div {
   height: 40dvh;
-  border-style: solid;
-  border-width: 0.1rem;
 }
 
 .detalles button {

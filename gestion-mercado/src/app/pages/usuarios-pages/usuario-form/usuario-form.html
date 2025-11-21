@@ -1,25 +1,28 @@
-<h2> {{editMode() ? 'Editar Usuario' : 'Registrar Usuario'}} </h2>
+<div class="form-container">
+  <div class="card">
+    <h2> {{editMode() ? 'Editar Usuario' : 'Registrar Usuario'}} </h2>
 
-<form [formGroup]="form" (ngSubmit)="save()">
- <div>
-    <label>Email: </label>
-    <input type="text" formControlName="email">
-    @if (form.get('email')?.invalid && form.get('email')?.touched) {
-      <span class = "error">El email es requerido en el formato correcto.</span>
-    }
- </div>
- <div>
-   <label>Contraseña: </label>
-    <input type="text" formControlName="contraseña">
-    @if (form.get('contraseña')?.invalid && form.get('contraseña')?.touched) {
-      <span class = "error">La contraseña es requerida.</span>
-    }
- </div>
+    <form [formGroup]="form" (ngSubmit)="save()">
+    <div class="campo">
+        <label>Email: </label>
+        <input type="text" formControlName="email">
+        @if (form.get('email')?.invalid && form.get('email')?.touched) {
+          <span class = "error">El email es requerido en el formato correcto.</span>
+        }
+    </div>
+    <div class="campo">
+      <label>Contraseña: </label>
+        <input type="password" formControlName="contraseña">
+        @if (form.get('contraseña')?.invalid && form.get('contraseña')?.touched) {
+          <span class = "error">La contraseña es requerida.</span>
+        }
+    </div>
 
- <div class="botones">
-  <button type="submit"[disabled]="form.invalid">
-   {{ editMode() ? 'Actualizar' : 'Registrar' }}
-  </button>
-
-
- </div>
+    <div class="botones">
+      <button type="submit"[disabled]="form.invalid">
+      {{ editMode() ? 'Actualizar' : 'Registrar' }}
+      </button>
+    </div>
+    </form>
+  </div>
+</div>

@@ -1,38 +1,48 @@
-<h2> {{isEditMode() ? 'Editar Persona' : 'Registrar Persona'}} </h2>
+<div class="form-container">
+  <div class="card">
+    <h2>{{isEditMode() ? 'Editar Persona' : 'Registrar Persona'}}</h2>
 
-<form [formGroup]="form" (ngSubmit)="savePersona()">
+    <form [formGroup]="form" (ngSubmit)="savePersona()">
+      <!-- Campo Nombre -->
+      <div class="campo">
+        <label>Nombre:</label>
+        <input type="text" formControlName="nombre" placeholder="Ingrese el nombre">
+        @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
+          <span class="error">El campo no puede estar vacío ni contener caracteres no alfabéticos.</span>
+        }
+      </div>
 
-  <div class = "campo">
-    <label>Nombre: </label>
-    <input type="text" formControlName="nombre">
-    @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
-      <span class = "error">El campo no puede estar vacio ni contener caracteres no alfabeticos.</span>
-    }
+      <!-- Campo DNI -->
+      <div class="campo">
+        <label>DNI:</label>
+        <input type="number" formControlName="dni" placeholder="Ingrese el DNI">
+        @if (form.get('dni')?.invalid && form.get('dni')?.touched) {
+          <span class="error">El DNI debe tener entre 6 y 9 dígitos</span>
+        }
+      </div>
+
+      <!-- Campo Edad -->
+      <div class="campo">
+        <label>Edad:</label>
+        <input type="number" formControlName="edad" placeholder="Ingrese la edad">
+        @if (form.get('edad')?.invalid && form.get('edad')?.touched) {
+          <span class="error">La persona debe tener entre 18 y 120 años.</span>
+        }
+      </div>
+
+      <!-- Botones -->
+      <div class="botones">
+        <button type="submit" [disabled]="form.invalid">
+          {{isEditMode() ? 'Actualizar' : 'Registrar'}}
+        </button>
+
+        @if (isEditMode()) {
+          <button type="button" (click)="cancelEdit()">Cancelar</button>
+        }
+      </div>
+    </form>
   </div>
-
-  <div class = "campo">
-    <label>Dni: </label>
-    <input type="number" formControlName="dni">
-    @if (form.get('dni')?.invalid && form.get('dni')?.touched) {
-      <span class = "error">El DNI debe tener enter 6 y 9 digitos</span>
-    }
+  <div class="image">
+    <img src="assets/images/arbol-sakura.png" alt="Personaje">
   </div>
-
-  <div class = "campo">
-    <label>Edad: </label>
-    <input type="number" formControlName="edad">
-    @if (form.get('edad')?.invalid && form.get('edad')?.touched) {
-      <span class = "error">La persona debe tener entre 18 y 120 años.</span>
-    }
-  </div>
-
-  <div class="botones">
-    <button type="submit"[disabled]="form.invalid">
-      {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
-    </button>
-
-  @if (isEditMode()) {
-    <button type="button" (click)="cancelEdit()" >Cancelar</button>
-  }
-  </div>
-</form>
+</div>

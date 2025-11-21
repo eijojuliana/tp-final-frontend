@@ -1,55 +1,58 @@
-<h2> {{ isEditMode() ? 'Editar Lote' : 'Registrar Lote' }} </h2>
+<div class="form-container">
+  <div class="card">
+    <h2> {{ isEditMode() ? 'Editar Lote' : 'Registrar Lote' }} </h2>
 
-<form [formGroup]="form" (ngSubmit)="saveLote()">
+    <form [formGroup]="form" (ngSubmit)="saveLote()">
 
-  <div class = "campo">
-    <label>Producto: </label>
-    <select formControlName="producto">
-      <option [ngValue]="null" disabled selected>Seleccione un producto</option>
+      <div class = "campo">
+        <label>Producto: </label>
+        <select formControlName="producto">
+          <option [ngValue]="null" disabled selected>Seleccione un producto</option>
 
-      @for(prod of productos(); track $index) {
-        <option [ngValue]="prod">
-          {{ prod.nombre }} ({{ prod.categoria }})
-        </option>
-      }
-    </select>
-    @if (form.get('producto')?.invalid && form.get('producto')?.touched) {
-      <span class = "error">El producto es requerido.</span>
-    }
+          @for(prod of productos(); track $index) {
+            <option [ngValue]="prod">
+              {{ prod.nombre }} ({{ prod.categoria }})
+            </option>
+          }
+        </select>
+        @if (form.get('producto')?.invalid && form.get('producto')?.touched) {
+          <span class = "error">El producto es requerido.</span>
+        }
+      </div>
+
+      <div class = "campo">
+        <label>Cantidad Disponible: </label>
+        <input type="number" formControlName="cantidadDisponible">
+        @if (form.get('cantidadDisponible')?.invalid && form.get('cantidadDisponible')?.touched) {
+          <span class = "error">El la cantidad disponible es requerida.</span>
+        }
+      </div>
+
+      <div class = "campo">
+        <label>Costo Unitario: </label>
+        <input type="number" formControlName="costoUnitario">
+        @if (form.get('costoUnitario')?.invalid && form.get('costoUnitario')?.touched) {
+          <span class = "error">El costo unitario debe ser superior a 0.</span>
+        }
+      </div>
+
+      <div class = "campo">
+        <label>Fecha de Ingreso: </label>
+        <input type="date" formControlName="fechaIngreso">
+        @if (form.get('fechaIngreso')?.invalid && form.get('fechaIngreso')?.touched) {
+          <span class = "error">La fecha de ingreso es requerida.</span>
+        }
+      </div>
+
+      <div class="botones">
+        <button type="submit" [disabled]="form.invalid">
+          {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
+        </button>
+
+        @if (isEditMode()) {
+          <button type="button" (click)="cancelEdit()">Cancelar</button>
+        }
+      </div>
+    </form>
   </div>
-
-  <div class = "campo">
-    <label>Cantidad Disponible: </label>
-    <input type="number" formControlName="cantidadDisponible">
-    @if (form.get('cantidadDisponible')?.invalid && form.get('cantidadDisponible')?.touched) {
-      <span class = "error">El la cantidad disponible es requerida.</span>
-    }
-  </div>
-
-  <div class = "campo">
-    <label>Costo Unitario: </label>
-    <input type="number" formControlName="costoUnitario">
-    @if (form.get('costoUnitario')?.invalid && form.get('costoUnitario')?.touched) {
-      <span class = "error">El costo unitario debe ser superior a 0.</span>
-    }
-  </div>
-
-  <div class = "campo">
-    <label>Fecha de Ingreso: </label>
-    <input type="date" formControlName="fechaIngreso">
-    @if (form.get('fechaIngreso')?.invalid && form.get('fechaIngreso')?.touched) {
-      <span class = "error">La fecha de ingreso es requerida.</span>
-    }
-  </div>
-
-  <div class="botones">
-    <button type="submit" [disabled]="form.invalid">
-      {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
-    </button>
-
-    @if (isEditMode()) {
-      <button type="button" (click)="cancelEdit()">Cancelar</button>
-    }
-  </div>
-
-</form>
+</div>

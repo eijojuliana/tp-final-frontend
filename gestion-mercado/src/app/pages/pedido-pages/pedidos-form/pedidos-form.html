@@ -68,7 +68,7 @@
         </button>
 
         @if (isEditMode()) {
-        <button type="button" (click)="cancelEdit()">Cancelar</button>
+        <button class="btn" type="button" (click)="cancelEdit()">Cancelar</button>
         }
       </div>
     </form>
@@ -81,7 +81,7 @@
       <app-detalles-pedido [pedido]="pedido"></app-detalles-pedido>
 
       <div class="botones-detalles">
-        <button type="button" (click)="cancelarCreacion()">Finalizar Pedido</button>
+        <button type="button" (click)="cancelarCreacion()">Cancelar Pedido</button>
       </div>
     }
     @else {
