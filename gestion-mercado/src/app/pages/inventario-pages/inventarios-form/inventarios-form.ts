@@ -58,10 +58,8 @@ export class InventariosForm {
     const formValue = {
       ...this.form.getRawValue(),
       producto_id: Number(this.form.value.producto_id),
-      cantidad: Number(this.form.value.cantidad),
       stockMin: Number(this.form.value.stockMin),
       precioVenta: Number(this.form.value.precioVenta),
-      costoAdquisicion: Number(this.form.value.costoAdquisicion),
     };
 
     const updated = { ...this.inventarioToEdit, ...formValue };
