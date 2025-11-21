@@ -1,0 +1,9 @@
+<nav class="breadcrumbs">
+  <a
+    *ngFor="let c of crumbs; let i = index"
+    [routerLink]="c.url"
+    [class.active]="i === crumbs.length - 1"
+  >
+    {{ c.label }}
+  </a>
+</nav>

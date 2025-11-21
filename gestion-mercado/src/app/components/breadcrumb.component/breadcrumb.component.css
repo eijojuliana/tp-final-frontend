@@ -1,0 +1,47 @@
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem 1.25rem;
+  background: rgba(250, 221, 213, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(247, 192, 201, 0.4);
+  margin: 0;
+  color: var(--rosa);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+.breadcrumbs a {
+  text-decoration: none;
+  color: var(--rosa);
+  transition: 0.25s ease;
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+.breadcrumbs a:hover {
+  color: var(--rosa-oscuro);
+  transform: translateY(-1px);
+  text-shadow: 0 0 6px rgba(247, 130, 149, 0.55);
+}
+
+.breadcrumbs a.active {
+  color: var(--rosita);
+  cursor: default;
+  pointer-events: none;
+  font-weight: 700;
+  text-shadow: 0 0 4px rgba(247, 192, 201, 0.9);
+}
+
+.breadcrumbs a::after {
+  content: " / ";
+  color: var(--rosa-oscuro);
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.breadcrumbs a.active::after {
+  content: "";
+}
