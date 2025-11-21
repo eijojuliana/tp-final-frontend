@@ -10,6 +10,8 @@
     position: relative;
     filter: brightness(0.8) contrast(1.1);
     box-shadow: 0 2px 15px rgba(248, 157, 195, 0.377);
+    position:relative;
+    z-index: 3;
 }
 
 .container::before {

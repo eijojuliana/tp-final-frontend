@@ -60,14 +60,14 @@ export const routes: Routes = [
   { path:'menu/personas/form',component:PersonaForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
 
   // Rutas de Cuentas Bancarias
-  {path:'menu/cuentas-bancarias', component: CuentasBancariasList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
+  {path:'menu/cuentas-bancarias', component: CuentasBancariasList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
   {path:'menu/cuentas-bancarias/form', component: CuentasBancariasForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
 
   // Rutas de la Tienda
   { path:'menu/tienda', component: TiendaPage ,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
 
   // Rutas usuarios
-  {path:'menu/usuarios', component: UsuariosList, canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
+  {path:'menu/usuarios', component: UsuariosList, canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
   {path:'menu/usuarios/form', component: UsuarioForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
 
   // Rutas duenios
@@ -75,7 +75,7 @@ export const routes: Routes = [
   {path:'menu/duenios/form', component: DuenioForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
 
   //Rutas empleados
-  { path: 'menu/empleados', component: EmpleadoList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
+  { path: 'menu/empleados', component: EmpleadoList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
   { path: 'menu/empleados/form', component: EmpleadoForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
 
   //Rutas clientes
