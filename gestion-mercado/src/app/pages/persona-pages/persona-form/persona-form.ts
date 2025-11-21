@@ -2,7 +2,7 @@ import { Component, effect, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PersonaService } from '../../../services/persona-service';
 import { Router } from '@angular/router';
-import { NewPersona, Persona } from '../../../models/persona.model';
+import { Persona } from '../../../models/persona.model';
 
 @Component({
   selector: 'app-persona-form',
@@ -19,9 +19,9 @@ export class PersonaForm {
   private personaToEdit: Persona | null = null;
 
   form = this.fb.nonNullable.group({
-    nombre: ['', [Validators.required,Validators.pattern(/^[A-Za-zÁÉÍÓÚÜáéíóúüÑñ\s]+$/)]],
+    nombre: ['', [Validators.required, Validators.pattern(/^[A-Za-zÁÉÍÓÚÜáéíóúüÑñ\s]+$/)]],
     dni: [0, [Validators.required, Validators.pattern(/^\d{6,9}$/)]],
-    edad: [0, [Validators.required, Validators.min(18),Validators.max(120)]],
+    edad: [0, [Validators.required, Validators.min(18), Validators.max(120)]],
   });
 
   constructor() {
@@ -43,23 +43,16 @@ export class PersonaForm {
   }
 
   savePersona() {
-    if (this.form.invalid) return;
+    if (this.form.invalid || !this.isEditMode() || !this.personaToEdit) return;
 
-    const formValue: NewPersona = this.form.getRawValue();
+    const formValue = this.form.getRawValue();
+    const updatePersona = { ...this.personaToEdit, ...formValue };
 
-    if (this.isEditMode() && this.personaToEdit) {
-      const updatePersona = { ...this.personaToEdit, ...formValue };
-      this.PersonasService.update(updatePersona).subscribe(() => {
-        console.log('Persona Actualizada');
-        this.PersonasService.clearPersonaToEdit();
-      });
-    } else {
-      this.PersonasService.post(formValue).subscribe(() => {
-        console.log('Persona Registrada');
-        this.form.reset();
-      });
-    }
-    this.router.navigate(['/menu/personas']);
+    this.PersonasService.update(updatePersona).subscribe(() => {
+      console.log('Persona Actualizada');
+      this.PersonasService.clearPersonaToEdit();
+      this.router.navigate(['/menu/personas']);
+    });
   }
 
   cancelEdit() {

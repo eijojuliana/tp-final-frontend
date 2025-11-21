@@ -1,12 +1,12 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { InventarioService } from '../../../services/inventario-service';
-import { Router, RouterLink } from '@angular/router';
+import { Router} from '@angular/router';
 import { Inventario } from '../../../models/inventario.model';
 import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-inventarios-list',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './inventarios-list.html',
   styleUrl: './inventarios-list.css',
 })
