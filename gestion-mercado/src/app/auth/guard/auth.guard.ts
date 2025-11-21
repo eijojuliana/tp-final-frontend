@@ -25,5 +25,5 @@ export const authGuard: CanActivateFn = (route, state) => {
   }
 
   // Si está logueado pero no tiene permiso, lo devuelvo al login (o podrías hacer /no-autorizado)
-  return router.parseUrl('/login');
+  return router.parseUrl('/acceso-denegado');
 };

@@ -1,0 +1,12 @@
+.acceso-denegado {
+  text-align: center;
+  padding: 4rem 1rem;
+  font-family: system-ui, sans-serif;
+}
+.acceso-denegado h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+.acceso-denegado p {
+  margin-bottom: 2rem;
+}

@@ -27,65 +27,75 @@ import { PedidosList } from './pages/pedido-pages/pedidos-list/pedidos-list';
 import { PedidosForm } from './pages/pedido-pages/pedidos-form/pedidos-form';
 import { ProveedoresList } from './pages/proveedor-pages/proveedores-list/proveedores-list';
 import { ProveedoresForm } from './pages/proveedor-pages/proveedores-form/proveedores-form';
+import { authGuard } from './auth/guard/auth.guard';
+import { AccesoDenegado } from './pages/acceso-denegado-pages/acceso-denegado/acceso-denegado';
+import { YaLogueado } from './pages/ya-logueado-page/ya-logueado/ya-logueado';
 
 export const routes: Routes = [
   // Ruta por defecto que dirige a /login
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+
   // Ruta del login
   { path: 'login', component: LoginLayout },
+
+  { path: 'ya-logueado', component: YaLogueado,canActivate:[authGuard]},
+
   // Ruta para página principal
-  { path: 'menu', component: MenuPage },
+  { path: 'menu', component: MenuPage, canActivate:[authGuard]},
 
   // Rutas productos
-  { path: 'menu/productos', component: ProductList},
-  { path: 'menu/productos/form', component: ProductRegister},
+  { path: 'menu/productos', component: ProductList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
+  { path: 'menu/productos/form', component: ProductRegister,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
 
   // Rutas lotes
-  { path:'menu/lotes', component: LotesList },
-  { path:'menu/lotes/form', component: LotesForm },
+  { path:'menu/lotes', component: LotesList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']} },
+  { path:'menu/lotes/form', component: LotesForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']} },
 
   // Rutas inventarios
-  { path:'menu/inventarios', component: InventariosList},
-  { path:'menu/inventarios/form', component:InventariosForm},
+  { path:'menu/inventarios', component: InventariosList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
+  { path:'menu/inventarios/form', component:InventariosForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
 
   // Rutas personas
-  { path:'menu/personas', component: PersonaList },
-  { path:'menu/personas/form',component:PersonaForm},
+  { path:'menu/personas', component: PersonaList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']} },
+  { path:'menu/personas/form',component:PersonaForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
 
   // Rutas de Cuentas Bancarias
-  {path:'menu/cuentas-bancarias', component: CuentasBancariasList},
-  {path:'menu/cuentas-bancarias/form', component: CuentasBancariasForm},
+  {path:'menu/cuentas-bancarias', component: CuentasBancariasList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
+  {path:'menu/cuentas-bancarias/form', component: CuentasBancariasForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
 
   // Rutas de la Tienda
-  { path:'menu/tienda', component: TiendaPage },
+  { path:'menu/tienda', component: TiendaPage ,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
 
   // Rutas usuarios
-  {path:'menu/usuarios', component: UsuariosList},
-  {path:'menu/usuarios/form', component: UsuarioForm},
+  {path:'menu/usuarios', component: UsuariosList, canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
+  {path:'menu/usuarios/form', component: UsuarioForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
 
   // Rutas duenios
-  {path:'menu/duenios', component: DueniosList},
-  {path:'menu/duenios/form', component: DuenioForm},
+  {path:'menu/duenios', component: DueniosList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
+  {path:'menu/duenios/form', component: DuenioForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
 
   //Rutas empleados
-  { path: 'menu/empleados', component: EmpleadoList},
-  { path: 'menu/empleados/form', component: EmpleadoForm},
+  { path: 'menu/empleados', component: EmpleadoList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
+  { path: 'menu/empleados/form', component: EmpleadoForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
 
   //Rutas clientes
-  { path: 'menu/clientes', component: ClienteList},
-  { path: 'menu/clientes/form', component: ClienteForm},
+  { path: 'menu/clientes', component: ClienteList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
+  { path: 'menu/clientes/form', component: ClienteForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
 
   //Rutas transacciones
-  { path: 'menu/transacciones', component: TransaccionesList},
-  { path: 'menu/transacciones/form', component: TransaccionForm},
+  { path: 'menu/transacciones', component: TransaccionesList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
+  { path: 'menu/transacciones/form', component: TransaccionForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
 
   //Rutas pedidos
-  { path: 'menu/pedidos', component: PedidosList},
-  { path: 'menu/pedidos/form', component: PedidosForm},
+  { path: 'menu/pedidos', component: PedidosList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
+  { path: 'menu/pedidos/form', component: PedidosForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
 
   //Rutas proveedores
-  {path: 'menu/proveedores', component: ProveedoresList},
-  {path: 'menu/proveedores/form', component: ProveedoresForm},
+  {path: 'menu/proveedores', component: ProveedoresList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
+  {path: 'menu/proveedores/form', component: ProveedoresForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
+
+  //Acceso denegado
+  { path: 'acceso-denegado', component: AccesoDenegado },
 
 ];
 

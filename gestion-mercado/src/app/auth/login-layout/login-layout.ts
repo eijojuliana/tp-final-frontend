@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -18,7 +18,7 @@ interface UserProfileResponse {
   templateUrl: './login-layout.html',
   styleUrl: './login-layout.css',
 })
-export class LoginLayout {
+export class LoginLayout implements OnInit{
   username: string = '';
   password: string = '';
   errorMsg: string = '';
@@ -28,6 +28,12 @@ export class LoginLayout {
     private router: Router,
     private authService: AuthService
   ) { }
+
+ ngOnInit(): void {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/ya-logueado']);
+    }
+  }
 
 login(): void {
     this.errorMsg = '';
@@ -50,19 +56,9 @@ login(): void {
           // 3. Guardar rol en el AuthService
           this.authService.setRoleFromBackendRoles(profile.roles);
 
-          // 4. Elegir a dónde redirigir según el rol
-          const rolesLimpios = profile.roles.map(r => r.replace('ROLE_', ''));
-
-          if (rolesLimpios.includes('ADMIN') || rolesLimpios.includes('DUENIO')) {
             // Dueño/Admin → menú general
             this.router.navigate(['/menu']);
-          } else if (rolesLimpios.includes('EMPLEADO')) {
-            // Empleado → por ejemplo, la sección de pedidos o tienda
-            this.router.navigate(['/menu/empleados']);
-          } else {
-            // Si por algún motivo no viene rol, lo mando al menú básico
-            this.router.navigate(['/menu']);
-          }
+
         },
         error: (err) => {
           console.error('Error en login:', err);
