@@ -12,7 +12,7 @@
           <option value="VENTA">VENTA</option>
         </select>
         @if (form.get('tipoPedido')?.invalid && form.get('tipoPedido')?.touched) {
-          <span class="error">El tipo de pedido es requerido.</span>
+        <span class="error">El tipo de pedido es requerido.</span>
         }
       </div>
 
@@ -24,42 +24,52 @@
           <option value="DEBITO">DÉBITO</option>
         </select>
         @if (form.get('tipoTransaccion')?.invalid && form.get('tipoTransaccion')?.touched) {
-          <span class="error">El tipo de transaccion es requerido.</span>
+        <span class="error">El tipo de transaccion es requerido.</span>
         }
       </div>
 
       @if (form.get('tipoTransaccion')?.value !== 'EFECTIVO' || form.get('tipoPedido')?.value === 'VENTA'){
       <div class="campo">
-        <label>
-          @if (form.get('tipoPedido')?.value === 'VENTA') {
-            ID del Cliente(cambiar a dni):
+
+        @if (form.get('tipoPedido')?.value === 'VENTA') {
+        <label>Cliente:</label>
+        <select formControlName="origen_id">
+          <option [ngValue]="null" disabled selected>Seleccione un cliente</option>
+          @for (cliente of clientes(); track $index) {
+          <option [ngValue]="cliente.clienteId">
+            {{ cliente.nombre }}
+            {{(cliente.dni)}}
+          </option>
           }
-          @else {
-            Cuenta Bancaria(Tienda):
-          }
-        </label>
+        </select>
+        }
+        @else {
+        <label>Cuenta Bancaria(Tienda):</label>
         <input type="number" formControlName="origen_id" />
         @if (form.get('origen_id')?.invalid && form.get('origen_id')?.touched) {
-          <span class="error">La cuenta de origen es requerida.</span>
+        <span class="error">La cuenta de origen es requerida.</span>
         }
+        }
+
+
       </div>
       }
 
       @if (form.get('tipoPedido')?.value === 'COMPRA') {
-        <div class="campo">
-          <label>Proveedor:</label>
-          <select formControlName="destino_id">
-            <option [ngValue]="null" disabled selected>Seleccione un proveedor</option>
-            @for(prov of proveedores(); track $index) {
-            <option [ngValue]="prov.proveedorId">
-              {{ prov.nombre }}
-            </option>
-            }
-          </select>
-          @if (form.get('destino_id')?.invalid && form.get('destino_id')?.touched) {
-          <span class="error">La cuenta de destino es requerida.</span>
+      <div class="campo">
+        <label>Proveedor:</label>
+        <select formControlName="destino_id">
+          <option [ngValue]="null" disabled selected>Seleccione un proveedor</option>
+          @for(prov of proveedores(); track $index) {
+          <option [ngValue]="prov.proveedorId">
+            {{ prov.nombre }}
+          </option>
           }
-        </div>
+        </select>
+        @if (form.get('destino_id')?.invalid && form.get('destino_id')?.touched) {
+        <span class="error">La cuenta de destino es requerida.</span>
+        }
+      </div>
       }
 
       <div class="botones">
@@ -76,17 +86,17 @@
 
   <section class="detalles">
     @if (pedidoCreado(); as pedido) {
-      <h2>Detalles del Pedido {{ pedido.pedidoId }}</h2>
-      <!-- Componente de detalles se inicializa con el ID del pedido creado -->
-      <app-detalles-pedido [pedido]="pedido"></app-detalles-pedido>
+    <h2>Detalles del Pedido {{ pedido.pedidoId }}</h2>
+    <!-- Componente de detalles se inicializa con el ID del pedido creado -->
+    <app-detalles-pedido [pedido]="pedido"></app-detalles-pedido>
 
-      <div class="botones-detalles">
-        <button type="button" (click)="cancelarCreacion()">Cancelar Pedido</button>
-      </div>
+    <div class="botones-detalles">
+      <button type="button" (click)="cancelarCreacion()">Cancelar Pedido</button>
+    </div>
     }
     @else {
-      <h2>Detalles</h2>
-      <p>Primero debe registrar el pedido para poder agregar detalles.</p>
+    <h2>Detalles</h2>
+    <p>Primero debe registrar el pedido para poder agregar detalles.</p>
     }
   </section>
 </main>

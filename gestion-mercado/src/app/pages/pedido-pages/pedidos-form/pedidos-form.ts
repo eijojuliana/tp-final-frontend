@@ -6,6 +6,7 @@ import { NewPedido, Pedido } from '../../../models/pedido.model';
 import { ProveedorService } from '../../../services/proveedor-service';
 import { DetallesPedido } from "../../../components/detalles-pedido/detalles-pedido";
 import { Transaccion } from '../../../models/transaccion.model';
+import { ClienteService } from '../../../services/cliente-service';
 
 @Component({
   selector: 'app-pedidos-form',
@@ -22,6 +23,9 @@ export class PedidosForm {
   private proveedorService = inject(ProveedorService);
   public proveedores = this.proveedorService.proveedores;
 
+  //Para clientes
+  private clientesService=inject(ClienteService);
+  public clientes=this.clientesService.clientes;
   isEditMode = signal(false);
   public pedidoToEdit: Pedido | null = null;
 
