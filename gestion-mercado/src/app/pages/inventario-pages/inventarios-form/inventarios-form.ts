@@ -1,7 +1,7 @@
 import { Component, effect, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Inventario, newInventario } from '../../../models/inventario.model';
+import { Inventario } from '../../../models/inventario.model';
 import { InventarioService } from '../../../services/inventario-service';
 import { ProductService } from '../../../services/product-service';
 import { ToastService } from '../../../services/toast.service';
@@ -52,18 +52,18 @@ export class InventariosForm {
     });
   }
 
-saveInventario() {
-  if (this.form.invalid) return;
+  saveInventario() {
+    if (this.form.invalid || !this.isEditMode() || !this.inventarioToEdit) return;
 
-  const formValue = { ...this.form.getRawValue(),
-    producto_id: Number(this.form.value.producto_id),
-    cantidad: Number(this.form.value.cantidad),
-    stockMin: Number(this.form.value.stockMin),
-    precioVenta: Number(this.form.value.precioVenta),
-    costoAdquisicion: Number(this.form.value.costoAdquisicion),
-  };
+    const formValue = {
+      ...this.form.getRawValue(),
+      producto_id: Number(this.form.value.producto_id),
+      cantidad: Number(this.form.value.cantidad),
+      stockMin: Number(this.form.value.stockMin),
+      precioVenta: Number(this.form.value.precioVenta),
+      costoAdquisicion: Number(this.form.value.costoAdquisicion),
+    };
 
-  if (this.isEditMode() && this.inventarioToEdit) {
     const updated = { ...this.inventarioToEdit, ...formValue };
 
     this.inventarioService.update(updated).subscribe({
@@ -73,17 +73,7 @@ saveInventario() {
         this.router.navigate(['/menu/inventarios']);
       }
     });
-  } else {
-    this.inventarioService.post(formValue).subscribe({
-        next: () => {
-          this.toast.success("Inventario registrado correctamente");
-          this.form.reset();
-          this.router.navigate(['/menu/inventarios']);
-        }
-      });
-    }
   }
-
 
   cancelarUpdate() {
     this.inventarioService.limpiarInventarioToEdit();
