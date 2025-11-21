@@ -2,7 +2,13 @@
 
   <div class="campo">
     <label for="productoId">Producto ID:</label>
-    <input type="number" id="productoId" [(ngModel)]="nuevoDetalle.productoId" name="productoId">
+    <select [(ngModel)]="nuevoDetalle.productoId" name="productoId">
+  <option [ngValue]="null" disabled selected>Seleccione un producto</option>
+  @for (producto of productos(); track $index) {
+    <option [ngValue]="producto.producto_id">{{ producto.nombre }}</option>
+  }
+</select>
+
   </div>
 
   <div class="campo">

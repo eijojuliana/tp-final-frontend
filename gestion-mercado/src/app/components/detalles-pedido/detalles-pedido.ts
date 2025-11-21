@@ -3,6 +3,7 @@ import { DetallePedidoService } from '../../services/detallePedido-service';
 import { DetallePedido } from '../../models/detallePedido.model';
 import { FormsModule } from '@angular/forms';
 import { Pedido } from '../../models/pedido.model';
+import { ProductService } from '../../services/product-service';
 
 @Component({
   selector: 'app-detalles-pedido',
@@ -11,7 +12,11 @@ import { Pedido } from '../../models/pedido.model';
   styleUrl: './detalles-pedido.css',
 })
 export class DetallesPedido {
-  @Input({ required: true }) pedido!: Pedido; // Recibe el pedido
+  @Input({ required: true }) pedido!: Pedido;// Recibe el pedido
+
+  //Para producto
+  private productService=inject(ProductService);
+  public productos=this.productService.productos;
 
   private detallePedidoService = inject(DetallePedidoService);
 
