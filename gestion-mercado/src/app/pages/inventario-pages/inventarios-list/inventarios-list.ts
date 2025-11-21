@@ -2,6 +2,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { InventarioService } from '../../../services/inventario-service';
 import { Router, RouterLink } from '@angular/router';
 import { Inventario } from '../../../models/inventario.model';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-inventarios-list',
@@ -13,6 +14,7 @@ export class InventariosList {
   private inventarioService = inject(InventarioService);
   private router = inject(Router);
   inventarios = this.inventarioService.inventarios;
+  private toast = inject(ToastService);
 
   filtro = signal('');
   atributo = signal<'cantidad' | 'producto_id' | 'stockMin' | 'precioVenta' | 'costoAdquisición'>('cantidad');
@@ -28,9 +30,12 @@ export class InventariosList {
 
   deleteInventario(id:number) {
     if(confirm("¿Desea eliminar?")) {
-      this.inventarioService.delete(id).subscribe(() => {
-        console.log(`Inventario de ID: ${id} eliminado.`);
-      })
+      this.inventarioService.delete(id).subscribe({
+        next: () => {
+          this.toast.success("Inventario eliminado correctamente");
+          console.log(`Inventario de ID: ${id} eliminado.`);
+        }
+      });
     }
   }
 

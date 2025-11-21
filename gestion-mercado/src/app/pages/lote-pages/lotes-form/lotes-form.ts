@@ -6,6 +6,7 @@ import { LoteService } from '../../../services/lote-service';
 import { Lote, newLote } from '../../../models/lote.model';
 import { Producto } from '../../../models/producto.model';
 import { ProductService } from '../../../services/product-service';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-lotes-form',
@@ -19,6 +20,7 @@ export class LotesForm {
   loteService = inject(LoteService);
   productService = inject(ProductService);
   private router = inject(Router);
+  private toast = inject(ToastService);
 
   isEditMode = signal(false);
   private loteToEdit: Lote | null = null;
@@ -72,17 +74,23 @@ export class LotesForm {
     };
 
     if (this.isEditMode() && this.loteToEdit) {
-      this.loteService.update({ ...this.loteToEdit, ...dto }).subscribe(() => {
-        this.loteService.limpiarLoteToEdit();
+      this.loteService.update({ ...this.loteToEdit, ...dto }).subscribe({
+        next: () => {
+          this.toast.success("Lote actualizado correctamente");
+          this.loteService.limpiarLoteToEdit();
+          this.router.navigate(['/menu/lotes']);
+        }
       });
     } else {
-      this.loteService.post(dto).subscribe(() => {
-        this.form.reset();
+      this.loteService.post(dto).subscribe({
+        next: () => {
+          this.toast.success("Lote registrado correctamente");
+          this.form.reset();
+          this.router.navigate(['/menu/lotes']);
+        }
       });
     }
-    this.router.navigate(['/menu/lotes']);
   }
-
   cancelEdit() {
     this.loteService.limpiarLoteToEdit();
     this.router.navigate(['/menu/lotes']);

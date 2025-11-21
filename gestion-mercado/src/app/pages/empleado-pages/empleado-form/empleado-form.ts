@@ -3,6 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EmpleadoService } from '../../../services/empleado-service';
 import { Router } from '@angular/router';
 import { Empleado, NewEmpleado } from '../../../models/empleado.model';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-empleado-form',
@@ -15,6 +16,7 @@ export class EmpleadoForm {
   private fb=inject(FormBuilder);
   empleadoService=inject(EmpleadoService);
   private router=inject(Router);
+  private toast = inject(ToastService);
 
   isEditMode=signal(false);
   private empleadoToEdit:Empleado|null=null;
@@ -51,30 +53,32 @@ export class EmpleadoForm {
   }
 
 
-  saveEmpleado(){
-
+  saveEmpleado() {
   if(this.form.invalid){return;}
 
-    const formValue:NewEmpleado=this.form.getRawValue();
+  const formValue: NewEmpleado = this.form.getRawValue();
 
-    if(this.isEditMode()&&this.empleadoToEdit){
+  if(this.isEditMode() && this.empleadoToEdit){
+    const updateEmpleado: Empleado = { ...this.empleadoToEdit, ...formValue };
 
-      const updateEmpleado:Empleado={...this.empleadoToEdit,...formValue};
-
-      this.empleadoService.update(updateEmpleado).subscribe(()=>{
-        console.log("Empleado eliminado");
+    this.empleadoService.update(updateEmpleado).subscribe({
+      next: () => {
+        this.toast.success("Empleado actualizado correctamente");
+        console.log("Empleado actualizado");
         this.empleadoService.clearEmpleadoToEdit();
-
+        this.router.navigate(['/menu/empleados']);
       }
-      )
-    }else{
-      this.empleadoService.agregar(formValue).subscribe(()=>{
+    });
+  } else {
+    this.empleadoService.agregar(formValue).subscribe({
+      next: () => {
+        this.toast.success("Empleado registrado correctamente");
         this.form.reset();
-      })
-    }
-    this.router.navigate(['/menu/empleados']);
+        this.router.navigate(['/menu/empleados']);
+      }
+    });
   }
-
+}
 
   cancelEdit(){
     this.empleadoService.clearEmpleadoToEdit();

@@ -1,6 +1,7 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { ClienteService } from '../../../services/cliente-service';
 import { Router, RouterLink } from '@angular/router';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-cliente-list',
@@ -12,6 +13,7 @@ export class ClienteList {
 service=inject(ClienteService);
 clientes=this.service.clientes;
 router=inject(Router);
+private toast = inject(ToastService);
 
 
  filtro = signal('');
@@ -27,11 +29,14 @@ router=inject(Router);
   });
 
 
-eliminarCliente(id:number){
-  if(confirm("¿Desea eliminar este cliente?")){
-  this.service.eliminar(id).subscribe(()=>{
-  console.log(`Cliente con el id:${id} eliminado`);
-  })
+eliminarCliente(id: number) {
+  if (confirm("¿Desea eliminar este cliente?")) {
+    this.service.eliminar(id).subscribe({
+      next: () => {
+        this.toast.success("Cliente eliminado correctamente");
+        console.log(`Cliente con el id: ${id} eliminado`);
+      }
+    });
   }
 }
 

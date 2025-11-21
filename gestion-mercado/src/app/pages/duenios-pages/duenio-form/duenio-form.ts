@@ -3,6 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DuenioService } from '../../../services/duenio-service';
 import { Duenio, NewDuenio } from '../../../models/duenio.model';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-duenio-form',
@@ -15,6 +16,7 @@ export class DuenioForm {
   private fb = inject(FormBuilder);
   private service = inject(DuenioService);
   private router = inject(Router);
+  private toast = inject(ToastService);
 
   isEditMode = signal(false);
   private duenioToEdit: Duenio | null = null;
@@ -56,28 +58,30 @@ export class DuenioForm {
       nombre: formValue.nombre,
       dni: formValue.dni,
       edad: formValue.edad,
-
-        email: formValue.email,
-        contraseña: formValue.contraseña,
-
+      email: formValue.email,
+      contraseña: formValue.contraseña,
     };
 
     if (this.isEditMode() && this.duenioToEdit) {
-
       const updatedDuenio = { ...this.duenioToEdit, ...dto };
-      this.service.update(updatedDuenio).subscribe(() => {
-        console.log('Duenio Actualizado');
-        this.service.clearDuenioToEdit();
+      this.service.update(updatedDuenio).subscribe({
+        next: () => {
+          this.toast.success("Dueño actualizado correctamente");
+          console.log('Duenio Actualizado');
+          this.service.clearDuenioToEdit();
+          this.router.navigate([this.rutaListado]);
+        }
       });
-
     } else {
-
-      this.service.post(dto).subscribe(() => {
-        console.log('Duenio Registrado');
-        this.form.reset();
+      this.service.post(dto).subscribe({
+        next: () => {
+          this.toast.success("Dueño registrado correctamente");
+          console.log('Duenio Registrado');
+          this.form.reset();
+          this.router.navigate([this.rutaListado]);
+        }
       });
     }
-    this.router.navigate([this.rutaListado]);
   }
 
   cancelEdit() {

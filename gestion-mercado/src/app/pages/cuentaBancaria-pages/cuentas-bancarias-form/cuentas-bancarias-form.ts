@@ -4,6 +4,7 @@ import { CuentaBancariaService } from '../../../services/cuenta-bancaria-service
 import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { single } from 'rxjs';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-cuentas-bancarias-form',
@@ -15,6 +16,7 @@ export class CuentasBancariasForm {
   private cuentaBancariaService = inject(CuentaBancariaService);
   private fb = inject(FormBuilder);
   private router = inject(Router);
+  private toast = inject(ToastService); 
 
   public isEditMode = signal(false);
   private cuentaBancariaToEdit: CuentaBancaria | null = null
@@ -44,21 +46,31 @@ export class CuentasBancariasForm {
   saveCuentaBancaria() {
     if(this.form.invalid) return;
 
-    const nuevosValores:newCuentaBancaria = this.form.getRawValue();
+    const nuevosValores: newCuentaBancaria = this.form.getRawValue();
 
     if(this.isEditMode() && this.cuentaBancariaToEdit) {
-      const cuentaBancariaUpdated = {...this.cuentaBancariaToEdit, ...nuevosValores};
 
-      this.cuentaBancariaService.update(cuentaBancariaUpdated).subscribe(() => {
-        console.log("Cuenta Bancaria Actualizada");
-      })
+      const cuentaBancariaUpdated = { ...this.cuentaBancariaToEdit, ...nuevosValores };
+
+      this.cuentaBancariaService.update(cuentaBancariaUpdated).subscribe({
+        next: () => {
+          console.log("Cuenta Bancaria Actualizada");
+          this.toast.success("Cuent Bancaria Actualizada");
+          this.form.reset();
+          this.router.navigate(['/menu/cuentas-bancarias']);
+        }
+      });
     } else {
-      this.cuentaBancariaService.post(nuevosValores).subscribe(() => {
-        console.log("Cuenta Bancaria Registrada");
-      })
+      this.cuentaBancariaService.post(nuevosValores).subscribe({
+        next: () => {
+          this.toast.success("Cuenta Bancaria Registrada con éxito");
+          this.form.reset();
+          this.router.navigate(['/menu/cuentas-bancarias']);
+        }
+      });
     }
-    this.router.navigate(['/menu/cuentas-bancarias']);
   }
+
 
   cancelarUpdate() {
     this.cuentaBancariaService.limpiarCuentaBancariaToEdit();

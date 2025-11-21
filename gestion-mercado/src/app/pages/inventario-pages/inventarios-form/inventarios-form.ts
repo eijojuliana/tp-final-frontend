@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Inventario, newInventario } from '../../../models/inventario.model';
 import { InventarioService } from '../../../services/inventario-service';
 import { ProductService } from '../../../services/product-service';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-inventarios-form',
@@ -16,6 +17,7 @@ export class InventariosForm {
   private inventarioService = inject(InventarioService);
   private productService = inject(ProductService);
   private router = inject(Router);
+  private toast = inject(ToastService);
   productos = this.productService.productos;
 
   isEditMode = signal(false);
@@ -50,31 +52,38 @@ export class InventariosForm {
     });
   }
 
-  saveInventario() {
-    if (this.form.invalid) return;
+saveInventario() {
+  if (this.form.invalid) return;
 
-    const formValue = {...this.form.getRawValue(),
-      producto_id: Number(this.form.value.producto_id),
-      cantidad: Number(this.form.value.cantidad),
-      stockMin: Number(this.form.value.stockMin),
-      precioVenta: Number(this.form.value.precioVenta),
-      costoAdquisicion: Number(this.form.value.costoAdquisicion),
-    };
+  const formValue = { ...this.form.getRawValue(),
+    producto_id: Number(this.form.value.producto_id),
+    cantidad: Number(this.form.value.cantidad),
+    stockMin: Number(this.form.value.stockMin),
+    precioVenta: Number(this.form.value.precioVenta),
+    costoAdquisicion: Number(this.form.value.costoAdquisicion),
+  };
 
-    if (this.isEditMode() && this.inventarioToEdit) {
+  if (this.isEditMode() && this.inventarioToEdit) {
+    const updated = { ...this.inventarioToEdit, ...formValue };
 
-      const updated = {...this.inventarioToEdit,...formValue};
-
-      this.inventarioService.update(updated).subscribe(() => {
+    this.inventarioService.update(updated).subscribe({
+      next: () => {
+        this.toast.success("Inventario actualizado correctamente");
         this.inventarioService.limpiarInventarioToEdit();
-      });
-    } else {
-      this.inventarioService.post(formValue).subscribe(() => {
-        this.form.reset();
+        this.router.navigate(['/menu/inventarios']);
+      }
+    });
+  } else {
+    this.inventarioService.post(formValue).subscribe({
+        next: () => {
+          this.toast.success("Inventario registrado correctamente");
+          this.form.reset();
+          this.router.navigate(['/menu/inventarios']);
+        }
       });
     }
-    this.router.navigate(['/menu/inventarios']);
   }
+
 
   cancelarUpdate() {
     this.inventarioService.limpiarInventarioToEdit();

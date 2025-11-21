@@ -3,6 +3,7 @@ import { TiendaService } from './../../../services/tienda-service';
 import { Component, effect, inject, signal } from '@angular/core';
 import { NewTienda, Tienda } from '../../../models/tienda.model';
 import { Router } from '@angular/router';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-tiendas-form',
@@ -14,6 +15,7 @@ export class TiendasForm {
   private tiendaService = inject(TiendaService);
   private fb = inject(FormBuilder);
   private router = inject(Router);
+  private toast = inject(ToastService);
 
   isEditMode = signal(false);
   tiendaToEdit: Tienda | null = null;
@@ -50,17 +52,25 @@ export class TiendasForm {
 
     if(this.isEditMode() && this.tiendaToEdit) {
       const tiendaId = this.tiendaToEdit.tiendaId;
-      this.tiendaService.update(formValue,tiendaId).subscribe(() => {
-        console.log('Tienda Actualizado');
-        this.tiendaService.limpiarTiendaToEdit();
+
+      this.tiendaService.update(formValue, tiendaId).subscribe({
+        next: () => {
+          this.toast.success("Tienda actualizada correctamente");
+          console.log('Tienda Actualizado');
+          this.tiendaService.limpiarTiendaToEdit();
+          this.router.navigate(['/menu/tienda']);
+        }
       });
     } else {
-      this.tiendaService.post(formValue).subscribe(() => {
-        console.log("Tienda Registrado");
-        this.form.reset();
-      })
+      this.tiendaService.post(formValue).subscribe({
+        next: () => {
+          this.toast.success("Tienda registrada correctamente");
+          console.log("Tienda Registrado");
+          this.form.reset();
+          this.router.navigate(['/menu/tienda']);
+        }
+      });
     }
-    this.router.navigate(['/menu/tienda'])
   }
 
   cancelarUpdate() {

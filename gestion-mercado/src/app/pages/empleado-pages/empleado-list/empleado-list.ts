@@ -1,6 +1,7 @@
 import { Router, RouterLink } from '@angular/router';
 import { EmpleadoService } from './../../../services/empleado-service';
 import { Component, computed, inject, signal } from '@angular/core';
+import { ToastService } from '../../../services/toast.service';
 
 
 @Component({
@@ -13,8 +14,9 @@ export class EmpleadoList {
  service=inject(EmpleadoService);
  empleados=this.service.empleados;
  router=inject(Router);
+ private toast = inject(ToastService);
 
-filtro = signal('');
+  filtro = signal('');
   atributo = signal<'nombre' | 'dni'|'edad'|'email'>('nombre');
 
   empleadosFiltrados = computed(() => {
@@ -26,25 +28,19 @@ filtro = signal('');
     );
   });
 
- eliminarEmpleado(id:number){
-  if(confirm("Desea eliminar este empleado?")){
-    this.service.eliminar(id).subscribe(()=>
-      console.log(`Empleado con id ${id} eliminado.`)
-    );
+  eliminarEmpleado(id:number){
+    if(confirm("Desea eliminar este empleado?")){
+      this.service.eliminar(id).subscribe({
+        next: () => {
+          this.toast.success("Empleado eliminado correctamente");
+          console.log(`Empleado con id ${id} eliminado.`);
+        }
+      });
+    }
   }
- }
 
- modificarEmpleado(empleado:any){
-  this.service.selectEmpleadoToEdit(empleado);
-  this.router.navigate(['menu/empleados/form'])
- }
-
-
-
-
-
-
-
-
-
+  modificarEmpleado(empleado:any){
+    this.service.selectEmpleadoToEdit(empleado);
+    this.router.navigate(['menu/empleados/form'])
+  }
 }

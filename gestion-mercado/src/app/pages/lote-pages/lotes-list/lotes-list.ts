@@ -2,6 +2,7 @@ import { Router, RouterLink } from '@angular/router';
 import { LoteService } from '../../../services/lote-service';
 import { Component, computed, inject, signal } from '@angular/core';
 import { Lote } from '../../../models/lote.model';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-lotes-list',
@@ -13,6 +14,7 @@ export class LotesList {
   private loteService = inject(LoteService);
   lotes = this.loteService.lotes;
   private router = inject(Router);
+  private toast = inject(ToastService);
 
   filtro = signal('');
   atributo = signal<'nombre' | 'categoria' | 'cantidadDisponible' | 'costoUnitario' | 'fechaIngreso'>('nombre');
@@ -28,12 +30,14 @@ export class LotesList {
     });
   });
 
-
   deleteLote(id:number) {
     if(confirm("Desea eliminar?")) {
-      this.loteService.delete(id).subscribe(() => {
-        console.log(`Lote de ID: ${id} eliminado.`);
-      })
+      this.loteService.delete(id).subscribe({
+        next: () => {
+          this.toast.success("Lote eliminado correctamente");
+          console.log(`Lote de ID: ${id} eliminado.`);
+        }
+      });
     }
   }
 

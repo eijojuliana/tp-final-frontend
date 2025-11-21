@@ -3,6 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClienteService } from '../../../services/cliente-service';
 import { Router } from '@angular/router';
 import { Cliente, NewCliente } from '../../../models/cliente.model';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-cliente-form',
@@ -15,6 +16,7 @@ export class ClienteForm {
   private fb=inject(FormBuilder);
   clienteService=inject(ClienteService);
   private router=inject(Router);
+  private toast = inject(ToastService);
 
   isEditMode=signal(false);
   private clienteToEdit:Cliente|null=null;
@@ -27,53 +29,56 @@ export class ClienteForm {
 
 
   constructor(){
-  effect(()=>{
+    effect(()=>{
+      this.clienteToEdit=this.clienteService.clienteToEdit();
 
-    this.clienteToEdit=this.clienteService.clienteToEdit();
+      if(this.clienteToEdit){
+        this.isEditMode.set(true);
 
-    if(this.clienteToEdit){
-      this.isEditMode.set(true);
+        this.form.patchValue({
+          nombre:this.clienteToEdit.nombre,
+          dni:this.clienteToEdit.dni,
+          edad:this.clienteToEdit.edad
+        });
+      }else{
+        this.isEditMode.set(false);
+        this.form.reset();
+      }
+    })
+  }
 
-      this.form.patchValue({
-        nombre:this.clienteToEdit.nombre,
-        dni:this.clienteToEdit.dni,
-        edad:this.clienteToEdit.edad
+
+  saveCliente() {
+    if (this.form.invalid) return;
+
+    const formValue: NewCliente = this.form.getRawValue();
+
+    if (this.isEditMode() && this.clienteToEdit) {
+      const updateCliente: Cliente = {...this.clienteToEdit, ...formValue};
+
+      this.clienteService.modificar(updateCliente).subscribe({
+        next: () => {
+          this.toast.success("Persona actualizada correctamente");
+          console.log("Persona actualizada");
+          this.clienteService.clearClienteToEdit();
+          this.router.navigate(['menu/clientes']);
+        }
       });
-    }else{
-      this.isEditMode.set(false);
-      this.form.reset();
+    } else {
+      this.clienteService.agregar(formValue).subscribe({
+        next: () => {
+          this.toast.success("Persona agregada correctamente");
+          this.form.reset();
+          this.router.navigate(['menu/clientes']);
+        }
+      });
     }
-  })
-}
+  }
 
-
-saveCliente(){
-
-if(this.form.invalid){return;}
-
-const formValue: NewCliente=this.form.getRawValue();
-
-if(this.isEditMode()&&this.clienteToEdit){
-  const updateCliente:Cliente={...this.clienteToEdit, ...formValue};
-
-  this.clienteService.modificar(updateCliente).subscribe(()=>{
-    console.log("Persona actualizada");
+  cancelEdit(){
     this.clienteService.clearClienteToEdit();
-  })
-}else{
- this.clienteService.agregar(formValue).subscribe(()=>{
-  this.form.reset();
- })
-}
-
-this.router.navigate(['menu/clientes']);
-}
-
-
-cancelEdit(){
-  this.clienteService.clearClienteToEdit();
-  this.router.navigate(['menu/clientes']);
-}
+    this.router.navigate(['menu/clientes']);
+  }
 
 
 

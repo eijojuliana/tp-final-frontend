@@ -2,6 +2,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { CuentaBancariaService } from '../../../services/cuenta-bancaria-service';
 import { Router, RouterLink } from '@angular/router';
 import { CuentaBancaria } from '../../../models/cuentaBancaria.model';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-cuentas-bancarias-list',
@@ -13,6 +14,7 @@ export class CuentasBancariasList {
   private cuentaBancariaService = inject(CuentaBancariaService);
   private router = inject(Router);
   public cuentasBancarias = this.cuentaBancariaService.cuentasBancarias;
+  private toast = inject(ToastService);
 
   filtro = signal('');
   atributo = signal<'cbu' | 'saldo'>('cbu');
@@ -28,8 +30,11 @@ export class CuentasBancariasList {
 
   deleteCuentaBancaria(id:number) {
     if(confirm("¿Desea eliminar?")) {
-      this.cuentaBancariaService.delete(id).subscribe(() => {
-        console.log(`Cuenta de ID: ${id} eliminada.`);
+      this.cuentaBancariaService.delete(id).subscribe({
+        next: () => {
+        this.toast.success("Cuenta Bancaria eliminada correctamente");
+        console.log(`Cuenta Bancaria con id: ${id} eliminada`);
+      }
       })
     }
   }

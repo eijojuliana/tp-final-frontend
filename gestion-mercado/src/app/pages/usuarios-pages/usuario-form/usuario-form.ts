@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@ang
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsuarioService } from '../../../services/usuario-service';
 import { Router } from '@angular/router';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-usuario-form',
@@ -15,6 +16,7 @@ export class UsuarioForm {
   private fb = inject(FormBuilder)
   private usuarioService = inject(UsuarioService);
   private router = inject(Router);
+  private toast = inject(ToastService);
 
   public editMode = signal(false);
   private usuarioToEdit: Usuario | null = null;
@@ -53,20 +55,27 @@ export class UsuarioForm {
     };
 
     if(this.editMode() && this.usuarioToEdit){
-
       const updatedUsuario = { ...this.usuarioToEdit, ...dto };
-      this.usuarioService.update(updatedUsuario).subscribe(() => {
-        console.log('Usuario Actualizado');
-        this.usuarioService.clearUsuarioToEdit();
+      this.usuarioService.update(updatedUsuario).subscribe({
+        next: () => {
+          this.toast.success("Usuario actualizado correctamente");
+          console.log('Usuario Actualizado');
+          this.usuarioService.clearUsuarioToEdit();
+          this.router.navigate(['/menu/usuarios']);
+        }
       });
     } else {
-       this.usuarioService.post(dto).subscribe( () => {
-        console.log("Usuario Agregado.");
-        this.form.reset();
-       });
+      this.usuarioService.post(dto).subscribe({
+        next: () => {
+          this.toast.success("Usuario registrado correctamente");
+          console.log("Usuario Agregado.");
+          this.form.reset();
+          this.router.navigate(['/menu/usuarios']);
+        }
+      });
     }
-    this.router.navigate(['/menu/usuarios']);
   }
+
 
  cancelEdit() {
     this.usuarioService.clearUsuarioToEdit();

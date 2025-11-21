@@ -1,6 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { UsuarioService } from '../../../services/usuario-service';
 import { Router, RouterLink } from '@angular/router';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-usuarios-list',
@@ -12,7 +13,8 @@ export class UsuariosList {
 
   private usuarioService = inject(UsuarioService);
   public usuarios = this.usuarioService.usuarios;
-  router=inject(Router)
+  router=inject(Router);
+  private toast = inject(ToastService);
 
   filtro = signal('');
   atributo = signal<'email'>('email');
@@ -30,7 +32,12 @@ export class UsuariosList {
 
   eliminarUsuario(id: number) {
     if (confirm('Desea eliminar este usuario?')) {
-      this.usuarioService.delete(id).subscribe(() => console.log(`Usuario con id ${id} eliminado.`));
+      this.usuarioService.delete(id).subscribe({
+        next: () => {
+          this.toast.success("Usuario eliminado correctamente");
+          console.log(`Usuario con id ${id} eliminado.`);
+        }
+      });
     }
   }
 
