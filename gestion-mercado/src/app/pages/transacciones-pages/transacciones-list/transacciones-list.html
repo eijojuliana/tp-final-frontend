@@ -3,6 +3,12 @@
     <button type="button" class="btn-agregar" routerLink="/menu/personas/form"> Agregar </button>
   </div>
 
+   <select (change)="onTipoChange($event)">
+  <option value="">Todos</option>
+  <option value="EFECTIVO">Efectivo</option>
+  <option value="DEBITO">Debito</option>
+</select>
+
   <table class="tabla">
     <thead class="encabezado">
       <tr>
@@ -17,7 +23,7 @@
     </thead>
 
     <tbody class="tablaBody">
-      @for (transaccion of transacciones(); track $index){
+      @for (transaccion of transaccionesFiltrados(); track $index){
         <tr>
           <td>{{ transaccion.transaccion_id }}</td>
           <td>{{ transaccion.tipo }}</td>
