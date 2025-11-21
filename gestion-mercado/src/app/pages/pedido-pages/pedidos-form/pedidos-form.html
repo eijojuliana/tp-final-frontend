@@ -86,7 +86,7 @@
 
   <section class="detalles">
     @if (pedidoCreado(); as pedido) {
-    <h2>Detalles del Pedido {{ pedido.pedidoId }}</h2>
+    <h2>Detalles del Pedido nro{{ pedido.pedidoId }}</h2>
     <!-- Componente de detalles se inicializa con el ID del pedido creado -->
     <app-detalles-pedido [pedido]="pedido"></app-detalles-pedido>
 

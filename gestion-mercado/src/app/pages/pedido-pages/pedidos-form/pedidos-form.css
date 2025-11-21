@@ -1,28 +1,332 @@
+/* ==== CONTENEDOR GENERAL ==== */
 main {
-  background-color: white;
+  min-height: 100vh;
   display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3rem;
+
+  background: linear-gradient(135deg, #2c1b2e 0%, #1a0e1f 50%, #2c1b2e 100%);
+  position: relative;
 }
 
-.form {
-  background-color: rgb(227, 196, 255);
-  flex: 1;
-  align-items: center;
+main::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.7;
+  z-index: 0;
+  pointer-events: none;
 }
 
-.form div {
+/* ==== FORMULARIO (SECCIÓN IZQ) ==== */
+section.form,
+section.detalles {
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 3rem;
   width: 100%;
+
+  box-shadow:
+    0 8px 32px rgba(255, 182, 193, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-.detalles {
-  background-color: rgb(219, 188, 245);
-  flex: 3;
+section.form{
+  width: 20%;
+}
+section.detalles{
+width: 80%;
 }
 
-.detalles div {
-  height: 40dvh;
+/* ==== TÍTULOS ==== */
+section.form h2,
+section.detalles h2,
+h3 {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.8rem;
+  letter-spacing: 1px;
 }
 
-.detalles button {
+/* ==== CAMPOS ==== */
+.campo {
   display: flex;
-  justify-self: end;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+  margin-bottom: 1.8rem;
 }
+
+.campo label {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.campo input,
+.campo select {
+  padding: 1rem 1.25rem;
+  border: 2px solid rgba(255, 197, 208, 0.3);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  width: 100%;
+  font-size: 1.5rem;
+  outline: none;
+  transition: 0.3s;
+  backdrop-filter: blur(10px);
+}
+
+.campo input:hover,
+.campo select:hover {
+  border-color: rgba(255, 159, 176, 0.5);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.campo input:focus,
+.campo select:focus {
+  border-color: #ffa6c9;
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 0 0 3px rgba(255, 166, 201, 0.2);
+}
+
+/* ==== BOTONES FORM PRINCIPAL ==== */
+.botones {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.botones button,
+button.btnEliminar {
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: "Proza Libre", sans-serif;
+}
+
+/* submit */
+.botones button[type="submit"] {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 154, 158, 0.3);
+}
+
+.botones button[type="submit"]:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #ff6b81 0%, #fda4ba 100%);
+}
+
+.botones button[type="submit"]:disabled {
+  background: rgba(255, 154, 158, 0.3);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* cancelar */
+button.btn,
+button.btn-cancel {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 2px solid rgba(255, 182, 193, 0.3);
+}
+
+button.btn:hover,
+button.btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 182, 193, 0.5);
+  transform: translateY(-2px);
+}
+
+/* ===== MENSAJES DE ERROR ===== */
+.error {
+  background: rgba(255, 123, 156, 0.15);
+  color: #ffb3c1;
+  border: 2px solid rgba(255, 123, 156, 0.4);
+  border-radius: 12px;
+  font-size: 1.3rem;
+  padding: 0.75rem 1rem;
+  margin-top: 0.25rem;
+  backdrop-filter: blur(10px);
+}
+
+
+
+/* botón eliminar */
+.btnEliminar {
+  background: rgba(255, 120, 120, 0.4);
+  border: 2px solid rgba(255, 120, 120, 0.6);
+  color: white;
+}
+
+.btnEliminar:hover {
+  background: rgba(255, 100, 100, 0.7);
+  border-color: rgba(255, 80, 80, 0.7);
+  transform: translateY(-2px);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 600px) {
+  section.form,
+  section.detalles {
+    padding: 2rem 1.5rem;
+  }
+
+  .botones {
+    flex-direction: column;
+  }
+
+  .botones button {
+    width: 100%;
+  }
+}
+/* ===== SECCIÓN DE DETALLES DEL PEDIDO ===== */
+
+/* Igual que .form */
+section.detalles form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Igual que los campos del form principal */
+section.detalles .campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+section.detalles .campo label {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Inputs y selects */
+section.detalles .campo input,
+section.detalles .campo select {
+  padding: 1rem 1.25rem;
+  border: 2px solid rgba(255, 197, 208, 0.3);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  width: 100%;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+section.detalles .campo input:hover,
+section.detalles .campo select:hover {
+  border-color: rgba(255, 159, 176, 0.5);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+section.detalles .campo input:focus,
+section.detalles .campo select:focus {
+  border-color: #ffa6c9;
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 0 0 3px rgba(255, 166, 201, 0.2);
+}
+
+/* Boton "Agregar Detalle" */
+section.detalles button[type="button"]:not(.btnEliminar) {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 154, 158, 0.3);
+  width: fit-content;
+  margin-top: 1rem;
+}
+
+section.detalles button[type="button"]:not(.btnEliminar):hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #ff6b81 0%, #fda4ba 100%);
+}
+
+/* Botón Cancelar Pedido */
+section.detalles .botones-detalles button {
+  padding: 1rem 2.5rem;
+  border-radius: 12px;
+  font-size: 1.4rem;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 2px solid rgba(255, 182, 193, 0.3);
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-top: 1.5rem;
+}
+
+section.detalles .botones-detalles button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 182, 193, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Igualar separación y centrado */
+section.detalles .botones-detalles {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+/* Botón eliminar de la tabla */
+section.detalles .btnEliminar {
+  padding: 0.7rem 1.5rem;
+  background: rgba(255, 120, 120, 0.4);
+  border: 2px solid rgba(255, 120, 120, 0.6);
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+section.detalles .btnEliminar:hover {
+  background: rgba(255, 100, 100, 0.7);
+  border-color: rgba(255, 80, 80, 0.7);
+  transform: translateY(-2px);
+}
+
+/* Evitar que el contenido del detalle se salga de la tarjeta */
+section.detalles {
+  overflow-x: auto;
+}
+
+/* Evitar que la tabla se desborde */
+section.detalles table {
+  width: 100%;
+  display: block;
+  overflow-x: auto;
+}
+
+option{
+  color: #000;
+}
+

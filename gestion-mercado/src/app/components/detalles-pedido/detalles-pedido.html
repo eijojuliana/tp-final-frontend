@@ -1,58 +1,69 @@
-<form>
+<section class="detalles">
+  <form>
 
-  <div class="campo">
-    <label for="productoId">Producto ID:</label>
-    <select [(ngModel)]="nuevoDetalle.productoId" name="productoId">
-  <option [ngValue]="null" disabled selected>Seleccione un producto</option>
-  @for (producto of productos(); track $index) {
-    <option [ngValue]="producto.producto_id">{{ producto.nombre }}</option>
-  }
-</select>
-
-  </div>
-
-  <div class="campo">
-    <label for="cantidad">Cantidad:</label>
-    <input type="number" id="cantidad" [(ngModel)]="nuevoDetalle.cantidad" name="cantidad">
-  </div>
-
-  @if (pedido.tipo === 'COMPRA') {
     <div class="campo">
-      <label for="costoUnitario">Costo Unitario:</label>
-      <input type="number" id="costoUnitario" [(ngModel)]="nuevoDetalle.costoUnitario" name="costoUnitario">
+      <label for="productoId">Producto ID:</label>
+      <select [(ngModel)]="nuevoDetalle.productoId" name="productoId">
+        <option [ngValue]="null" disabled selected>Seleccione un producto</option>
+        @for (producto of productos(); track $index) {
+          <option [ngValue]="producto.producto_id">{{ producto.nombre }}</option>
+        }
+      </select>
     </div>
+
+    <div class="campo">
+      <label for="cantidad">Cantidad:</label>
+      <input type="number" id="cantidad" [(ngModel)]="nuevoDetalle.cantidad" name="cantidad">
+    </div>
+
+    @if (pedido.tipo === 'COMPRA') {
+      <div class="campo">
+        <label for="costoUnitario">Costo Unitario:</label>
+        <input type="number" id="costoUnitario" [(ngModel)]="nuevoDetalle.costoUnitario" name="costoUnitario">
+      </div>
+    }
+
+    <!-- BOTÓN CORRECTO CON SU CLASE -->
+    <button type="button" class="agregar-detalle" (click)="agregarDetalle()">
+      Agregar Detalle
+    </button>
+
+  </form>
+
+  @if (detallesPedido().length > 0) {
+    <hr>
+    <h3>Detalles Cargados ({{ detallesPedido().length }})</h3>
+
+    <table class="tabla">
+      <thead class="encabezado">
+        <tr>
+          <th>ID</th>
+          <th>Código Producto</th>
+          <th>Nombre</th>
+          <th>Cantidad</th>
+          <th>Subtotal</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody class="tablaBody">
+        @for (detalle of detallesPedido(); track detalle.producto_id) {
+          <tr>
+            <td>{{ detalle.detallePedidoId }}</td>
+            <td>{{ detalle.producto_id }}</td>
+            <td>{{ detalle.producto_nombre }}</td>
+            <td>{{ detalle.cantidad }}</td>
+            <td>{{ detalle.subtotal }}</td>
+            <td class="botones">
+              <button class="btnEliminar" (click)="eliminarDetalle(detalle.detallePedidoId)">
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
   }
 
-  <button type="button" (click)="agregarDetalle()">Agregar Detalle</button>
-</form>
+</section>
 
-@if (detallesPedido().length > 0) {
-  <hr>
-  <h3>Detalles Cargados ({{ detallesPedido().length }})</h3>
-  <table class="tabla">
-    <thead class="encabezado">
-      <tr>
-        <th>ID</th>
-        <th>Código Producto</th>
-        <th>Nombre</th>
-        <th>Cantidad</th>
-        <th>Subtotal</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody class="tablaBody">
-      @for (detalle of detallesPedido(); track detalle.producto_id) {
-        <tr>
-          <td>{{ detalle.detallePedidoId }}</td>
-          <td>{{ detalle.producto_id }}</td>
-          <td>{{ detalle.producto_nombre }}</td>
-          <td>{{ detalle.cantidad }}</td>
-          <td>{{ detalle.subtotal }}</td>
-          <td class="botones">
-            <button class="btnEliminar" (click)="eliminarDetalle(detalle.detallePedidoId)">Eliminar</button>
-          </td>
-        </tr>
-      }
-    </tbody>
-  </table>
-}
