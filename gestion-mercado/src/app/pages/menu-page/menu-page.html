@@ -10,11 +10,12 @@
       <!-- PERSONAS -->
        @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
         <li class="card" id="personas">
-        <a routerLink="/menu/personas"> <div class="recuadro"></div> </a>
+        <a routerLink="/menu/personas"> <div class="recuadro"></div>
         <div class="icon-container">
           <img class="icon" src="/assets/images/persona-icon.png" alt="persona-icon" />
           <p> PERSONAS </p>
         </div>
+        </a>
       </li>
        }
 
@@ -22,11 +23,12 @@
       <!-- DUENIOS -->
        @if (auth.hasRole(['ADMIN','DUENIO'])){
          <li class="card" id="duenios">
-        <a routerLink="/menu/duenios"> <div class="recuadro"></div> </a>
+        <a routerLink="/menu/duenios"> <div class="recuadro"></div>
         <div class="icon-container">
           <img class="icon" src="" alt="duenio-icon" />
           <p> DUENIOS </p>
         </div>
+        </a>
       </li>
        }
 
@@ -34,11 +36,12 @@
       <!-- EMPLEADOS -->
        @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
         <li class="card" id="empleados">
-        <a routerLink="/menu/empleados"> <div class="recuadro"></div> </a>
+        <a routerLink="/menu/empleados"> <div class="recuadro"></div>
         <div class="icon-container">
           <img class="icon" src="" alt="duenio-icon" />
           <p> EMPLEADOS </p>
         </div>
+         </a>
       </li>
        }
 
@@ -46,32 +49,35 @@
       <!-- CLIENTES -->
        @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
         <li class="card" id="clientes">
-        <a routerLink="/menu/clientes"> <div class="recuadro"></div> </a>
+        <a routerLink="/menu/clientes"> <div class="recuadro"></div>
         <div class="icon-container">
           <img class="icon" src="" alt="duenio-icon" />
           <p> CLIENTES </p>
         </div>
+         </a>
       </li>}
 
       <!-- Proveedores -->
        @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
          <li class="card" id="proveedores">
-        <a routerLink="/menu/proveedores"> <div class="recuadro"></div> </a>
+        <a routerLink="/menu/proveedores"> <div class="recuadro"></div>
         <div class="icon-container">
           <img class="icon" src="" alt="duenio-icon" />
           <p> Proveedores </p>
         </div>
+         </a>
       </li>}
 
 
       <!-- USUARIOS -->
        @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
       <li class="card" id="usuarios">
-        <a routerLink="/menu/usuarios"> <div class="recuadro"></div> </a>
+        <a routerLink="/menu/usuarios"> <div class="recuadro"></div>
         <div class="icon-container">
           <img class="icon" src="/assets/images/user-icon.png" alt="usuario-icon" />
           <p> USUARIOS </p>
         </div>
+        </a>
       </li>
        }
 
@@ -81,12 +87,13 @@
       <!-- PRODUCTOS -->
         @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
           <li class="card" id="productos">
-        <a routerLink="/menu/productos"> <div class="recuadro"></div> </a>
+        <a routerLink="/menu/productos"> <div class="recuadro"></div>
         <div class="icon-container">
           <img class="icon" src="/assets/images/productos-icon.png" alt="producto-icon" />
           <p> PRODUCTOS  </p>
           <p>(cambiar imagen👍)</p>
         </div>
+        </a>
       </li>
         }
 
@@ -94,11 +101,12 @@
       <!-- LOTES -->
        @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
         <li class="card" id="lotes">
-        <a routerLink="/menu/lotes"> <div class="recuadro"></div> </a>
+        <a routerLink="/menu/lotes"> <div class="recuadro"></div>
         <div class="icon-container">
           <img class="icon" src="/assets/images/lotes-icon.png" alt="lote-icon" />
           <p> LOTES </p>
         </div>
+        </a>
       </li>
        }
 
@@ -106,11 +114,12 @@
       <!-- INVENTARIOS -->
        @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
         <li class="card" id="inventarios">
-        <a routerLink="/menu/inventarios"> <div class="recuadro"></div> </a>
+        <a routerLink="/menu/inventarios"> <div class="recuadro"></div>
         <div class="icon-container">
           <img class="icon" src="/assets/images/inventarios-icon.png" alt="inventarios-icon" />
           <p> INVENTARIOS </p>
         </div>
+        </a>
       </li>
        }
 
@@ -120,11 +129,12 @@
       <!-- TIENDA -->
        @if (auth.hasRole(['ADMIN','DUENIO'])){
          <li class="card" id="tienda">
-        <a routerLink="/menu/tienda"> <div class="recuadro"></div> </a>
+        <a routerLink="/menu/tienda"> <div class="recuadro"></div>
         <div class="icon-container">
           <img class="icon" src="/assets/images/shop-icon.png" alt="tienda-icon" />
           <p> TIENDA </p>
         </div>
+        </a>
       </li>
        }
 
@@ -132,11 +142,12 @@
       <!-- CUENTAS B -->
         @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
           <li class="card" id="cuentasB">
-        <a routerLink="/menu/cuentas-bancarias"> <div class="recuadro"></div> </a>
+        <a routerLink="/menu/cuentas-bancarias"> <div class="recuadro"></div>
         <div class="icon-container">
           <img class="icon" src="/assets/images/cuentaB-icon.png" alt="cuenta bancaria-icon" />
           <p> CUENTA BANCARIA </p>
         </div>
+        </a>
       </li>
         }
 
@@ -144,11 +155,12 @@
       <!-- TRANSACCIONES -->
         @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
           <li class="card" id="transacciones">
-        <a routerLink="/menu/transacciones"> <div class="recuadro"></div> </a>
+        <a routerLink="/menu/transacciones"> <div class="recuadro"></div>
         <div class="icon-container">
           <img class="icon" src="/assets/images/transaccion-icon.png" alt="transaccion-icon" />
           <p> TRANSACCIONES </p>
         </div>
+        </a>
       </li>
         }
 
@@ -158,11 +170,12 @@
       <!-- PEDIDOS -->
        @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
          <li class="card" id="pedidos">
-        <a routerLink="/menu/pedidos"> <div class="recuadro"></div> </a>
+        <a routerLink="/menu/pedidos"> <div class="recuadro"></div>
         <div class="icon-container">
           <img class="icon" src="/assets/images/pedidos-icon.png" alt="pedido-icon" />
           <p> PEDIDOS  </p>
         </div>
+        </a>
       </li>
        }
 
