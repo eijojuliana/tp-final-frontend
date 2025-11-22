@@ -1,4 +1,7 @@
-<nav class="breadcrumbs">
+<nav
+  class="breadcrumbs"
+  [style.display]="crumbs.length === 0 ? 'none' : 'flex'"
+>
   <a
     *ngFor="let c of crumbs; let i = index"
     [routerLink]="c.url"

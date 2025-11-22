@@ -18,14 +18,25 @@ export class ProveedoresList {
 
   filtro = signal('');
   atributo = signal<'nombre' | 'dni'|'edad'>('nombre');
+  orden = signal<'asc' | 'desc'>('asc');
 
   proveedoresFiltrados = computed(() => {
     const f = this.filtro().toLowerCase().trim();
     const attr = this.atributo();
+    const order = this.orden();
 
-    return this.proveedores().filter(p =>
-      String((p as any)[attr]).toLowerCase().includes(f)
-    );
+    return this.proveedores()
+      .filter(p =>
+        String((p as any)[attr]).toLowerCase().includes(f)
+      )
+      .sort((a, b) => {
+        const A = String((a as any)[attr]).toLowerCase();
+        const B = String((b as any)[attr]).toLowerCase();
+
+        return order === 'asc'
+          ? A.localeCompare(B)
+          : B.localeCompare(A);
+      });
   });
 
   eliminarProveedor(id:number){

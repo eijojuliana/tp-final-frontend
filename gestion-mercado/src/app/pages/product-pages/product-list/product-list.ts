@@ -15,15 +15,27 @@ export class ProductList {
 
   filtro = signal('');
   atributo = signal<'nombre' | 'categoria'>('nombre');
+  orden = signal<'asc' | 'desc'>('asc');
 
   productsFiltrados = computed(() => {
     const f = this.filtro().toLowerCase().trim();
     const attr = this.atributo();
+    const order = this.orden();
 
-    return this.products().filter(p =>
-      String((p as any)[attr]).toLowerCase().includes(f)
-    );
+    return this.products()
+      .filter(p =>
+        String((p as any)[attr]).toLowerCase().includes(f)
+      )
+      .sort((a, b) => {
+        const A = String((a as any)[attr]).toLowerCase();
+        const B = String((b as any)[attr]).toLowerCase();
+
+        return order === 'asc'
+          ? A.localeCompare(B)
+          : B.localeCompare(A);
+      });
   });
+
 
   deleteProduct(id:number) {
     if(confirm("¿Desea eliminar este producto?")) {

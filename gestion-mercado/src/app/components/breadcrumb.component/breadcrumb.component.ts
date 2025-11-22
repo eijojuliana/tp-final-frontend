@@ -38,15 +38,21 @@ export class BreadcrumbComponent {
 
   buildBreadcrumbs() {
     const url = this.router.url;
-    const parts = url.split('/').filter(p => p !== '');
 
+    // ESTO ES PARA SOLO MOSTRAR SI EMPIEZA CON MENU (así no se ve el login xd)
+    if (!url.startsWith('/menu')) {
+      this.crumbs = [];
+      return;
+    }
+
+    const parts = url.split('/').filter(p => p !== '');
     let accumulated = '';
+
     this.crumbs = parts.map((part, index) => {
       accumulated += '/' + part;
 
       let label = this.labels[part] || part.toUpperCase();
 
-      // Si es "form", siempre mostrar "Formulario X"
       if (part === 'form') {
         const moduleName = this.labels[parts[index - 1]] || 'Item';
         label = `Formulario ${moduleName}`;

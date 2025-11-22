@@ -18,17 +18,27 @@ export class UsuariosList {
 
   filtro = signal('');
   atributo = signal<'email'>('email');
+  orden = signal<'asc' | 'desc'>('asc');
 
   usuariosFiltrados = computed(() => {
     const f = this.filtro().toLowerCase().trim();
     const attr = this.atributo();
+    const order = this.orden();
 
-    return this.usuarios().filter((u) =>
-      String((u as any)[attr])
-        .toLowerCase()
-        .includes(f)
-    );
+    return this.usuarios()
+      .filter((u) =>
+        String((u as any)[attr]).toLowerCase().includes(f)
+      )
+      .sort((a, b) => {
+        const A = String((a as any)[attr]).toLowerCase();
+        const B = String((b as any)[attr]).toLowerCase();
+
+        return order === 'asc'
+          ? A.localeCompare(B)
+          : B.localeCompare(A);
+      });
   });
+
 
   eliminarUsuario(id: number) {
     if (confirm('Desea eliminar este usuario?')) {
@@ -45,24 +55,4 @@ export class UsuariosList {
     this.usuarioService.selectUsuarioToEdit(usuario);
     this.router.navigate(['menu/usuarios/form']);
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
