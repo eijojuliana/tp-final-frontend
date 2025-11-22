@@ -2,13 +2,14 @@ import { Injectable, signal } from '@angular/core';
 import { Duenio, NewDuenio } from '../models/duenio.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { environment } from './ip';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DuenioService {
 
-  private apiUrl = 'http://localhost:8080/api/duenios';
+  private apiUrl = environment.apiBaseUrl + "/duenios";
 
   private dueniosState = signal<Duenio[]>([]);
   public duenios = this.dueniosState.asReadonly();

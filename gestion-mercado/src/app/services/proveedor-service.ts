@@ -2,12 +2,13 @@ import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Proveedor, NewProveedor } from '../models/proveedor.model';
+import { environment } from './ip';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProveedorService {
-  private url = "http://localhost:8080/api/proveedores"
+  private url = environment.apiBaseUrl + "/proveedores";
 
   private proveedorState = signal<Proveedor[]>([]);
   public proveedores = this.proveedorState.asReadonly();

@@ -1,12 +1,13 @@
 import { Injectable, signal } from '@angular/core';
 import { Transaccion } from '../models/transaccion.model';
 import { HttpClient } from '@angular/common/http';
+import { environment } from './ip';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TransaccionService {
-  private url = "http://localhost:8080/api/transacciones"
+  private url = environment.apiBaseUrl + "/transacciones";
 
   private transaccionesState = signal<Transaccion[]>([]);
   public transacciones = this.transaccionesState.asReadonly();

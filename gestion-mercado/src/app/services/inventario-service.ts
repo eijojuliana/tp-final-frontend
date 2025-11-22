@@ -2,12 +2,13 @@ import { Injectable, signal } from '@angular/core';
 import { Inventario, newInventario } from '../models/inventario.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { environment } from './ip';
 
 @Injectable({
   providedIn: 'root',
 })
 export class InventarioService {
-  private url = "http://localhost:8080/api/inventarios";
+  private url = environment.apiBaseUrl + "/inventarios";
 
   private inventarioState = signal<Inventario[]>([]);
   public inventarios = this.inventarioState.asReadonly();

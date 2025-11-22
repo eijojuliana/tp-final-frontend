@@ -2,12 +2,13 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { Observable } from "rxjs";
 import { DetallePedido, NewDetallePedido } from "../models/detallePedido.model";
+import { environment } from "./ip";
 
 @Injectable({
   providedIn: 'root',
 })
 export class DetallePedidoService {
-  private apiUrlBase = 'http://localhost:8080/api/detallespedido';
+  private apiUrlBase = environment.apiBaseUrl + "/detallespedido";
   private http = inject(HttpClient);
 
 

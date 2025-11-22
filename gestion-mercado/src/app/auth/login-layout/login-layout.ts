@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { environment } from '../../services/ip';
 
 
 
@@ -47,7 +48,7 @@ login(): void {
     this.authService.setCredentials(this.username, this.password);
 
     // 2. Probar contra el back pidiendo /api/auth/profile
-    this.http.get<UserProfileResponse>('http://localhost:8080/api/auth/profile')
+    this.http.get<UserProfileResponse>( environment.apiBaseUrl + '/auth/profile')
       .subscribe({
         next: (profile) => {
           // Acá llegamos SOLO si el back aceptó las credenciales

@@ -2,12 +2,13 @@ import { Injectable, signal } from '@angular/core';
 import { Observable, of, switchMap, tap } from 'rxjs';
 import { Pedido, NewPedido } from '../models/pedido.model';
 import { HttpClient } from '@angular/common/http';
+import { environment } from './ip';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PedidoService {
-  private url = 'http://localhost:8080/api/pedidos';
+  private url = environment.apiBaseUrl + "/pedidos";
 
   private pedidosState = signal<Pedido[]>([]);
   public pedidos = this.pedidosState.asReadonly();

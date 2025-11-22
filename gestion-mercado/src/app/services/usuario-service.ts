@@ -2,12 +2,13 @@ import { Usuario, NewUsuario } from './../models/usuario.model';
 import { Injectable, signal } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, tap } from "rxjs";
+import { environment } from './ip';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsuarioService {
-  private url = "http://localhost:8080/api/usuarios"
+  private url = environment.apiBaseUrl + "/usuarios";
 
   private usuariosState = signal<Usuario[]>([]);
   public usuarios = this.usuariosState.asReadonly();

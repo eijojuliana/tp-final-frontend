@@ -2,13 +2,14 @@ import { Empleado, NewEmpleado } from './../models/empleado.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { filter, Observable, tap } from 'rxjs';
+import { environment } from './ip';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class EmpleadoService {
-  private apiurl='http://localhost:8080/api/empleados'
+  private apiurl= environment.apiBaseUrl + "/empleados";
   private state=signal<Empleado[]>([]);
   private empleadoToEditToState=signal<Empleado | null> (null);
   public empleados=this.state.asReadonly();

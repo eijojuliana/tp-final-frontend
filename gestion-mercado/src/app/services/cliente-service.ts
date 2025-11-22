@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { Cliente, NewCliente } from '../models/cliente.model';
 import { Observable, tap } from 'rxjs';
+import { environment } from './ip';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClienteService {
-  private apiurls="http://localhost:8080/api/clientes";
+  private apiurls= environment.apiBaseUrl + "/clientes";
   private state=signal<Cliente[]>([]);
   public clientes=this.state.asReadonly();
 

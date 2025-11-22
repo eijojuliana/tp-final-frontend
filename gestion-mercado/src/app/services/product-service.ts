@@ -2,12 +2,13 @@ import { Injectable, signal } from '@angular/core';
 import { nuevoProducto, Producto } from '../models/producto.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { environment } from './ip';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  private url = "http://localhost:8080/api/productos"
+  private url = environment.apiBaseUrl + "/productos";
 
   private productState = signal<Producto[]>([]);
   public productos = this.productState.asReadonly();

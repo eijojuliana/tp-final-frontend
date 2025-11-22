@@ -2,12 +2,13 @@ import { Injectable, signal } from '@angular/core';
 import { Lote, newLote } from '../models/lote.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { environment } from './ip';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoteService {
-  private url = "http://localhost:8080/api/lotes";
+  private url = environment.apiBaseUrl + "/lotes";
 
   private loteState = signal<Lote[]>([]);
   public lotes = this.loteState.asReadonly();

@@ -3,13 +3,14 @@ import { Injectable, signal } from '@angular/core';
 import { Persona } from '../models/persona.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { environment } from './ip';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PersonaService {
 
-  private apiUrl = 'http://localhost:8080/api/personas';
+  private apiUrl = environment.apiBaseUrl + "/personas";
 
   private personasState = signal<Persona[]>([]);
   public personas = this.personasState.asReadonly();
