@@ -4,6 +4,7 @@ import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { environment } from '../../services/ip';
+import { ToastService } from '../../services/toast.service';
 
 
 
@@ -27,7 +28,8 @@ export class LoginLayout implements OnInit{
   constructor(
     private http: HttpClient,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private toast: ToastService
   ) { }
 
  ngOnInit(): void {
@@ -53,17 +55,19 @@ login(): void {
         next: (profile) => {
           // Acá llegamos SOLO si el back aceptó las credenciales
           console.log('Perfil recibido:', profile);
+          this.toast.success("Login realizado correctamente.");
 
-          // 3. Guardar rol en el AuthService
+          // 3. Guardar rol y nombre en el AuthService
           this.authService.setRoleFromBackendRoles(profile.roles);
+          this.authService.fetchAndSetPersonaName();
 
-            // Dueño/Admin → menú general
-            this.router.navigate(['/menu']);
+          // Dueño/Admin → menú general
+          this.router.navigate(['/menu']);
 
         },
         error: (err) => {
           console.error('Error en login:', err);
-          // 5. Si hubo error (401, etc.), limpiar credenciales y mostrar mensaje
+          this.toast.error("Usuario o contraseña incorrectos");
           this.authService.clearCredentials();
           this.errorMsg = 'Usuario o contraseña incorrectos';
         }

@@ -16,7 +16,9 @@
       <button type="submit" class="btn-add">Ingresar</button>
 
       <!-- Mensaje de error -->
-      <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
+      @if (errorMsg!='') {
+        <p class="error">{{ errorMsg }}</p>
+      }
     </form>
   </div>
 </div>

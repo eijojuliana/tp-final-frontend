@@ -16,6 +16,7 @@ export class Header {
   menuAbierto: boolean = false;
 
   public logout=inject(AuthService);
+  public authService=inject(AuthService);
   route=inject(Router);
 
 

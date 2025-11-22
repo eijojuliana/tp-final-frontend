@@ -11,9 +11,10 @@ import { AuthService } from '../../auth/auth.service';
 })
 export class MenuPage {
 
-constructor(
-    public auth: AuthService   // 👈 público para usar en el HTML
-  ) {}
+  constructor(public auth: AuthService) { }
 
+  get currentRole(): string | null {
+    return this.auth.getRole();
+  }
 
 }
