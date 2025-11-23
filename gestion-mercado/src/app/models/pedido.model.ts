@@ -6,9 +6,11 @@ export interface Pedido {
     transaccion: Transaccion;
     tipo: 'VENTA' | 'COMPRA';
     detalles: DetallePedido[];
+    estado: 'PENDIENTE' | 'FINALIZADO';
 }
 
 export interface NewPedido {
     tipo: 'VENTA' | 'COMPRA';
     transaccion: NewTransaccion;
+    estado: 'PENDIENTE' | 'FINALIZADO';
 }

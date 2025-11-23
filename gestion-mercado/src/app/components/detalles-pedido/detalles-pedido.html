@@ -1,5 +1,7 @@
 <section class="detalles">
-  <form>
+
+  @if (pedido.estado === 'FINALIZADO') {
+    <form>
 
     <div class="campo">
       <label for="productoId">Producto:</label>
@@ -37,6 +39,8 @@
     </div>
 
   </form>
+  }
+
 
   @if (detallesPedido().length > 0) {
     <hr>
