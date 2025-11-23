@@ -4,6 +4,7 @@ import { DetallePedido } from '../../models/detallePedido.model';
 import { FormsModule } from '@angular/forms';
 import { Pedido } from '../../models/pedido.model';
 import { ProductService } from '../../services/product-service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-detalles-pedido',
@@ -19,6 +20,7 @@ export class DetallesPedido {
   public productos=this.productService.productos;
 
   private detallePedidoService = inject(DetallePedidoService);
+  private toast = inject(ToastService);
 
   // Signal de la lista de detalles
   detallesPedido = signal<DetallePedido[]>([]);
@@ -27,6 +29,9 @@ export class DetallesPedido {
   total = computed(() => {
     return this.detallesPedido().reduce((acc, curr) => acc + curr.subtotal, 0);
   });
+
+  //Signal para editar
+  detalleEnEdicion = signal<DetallePedido | null>(null);
 
   // Objeto para el formulario
   nuevoDetalle: { productoId: number | undefined, cantidad: number | undefined, costoUnitario: number | undefined } = {
@@ -53,12 +58,24 @@ export class DetallesPedido {
       costoUnitarioCompra: this.nuevoDetalle.costoUnitario
     };
 
-    this.detallePedidoService.agregarDetalle(this.pedido.pedidoId, dto).subscribe( () => {
-        console.log('Detalle de pedido agregado:');
+    if (this.detalleEnEdicion()) {
+      // MODO EDICIÓN
+      const idDetalle = this.detalleEnEdicion()!.detallePedidoId;
+      this.detallePedidoService.update(idDetalle, dto).subscribe(() => {
+        console.log('Detalle actualizado');
+        this.toast.success("Detalle actualizado correctamente");
+        this.obtenerDetallesDelPedido(this.pedido.pedidoId);
+        this.cancelarEdicionDetalle();
+      });
+    } else {
+      // MODO CREACIÓN
+      this.detallePedidoService.agregarDetalle(this.pedido.pedidoId, dto).subscribe(() => {
+        console.log('Detalle agregado');
+        this.toast.success("Detalle agregado correctamente");
         this.obtenerDetallesDelPedido(this.pedido.pedidoId);
         this.nuevoDetalle = { productoId: undefined, cantidad: undefined, costoUnitario: undefined };
-      }
-    );
+      });
+    }
   }
 
   obtenerDetallesDelPedido(pedidoId: number){
@@ -75,5 +92,19 @@ export class DetallesPedido {
         this.obtenerDetallesDelPedido(this.pedido.pedidoId);
       }
     );
+  }
+
+  editarDetalle(detalle: DetallePedido) {
+    this.detalleEnEdicion.set(detalle);
+    this.nuevoDetalle = {
+      productoId: detalle.producto_id,
+      cantidad: detalle.cantidad,
+      costoUnitario: detalle.costoUnitarioCompra // Si es compra
+    };
+  }
+
+  cancelarEdicionDetalle() {
+    this.detalleEnEdicion.set(null);
+    this.nuevoDetalle = { productoId: undefined, cantidad: undefined, costoUnitario: undefined };
   }
 }

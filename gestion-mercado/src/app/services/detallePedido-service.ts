@@ -24,4 +24,8 @@ export class DetallePedidoService {
   eliminarDetalle(detalleId: number): Observable<boolean> {
     return this.http.delete<boolean>(`${this.apiUrlBase}/${detalleId}`);
   }
+
+  update(id: number, detalle: NewDetallePedido): Observable<boolean> {
+    return this.http.put<boolean>(`${this.apiUrlBase}/${id}`, detalle);
+  }
 }

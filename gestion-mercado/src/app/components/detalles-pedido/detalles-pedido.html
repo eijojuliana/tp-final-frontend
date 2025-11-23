@@ -23,10 +23,18 @@
       </div>
     }
 
-    <!-- BOTÓN CORRECTO CON SU CLASE -->
-    <button type="button" class="agregar-detalle" (click)="agregarDetalle()">
-      Agregar Detalle
-    </button>
+
+    <div class="acciones-form">
+      <button type="button" class="agregar-detalle" (click)="agregarDetalle()">
+        {{ detalleEnEdicion() ? 'Actualizar Detalle' : 'Agregar Detalle' }}
+      </button>
+
+      @if (detalleEnEdicion()) {
+        <button type="button" class="btn-cancel-detalle" (click)="cancelarEdicionDetalle()">
+          Cancelar Edición
+        </button>
+      }
+    </div>
 
   </form>
 
@@ -38,7 +46,7 @@
       <thead class="encabezado">
         <tr>
           <th>ID</th>
-          <th>Código Producto</th>
+          <th>Cod.Prod</th>
           <th>Nombre</th>
           <th>Cantidad</th>
           <th>Subtotal</th>
@@ -55,6 +63,9 @@
             <td>{{ detalle.cantidad }}</td>
             <td>{{ detalle.subtotal }}</td>
             <td class="botones">
+              <button class="btnEditar" (click)="editarDetalle(detalle)">
+                Editar
+              </button>
               <button class="btnEliminar" (click)="eliminarDetalle(detalle.detallePedidoId)">
                 Eliminar
               </button>
