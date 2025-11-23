@@ -17,6 +17,7 @@ export class DuenioForm {
   private service = inject(DuenioService);
   private router = inject(Router);
   private toast = inject(ToastService);
+  passwordVisible: boolean = false;
 
   isEditMode = signal(false);
   private duenioToEdit: Duenio | null = null;
@@ -87,5 +88,9 @@ export class DuenioForm {
   cancelEdit() {
     this.service.clearDuenioToEdit();
     this.router.navigate([this.rutaListado]);
+  }
+
+  togglePasswordVisibility(): void {
+  this.passwordVisible = !this.passwordVisible;
   }
 }

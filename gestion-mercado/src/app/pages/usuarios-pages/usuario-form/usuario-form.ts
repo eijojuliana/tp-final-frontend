@@ -18,6 +18,7 @@ export class UsuarioForm {
   private router = inject(Router);
   private toast = inject(ToastService);
 
+  passwordVisible: boolean = false;
   public editMode = signal(false);
   private usuarioToEdit: Usuario | null = null;
 
@@ -82,7 +83,9 @@ export class UsuarioForm {
     this.router.navigate(['/menu/usuarios']);
   }
 
-
+  togglePasswordVisibility(): void {
+  this.passwordVisible = !this.passwordVisible;
+}
 }
 
 

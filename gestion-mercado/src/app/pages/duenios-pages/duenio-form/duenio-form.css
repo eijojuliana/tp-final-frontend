@@ -22,3 +22,30 @@
         max-width: 400px;
     }
 }
+.password-input-wrapper {
+  position: relative;
+}
+
+.password-input-wrapper input {
+  width: 100%;
+  padding-right: 3.5rem; /* espacio para el botón "Mostrar/Ocultar" */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0;
+  /* si querés que combine con la paleta del login: */
+  color: var(--color2);
+}
+
+.toggle-password:focus {
+  outline: none;
+}

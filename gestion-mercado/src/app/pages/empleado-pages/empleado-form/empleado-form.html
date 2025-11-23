@@ -32,12 +32,27 @@
         }
       </div>
       <div class = "campo">
-        <label>Contraseña: </label>
-        <input type="text" formControlName="contraseña">
-        @if (form.get('contraseña')?.invalid && form.get('contraseña')?.touched) {
-          <span class = "error">La contraseña no debe estar vacia.</span>
-        }
-      </div>
+  <label>Contraseña: </label>
+
+  <div class="password-input-wrapper">
+    <input
+      [type]="passwordVisible ? 'text' : 'password'"
+      formControlName="contraseña"
+    >
+
+    <button
+      type="button"
+      class="toggle-password"
+      (click)="togglePasswordVisibility()"
+    >
+      {{ passwordVisible ? 'Ocultar' : 'Mostrar' }}
+    </button>
+  </div>
+
+  @if (form.get('contraseña')?.invalid && form.get('contraseña')?.touched) {
+    <span class = "error">La contraseña no debe estar vacia.</span>
+  }
+</div>
 
       <div class="botones">
         <button type="submit"[disabled]="form.invalid">

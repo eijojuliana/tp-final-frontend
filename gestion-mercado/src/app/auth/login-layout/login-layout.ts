@@ -25,6 +25,8 @@ export class LoginLayout implements OnInit{
   password: string = '';
   errorMsg: string = '';
 
+  passwordVisible: boolean = false;
+
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -38,6 +40,9 @@ export class LoginLayout implements OnInit{
     }
   }
 
+  togglePasswordVisibility(): void {
+    this.passwordVisible = !this.passwordVisible;
+  }
 login(): void {
     this.errorMsg = '';
 

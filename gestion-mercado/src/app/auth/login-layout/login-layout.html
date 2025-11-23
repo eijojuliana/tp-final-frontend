@@ -9,9 +9,27 @@
       </div>
 
       <div class="inputs">
-        <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password" placeholder="Contraseña" [(ngModel)]="password" required>
-      </div>
+  <label for="password">Contraseña:</label>
+
+  <div class="password-input-wrapper">
+    <input
+      [type]="passwordVisible ? 'text' : 'password'"
+      id="password"
+      name="password"
+      placeholder="Contraseña"
+      [(ngModel)]="password"
+      required
+    >
+
+    <button
+      type="button"
+      class="toggle-password"
+      (click)="togglePasswordVisibility()"
+    >
+      {{ passwordVisible ? 'Ocultar' : 'Mostrar' }}
+    </button>
+  </div>
+</div>
 
       <button type="submit" class="btn-add">Ingresar</button>
 

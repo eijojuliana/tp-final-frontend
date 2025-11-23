@@ -17,6 +17,7 @@ export class EmpleadoForm {
   empleadoService=inject(EmpleadoService);
   private router=inject(Router);
   private toast = inject(ToastService);
+  passwordVisible: boolean = false;
 
   isEditMode=signal(false);
   private empleadoToEdit:Empleado|null=null;
@@ -86,7 +87,9 @@ export class EmpleadoForm {
 
   }
 
-
+  togglePasswordVisibility(): void {
+  this.passwordVisible = !this.passwordVisible;
+}
 
 
 

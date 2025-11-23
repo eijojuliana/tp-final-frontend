@@ -75,3 +75,31 @@
 .btn-add:hover {
   background-color: var(--color2);
 }
+
+.password-input-wrapper {
+  position: relative;
+}
+
+.password-input-wrapper input {
+  width: 100%;
+  padding-right: 3.5rem; /* espacio para el botón dentro del input */
+}
+
+/* Botón "Mostrar/Ocultar" dentro del campo de contraseña */
+.toggle-password {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--color2); /* usa tu color secundario, puedes cambiarlo */
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.toggle-password:focus {
+  outline: none;
+}
