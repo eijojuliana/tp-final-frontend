@@ -29,11 +29,12 @@
   <table class="tabla">
     <thead class="encabezado">
       <tr>
-        <th> Pedido ID </th>
-        <th> Transacción ID </th>
+        <th> ID </th>
+        <th> ID.Tr </th>
         <th> Tipo </th>
         <th> Fecha </th>
-        <th> Tipo Pedido </th>
+        <th> Tipo </th>
+        <th> Estado </th>
         <th> Total </th>
         <th> Acciones </th>
       </tr>
@@ -47,6 +48,7 @@
           <td>{{ pedido.transaccion.tipo }}</td>
           <td>{{ pedido.transaccion.fecha }}</td>
           <td>{{ pedido.tipo }}</td>
+          <td>{{ pedido.estado }}</td>
           <td>{{ pedido.transaccion.monto }}</td>
           <td class="celda-acciones">
             <div class="botones">

@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NewPedido, Pedido } from '../../../models/pedido.model';
 import { ProveedorService } from '../../../services/proveedor-service';
 import { DetallesPedido } from "../../../components/detalles-pedido/detalles-pedido";
-import { Transaccion } from '../../../models/transaccion.model';
+import { NewTransaccion, Transaccion } from '../../../models/transaccion.model';
 import { ClienteService } from '../../../services/cliente-service';
 import { CuentaBancariaService } from '../../../services/cuenta-bancaria-service';
 
@@ -95,7 +95,7 @@ export class PedidosForm {
     const tipoPedido = formValue.tipoPedido;
 
     let finalOrigenId: number | null = formValue.origen_id;
-    let finalDestinoId: number = formValue.destino_id as number;
+    let finalDestinoId: number | null = formValue.destino_id;
 
     const TIENDA_ID = 1;
 
@@ -105,7 +105,6 @@ export class PedidosForm {
 
     if (tipoPedido === 'VENTA') {
       finalDestinoId = TIENDA_ID;
-      finalOrigenId = formValue.origen_id;
     } else if (tipoPedido === 'COMPRA') {
       finalOrigenId = TIENDA_ID;
       finalDestinoId = formValue.destino_id as number;
@@ -121,32 +120,27 @@ export class PedidosForm {
       }
     }
 
+    const destinoIdValue = finalDestinoId !== null ? finalDestinoId : (formValue.destino_id as number);
+    const origenIdValue = finalOrigenId;
+
     const dto: NewPedido = {
       tipo: formValue.tipoPedido,
       transaccion: {
         tipo: formValue.tipoTransaccion as 'EFECTIVO' | 'DEBITO',
-        origen_id: finalOrigenId,
-        destino_id: finalDestinoId,
+        origen_id: origenIdValue,
+        destino_id: destinoIdValue,
       },
     };
 
     if (this.isEditMode() && this.pedidoToEdit) {
-      const updatedTransaccion: Transaccion = {
-        transaccion_id: this.pedidoToEdit.transaccion.transaccion_id,
-        tipo: formValue.tipoTransaccion as 'EFECTIVO' | 'DEBITO',
-        origen_id: finalOrigenId,
-        destino_id: finalDestinoId,
-        fecha: this.pedidoToEdit.transaccion.fecha,
-        monto: this.pedidoToEdit.transaccion.monto,
-      };
-      const updatedPedido: Pedido = {
-        pedidoId: this.pedidoToEdit.pedidoId,
-        tipo: formValue.tipoPedido,
-        transaccion: updatedTransaccion,
-        detalles: this.pedidoToEdit.detalles,
+      const id = this.pedidoToEdit.pedidoId;
+      const updateDto: NewPedido = {
+        tipo: dto.tipo,
+        transaccion: {...dto.transaccion,transaccion_id: this.pedidoToEdit.transaccion.transaccion_id
+        } as NewTransaccion
       };
 
-      this.pedidoService.update(updatedPedido).subscribe(() => {
+      this.pedidoService.update(updateDto,id).subscribe(() => {
         console.log('Pedido Actualizado');
         this.pedidoService.clearPedidoToEdit();
         this.router.navigate(['/menu/pedidos']);

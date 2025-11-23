@@ -46,8 +46,8 @@ export class PedidoService {
     );
   }
 
-  update(pedidoToUpdate: Pedido): Observable<Pedido> {
-    return this.http.put<Pedido>(`${this.url}/${pedidoToUpdate.pedidoId}`, pedidoToUpdate).pipe(
+  update(pedidoToUpdate: NewPedido, id:number): Observable<Pedido> {
+    return this.http.put<Pedido>(`${this.url}/${id}`, pedidoToUpdate).pipe(
       tap( () => this.load() )
     );
   }

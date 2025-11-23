@@ -12,5 +12,4 @@ export interface Pedido {
 export interface NewPedido {
     tipo: 'VENTA' | 'COMPRA';
     transaccion: NewTransaccion;
-    estado: 'PENDIENTE' | 'FINALIZADO';
 }
