@@ -1,7 +1,7 @@
 import { Component, effect, inject, signal } from '@angular/core';
 import { PedidoService } from '../../../services/pedido-service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NewPedido, Pedido } from '../../../models/pedido.model';
 import { ProveedorService } from '../../../services/proveedor-service';
 import { DetallesPedido } from "../../../components/detalles-pedido/detalles-pedido";
@@ -20,6 +20,7 @@ export class PedidosForm {
   private fb = inject(FormBuilder);
   pedidoService = inject(PedidoService);
   private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
 
   private proveedorService = inject(ProveedorService);
   public proveedores = this.proveedorService.proveedores;
@@ -45,24 +46,45 @@ export class PedidosForm {
   constructor() {
     effect(() => {
       this.pedidoToEdit = this.pedidoService.pedidoToEdit();
-
       if (this.pedidoToEdit) {
-        this.isEditMode.set(true);
-        this.pedidoCreado.set(this.pedidoToEdit);
+        this.cargarDatosEnFormulario();
+      }
+    });
+  }
 
-        this.form.patchValue({
-          tipoPedido: this.pedidoToEdit.tipo,
-          tipoTransaccion: this.pedidoToEdit.transaccion?.tipo as 'EFECTIVO' | 'DEBITO',
-          origen_id: this.pedidoToEdit.transaccion?.origen_id,
-          destino_id: this.pedidoToEdit.transaccion?.destino_id,
-          cuentaBancaria: this.pedidoToEdit.transaccion?.origen_id,
+  ngOnInit() {
+    this.activatedRoute.paramMap.subscribe(params => {
+      const id = params.get('id');
+
+      if (id) {
+        this.pedidoService.getById(Number(id)).subscribe({
+          next: (pedido) => {
+            this.pedidoService.selectPedidoToEdit(pedido);
+            this.pedidoToEdit = pedido;
+            this.cargarDatosEnFormulario();
+          },
+          error: (err) => console.error('Error al recuperar pedido', err)
         });
       } else {
         this.isEditMode.set(false);
-        if (this.pedidoCreado() === null) {
-          this.form.reset();
-        }
+        this.pedidoCreado.set(null);
+        this.form.reset();
       }
+    });
+  }
+
+  cargarDatosEnFormulario() {
+    if (!this.pedidoToEdit) return;
+
+    this.isEditMode.set(true);
+    this.pedidoCreado.set(this.pedidoToEdit);
+
+    this.form.patchValue({
+      tipoPedido: this.pedidoToEdit.tipo,
+      tipoTransaccion: this.pedidoToEdit.transaccion?.tipo as 'EFECTIVO' | 'DEBITO',
+      origen_id: this.pedidoToEdit.transaccion?.origen_id,
+      destino_id: this.pedidoToEdit.transaccion?.destino_id,
+      cuentaBancaria: this.pedidoToEdit.transaccion?.origen_id,
     });
   }
 

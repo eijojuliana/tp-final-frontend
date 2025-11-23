@@ -65,8 +65,8 @@ export class PedidosList {
     }
   }
 
-  updatePedido(pedidoo: any) {
-    this.pedidoService.selectPedidoToEdit(pedidoo);
-    this.router.navigate(['/menu/pedidos/form']);
+  updatePedido(pedido: any) {
+    this.pedidoService.selectPedidoToEdit(pedido);
+    this.router.navigate(['/menu/pedidos/form', pedido.pedidoId]);
   }
 }

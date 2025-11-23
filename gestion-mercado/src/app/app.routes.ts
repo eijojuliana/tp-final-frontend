@@ -89,6 +89,7 @@ export const routes: Routes = [
   //Rutas pedidos
   { path: 'menu/pedidos', component: PedidosList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
   { path: 'menu/pedidos/form', component: PedidosForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
+  { path: 'menu/pedidos/form/:id', component: PedidosForm, canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
 
   //Rutas proveedores
   {path: 'menu/proveedores', component: ProveedoresList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},

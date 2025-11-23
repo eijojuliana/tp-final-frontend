@@ -26,6 +26,10 @@ export class PedidoService {
     );
   }
 
+  getById(id: number): Observable<Pedido> {
+    return this.http.get<Pedido>(`${this.url}/${id}`);
+  }
+
   post(pedido: NewPedido): Observable<Pedido> {
     return this.http.post<Pedido>(this.url, pedido).pipe(
       tap( () => this.load() )
