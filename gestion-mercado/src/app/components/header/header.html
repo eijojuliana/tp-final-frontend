@@ -24,13 +24,13 @@
           </div>
           <hr>
           <div class="opciones-menu">
-            <div class="opcion" routerLink="/menu">
+            <div class="opcion" routerLink="/menu" (click)="toggleMenu()">
               <span class="material-symbols-outlined">home</span>
               <p>Menú</p>
               <span>></span>
             </div>
 
-            <div class="opcion" (click)="cerrarSesion()">
+            <div class="opcion" (click)="cerrarSesion()" (click)="toggleMenu()">
               <span class="material-symbols-outlined">logout</span>
               <p>Cerrar Sesión</p>
               <span>></span>
