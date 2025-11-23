@@ -16,16 +16,16 @@ export class DueniosList {
   private toast = inject(ToastService);
 
   filtro = signal('');
-  atributo = signal<'id' | 'nombre' | 'dni' | 'edad' | 'email'>('id');
+  atributo = signal<'personaId' | 'duenioId' | 'nombre' | 'dni' | 'edad' | 'email'>('personaId');
   orden = signal<'asc' | 'desc'>('asc');
 
   dueniosFiltrados = computed(() => {
-    const filtro = this.filtro();
+    const filtro = this.filtro().toLowerCase().trim();
     const attr = this.atributo();
     const ord = this.orden();
 
     return this.duenios()
-      .filter(d => filtro ? (d as any)[attr] === filtro : true)
+      .filter(d => filtro ? String((d as any)[attr]).toLowerCase().includes(filtro) : true)
       .sort((a, b) => {
         const A = (a as any)[attr];
         const B = (b as any)[attr];
