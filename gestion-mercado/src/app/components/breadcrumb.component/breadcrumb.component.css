@@ -3,29 +3,27 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1.25rem;
-  background: rgba(56, 5, 35, 0.85);
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(0, 0, 0, 0.65);
   margin: 0;
 }
 
 .breadcrumbs a {
   text-decoration: none;
-  color: #f8dbe6;
+  color: var(--rosa);
   transition: 0.25s ease;
   font-weight: 600;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
 }
 
 .breadcrumbs a:hover {
-  color: #ffd8e8;
+  color: var(--rosa);
   transform: translateY(-1px);
   text-shadow: 0 0 8px rgba(255, 185, 210, 0.7);
 }
 
 .breadcrumbs a.active {
-  color: #ffeaf2;
+  color: var(--rosa);
   cursor: default;
   pointer-events: none;
   font-weight: 700;
@@ -34,7 +32,7 @@
 
 .breadcrumbs a::after {
   content: " / ";
-  color: #e8b8c9;
+  color: var(--rosa);
   font-weight: 400;
   opacity: 0.7;
 }
@@ -42,4 +40,10 @@
 .breadcrumbs a:last-child::after,
 .breadcrumbs a.active::after {
   content: "";
+}
+
+@media screen and (max-width: 768px) {
+  .breadcrumbs a {
+    font-size: 1rem;
+  }
 }

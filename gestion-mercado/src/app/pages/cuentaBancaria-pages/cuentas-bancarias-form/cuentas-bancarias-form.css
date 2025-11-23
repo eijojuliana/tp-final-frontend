@@ -1,1 +1,23 @@
 @import '../../../styles/form-style.scss';
+
+.form-container::before {
+  background-image: url('/assets/images/fondoRegistro.png');
+}
+
+.image {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 20rem;
+}
+
+.image img {
+  max-width: 100%;
+}
+
+@media screen and (max-width: 1024px) {
+    .image img {
+        max-width: 400px;
+    }
+}

@@ -19,6 +19,7 @@ export class BreadcrumbComponent {
     productos: 'Productos',
     empleados: 'Empleados',
     clientes: 'Clientes',
+    duenios: 'Dueños',
     lotes: 'Lotes',
     inventarios: 'Inventarios',
     usuarios: 'Usuarios',
@@ -54,7 +55,7 @@ export class BreadcrumbComponent {
       let label = this.labels[part] || part.toUpperCase();
 
       if (part === 'form') {
-        const moduleName = this.labels[parts[index - 1]] || 'Item';
+        const moduleName = this.labels[parts[index - 1] || ''];
         label = `Formulario ${moduleName}`;
       }
 

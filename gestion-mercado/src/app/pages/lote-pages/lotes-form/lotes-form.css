@@ -8,10 +8,10 @@
   display: flex;
   justify-self: flex-end;
   position: relative;
+  width: 30rem;
 }
 
 .image img {
-  width: 28em;
   max-width: 100%;
 }
 
