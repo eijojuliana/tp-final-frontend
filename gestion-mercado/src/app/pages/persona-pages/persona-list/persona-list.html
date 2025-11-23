@@ -1,14 +1,15 @@
 <section class="list-container">
   <div class="botones">
     <select (change)="atributo.set($any($event.target).value)">
+      <option value="personaId" selected>ID</option>
       <option value="nombre">Nombre</option>
       <option value="edad">Edad</option>
       <option value="dni">DNI</option>
     </select>
 
     <select (change)="orden.set($any($event.target).value)">
-      <option value="asc">A - Z</option>
-      <option value="desc">Z - A</option>
+      <option value="asc">Ascendente</option>
+      <option value="desc">Descendente</option>
     </select>
 
     <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)" />

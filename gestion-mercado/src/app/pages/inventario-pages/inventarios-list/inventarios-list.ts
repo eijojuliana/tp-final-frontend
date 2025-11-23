@@ -17,15 +17,28 @@ export class InventariosList {
   private toast = inject(ToastService);
 
   filtro = signal('');
-  atributo = signal<'cantidad' | 'producto_id' | 'stockMin' | 'precioVenta' | 'costoAdquisición'>('cantidad');
+  atributo = signal<'inventario_id' | 'cantidad' | 'producto_id' | 'stockMin' | 'precioVenta' | 'costoAdquisicion'>('inventario_id');
+  orden = signal<'asc' | 'desc'>('asc');
 
   inventariosFiltrados = computed(() => {
-    const f = this.filtro().toLowerCase().trim();
+    const filtro = this.filtro();
     const attr = this.atributo();
+    const ord = this.orden();
 
-    return this.inventarios().filter(i => {
-      return String((i as any)[attr]).toLowerCase().includes(f);
-    });
+    return this.inventarios()
+      .filter(i => filtro ? String((i as any)[attr]).toLowerCase().includes(filtro.toLowerCase()) : true)
+      .sort((a, b) => {
+        const A = (a as any)[attr];
+        const B = (b as any)[attr];
+
+        if (typeof A === 'number' && typeof B === 'number') {
+          return ord === 'asc' ? A - B : B - A;
+        }
+
+        return ord === 'asc'
+          ? String(A).localeCompare(String(B))
+          : String(B).localeCompare(String(A));
+      });
   });
 
   deleteInventario(id:number) {

@@ -1,15 +1,23 @@
 <section class="list-container">
   <h2>Listado de Lotes</h2>
 
-  <select (change)="atributo.set($any($event.target).value)">
-    <option value="nombre">Producto</option>
-    <option value="categoria">Categoría</option>
-    <option value="cantidadDisponible">Cantidad Disponible</option>
-    <option value="costoUnitario">Costo Unitario</option>
-    <option value="fechaIngreso">Fecha de Ingreso</option>
-  </select>
+  <div class = "botones">
+    <select (change)="orden.set($any($event.target).value)">
+      <option value="asc">Asc</option>
+      <option value="desc">Desc</option>
+    </select>
 
-  <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)">
+    <select (change)="atributo.set($any($event.target).value)">
+      <option value="lote_id" selected>ID Lote</option>
+      <option value="nombre">Producto</option>
+      <option value="categoria">Categoría</option>
+      <option value="cantidadDisponible">Cantidad Disponible</option>
+      <option value="costoUnitario">Costo Unitario</option>
+      <option value="fechaIngreso">Fecha de Ingreso</option>
+    </select>
+
+    <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)">
+  </div>
 
   <div class="botones">
       <button type="button" class="btn-agregar" routerLink="/menu/lotes/form"> Agregar </button>

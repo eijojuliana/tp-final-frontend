@@ -17,18 +17,34 @@ export class LotesList {
   private toast = inject(ToastService);
 
   filtro = signal('');
-  atributo = signal<'nombre' | 'categoria' | 'cantidadDisponible' | 'costoUnitario' | 'fechaIngreso'>('nombre');
+  atributo = signal<'lote_id' | 'nombre' | 'categoria' | 'cantidadDisponible' | 'costoUnitario' | 'fechaIngreso'>('lote_id');
+  orden = signal<'asc' | 'desc'>('asc');
 
   lotesFiltrados = computed(() => {
-    const f = this.filtro().toLowerCase().trim();
+    const filtro = this.filtro().toLowerCase();
     const attr = this.atributo();
+    const ord = this.orden();
 
-    return this.lotes().filter(l => {
-      if (attr === 'nombre') { return l.producto.nombre.toLowerCase().includes(f); }
-      if (attr === 'categoria') { return l.producto.categoria.toLowerCase().includes(f); }
-      return String((l as any)[attr]).toLowerCase().includes(f);
-    });
+    // filtrar acá se alarga por el tema de que recibo un Producto completo y no es sólo id je
+    const getValue = (l: any) =>
+      (attr === 'nombre' || attr === 'categoria') ? l.producto[attr] : l[attr];
+
+    return this.lotes()
+      .filter(l => String(getValue(l)).toLowerCase().includes(filtro))
+      .sort((a, b) => {
+        const A = getValue(a);
+        const B = getValue(b);
+
+        if (typeof A === 'number' && typeof B === 'number') {
+          return ord === 'asc' ? A - B : B - A;
+        }
+
+        return ord === 'asc'
+          ? String(A).localeCompare(String(B))
+          : String(B).localeCompare(String(A));
+      });
   });
+
 
   deleteLote(id:number) {
     if(confirm("Desea eliminar?")) {

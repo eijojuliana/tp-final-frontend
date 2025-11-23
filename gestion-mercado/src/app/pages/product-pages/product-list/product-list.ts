@@ -14,28 +14,29 @@ export class ProductList {
   router = inject(Router);
 
   filtro = signal('');
-  atributo = signal<'nombre' | 'categoria'>('nombre');
+  atributo = signal<'producto_id' | 'nombre' | 'categoria'>('producto_id');
   orden = signal<'asc' | 'desc'>('asc');
 
   productsFiltrados = computed(() => {
-    const f = this.filtro().toLowerCase().trim();
+    const filtro = this.filtro().toLowerCase().trim();
     const attr = this.atributo();
-    const order = this.orden();
+    const ord = this.orden();
 
     return this.products()
-      .filter(p =>
-        String((p as any)[attr]).toLowerCase().includes(f)
-      )
+      .filter(p => filtro ? String((p as any)[attr]).toLowerCase().includes(filtro) : true)
       .sort((a, b) => {
-        const A = String((a as any)[attr]).toLowerCase();
-        const B = String((b as any)[attr]).toLowerCase();
+        const A = (a as any)[attr];
+        const B = (b as any)[attr];
 
-        return order === 'asc'
-          ? A.localeCompare(B)
-          : B.localeCompare(A);
+        if (typeof A === 'number' && typeof B === 'number') {
+          return ord === 'asc' ? A - B : B - A;
+        }
+
+        return ord === 'asc'
+          ? String(A).toLowerCase().localeCompare(String(B).toLowerCase())
+          : String(B).toLowerCase().localeCompare(String(A).toLowerCase());
       });
   });
-
 
   deleteProduct(id:number) {
     if(confirm("¿Desea eliminar este producto?")) {

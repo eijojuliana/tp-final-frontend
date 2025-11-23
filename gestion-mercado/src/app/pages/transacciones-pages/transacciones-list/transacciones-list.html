@@ -1,9 +1,24 @@
 <section class="list-container">
-   <select (change)="onTipoChange($event)">
-  <option value="">Todos</option>
-  <option value="EFECTIVO">Efectivo</option>
-  <option value="DEBITO">Debito</option>
-</select>
+  <div>
+    <select (change)="onTipoChange($event)">
+      <option value="">Todos</option>
+      <option value="EFECTIVO">Efectivo</option>
+      <option value="DEBITO">Debito</option>
+    </select>
+
+    <select (change)="atributo.set($any($event.target).value)">
+      <option value="transaccion_id">Transacción ID</option>
+      <option value="origen_id">Origen ID</option>
+      <option value="destino_id">Destino ID</option>
+      <option value="monto">Monto</option>
+      <option value="fecha">Fecha</option>
+    </select>
+
+    <select (change)="orden.set($any($event.target).value)">
+      <option value="asc">Ascendente</option>
+      <option value="desc">Descendente</option>
+    </select>
+  </div>
 
   <table class="tabla">
     <thead class="encabezado">

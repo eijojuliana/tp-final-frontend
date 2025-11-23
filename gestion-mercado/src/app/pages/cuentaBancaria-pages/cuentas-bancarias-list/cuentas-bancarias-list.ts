@@ -18,14 +18,27 @@ export class CuentasBancariasList {
 
   filtro = signal('');
   atributo = signal<'cbu' | 'saldo'>('cbu');
+  orden = signal<'asc' | 'desc'>('asc');
 
   cuentasFiltradas = computed(() => {
-    const f = this.filtro().toLowerCase().trim();
+    const filtro = this.filtro();
     const attr = this.atributo();
+    const ord = this.orden();
 
-    return this.cuentasBancarias().filter(cb => {
-      return String((cb as any)[attr]).toLowerCase().includes(f);
-    });
+    return this.cuentasBancarias()
+      .filter(c => filtro ? String((c as any)[attr]).toLowerCase().includes(filtro.toLowerCase()) : true)
+      .sort((a, b) => {
+        const A = (a as any)[attr];
+        const B = (b as any)[attr];
+
+        if (typeof A === 'number' && typeof B === 'number') {
+          return ord === 'asc' ? A - B : B - A;
+        }
+
+        return ord === 'asc'
+          ? String(A).localeCompare(String(B))
+          : String(B).localeCompare(String(A));
+      });
   });
 
   deleteCuentaBancaria(id:number) {

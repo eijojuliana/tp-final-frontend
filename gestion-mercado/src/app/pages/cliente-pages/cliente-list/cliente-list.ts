@@ -10,42 +10,49 @@ import { ToastService } from '../../../services/toast.service';
   styleUrl: './cliente-list.css',
 })
 export class ClienteList {
-service=inject(ClienteService);
-clientes=this.service.clientes;
-router=inject(Router);
-private toast = inject(ToastService);
+  service=inject(ClienteService);
+  clientes=this.service.clientes;
+  router=inject(Router);
+  private toast = inject(ToastService);
 
-
- filtro = signal('');
-  atributo = signal<'nombre' | 'dni'|'edad'>('nombre');
+  filtro = signal('');
+  atributo = signal<'personaId' | 'clienteId' | 'nombre' | 'dni' | 'edad'>('personaId');
+  orden = signal<'asc' | 'desc'>('asc');
 
   clientesFiltrados = computed(() => {
-    const f = this.filtro().toLowerCase().trim();
-    const attr = this.atributo();
+  const filtro = this.filtro().toLowerCase().trim();
+  const attr = this.atributo();
+  const ord = this.orden();
 
-    return this.clientes().filter(c =>
-      String((c as any)[attr]).toLowerCase().includes(f)
-    );
-  });
+  return this.clientes()
+    .filter(c => filtro ? String((c as any)[attr]).toLowerCase().includes(filtro) : true)
+    .sort((a, b) => {
+      const A = (a as any)[attr];
+      const B = (b as any)[attr];
 
-
-eliminarCliente(id: number) {
-  if (confirm("¿Desea eliminar este cliente?")) {
-    this.service.eliminar(id).subscribe({
-      next: () => {
-        this.toast.success("Cliente eliminado correctamente");
-        console.log(`Cliente con el id: ${id} eliminado`);
+      if (typeof A === 'number' && typeof B === 'number') {
+        return ord === 'asc' ? A - B : B - A;
       }
+
+      return ord === 'asc'
+        ? String(A).localeCompare(String(B))
+        : String(B).localeCompare(String(A));
     });
+});
+
+  eliminarCliente(id: number) {
+    if (confirm("¿Desea eliminar este cliente?")) {
+      this.service.eliminar(id).subscribe({
+        next: () => {
+          this.toast.success("Cliente eliminado correctamente");
+          console.log(`Cliente con el id: ${id} eliminado`);
+        }
+      });
+    }
   }
-}
 
-modificarCliente(cliente:any){
-  this.service.selectClienteToEdit(cliente);
-  this.router.navigate(['menu/clientes/form']);
-}
-
-
-
-
+  modificarCliente(cliente:any){
+    this.service.selectClienteToEdit(cliente);
+    this.router.navigate(['menu/clientes/form']);
+  }
 }

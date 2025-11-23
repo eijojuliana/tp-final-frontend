@@ -1,13 +1,20 @@
 <section class="list-container">
   <h2>Inventario</h2>
   <div class="botones">
-    <select (change)="atributo.set($any($event.target).value)">
-      <option value="cantidad">Cantidad</option>
-      <option value="producto_id">Producto ID</option>
-      <option value="stockMin">StocK Mínimo</option>
-      <option value="precioVenta">Precio Venta</option>
-      <option value="costoAdquisicion">Costo Adquisicón</option>
+    <select (change)="orden.set($any($event.target).value)">
+      <option value="asc">Asc</option>
+      <option value="desc">Desc</option>
     </select>
+
+    <select (change)="atributo.set($any($event.target).value)">
+      <option value="inventario_id" selected>Inventario ID</option>
+      <option value="producto_id">Producto ID</option>
+      <option value="cantidad">Cantidad</option>
+      <option value="stockMin">Stock Mínimo</option>
+      <option value="precioVenta">Precio Venta</option>
+      <option value="costoAdquisicion">Costo Adquisición</option>
+    </select>
+
     <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)">
   </div>
 

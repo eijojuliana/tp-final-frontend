@@ -17,15 +17,28 @@ export class EmpleadoList {
  private toast = inject(ToastService);
 
   filtro = signal('');
-  atributo = signal<'nombre' | 'dni'|'edad'|'email'>('nombre');
+  atributo = signal<'personaId' | 'empleadoId' | 'nombre' | 'dni' | 'edad' | 'email'>('personaId');
+  orden = signal<'asc' | 'desc'>('asc');
 
   empleadosFiltrados = computed(() => {
-    const f = this.filtro().toLowerCase().trim();
+    const filtro = this.filtro();
     const attr = this.atributo();
+    const ord = this.orden();
 
-    return this.empleados().filter(e =>
-      String((e as any)[attr]).toLowerCase().includes(f)
-    );
+    return this.empleados()
+      .filter(e => filtro ? (e as any)[attr] === filtro : true)
+      .sort((a, b) => {
+        const A = (a as any)[attr];
+        const B = (b as any)[attr];
+
+        if (typeof A === 'number' && typeof B === 'number') {
+          return ord === 'asc' ? A - B : B - A;
+        }
+
+        return ord === 'asc'
+          ? String(A).localeCompare(String(B))
+          : String(B).localeCompare(String(A));
+      });
   });
 
   eliminarEmpleado(id:number){

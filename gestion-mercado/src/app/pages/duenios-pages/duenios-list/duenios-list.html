@@ -1,7 +1,15 @@
 <section class="list-container">
   <div class="botones">
     <button type="button" class="btn-agregar" routerLink="/menu/duenios/form"> Agregar </button>
+
+    <select (change)="orden.set($any($event.target).value)">
+      <option value="asc">Ascendente</option>
+      <option value="desc">Descendente</option>
+    </select>
+
     <select (change)="atributo.set($any($event.target).value)">
+      <option value="personaId" selected>ID Persona</option>
+      <option value="duenioId">ID Dueño</option>
       <option value="nombre">Nombre</option>
       <option value="dni">Dni</option>
       <option value="edad">Edad</option>

@@ -15,7 +15,7 @@ export class PersonaList {
   router=inject(Router);
 
   filtro = signal('');
-  atributo = signal<'nombre' | 'dni'|'edad'>('nombre');
+  atributo = signal<'personaId' | 'nombre' | 'dni' | 'edad'>('personaId');
   orden = signal<'asc' | 'desc'>('asc');
 
   personasFiltradas = computed(() => {

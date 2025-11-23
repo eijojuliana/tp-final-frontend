@@ -2,14 +2,19 @@
   <h2>Listado de Cuentas Bancarias</h2>
 
   <div class="botones">
-      <button type="button" class="btn-agregar" routerLink="/menu/cuentas-bancarias/form"> Agregar </button>
+    <button type="button" class="btn-agregar" routerLink="/menu/cuentas-bancarias/form"> Agregar </button>
 
-      <select (change)="atributo.set($any($event.target).value)">
-        <option value="cbu">CBU</option>
-        <option value="saldo">Saldo</option>
-      </select>
+    <select (change)="orden.set($any($event.target).value)">
+      <option value="asc">Ascendente</option>
+      <option value="desc">Descendente</option>
+    </select>
 
-  <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)">
+    <select (change)="atributo.set($any($event.target).value)">
+      <option value="cbu">CBU</option>
+      <option value="saldo">Saldo</option>
+    </select>
+
+    <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)">
   </div>
 
   <table class="tabla">

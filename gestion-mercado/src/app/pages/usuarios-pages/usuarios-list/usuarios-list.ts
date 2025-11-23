@@ -17,28 +17,29 @@ export class UsuariosList {
   private toast = inject(ToastService);
 
   filtro = signal('');
-  atributo = signal<'email'>('email');
+  atributo = signal<'usuarioId' | 'email'>('usuarioId');
   orden = signal<'asc' | 'desc'>('asc');
 
   usuariosFiltrados = computed(() => {
-    const f = this.filtro().toLowerCase().trim();
+    const filtro = this.filtro().toLowerCase().trim();
     const attr = this.atributo();
-    const order = this.orden();
+    const ord = this.orden();
 
     return this.usuarios()
-      .filter((u) =>
-        String((u as any)[attr]).toLowerCase().includes(f)
-      )
+      .filter(u => filtro ? String((u as any)[attr]).toLowerCase().includes(filtro) : true)
       .sort((a, b) => {
-        const A = String((a as any)[attr]).toLowerCase();
-        const B = String((b as any)[attr]).toLowerCase();
+        const A = (a as any)[attr];
+        const B = (b as any)[attr];
 
-        return order === 'asc'
-          ? A.localeCompare(B)
-          : B.localeCompare(A);
+        if (typeof A === 'number' && typeof B === 'number') {
+          return ord === 'asc' ? A - B : B - A;
+        }
+
+        return ord === 'asc'
+          ? String(A).toLowerCase().localeCompare(String(B).toLowerCase())
+          : String(B).toLowerCase().localeCompare(String(A).toLowerCase());
       });
   });
-
 
   eliminarUsuario(id: number) {
     if (confirm('Desea eliminar este usuario?')) {

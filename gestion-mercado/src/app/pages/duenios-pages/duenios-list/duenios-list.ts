@@ -16,17 +16,28 @@ export class DueniosList {
   private toast = inject(ToastService);
 
   filtro = signal('');
-  atributo = signal<'nombre' | 'dni' | 'edad' | 'email'>('nombre');
+  atributo = signal<'id' | 'nombre' | 'dni' | 'edad' | 'email'>('id');
+  orden = signal<'asc' | 'desc'>('asc');
 
   dueniosFiltrados = computed(() => {
-    const f = this.filtro().toLowerCase().trim();
+    const filtro = this.filtro();
     const attr = this.atributo();
+    const ord = this.orden();
 
-    return this.duenios().filter((d) =>
-      String((d as any)[attr])
-        .toLowerCase()
-        .includes(f)
-    );
+    return this.duenios()
+      .filter(d => filtro ? (d as any)[attr] === filtro : true)
+      .sort((a, b) => {
+        const A = (a as any)[attr];
+        const B = (b as any)[attr];
+
+        if (typeof A === 'number' && typeof B === 'number') {
+          return ord === 'asc' ? A - B : B - A;
+        }
+
+        return ord === 'asc'
+          ? String(A).localeCompare(String(B))
+          : String(B).localeCompare(String(A));
+      });
   });
 
   eliminarDuenio(id: number) {
