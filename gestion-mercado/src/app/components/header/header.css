@@ -144,3 +144,16 @@
   color: white;
   margin: 0;
 }
+
+.flecha-menu {
+  font-size: 24px;
+  color: #fff;
+  text-shadow: 0 0 6px #00ffff, 0 0 10px #00ffff;
+  margin-left: 4px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.flecha-menu.girar {
+  transform: rotate(180deg);
+}
