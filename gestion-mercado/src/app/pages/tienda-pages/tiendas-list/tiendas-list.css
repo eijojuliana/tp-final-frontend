@@ -1,0 +1,129 @@
+/* Contenedor principal */
+.tienda-container {
+  padding-left: 5%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Encabezado */
+h2 {
+  text-align: center;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #ffb3d9;
+  margin-bottom: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 4px rgba(255, 166, 201, 0.15);
+}
+
+/* Contenedor del botón agregar */
+.botones {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2.5rem;
+}
+
+/* Botón agregar */
+button{
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(255, 154, 158, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #ff6b81 0%, #fda4ba 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 154, 158, 0.4);
+}
+
+ul {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+ul li {
+  position: relative;
+  z-index: 2;
+  border-radius: 24px;
+  padding: 5rem;
+  width: 100%;
+  max-width: 40dvw;
+  box-shadow:
+    0 8px 32px rgba(255, 182, 193, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+p {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 5rem;
+  font-size: 3rem;
+  letter-spacing: 1px;
+}
+
+ul li::before {
+  content: '🌸';
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 1.6rem;
+  opacity: 0.18;
+}
+
+/* Contenedor de acciones */
+.botones {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 3px dashed #ffe4ed;
+}
+
+/* Botones de acción */
+.botones button {
+  flex: 1;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: white;
+}
+
+.actions button.edit {
+  background: linear-gradient(135deg, #e0a9d5 0%, #f3c9e8 100%);
+}
+
+.actions button.edit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(224, 169, 213, 0.22);
+}
+
+.actions button.delete {
+  background: linear-gradient(135deg, #ff7b9c 0%, #ff9fb0 100%);
+}
+
+.actions button.delete:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 123, 156, 0.22);
+}
+

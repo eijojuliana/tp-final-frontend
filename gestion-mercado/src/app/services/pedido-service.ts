@@ -55,4 +55,8 @@ export class PedidoService {
   clearPedidoToEdit() {
     this.pedidoToEditState.set(null);
   }
+
+  finalizar(id: number): Observable<boolean> {
+  return this.http.put<boolean>(`${this.url}/${id}/finalizar`, {});
+  }
 }

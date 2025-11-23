@@ -1,4 +1,4 @@
-import { Component, inject, Input, signal, SimpleChanges } from '@angular/core';
+import { Component, computed, inject, Input, signal, SimpleChanges } from '@angular/core';
 import { DetallePedidoService } from '../../services/detallePedido-service';
 import { DetallePedido } from '../../models/detallePedido.model';
 import { FormsModule } from '@angular/forms';
@@ -23,11 +23,10 @@ export class DetallesPedido {
   // Signal de la lista de detalles
   detallesPedido = signal<DetallePedido[]>([]);
 
-  ngOnChanges(changes: SimpleChanges){
-    if (changes['pedido'] && this.pedido?.detalles) {
-      this.detallesPedido.set(this.pedido.detalles); // Inicializamos el signal con los detalles que vienen del input
-    }
-  }
+  //Variable para el total
+  total = computed(() => {
+    return this.detallesPedido().reduce((acc, curr) => acc + curr.subtotal, 0);
+  });
 
   // Objeto para el formulario
   nuevoDetalle: { productoId: number | undefined, cantidad: number | undefined, costoUnitario: number | undefined } = {
@@ -37,7 +36,7 @@ export class DetallesPedido {
   };
 
   ngOnInit(){
-    if (this.pedido && (!this.pedido.detalles || this.pedido.detalles.length === 0)) {
+    if (this.pedido && this.pedido.pedidoId) {
       this.obtenerDetallesDelPedido(this.pedido.pedidoId);
     }
   }

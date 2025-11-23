@@ -15,7 +15,7 @@ export class BreadcrumbComponent {
 
   // Nombres de cada módulo
   private labels: Record<string, string> = {
-    menu: 'Menu',
+    menu: 'Menú',
     productos: 'Productos',
     empleados: 'Empleados',
     clientes: 'Clientes',

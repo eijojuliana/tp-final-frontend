@@ -1,0 +1,8 @@
+.tienda-page-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 3rem;
+  padding: 3rem;
+  background: var(--color6);
+}

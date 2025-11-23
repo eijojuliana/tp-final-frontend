@@ -36,7 +36,7 @@ export class TiendasForm {
         this.form.patchValue({
           nombre: this.tiendaToEdit.nombre,
           direccion: this.tiendaToEdit.direccion,
-          caja: this.tiendaToEdit.caja,
+          caja: this.tiendaToEdit.caja
         });
       } else {
         this.isEditMode = signal(false);
@@ -56,9 +56,8 @@ export class TiendasForm {
       this.tiendaService.update(formValue, tiendaId).subscribe({
         next: () => {
           this.toast.success("Tienda actualizada correctamente");
-          console.log('Tienda Actualizado');
+          console.log('Tienda Actualizada');
           this.tiendaService.limpiarTiendaToEdit();
-          this.router.navigate(['/menu/tienda']);
         }
       });
     } else {
@@ -67,7 +66,6 @@ export class TiendasForm {
           this.toast.success("Tienda registrada correctamente");
           console.log("Tienda Registrado");
           this.form.reset();
-          this.router.navigate(['/menu/tienda']);
         }
       });
     }

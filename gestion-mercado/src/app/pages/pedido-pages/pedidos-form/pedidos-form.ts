@@ -152,4 +152,20 @@ export class PedidosForm {
     this.form.reset();
     this.router.navigate(['/menu/pedidos']);
   }
+
+  finalizarPedido() {
+    const pedido = this.pedidoCreado();
+    if (!pedido) return;
+
+    if (confirm('¿Desea finalizar el pedido? Una vez finalizado no podrá modificarse.')) {
+      this.pedidoService.finalizar(pedido.pedidoId).subscribe({
+        next: () => {
+          console.log('Pedido Finalizado');
+          this.pedidoService.clearPedidoToEdit(); // Limpiamos selección
+          this.router.navigate(['/menu/pedidos']);
+        },
+        error: (e) => console.error('Error al finalizar:', e)
+      });
+    }
+  }
 }

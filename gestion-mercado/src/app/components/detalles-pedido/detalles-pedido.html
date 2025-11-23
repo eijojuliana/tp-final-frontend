@@ -2,7 +2,7 @@
   <form>
 
     <div class="campo">
-      <label for="productoId">Producto ID:</label>
+      <label for="productoId">Producto:</label>
       <select [(ngModel)]="nuevoDetalle.productoId" name="productoId">
         <option [ngValue]="null" disabled selected>Seleccione un producto</option>
         @for (producto of productos(); track $index) {
@@ -63,6 +63,11 @@
         }
       </tbody>
     </table>
+
+    <div class="total-pedido">
+      <p>Total a Pagar:</p>
+      <span>${{ total() }}</span>
+    </div>
   }
 
 </section>

@@ -330,3 +330,15 @@ option{
   color: #000;
 }
 
+section.detalles .botones-detalles button.btn-finalizar {
+  background: linear-gradient(135deg, #a8ff78 0%, #78ffd6 100%);
+  color: #1f5f48;
+  border: none;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(120, 255, 214, 0.4);
+}
+
+section.detalles .botones-detalles button.btn-finalizar:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #86e65a 0%, #4aeec3 100%);
+}

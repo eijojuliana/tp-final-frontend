@@ -1,18 +1,14 @@
-<h2>Tienda</h2>
-
-<div>
+<ul class="tienda-container">
   @for (t of tienda(); track $index) {
-  <div>
-    <p>{{t.tiendaId}}</p>
-    <p>{{t.nombre}}</p>
-    <p>{{t.duenio}}</p>
-    <p>{{t.direccion}}</p>
-    <p>${{t.caja}}</p>
-  </div>
-
-  <div class="actions">
-      <button (click)="updateTienda(t)">Editar</button>
-      <button (click)="deleteTienda(t.tiendaId)">Eliminar</button>
-    </div>
+  <li>
+    <h2>{{t.nombre}}</h2>
+    <p> Dueño: {{t.duenio}}</p>
+    <p> Dirección: {{t.direccion}}</p>
+    <p> Monto Actual de la caja: ${{t.caja}}</p>
+    <div class="botones">
+        <button (click)="updateTienda(t)">Editar</button>
+        <button (click)="deleteTienda(t.tiendaId)">Eliminar</button>
+      </div>
+  </li>
   }
-</div>
+</ul>

@@ -73,7 +73,7 @@
 
         @if (form.get('tipoTransaccion')?.value === 'DEBITO') {
           <div class="campo">
-            <label>Cuenta bancaria (Origen Tienda):</label>
+            <label>Cuenta bancaria de la Tienda:</label>
             <select formControlName="cuentaBancaria">
               <option [ngValue]="null" disabled selected>Seleccione una cuenta</option>
               @for (cuenta of cuentasBancarias(); track $index) {
@@ -105,6 +105,9 @@
       <app-detalles-pedido [pedido]="pedido"></app-detalles-pedido>
 
       <div class="botones-detalles">
+        <button type="button" class="btn-finalizar" (click)="finalizarPedido()">
+          Finalizar Pedido
+        </button>
         <button type="button" (click)="cancelarCreacion()">Cancelar Pedido</button>
       </div>
     }

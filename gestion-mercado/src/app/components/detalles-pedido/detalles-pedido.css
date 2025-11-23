@@ -154,3 +154,31 @@ option{
 h3{
   color: #fff;
 }
+
+.total-pedido {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 2px dashed rgba(255, 182, 193, 0.5);
+}
+
+.total-pedido p {
+  font-size: 2rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.total-pedido span {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 0.5rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
