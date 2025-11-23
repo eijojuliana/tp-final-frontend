@@ -1,14 +1,17 @@
-<div class="acceso-denegado">
-  <h1>Acceso denegado</h1>
-  <p>No tenés permisos para ver esta sección.</p>
+<div class="acceso-denegado-container">
+  <div class="acceso-denegado-card">
+    <h1>Acceso denegado</h1>
+    <p>No tenés permisos para ver esta sección.</p>
 
+    <div class="acceso-denegado-actions">
+      <button class="btn-primary" (click)="menu()">
+        Volver al menú
+      </button>
 
-  <button (click)="menu()">
-    <a routerLink="/menu">Volver al menú</a>
-  </button>
-
-  <button (click)="cerrarSesion()">
-     <a routerLink="/login" style="margin-left: 1rem;">Cerrar sesión e iniciar con otra cuenta</a>
-  </button>
-
+      <button class="btn-secondary" (click)="cerrarSesion()">
+        Cerrar sesión e iniciar con otra cuenta
+      </button>
+    </div>
+  </div>
 </div>
+

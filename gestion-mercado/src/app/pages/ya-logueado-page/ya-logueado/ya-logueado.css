@@ -3,12 +3,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at top, #ffe4f0 0, #f5f5f5 40%, #e0e0e0 100%);
+  background-image: url('../../../../assets/images/background-login.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  image-rendering: auto;
+  position: relative;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+.ya-logueado::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(14, 2, 12, 0.849);
+  z-index: 0;
+}
+
 .ya-logueado-card {
-  background: white;
+  position: relative;
+  z-index: 1;
+  background: var(--blanco);
   padding: 2.5rem 3rem;
   border-radius: 1.2rem;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
@@ -20,6 +38,7 @@
 .ya-logueado-card h1 {
   font-size: 2rem;
   margin-bottom: 0.5rem;
+  color: var(--rosa-oscuro);
 }
 
 .ya-logueado-card p {
@@ -45,7 +64,7 @@
 
 /* botón principal */
 .btn-primary {
-  background: #ff6ba8;
+  background: var(--rosa-oscuro);
   color: white;
   box-shadow: 0 6px 15px rgba(255, 107, 168, 0.5);
 }
