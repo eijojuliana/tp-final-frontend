@@ -82,10 +82,10 @@
 
 .password-input-wrapper input {
   width: 100%;
-  padding-right: 3.5rem; /* espacio para el botón dentro del input */
+  padding-right: 3.5rem;
 }
 
-/* Botón "Mostrar/Ocultar" dentro del campo de contraseña */
+
 .toggle-password {
   position: absolute;
   right: 0.75rem;
@@ -93,7 +93,7 @@
   transform: translateY(-50%);
   background: transparent;
   border: none;
-  color: var(--color2); /* usa tu color secundario, puedes cambiarlo */
+  color: var(--color2);
   font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;

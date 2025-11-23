@@ -28,7 +28,7 @@
 
 .password-input-wrapper input {
   width: 100%;
-  padding-right: 3.5rem; /* espacio para el botón "Mostrar/Ocultar" */
+  padding-right: 3.5rem;
 }
 
 .toggle-password {
@@ -42,7 +42,6 @@
   font-size: 0.8rem;
   font-weight: 600;
   padding: 0;
-  /* si querés que combine con la paleta del login: */
   color: var(--color2);
 }
 
