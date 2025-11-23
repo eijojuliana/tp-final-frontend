@@ -1,7 +1,7 @@
 <section class="detalles">
 
   @if (pedido.estado === 'PENDIENTE') {
-    <form>
+  <form>
 
     <div class="campo">
       <label for="productoId">Producto:</label>
@@ -20,20 +20,20 @@
 
     @if (pedido.tipo === 'COMPRA') {
       <div class="campo">
-        <label for="costoUnitario">Costo Unitario:</label>
-        <input type="number" id="costoUnitario" [(ngModel)]="nuevoDetalle.costoUnitario" name="costoUnitario">
+        <label for="costoUnitarioCompra">Costo Unitario:</label>
+        <input type="number" id="costoUnitarioCompra" [(ngModel)]="nuevoDetalle.costoUnitario" name="costoUnitarioCompra">
       </div>
     }
 
 
     <div class="acciones-form">
       <button type="button" class="agregar-detalle" (click)="agregarDetalle()">
-        {{ detalleEnEdicion() ? 'Actualizar Detalle' : 'Agregar Detalle' }}
+        {{ detalleEnEdicion() ? 'Actualizar' : 'Agregar' }}
       </button>
 
       @if (detalleEnEdicion()) {
         <button type="button" class="btn-cancel-detalle" (click)="cancelarEdicionDetalle()">
-          Cancelar Edición
+          Cancelar
         </button>
       }
     </div>
@@ -53,6 +53,7 @@
           <th>Cod.Prod</th>
           <th>Nombre</th>
           <th>Cantidad</th>
+          <th>Costo Unit</th>
           <th>Subtotal</th>
           <th>Acciones</th>
         </tr>
@@ -65,12 +66,19 @@
             <td>{{ detalle.producto_id }}</td>
             <td>{{ detalle.producto_nombre }}</td>
             <td>{{ detalle.cantidad }}</td>
+            <td>${{ detalle.costoUnitario }}</td>
             <td>{{ detalle.subtotal }}</td>
             <td class="botones">
-              <button class="btnEditar" (click)="editarDetalle(detalle)">
+              <button
+                class="btnEditar"
+                (click)="editarDetalle(detalle)"
+                [disabled]="pedido.estado === 'FINALIZADO'">
                 Editar
               </button>
-              <button class="btnEliminar" (click)="eliminarDetalle(detalle.detallePedidoId)">
+              <button
+                class="btnEliminar"
+                (click)="eliminarDetalle(detalle.detallePedidoId)"
+                [disabled]="pedido.estado === 'FINALIZADO'">
                 Eliminar
               </button>
             </td>

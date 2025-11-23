@@ -48,6 +48,7 @@ export class PedidosForm {
       this.pedidoToEdit = this.pedidoService.pedidoToEdit();
       if (this.pedidoToEdit) {
         this.cargarDatosEnFormulario();
+        this.pedidoCreado.set(this.pedidoToEdit);
       }
     });
   }
@@ -62,6 +63,7 @@ export class PedidosForm {
             this.pedidoService.selectPedidoToEdit(pedido);
             this.pedidoToEdit = pedido;
             this.cargarDatosEnFormulario();
+            this.pedidoCreado.set(pedido);
           },
           error: (err) => console.error('Error al recuperar pedido', err)
         });
@@ -69,6 +71,7 @@ export class PedidosForm {
         this.isEditMode.set(false);
         this.pedidoCreado.set(null);
         this.form.reset();
+        this.form.enable();
       }
     });
   }
@@ -77,7 +80,12 @@ export class PedidosForm {
     if (!this.pedidoToEdit) return;
 
     this.isEditMode.set(true);
-    this.pedidoCreado.set(this.pedidoToEdit);
+
+    if (this.pedidoToEdit.estado === 'FINALIZADO') {
+      this.form.disable();
+    } else {
+      this.form.enable();
+    }
 
     this.form.patchValue({
       tipoPedido: this.pedidoToEdit.tipo,

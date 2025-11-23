@@ -4,7 +4,8 @@ main {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 3rem;
+  gap: 1rem;
+  padding: 5rem;
 
   background: linear-gradient(135deg, #2c1b2e 0%, #1a0e1f 50%, #2c1b2e 100%);
   position: relative;
@@ -29,6 +30,7 @@ section.detalles {
   border-radius: 24px;
   padding: 3rem;
   width: 100%;
+  min-height: 70dvh;
 
   box-shadow:
     0 8px 32px rgba(255, 182, 193, 0.15),

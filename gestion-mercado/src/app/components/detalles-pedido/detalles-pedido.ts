@@ -46,6 +46,12 @@ export class DetallesPedido {
     }
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['pedido'] && this.pedido && this.pedido.pedidoId) {
+      this.obtenerDetallesDelPedido(this.pedido.pedidoId);
+    }
+  }
+
   agregarDetalle(){
     if (this.nuevoDetalle.productoId === undefined || this.nuevoDetalle.cantidad === undefined) {
       console.error('Producto ID y Cantidad son requeridos.');
@@ -55,8 +61,10 @@ export class DetallesPedido {
     const dto = {
       productoId: this.nuevoDetalle.productoId,
       cantidad: this.nuevoDetalle.cantidad,
-      costoUnitarioCompra: this.nuevoDetalle.costoUnitario
+      costoUnitario: Number(this.nuevoDetalle.costoUnitario)
     };
+
+    console.log("Enviando DTO:", dto);
 
     if (this.detalleEnEdicion()) {
       // MODO EDICIÓN
@@ -99,7 +107,7 @@ export class DetallesPedido {
     this.nuevoDetalle = {
       productoId: detalle.producto_id,
       cantidad: detalle.cantidad,
-      costoUnitario: detalle.costoUnitarioCompra // Si es compra
+      costoUnitario: detalle.costoUnitario
     };
   }
 

@@ -88,7 +88,7 @@
 
 
       <div class="botones">
-        <button type="submit" [disabled]="form.invalid">
+        <button type="submit" [disabled]="form.invalid || (isEditMode() && pedidoToEdit?.estado === 'FINALIZADO')">
           {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
         </button>
 
@@ -105,10 +105,17 @@
       <app-detalles-pedido [pedido]="pedido"></app-detalles-pedido>
 
       <div class="botones-detalles">
-        <button type="button" class="btn-finalizar" (click)="finalizarPedido()">
-          Finalizar Pedido
-        </button>
-        <button type="button" (click)="cancelarCreacion()">Cancelar Pedido</button>
+        @if (pedido.estado === 'PENDIENTE') {
+          <button (click)="finalizarPedido()" class="btn-finalizar">
+            Finalizar Pedido
+          </button>
+        }
+
+        @if (pedido.estado === 'PENDIENTE') {
+          <button (click)="cancelarCreacion()" class="btn-editar">
+            Cancelar Pedido
+          </button>
+        }
       </div>
     }
     @else {

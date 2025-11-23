@@ -3,12 +3,12 @@ export interface DetallePedido {
   producto_id: number,
   producto_nombre: string,
   cantidad: number,
-  costoUnitarioCompra?: number,
+  costoUnitario?: number,
   subtotal: number
 }
 
 export interface NewDetallePedido {
   productoId: number,
   cantidad: number,
-  costoUnitarioCompra?: number
+  costoUnitario: number
 }

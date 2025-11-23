@@ -1,8 +1,6 @@
-/* Para la tabla de detalles */
-@import '../../styles/tabla-style.scss';
-/* === DETALLES DEL PEDIDO (usa exactamente lo mismo que el form principal) === */
 
-/* Usa los mismos estilos del contenedor */
+@import '../../styles/tabla-style.scss';
+
 section.detalles {
   position: relative;
   z-index: 2;
@@ -25,7 +23,6 @@ section.detalles h2 {
   letter-spacing: 1px;
 }
 
-/* Campos (idénticos a .campo del form principal) */
 section.detalles .campo {
   display: flex;
   flex-direction: column;
@@ -87,7 +84,7 @@ section.detalles button.agregar-detalle:hover {
   background: linear-gradient(135deg, #ff6b81 0%, #fda4ba 100%);
 }
 
-/* Botón Cancelar Pedido → igual al cancelar del form */
+
 section.detalles .btn-cancel-detalle {
   padding: 1rem 2.5rem;
   border-radius: 12px;
@@ -105,7 +102,6 @@ section.detalles .btn-cancel-detalle:hover {
   transform: translateY(-2px);
 }
 
-/* Tabla (idéntica a la del formulario principal) */
 section.detalles table {
   width: 100%;
   border-collapse: collapse;
@@ -162,6 +158,11 @@ section.detalles .btnEliminar:hover {
   background: rgba(255, 100, 100, 0.7);
   border-color: rgba(255, 80, 80, 0.7);
   transform: translateY(-2px);
+}
+
+section.detalles form {
+  display: flex;
+  flex-direction: row;
 }
 
 option{

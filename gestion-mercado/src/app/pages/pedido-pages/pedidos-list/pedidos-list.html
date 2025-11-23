@@ -52,9 +52,25 @@
           <td>{{ pedido.transaccion.monto }}</td>
           <td class="celda-acciones">
             <div class="botones">
-              <button class="btnDetalle"> Detalle </button>
-              <button class="btnEliminar" (click)="deletePedido(pedido.pedidoId)"> Eliminar </button>
-              <button class="btnEditar" (click)="updatePedido(pedido)"> Editar </button>
+              <button
+                class="btnDetalle"
+                [routerLink]="['/menu/pedidos/form', pedido.pedidoId]">
+                Detalle
+              </button>
+
+              <button
+                class="btnEliminar"
+                (click)="deletePedido(pedido.pedidoId)"
+                [disabled]="pedido.estado === 'FINALIZADO'">
+                Eliminar
+              </button>
+
+              <button
+                class="btnEditar"
+                (click)="updatePedido(pedido)"
+                [disabled]="pedido.estado === 'FINALIZADO'">
+                Editar
+              </button>
             </div>
           </td>
         </tr>
