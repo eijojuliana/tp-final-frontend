@@ -25,7 +25,7 @@ export class DuenioForm {
 
   form = this.fb.nonNullable.group({
     nombre: ['', [Validators.required]],
-    dni: [0, [Validators.required, Validators.min(1)]],
+    dni: [0, [Validators.required, Validators.min(100000), Validators.max(999999999)]],
     edad: [0, [Validators.required, Validators.min(18)]],
     email: ['', [Validators.required, Validators.email]],
     contraseña: [''],
