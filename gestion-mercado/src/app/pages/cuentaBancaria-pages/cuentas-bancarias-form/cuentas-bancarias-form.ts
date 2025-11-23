@@ -16,7 +16,7 @@ export class CuentasBancariasForm {
   private cuentaBancariaService = inject(CuentaBancariaService);
   private fb = inject(FormBuilder);
   private router = inject(Router);
-  private toast = inject(ToastService); 
+  private toast = inject(ToastService);
 
   public isEditMode = signal(false);
   private cuentaBancariaToEdit: CuentaBancaria | null = null
@@ -55,7 +55,7 @@ export class CuentasBancariasForm {
       this.cuentaBancariaService.update(cuentaBancariaUpdated).subscribe({
         next: () => {
           console.log("Cuenta Bancaria Actualizada");
-          this.toast.success("Cuent Bancaria Actualizada");
+          this.toast.success("Cuenta Bancaria Actualizada");
           this.form.reset();
           this.router.navigate(['/menu/cuentas-bancarias']);
         }
