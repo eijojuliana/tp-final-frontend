@@ -1,1 +1,11 @@
 @import '../../../styles/tabla-style.scss';
+
+
+.tablaBody tr.entrada {
+  background-color: #cafdd9 !important; /* verde */
+}
+
+
+.tablaBody tr.salida {
+  background-color: #fa7272 !important; /* rojo */
+}

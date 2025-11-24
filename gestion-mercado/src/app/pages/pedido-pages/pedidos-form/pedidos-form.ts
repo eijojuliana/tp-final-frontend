@@ -8,6 +8,7 @@ import { DetallesPedido } from "../../../components/detalles-pedido/detalles-ped
 import { NewTransaccion, Transaccion } from '../../../models/transaccion.model';
 import { ClienteService } from '../../../services/cliente-service';
 import { CuentaBancariaService } from '../../../services/cuenta-bancaria-service';
+import { TransaccionService } from '../../../services/transaccion-service';
 
 
 @Component({
@@ -30,6 +31,8 @@ export class PedidosForm {
 
   private cuentaService = inject(CuentaBancariaService);
   public cuentasBancarias= this.cuentaService.cuentasBancarias;
+
+  private transaccionService = inject(TransaccionService);
 
   isEditMode = signal(false);
   public pedidoToEdit: Pedido | null = null;
@@ -186,6 +189,7 @@ export class PedidosForm {
         next: () => {
           console.log('Pedido Finalizado');
           this.pedidoService.clearPedidoToEdit(); // Limpiamos selección
+          this.transaccionService.load();
           this.router.navigate(['/menu/pedidos']);
         },
         error: (e) => console.error('Error al finalizar:', e)

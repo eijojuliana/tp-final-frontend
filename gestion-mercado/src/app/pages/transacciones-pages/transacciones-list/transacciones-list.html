@@ -34,7 +34,7 @@
 
     <tbody class="tablaBody">
       @for (transaccion of transaccionesFiltrados(); track $index){
-        <tr>
+        <tr [class.entrada]="esEntrada(transaccion)" [class.salida]="!esEntrada(transaccion)">
           <td>{{ transaccion.transaccion_id }}</td>
           <td>{{ transaccion.tipo }}</td>
           <td>{{ transaccion.origen_id }}</td>

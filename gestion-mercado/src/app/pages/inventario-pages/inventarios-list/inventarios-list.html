@@ -23,6 +23,7 @@
       <tr>
         <th>ID</th>
         <th>Producto ID</th>
+        <th>Nombre</th>
         <th>Cantidad</th>
         <th>Stock Mínimo</th>
         <th>Precio Venta</th>
@@ -36,6 +37,7 @@
         <tr>
           <td>{{ i.inventario_id }}</td>
           <td>{{ i.producto_id }}</td>
+          <td>{{ getNombreProducto(i.producto_id) }}</td>
           <td>{{ i.cantidad }}</td>
           <td>{{ i.stockMin }}</td>
           <td>{{ i.precioVenta }}</td>

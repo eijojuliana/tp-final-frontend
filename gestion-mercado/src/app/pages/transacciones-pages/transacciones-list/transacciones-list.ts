@@ -1,5 +1,8 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { TransaccionService } from '../../../services/transaccion-service';
+import { Transaccion } from '../../../models/transaccion.model';
+import { PedidoService } from '../../../services/pedido-service';
+import { Pedido } from '../../../models/pedido.model';
 
 @Component({
   selector: 'app-transacciones-list',
@@ -10,6 +13,10 @@ import { TransaccionService } from '../../../services/transaccion-service';
 export class TransaccionesList {
   private service = inject(TransaccionService);
   public transacciones = this.service.transacciones;
+
+  private pedidoService = inject(PedidoService);
+  private pedidos = this.pedidoService.pedidos;
+
 
   tipoFiltro = signal<'EFECTIVO' | 'DEBITO' | ''>('');
   atributo = signal<'transaccion_id' | 'origen_id' | 'destino_id' | 'monto' | 'fecha'>('transaccion_id');
@@ -40,4 +47,18 @@ export class TransaccionesList {
     const value = (event.target as HTMLSelectElement).value as 'EFECTIVO' | 'DEBITO' | '';
     this.tipoFiltro.set(value);
   }
+
+
+esEntrada(t: Transaccion): boolean {
+
+  const pedidoEncontrado = this.pedidos()
+    .find((p: Pedido) => p.transaccion?.transaccion_id === t.transaccion_id);
+
+  if (!pedidoEncontrado) {
+
+    return false;
+  }
+
+  return pedidoEncontrado.tipo === 'VENTA';
+}
 }
