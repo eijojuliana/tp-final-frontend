@@ -119,10 +119,10 @@ ul {
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, 30dvw);
+  justify-content: center;
   gap: 1.5rem;
   padding-bottom: 2rem;
-  max-width: 1000px;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -130,7 +130,7 @@ ul {
 
 /* Tarjeta de producto */
 ul li {
-  background-color: #f5efe0;
+  background-color: #f8f3f3;
   border: 5px solid #ffa6c9;
   border-radius: 20px;
   padding: 2rem;
@@ -148,7 +148,7 @@ ul li::before {
   position: absolute;
   top: 12px;
   right: 18px;
-  font-size: 1.6rem;
+  font-size: 3rem;
   opacity: 0.18;
 }
 
@@ -170,7 +170,7 @@ ul li:hover {
 
 /* Código del producto */
 ul li p.codigo {
-  font-size: 0.85rem;
+  font-size: 1rem;
   color: #8b5a6f;
   font-weight: 600;
   text-transform: uppercase;
@@ -182,7 +182,7 @@ ul li p.codigo {
 
 /* Nombre del producto */
 ul li p.nombre {
-  font-size: 1.8rem;
+  font-size: 3rem;
   font-weight: 800;
   color: #d4567f;
   margin: 0.6rem 0;
@@ -191,7 +191,7 @@ ul li p.nombre {
 
 /* Categoría */
 ul li p.categoria {
-  font-size: 1.05rem;
+  font-size: 1.5rem;
   color: #ff9fb0;
   font-weight: 600;
   margin-bottom: auto;
@@ -259,21 +259,6 @@ ul li .card-top img {
 }
 
 /* Responsive */
-@media screen and (max-width: 1200px) {
-  ul {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-  }
-
-  ul li {
-    padding: 1.75rem;
-  }
-
-  ul li p.nombre {
-    font-size: 1.6rem;
-  }
-}
-
 @media screen and (max-width: 768px) {
   .list-container {
     padding: 1rem;
@@ -322,28 +307,6 @@ ul li .card-top img {
 
   .actions button {
     width: 100%;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  h2 {
-    font-size: 2rem;
-  }
-
-  ul li {
-    border-width: 4px;
-  }
-
-  ul li p.codigo {
-    font-size: 0.75rem;
-  }
-
-  ul li p.nombre {
-    font-size: 1.2rem;
-  }
-
-  ul li p.categoria {
-    font-size: 0.95rem;
   }
 }
 

@@ -1,5 +1,12 @@
 <main class="contenido">
-  <h2>MENÚ DE {{auth.getRole()}}</h2>
+  <h2>
+    MENÚ DE
+    @if(auth.getRole()=='DUENIO'){
+      DUEÑO
+    } @else {
+      {{auth.getRole()}}
+    }
+  </h2>
   <nav class="menus-container">
     <ul class="menus">
 
