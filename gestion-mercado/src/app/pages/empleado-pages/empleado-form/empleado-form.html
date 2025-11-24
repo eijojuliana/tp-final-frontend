@@ -7,14 +7,14 @@
         <label>Nombre: </label>
         <input type="text" formControlName="nombre">
         @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
-          <span class = "error">El campo no puede estar vacio ni contener caracteres no alfabeticos.</span>
+          <span class = "error">El campo no puede estar vacío ni contener carácteres no alfabéticos.</span>
         }
       </div>
       <div class = "campo">
         <label>Dni: </label>
         <input type="number" formControlName="dni">
         @if (form.get('dni')?.invalid && form.get('dni')?.touched) {
-          <span class = "error">El DNI debe tener enter 6 y 9 digitos</span>
+          <span class = "error">El DNI debe tener enter 6 y 9 dígitos</span>
         }
       </div>
       <div class = "campo">
@@ -28,7 +28,7 @@
         <label>Email: </label>
         <input type="email" formControlName="email">
         @if (form.get('email')?.invalid && form.get('email')?.touched) {
-          <span class = "error">El email debe ser valido.</span>
+          <span class = "error">El email debe ser válido.</span>
         }
       </div>
       <div class = "campo">
@@ -50,7 +50,7 @@
   </div>
 
   @if (form.get('contraseña')?.invalid && form.get('contraseña')?.touched) {
-    <span class = "error">La contraseña no debe estar vacia.</span>
+    <span class = "error">La contraseña no debe estar vacía.</span>
   }
 </div>
 

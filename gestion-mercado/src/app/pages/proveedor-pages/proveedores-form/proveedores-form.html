@@ -7,21 +7,21 @@
         <label>Nombre: </label>
         <input type="text" formControlName="nombre">
         @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
-          <span class = "error">El campo no puede estar vacio ni contener caracteres no alfabeticos.</span>
+          <span class = "error">El campo no puede estar vacío ni contener caracteres no alfabéticos.</span>
         }
       </div>
       <div class = "campo">
         <label>Dni: </label>
         <input type="number" formControlName="dni">
         @if (form.get('dni')?.invalid && form.get('dni')?.touched) {
-          <span class = "error">El DNI debe tener enter 6 y 9 digitos</span>
+          <span class = "error">El DNI debe tener entre 6 y 9 dígitos</span>
         }
       </div>
       <div class = "campo">
         <label>Edad: </label>
         <input type="number" formControlName="edad">
         @if (form.get('edad')?.invalid && form.get('edad')?.touched) {
-          <span class = "error">El cliente debe tener entre 18 y 120 años.</span>
+          <span class = "error">El proveedor debe tener entre 18 y 120 años.</span>
         }
       </div>
 
