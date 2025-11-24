@@ -19,36 +19,37 @@
     <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)" />
   </div>
 
-  <table class="tabla">
-    <thead class="encabezado">
-      <tr>
-        <th> ID </th>
-        <th> ID.Du </th>
-        <th> Nombre </th>
-        <th> Edad </th>
-        <th> DNI </th>
-        <th> Email </th>
-        <th> Acciones </th>
-      </tr>
-    </thead>
-
-    <tbody class="tablaBody">
-      @for (duenio of dueniosFiltrados(); track $index){
+  <div class="tabla-contenedor">
+    <table class="tabla">
+      <thead class="encabezado">
         <tr>
-          <td>{{ duenio.personaId }}</td>
-          <td>{{ duenio.duenioId }}</td>
-          <td>{{ duenio.nombre }}</td>
-          <td>{{ duenio.edad }}</td>
-          <td>{{ duenio.dni }}</td>
-          <td>{{ duenio.email }}</td>
-          <td class="botones">
-            <button class="btnEliminar" (click)="eliminarDuenio(duenio.duenioId)"> Eliminar </button>
-            <button class="btnEditar" (click)="modificarDuenio(duenio)"> Editar </button>
-          </td>
-
+          <th> ID </th>
+          <th> ID.Du </th>
+          <th> Nombre </th>
+          <th> Edad </th>
+          <th> DNI </th>
+          <th> Email </th>
+          <th> Acciones </th>
         </tr>
-      }
-    </tbody>
+      </thead>
 
-  </table>
+      <tbody class="tablaBody">
+        @for (duenio of dueniosFiltrados(); track $index){
+          <tr>
+            <td>{{ duenio.personaId }}</td>
+            <td>{{ duenio.duenioId }}</td>
+            <td>{{ duenio.nombre }}</td>
+            <td>{{ duenio.edad }}</td>
+            <td>{{ duenio.dni }}</td>
+            <td>{{ duenio.email }}</td>
+            <td class="acciones">
+              <button class="btnEliminar" (click)="eliminarDuenio(duenio.duenioId)"> Eliminar </button>
+              <button class="btnEditar" (click)="modificarDuenio(duenio)"> Editar </button>
+            </td>
+
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 </section>

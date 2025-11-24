@@ -157,3 +157,14 @@
 .flecha-menu.girar {
   transform: rotate(180deg);
 }
+
+/* DISEÑO RESPONSIVO */
+@media (max-width: 768px) {
+  .titulo {
+    font-size: 2rem;
+  }
+
+  .logo, .user-icon {
+    width: 4rem;
+  }
+}

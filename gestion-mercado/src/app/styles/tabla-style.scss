@@ -19,7 +19,7 @@
 .btn-agregar {
   background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
   color: #fff;
-  padding: 0.75rem 1.5rem;
+  padding: 0.5rem 1.5rem;
   border: none;
   border-radius: 8px;
   font-weight: 600;
@@ -93,14 +93,13 @@ input[type="text"]:focus {
   box-shadow: 0 0 0 3px rgba(255, 154, 158, 0.1);
 }
 
+
 /* Tabla */
 .tabla {
   width: 100%;
-  border-collapse: separate;
   border-spacing: 0;
-  border-radius: 12px;
-  overflow: hidden;
   box-shadow: 0 4px 6px rgba(255, 182, 193, 0.15);
+
   background-image:
     linear-gradient(rgba(255, 249, 252, 0.959), rgba(245, 236, 242, 0.952)),
     url('/assets/images/background-tabla-gemerius.jpg');
@@ -116,8 +115,8 @@ input[type="text"]:focus {
 }
 
 .encabezado th {
-  padding: 1rem 1.25rem;
-  text-align: left;
+  padding: 1rem 1rem;
+  text-align: center;
   font-weight: 600;
   font-size: 1.5rem;
   text-transform: uppercase;
@@ -127,7 +126,7 @@ input[type="text"]:focus {
 
 .tablaBody tr {
   border-bottom: 1px solid #ffe4ed;
-  transition: background-color 0.2s ease;
+  text-align: center;
 }
 
 .tablaBody tr:last-child {
@@ -138,53 +137,58 @@ input[type="text"]:focus {
   padding: 1rem 1.25rem;
   font-size: 1.5rem;
   color: var(--color3);
+  text-align: center;
 }
 
-/* Celda de acciones con ancho fijo más amplio */
-.celda-acciones {
-  width: 280px;
-  min-width: 280px;
-  padding: 0.75rem 1rem;
-}
-
-.celda-acciones .botones {
-  display: flex;
-  gap: 1rem;
-  justify-content: flex-start;
-  flex-wrap: nowrap;
-  margin: 0;
-}
-
-/* Botones dentro de la tabla (para persona-list que tiene .botones en td) */
 .tablaBody td.botones {
   display: flex;
   gap: 1rem;
   justify-content: flex-start;
   align-items: center;
-  padding: 0.75rem 1rem;
-  width: 220px;
-  min-width: 220px;
 }
 
-/* Botones de acción */
 .btnDetalle,
 .btnEliminar,
 .btnEditar,
 .btn {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 6px;
-  font-size: 1.4rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-  flex: 0 0 auto;
   color: white;
+  font-weight: 600;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: 0.3s;
+  white-space: nowrap;
+  /* Propiedades de Contenedor */
+  padding: 0.7rem 1.5rem;
+  border-radius: 10px;
+  border: none;
+  transform: none;
+}
+
+.btnEditar {
+  background: rgb(169, 206, 255);
+  border: 2px solid rgba(120, 190, 255, 0.6);
+}
+
+.btnEditar:hover {
+  background: rgba(100, 141, 255, 0.7);
+  border-color: rgba(83, 80, 255, 0.7);
+  transform: translateY(-2px);
+}
+
+.btnEliminar {
+  background: rgb(255, 160, 160);
+  border: 2px solid rgba(255, 120, 120, 0.6);
+}
+
+.btnEliminar:hover {
+  background: rgba(255, 100, 100, 0.7);
+  border-color: rgba(255, 80, 80, 0.7);
+  transform: translateY(-2px);
 }
 
 .btnDetalle {
   background: linear-gradient(135deg, #e0a9d5 0%, #f3c9e8 100%);
+  border: 2px solid #e0a9d5;
 }
 
 .btnDetalle:hover {
@@ -193,65 +197,12 @@ input[type="text"]:focus {
   box-shadow: 0 2px 4px rgba(224, 169, 213, 0.4);
 }
 
-.btnEliminar {
-  background: linear-gradient(135deg, #ff7b9c 0%, #ff9fb0 100%);
-}
-
-.btnEliminar:hover {
-  background: linear-gradient(135deg, #ff5a82 0%, #ff7b96 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(255, 123, 156, 0.4);
-}
-
-.btnEditar {
-  background: linear-gradient(135deg, #ffb3d9 0%, #ffc9e5 100%);
-}
-
-.btnEditar:hover {
-  background: linear-gradient(135deg, #ff9ac9 0%, #ffb3d9 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(255, 179, 217, 0.4);
-}
-
-.btnEliminar:disabled,
-.btnEditar:disabled {
-  background: #cccccc;
-  color: #888888;
-  cursor: not-allowed;
-  opacity: 0.6;
-  transform: none;
-  box-shadow: none;
-}
-
-.btnEliminar:disabled:hover,
-.btnEditar:disabled:hover,
-.btnEliminar:disabled:focus,
-.btnEditar:disabled:focus {
-  background: #cccccc;
-  transform: none;
-  box-shadow: none;
-}
-
-
-/* Responsive */
-@media screen and (max-width: 1200px) {
-  .celda-acciones,
-  .tablaBody td.botones {
-    width: 250px;
-    min-width: 250px;
-  }
-
-  .btnDetalle,
-  .btnEliminar,
-  .btnEditar {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
-  }
-}
-
+/* =========================================
+  DISEÑO RESPONSIVE
+========================================= */
 @media screen and (max-width: 768px) {
   .list-container {
-    padding: 1rem;
+    padding: 2%;
   }
 
   .botones {
@@ -261,28 +212,43 @@ input[type="text"]:focus {
 
   .filter-container {
     max-width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .tabla-contenedor {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .tabla {
-    font-size: 0.85rem;
+    width: 650px;
+    min-width: 650px;
+    font-size: 0.83rem;
+    box-shadow: none;
   }
 
-  .encabezado th,
+  .encabezado th {
+    padding: 0.75rem 0.5rem;
+    font-size: 1.4rem;
+  }
+
   .tablaBody td {
     padding: 0.75rem 0.5rem;
+    font-size: 1.4rem;
   }
 
-  .celda-acciones,
-  .tablaBody td.botones {
-    width: 200px;
-    min-width: 200px;
-    gap: 0.3rem;
+  .acciones {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    justify-content: center;
   }
 
   .btnDetalle,
   .btnEliminar,
   .btnEditar {
-    padding: 0.4rem 0.6rem;
-    font-size: 0.75rem;
+    font-size: 1.4rem;
+    padding: 1rem 1rem;
+    border-radius: 6px;
   }
 }

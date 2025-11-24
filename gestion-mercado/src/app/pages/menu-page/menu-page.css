@@ -36,14 +36,6 @@ main.contenido h2 {
   font-weight: 700;
 }
 
-/* Breadcrumb y otros textos auxiliares */
-.breadcrumb p,
-main.contenido > p {
-   font-family: "Proza Libre", sans-serif;
-   color: rgba(255, 255, 255, 0.8);
-   text-align: center;
-}
-
 .menus {
   display: grid;
   grid-template-columns: repeat(auto-fit, 24rem);
@@ -113,5 +105,82 @@ main.contenido > p {
 .icon {
   width: 10rem;
   height: 10rem;
-  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.4)) !important;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.4));
+}
+
+/* =========================================
+  DISEÑO RESPONSIVE
+========================================= */
+@media (max-width: 768px) {
+
+  main.contenido {
+    padding: 0.5rem;
+  }
+
+  main.contenido::before {
+    background-image: url('/assets/images/fondoRegistro.webp'); /* Cambiamos el formato a webp para disminuir la calidad y peso de la imagen */
+  }
+
+  main.contenido h2 {
+    font-size: 5dvw; /* Título más pequeño */
+  }
+
+  /* Preferimos descartar la idea de CARDS para celular y usar un listado */
+  .menus {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.3rem;
+    padding: 0;
+  }
+
+  .card {
+    width: 100%; /* Ancho completo */
+    height: auto;
+    padding: 5%;
+  }
+
+  .card:hover {
+    transform: none; /* Para eliminar efectos del hover en celular */
+  }
+
+  .card a div.recuadro {
+    position: absolute;
+    inset: 0;
+    width: auto;
+    height: auto;
+    border-radius: 12px;
+    z-index: 0;
+     /* Desactivamos el blur para celular ya que este disminuye el rendimiento */
+    backdrop-filter: none;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .icon-container {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start; /* Alineados a la izquierda */
+    padding: 0.3rem 0.5rem;
+    gap: 0.5rem;
+    z-index: 1;
+  }
+
+  .icon {
+    width: 20%;
+    height: 20%;
+  }
+
+  .card p {
+    font-size: 80%;
+    white-space: normal;
+    overflow-wrap: break-word;
+    line-height: 1.1;
+    text-align: left;
+    flex: 1;
+  }
 }
