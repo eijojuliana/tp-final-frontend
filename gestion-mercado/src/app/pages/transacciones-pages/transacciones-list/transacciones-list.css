@@ -1,11 +1,12 @@
 @import '../../../styles/tabla-style.scss';
 
 
-.tablaBody tr.entrada {
-  background-color: #cafdd9 !important; /* verde */
+.tablaBody td.monto-entrada {
+  color: #0f9d58;
+  font-weight: bold;
 }
 
-
-.tablaBody tr.salida {
-  background-color: #fa7272 !important; /* rojo */
+.tablaBody td.monto-salida {
+  color: #d93025;
+  font-weight: bold;
 }
