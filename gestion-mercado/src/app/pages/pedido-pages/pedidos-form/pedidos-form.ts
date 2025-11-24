@@ -9,6 +9,8 @@ import { NewTransaccion, Transaccion } from '../../../models/transaccion.model';
 import { ClienteService } from '../../../services/cliente-service';
 import { CuentaBancariaService } from '../../../services/cuenta-bancaria-service';
 import { TransaccionService } from '../../../services/transaccion-service';
+import { ToastService } from '../../../services/toast.service';
+import { DetallePedidoService } from '../../../services/detallePedido-service';
 
 
 @Component({
@@ -18,6 +20,7 @@ import { TransaccionService } from '../../../services/transaccion-service';
   styleUrl: './pedidos-form.css',
 })
 export class PedidosForm {
+  private toast = inject(ToastService);
   private fb = inject(FormBuilder);
   pedidoService = inject(PedidoService);
   private router = inject(Router);
@@ -33,6 +36,8 @@ export class PedidosForm {
   public cuentasBancarias= this.cuentaService.cuentasBancarias;
 
   private transaccionService = inject(TransaccionService);
+
+  private detallePedidoService = inject(DetallePedidoService);
 
   isEditMode = signal(false);
   public pedidoToEdit: Pedido | null = null;
@@ -180,22 +185,31 @@ export class PedidosForm {
     this.router.navigate(['/menu/pedidos']);
   }
 
-  finalizarPedido() {
-    const pedido = this.pedidoCreado();
-    if (!pedido) return;
+finalizarPedido() {
+  const pedido = this.pedidoCreado();
+  if (!pedido) return;
+  this.detallePedidoService.load(pedido.pedidoId).subscribe({
+    next: (detalles) => {
+      if (!detalles || detalles.length === 0) {
+        this.toast.error('El detalle no puede estar vacío');
+        return;
+      }
 
-    if (confirm('¿Desea finalizar el pedido? Una vez finalizado no podrá modificarse.')) {
-      this.pedidoService.finalizar(pedido.pedidoId).subscribe({
-        next: () => {
-          console.log('Pedido Finalizado');
-          this.pedidoService.clearPedidoToEdit(); // Limpiamos selección
-          this.transaccionService.load();
-          this.router.navigate(['/menu/pedidos']);
-        },
-        error: (e) => console.error('Error al finalizar:', e)
-      });
-    }
-  }
+      if (confirm('¿Desea finalizar el pedido? Una vez finalizado no podrá modificarse.')) {
+        this.pedidoService.finalizar(pedido.pedidoId).subscribe({
+          next: () => {
+            this.toast.success('Pedido finalizado correctamente');
+            this.pedidoService.clearPedidoToEdit();
+            this.transaccionService.load();
+            this.router.navigate(['/menu/pedidos']);
+          },
+          error: () => this.toast.error('Ocurrió un error al finalizar el pedido')
+        });
+      }
+    },
+    error: () => this.toast.error('No se pudieron cargar los detalles del pedido')
+  });
+}
 
   // CONFIG PARA QUE MENU DESPLEGABLE NE CELULAR
   formCollapsed = signal(true);
