@@ -15,32 +15,34 @@
     <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)" />
   </div>
 
-  <table class="tabla">
-    <thead class="encabezado">
-      <tr>
-        <th> ID </th>
-        <th> Email </th>
-        <th> Acciones </th>
-      </tr>
-    </thead>
+    <div class="tabla-contenedor">
+    <table class="tabla">
+      <thead class="encabezado">
+        <tr>
+          <th> ID </th>
+          <th> Email </th>
+          <th> Acciones </th>
+        </tr>
+      </thead>
 
-    <tbody class="tablaBody">
-      @for (usuario of usuariosFiltrados(); track $index){
-        <tr>
-          <td>{{ usuario.usuarioId }}</td>
-          <td>{{ usuario.email }}</td>
-          <td class="botones">
-            <button class="btnEliminar" (click)="eliminarUsuario(usuario.usuarioId)"> Eliminar </button>
-            <button class="btnEditar"(click)="modificarUsuario(usuario)"> Editar </button>
-          </td>
-        </tr>
-      } @empty {
-        <tr>
-          <td colspan="4" class="sin-registros">
-            No se encontraron registros
-          </td>
-        </tr>
-      }
-    </tbody>
-  </table>
+      <tbody class="tablaBody">
+        @for (usuario of usuariosFiltrados(); track $index){
+          <tr>
+            <td>{{ usuario.usuarioId }}</td>
+            <td>{{ usuario.email }}</td>
+            <td class="botones">
+              <button class="btnEliminar" (click)="eliminarUsuario(usuario.usuarioId)"> Eliminar </button>
+              <button class="btnEditar"(click)="modificarUsuario(usuario)"> Editar </button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="4" class="sin-registros">
+              No se encontraron registros
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 </section>

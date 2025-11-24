@@ -18,38 +18,40 @@
     <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)"/>
   </div>
 
-  <table class="tabla">
-    <thead class="encabezado">
-      <tr>
-        <th>ID</th>
-        <th>ID.CL</th>
-        <th>Nombre</th>
-        <th>Edad</th>
-        <th>DNI</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-
-    <tbody class="tablaBody">
-      @for (cliente of clientesFiltrados(); track $index){
-      <tr>
-        <td>{{ cliente.personaId }}</td>
-        <td>{{ cliente.clienteId }}</td>
-        <td>{{ cliente.nombre }}</td>
-        <td>{{ cliente.edad }}</td>
-        <td>{{ cliente.dni }}</td>
-        <td class="botones">
-          <button class="btnEliminar" (click)="eliminarCliente(cliente.clienteId)">Eliminar</button>
-          <button class="btnEditar" (click)="modificarCliente(cliente)">Editar</button>
-        </td>
-      </tr>
-      } @empty {
+  <div class="tabla-contenedor">
+    <table class="tabla">
+      <thead class="encabezado">
         <tr>
-          <td colspan="4" class="sin-registros">
-            No se encontraron registros
+          <th>ID</th>
+          <th>ID.CL</th>
+          <th>Nombre</th>
+          <th>Edad</th>
+          <th>DNI</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody class="tablaBody">
+        @for (cliente of clientesFiltrados(); track $index){
+        <tr>
+          <td>{{ cliente.personaId }}</td>
+          <td>{{ cliente.clienteId }}</td>
+          <td>{{ cliente.nombre }}</td>
+          <td>{{ cliente.edad }}</td>
+          <td>{{ cliente.dni }}</td>
+          <td class="botones">
+            <button class="btnEliminar" (click)="eliminarCliente(cliente.clienteId)">Eliminar</button>
+            <button class="btnEditar" (click)="modificarCliente(cliente)">Editar</button>
           </td>
         </tr>
-      }
-    </tbody>
-  </table>
+        } @empty {
+          <tr>
+            <td colspan="4" class="sin-registros">
+              No se encontraron registros
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 </section>

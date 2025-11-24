@@ -99,6 +99,11 @@
       box-shadow: 0 0 0 3px rgba(255, 166, 201, 0.2);
     }
   }
+
+  option {
+    color: var(--color4);
+    font-weight: 600;
+  }
 }
 
 /* Botones */

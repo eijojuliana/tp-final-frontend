@@ -26,59 +26,60 @@
     <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)" />
   </div>
 
-  <table class="tabla">
-    <thead class="encabezado">
-      <tr>
-        <th> ID </th>
-        <th> ID.Tr </th>
-        <th> Tipo </th>
-        <th> Fecha </th>
-        <th> Tipo </th>
-        <th> Estado </th>
-        <th> Total </th>
-        <th> Acciones </th>
-      </tr>
-    </thead>
+    <div class="tabla-contenedor">
+    <table class="tabla">
+      <thead class="encabezado">
+        <tr>
+          <th> ID </th>
+          <th> ID.Tr </th>
+          <th> Tipo </th>
+          <th> Fecha </th>
+          <th> Tipo </th>
+          <th> Estado </th>
+          <th> Total </th>
+          <th> Acciones </th>
+        </tr>
+      </thead>
 
-    <tbody class="tablaBody">
-      @for (pedido of pedidosFiltrados(); track $index){
-      <tr>
-        <td>{{ pedido.pedidoId }}</td>
-        <td>{{ pedido.transaccion.transaccion_id }}</td>
-        <td>{{ pedido.transaccion.tipo }}</td>
-        <td>{{ pedido.transaccion.fecha }}</td>
-        <td [class.tipo-compra]="pedido.tipo === 'COMPRA'" [class.tipo-venta]="pedido.tipo === 'VENTA'">
-          {{ pedido.tipo }}
-        </td>
-        <td>{{ pedido.estado }}</td>
-        <td [class.monto-compra]="pedido.tipo === 'COMPRA'" [class.monto-venta]="pedido.tipo === 'VENTA'">
-          {{ pedido.tipo === 'COMPRA' ? ('-' + pedido.transaccion.monto) : pedido.transaccion.monto }}
-        </td>
-        <td class="celda-acciones">
-          <div class="botones">
-            <button class="btnDetalle" [routerLink]="['/menu/pedidos/form', pedido.pedidoId]">
-              Detalle
-            </button>
+      <tbody class="tablaBody">
+        @for (pedido of pedidosFiltrados(); track $index){
+        <tr>
+          <td>{{ pedido.pedidoId }}</td>
+          <td>{{ pedido.transaccion.transaccion_id }}</td>
+          <td>{{ pedido.transaccion.tipo }}</td>
+          <td>{{ pedido.transaccion.fecha }}</td>
+          <td [class.tipo-compra]="pedido.tipo === 'COMPRA'" [class.tipo-venta]="pedido.tipo === 'VENTA'">
+            {{ pedido.tipo }}
+          </td>
+          <td>{{ pedido.estado }}</td>
+          <td [class.monto-compra]="pedido.tipo === 'COMPRA'" [class.monto-venta]="pedido.tipo === 'VENTA'">
+            {{ pedido.tipo === 'COMPRA' ? ('-' + pedido.transaccion.monto) : pedido.transaccion.monto }}
+          </td>
+          <td class="celda-acciones">
+            <div class="botones">
+              <button class="btnDetalle" [routerLink]="['/menu/pedidos/form', pedido.pedidoId]">
+                Detalle
+              </button>
 
-            <button class="btnEliminar" (click)="deletePedido(pedido.pedidoId)"
-              [disabled]="pedido.estado === 'FINALIZADO'">
-              Eliminar
-            </button>
+              <button class="btnEliminar" (click)="deletePedido(pedido.pedidoId)"
+                [disabled]="pedido.estado === 'FINALIZADO'">
+                Eliminar
+              </button>
 
-            <button class="btnEditar" (click)="updatePedido(pedido)" [disabled]="pedido.estado === 'FINALIZADO'">
-              Editar
-            </button>
-          </div>
-        </td>
-      </tr>
-      } @empty {
-      <tr>
-        <td colspan="4" class="sin-registros">
-          No se encontraron registros
-        </td>
-      </tr>
-      }
-    </tbody>
-
-  </table>
+              <button class="btnEditar" (click)="updatePedido(pedido)" [disabled]="pedido.estado === 'FINALIZADO'">
+                Editar
+              </button>
+            </div>
+          </td>
+        </tr>
+        } @empty {
+        <tr>
+          <td colspan="4" class="sin-registros">
+            No se encontraron registros
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 </div>
