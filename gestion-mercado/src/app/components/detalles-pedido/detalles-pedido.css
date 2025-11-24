@@ -220,3 +220,68 @@ section.detalles .tablaBody td.botones {
   align-items: center;
   margin-top: 1rem;
 }
+ /* detalle pedido pa celu */
+ @media (max-width: 901px) {
+  section.detalles {
+    width: 100% !important;
+    padding: 1.2rem !important;
+    box-sizing: border-box;
+  }
+
+  section.detalles h2,
+  section.detalles h3 {
+    text-align: center;
+    font-size: 1.2rem;
+  }
+
+  section.detalles form {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  section.detalles .campo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  section.detalles select,
+  section.detalles input {
+    width: 100% !important;
+  }
+
+  section.detalles .acciones-form {
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+    margin-top: .5rem;
+    width: 100%;
+  }
+
+  section.detalles .acciones-form button {
+    width: 100%;
+  }
+
+  section.detalles .botones {
+    display: flex;
+    gap: .5rem;
+    margin-top: .5rem;
+  }
+
+  section.detalles .btnEditar,
+  section.detalles .btnEliminar {
+    width: 100%;
+  }
+
+  /* TOTAL */
+  section.detalles .total-pedido {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+  }
+}

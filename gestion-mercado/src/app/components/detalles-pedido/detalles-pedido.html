@@ -20,8 +20,8 @@
 
     @if (pedido.tipo === 'COMPRA') {
       <div class="campo">
-        <label for="costoUnitarioCompra">Costo Unitario:</label>
-        <input type="number" id="costoUnitarioCompra" [(ngModel)]="nuevoDetalle.costoUnitario" name="costoUnitarioCompra">
+        <label for="costoUnitario">Costo Unitario:</label>
+        <input type="number" id="costoUnitario" [(ngModel)]="nuevoDetalle.costoUnitario" name="costoUnitario">
       </div>
     }
 
@@ -46,52 +46,53 @@
     <hr>
     <h3>Detalles Cargados ({{ detallesPedido().length }})</h3>
 
-    <table class="tabla">
-      <thead class="encabezado">
-        <tr>
-          <th>ID</th>
-          <th>Cod.Prod</th>
-          <th>Nombre</th>
-          <th>Cantidad</th>
-          <th>Costo Unit</th>
-          <th>Subtotal</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-
-      <tbody class="tablaBody">
-        @for (detalle of detallesPedido(); track detalle.producto_id) {
+    <div class="tabla-contenedor">
+      <table class="tabla">
+        <thead class="encabezado">
           <tr>
-            <td>{{ detalle.detallePedidoId }}</td>
-            <td>{{ detalle.producto_id }}</td>
-            <td>{{ detalle.producto_nombre }}</td>
-            <td>{{ detalle.cantidad }}</td>
-            <td>${{ detalle.costoUnitario }}</td>
-            <td>{{ detalle.subtotal }}</td>
-            <td class="botones">
-              <button
-                class="btnEditar"
-                (click)="editarDetalle(detalle)"
-                [disabled]="pedido.estado === 'FINALIZADO'">
-                Editar
-              </button>
-              <button
-                class="btnEliminar"
-                (click)="eliminarDetalle(detalle.detallePedidoId)"
-                [disabled]="pedido.estado === 'FINALIZADO'">
-                Eliminar
-              </button>
-            </td>
+            <th>ID</th>
+            <th>Cod.Prod</th>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Costo Unit</th>
+            <th>Subtotal</th>
+            <th>Acciones</th>
           </tr>
-        }
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody class="tablaBody">
+          @for (detalle of detallesPedido(); track detalle.producto_id) {
+            <tr>
+              <td>{{ detalle.detallePedidoId }}</td>
+              <td>{{ detalle.producto_id }}</td>
+              <td>{{ detalle.producto_nombre }}</td>
+              <td>{{ detalle.cantidad }}</td>
+              <td>${{ detalle.costoUnitario }}</td>
+              <td>{{ detalle.subtotal }}</td>
+              <td class="botones">
+                <button
+                  class="btnEditar"
+                  (click)="editarDetalle(detalle)"
+                  [disabled]="pedido.estado === 'FINALIZADO'">
+                  Editar
+                </button>
+                <button
+                  class="btnEliminar"
+                  (click)="eliminarDetalle(detalle.detallePedidoId)"
+                  [disabled]="pedido.estado === 'FINALIZADO'">
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
 
     <div class="total-pedido">
       <p>Total a Pagar:</p>
       <span>${{ total() }}</span>
     </div>
   }
-
 </section>
 

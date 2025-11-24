@@ -81,18 +81,9 @@ form {
 }
 
 /*para que si los forms son inválidos no se rompa y se agregue margen o algo D:*/
-form.ng-untouched,
-form.ng-pristine,
-form.ng-invalid,
-input.ng-untouched,
-input.ng-pristine,
-input.ng-invalid,
-textarea.ng-untouched,
-textarea.ng-pristine,
-textarea.ng-invalid {
-    margin: 0 !important;
-    padding: 0;
-    box-sizing: border-box;
+form[class*="ng-"] {
+    margin-left: 0 !important;
+    box-sizing: border-box !important;
 }
 
 .campo {
@@ -100,6 +91,7 @@ textarea.ng-invalid {
   flex-direction: column;
   width: 25%;
 }
+
 .error {
   background-color: var(--rojo-semitrans);
   color: var(--rojo-clarito);

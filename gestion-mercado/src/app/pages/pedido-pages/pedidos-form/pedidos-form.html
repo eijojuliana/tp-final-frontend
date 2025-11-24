@@ -1,107 +1,113 @@
 <main>
   <section class="form">
-    <h2>Pedido</h2>
+    <div class="form-toggle" (click)="toggleForm()">
+      <h2>Pedido</h2>
+      <span class="arrow">{{ formCollapsed() ? '▼' : '▲' }}</span>
+    </div>
 
-    <form [formGroup]="form" (ngSubmit)="savePedido()">
+    <div class="form-wrapper" [class.collapsed]="formCollapsed()">
+      <h2 class="form-title">Pedido</h2>
 
-      <div class="campo">
-        <label>Tipo de Pedido: </label>
-        <select formControlName="tipoPedido">
-          <option [ngValue]="null" disabled selected>Seleccione el Tipo</option>
-          <option value="COMPRA">COMPRA</option>
-          <option value="VENTA">VENTA</option>
-        </select>
-        @if (form.get('tipoPedido')?.invalid && form.get('tipoPedido')?.touched) {
-          <span class="error">El tipo de pedido es requerido.</span>
-        }
-      </div>
-
-
-      <div class="campo">
-        <label>Método de Pago: </label>
-        <select formControlName="tipoTransaccion">
-          <option [ngValue]="null" disabled selected>Seleccione el Método</option>
-          <option value="EFECTIVO">EFECTIVO</option>
-          <option value="DEBITO">DÉBITO</option>
-        </select>
-        @if (form.get('tipoTransaccion')?.invalid && form.get('tipoTransaccion')?.touched) {
-          <span class="error">El método de pago es requerido.</span>
-        }
-      </div>
-
-
-      @if (form.get('tipoPedido')?.value === 'VENTA') {
-        <div class="campo">
-          <label>Cliente:</label>
-          <select formControlName="origen_id">
-            <option [ngValue]="null" disabled selected>Seleccione un cliente</option>
-            @for (cliente of clientes(); track $index) {
-              <option [ngValue]="cliente.clienteId">
-                {{ cliente.nombre }} {{ cliente.dni }}
-              </option>
-            }
-          </select>
-        </div>
-
-        @if (form.get('tipoTransaccion')?.value === 'DEBITO') {
+      <div class="form-content" [class.collapsed]="formCollapsed()">
+        <form [formGroup]="form" (ngSubmit)="savePedido()">
           <div class="campo">
-            <label>Cuenta bancaria:</label>
-            <select formControlName="cuentaBancaria">
-              <option [ngValue]="null" disabled selected>Seleccione una cuenta</option>
-              @for (cuenta of cuentasBancarias(); track $index) {
-                <option [ngValue]="cuenta.cuentaBancariaId">
-                  CBU: {{ cuenta.cbu }} — Saldo: {{ cuenta.saldo }}
-                </option>
-              }
+            <label>Tipo de Pedido: </label>
+            <select formControlName="tipoPedido">
+              <option [ngValue]="null" disabled selected>Seleccione el Tipo</option>
+              <option value="COMPRA">COMPRA</option>
+              <option value="VENTA">VENTA</option>
             </select>
-          </div>
-        }
-      }
-
-      @if (form.get('tipoPedido')?.value === 'COMPRA') {
-        <div class="campo">
-          <label>Proveedor:</label>
-          <select formControlName="destino_id">
-            <option [ngValue]="null" disabled selected>Seleccione un proveedor</option>
-            @for (prov of proveedores(); track $index) {
-              <option [ngValue]="prov.proveedorId">
-                {{ prov.nombre }}
-              </option>
+            @if (form.get('tipoPedido')?.invalid && form.get('tipoPedido')?.touched) {
+              <span class="error">El tipo de pedido es requerido.</span>
             }
-          </select>
-        </div>
-
-        @if (form.get('tipoTransaccion')?.value === 'DEBITO') {
-          <div class="campo">
-            <label>Cuenta bancaria de la Tienda:</label>
-            <select formControlName="cuentaBancaria">
-              <option [ngValue]="null" disabled selected>Seleccione una cuenta</option>
-              @for (cuenta of cuentasBancarias(); track $index) {
-                <option [ngValue]="cuenta.cuentaBancariaId">
-                  CBU: {{ cuenta.cbu }} — Saldo: {{ cuenta.saldo }}
-                </option>
-              }
-            </select>
           </div>
-        }
-      }
+
+          <div class="campo">
+            <label>Método de Pago: </label>
+            <select formControlName="tipoTransaccion">
+              <option [ngValue]="null" disabled selected>Seleccione el Método</option>
+              <option value="EFECTIVO">EFECTIVO</option>
+              <option value="DEBITO">DÉBITO</option>
+            </select>
+            @if (form.get('tipoTransaccion')?.invalid && form.get('tipoTransaccion')?.touched) {
+              <span class="error">El método de pago es requerido.</span>
+            }
+          </div>
+
+          @if (form.get('tipoPedido')?.value === 'VENTA') {
+            <div class="campo">
+              <label>Cliente:</label>
+              <select formControlName="origen_id">
+                <option [ngValue]="null" disabled selected>Seleccione un cliente</option>
+                @for (cliente of clientes(); track $index) {
+                  <option [ngValue]="cliente.clienteId">
+                    {{ cliente.nombre }} {{ cliente.dni }}
+                  </option>
+                }
+              </select>
+            </div>
+
+            @if (form.get('tipoTransaccion')?.value === 'DEBITO') {
+              <div class="campo">
+                <label>Cuenta bancaria:</label>
+                <select formControlName="cuentaBancaria">
+                  <option [ngValue]="null" disabled selected>Seleccione una cuenta</option>
+                  @for (cuenta of cuentasBancarias(); track $index) {
+                    <option [ngValue]="cuenta.cuentaBancariaId">
+                      CBU: {{ cuenta.cbu }} — Saldo: {{ cuenta.saldo }}
+                    </option>
+                  }
+                </select>
+              </div>
+            }
+          }
+
+          @if (form.get('tipoPedido')?.value === 'COMPRA') {
+            <div class="campo">
+              <label>Proveedor:</label>
+              <select formControlName="destino_id">
+                <option [ngValue]="null" disabled selected>Seleccione un proveedor</option>
+                @for (prov of proveedores(); track $index) {
+                  <option [ngValue]="prov.proveedorId">
+                    {{ prov.nombre }}
+                  </option>
+                }
+              </select>
+            </div>
+
+            @if (form.get('tipoTransaccion')?.value === 'DEBITO') {
+              <div class="campo">
+                <label>Cuenta bancaria de la Tienda:</label>
+                <select formControlName="cuentaBancaria">
+                  <option [ngValue]="null" disabled selected>Seleccione una cuenta</option>
+                  @for (cuenta of cuentasBancarias(); track $index) {
+                    <option [ngValue]="cuenta.cuentaBancariaId">
+                      CBU: {{ cuenta.cbu }} — Saldo: {{ cuenta.saldo }}
+                    </option>
+                  }
+                </select>
+              </div>
+            }
+          }
 
 
-      <div class="botones">
-        <button type="submit" [disabled]="form.invalid || (isEditMode() && pedidoToEdit?.estado === 'FINALIZADO')">
-          {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
-        </button>
+          <div class="botones">
+            <button type="submit" [disabled]="form.invalid || (isEditMode() && pedidoToEdit?.estado === 'FINALIZADO')">
+              {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
+            </button>
 
-        @if (isEditMode()) {
-          <button class="btn" type="button" (click)="cancelEdit()">Cancelar</button>
-        }
+            @if (isEditMode()) {
+              <button class="btn" type="button" (click)="cancelEdit()">Cancelar</button>
+            }
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </section>
 
   <section class="detalles">
     @if (pedidoCreado(); as pedido) {
-      <h2>Detalles del Pedido nro {{ pedido.pedidoId }}</h2>
+      <h2>Detalles del Pedido N° {{ pedido.pedidoId }}</h2>
       <app-detalles-pedido [pedido]="pedido"></app-detalles-pedido>
 
       <div class="botones-detalles">

@@ -196,4 +196,13 @@ export class PedidosForm {
       });
     }
   }
+
+  // CONFIG PARA QUE MENU DESPLEGABLE NE CELULAR
+  formCollapsed = signal(true);
+
+  toggleForm() {
+    if (window.innerWidth <= 1000) {
+      this.formCollapsed.update(v => !v);
+    }
+  }
 }
