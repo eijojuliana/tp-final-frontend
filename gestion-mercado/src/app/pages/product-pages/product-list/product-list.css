@@ -25,11 +25,20 @@ h2 {
 .filter-search-container {
   margin-bottom: 2rem;
   display: flex;
-  gap: 1rem;
   align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   flex-wrap: wrap;
-  max-width: 600px;
+  max-width: 900px;
   width: 100%;
+}
+
+
+.filters-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  flex: 1;                         /* ocupa todo lo que pueda */
 }
 
 /* Select de filtros */
@@ -83,13 +92,7 @@ input[type="text"]:focus {
   box-shadow: 0 0 0 3px rgba(255, 154, 158, 0.06);
 }
 
-/* Contenedor del botón agregar */
-.botones {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 2.5rem;
-}
+
 
 /* Botón agregar */
 .btnAgregar {
