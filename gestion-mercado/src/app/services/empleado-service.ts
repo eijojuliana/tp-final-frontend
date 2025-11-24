@@ -25,13 +25,13 @@ export class EmpleadoService {
     )
   }
 
-  agregar(empleado:NewEmpleado): Observable<Empleado>{
+  post(empleado:NewEmpleado): Observable<Empleado>{
     return this.httpClient.post<Empleado>(this.apiurl,empleado).pipe(
       tap( () => this.load() )
     );
   }
 
-  eliminar(id:number): Observable<Empleado>{
+  delete(id:number): Observable<Empleado>{
     return this.httpClient.delete<Empleado>(`${this.apiurl}/${id}`).pipe(
       tap(
         () => this.state.update(currentEmpleado =>

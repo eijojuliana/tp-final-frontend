@@ -25,13 +25,13 @@ export class ClienteService {
     );
   }
 
-  agregar(cliente:NewCliente): Observable<Cliente>{
+  post(cliente:NewCliente): Observable<Cliente>{
     return this.httpClient.post<Cliente>(this.apiurls,cliente).pipe(
       tap( () => this.load() )
     );
   }
 
-  eliminar(id:number) : Observable<Cliente>{
+  delete(id:number) : Observable<Cliente>{
     return this.httpClient.delete<Cliente>(`${this.apiurls}/${id}`).pipe(
       tap(
         () => this.state.update(currentCliente =>
@@ -41,7 +41,7 @@ export class ClienteService {
     );
   }
 
-  modificar(cliente:Cliente): Observable<Cliente>{
+  update(cliente:Cliente): Observable<Cliente>{
     return this.httpClient.put<Cliente>(`${this.apiurls}/${cliente.clienteId}`,cliente).pipe(
       tap( () => this.load() )
     );

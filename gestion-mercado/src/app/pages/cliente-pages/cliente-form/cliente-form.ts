@@ -56,7 +56,7 @@ export class ClienteForm {
     if (this.isEditMode() && this.clienteToEdit) {
       const updateCliente: Cliente = {...this.clienteToEdit, ...formValue};
 
-      this.clienteService.modificar(updateCliente).subscribe({
+      this.clienteService.update(updateCliente).subscribe({
         next: () => {
           this.toast.success("Persona actualizada correctamente");
           console.log("Persona actualizada");
@@ -65,7 +65,7 @@ export class ClienteForm {
         }
       });
     } else {
-      this.clienteService.agregar(formValue).subscribe({
+      this.clienteService.post(formValue).subscribe({
         next: () => {
           this.toast.success("Persona agregada correctamente");
           this.form.reset();

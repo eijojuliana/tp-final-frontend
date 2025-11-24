@@ -57,7 +57,7 @@ export class TiendasForm {
         next: () => {
           this.toast.success("Tienda actualizada correctamente");
           console.log('Tienda Actualizada');
-          this.tiendaService.limpiarTiendaToEdit();
+          this.tiendaService.clearTiendaToEdit();
         }
       });
     } else {
@@ -72,6 +72,6 @@ export class TiendasForm {
   }
 
   cancelarUpdate() {
-    this.tiendaService.limpiarTiendaToEdit();
+    this.tiendaService.clearTiendaToEdit();
   }
 }

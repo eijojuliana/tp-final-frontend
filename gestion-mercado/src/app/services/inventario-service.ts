@@ -47,11 +47,11 @@ export class InventarioService {
   }
 
   // MÉTODOS DE DSP JE
-  seleccionarInventarioToEdit(inventario:Inventario) {
+  selectInventarioToEdit(inventario:Inventario) {
     this.inventarioToEditState.set(inventario);
   }
 
-  limpiarInventarioToEdit() {
+  clearInventarioToEdit() {
     this.inventarioToEditState.set(null);
   }
 }

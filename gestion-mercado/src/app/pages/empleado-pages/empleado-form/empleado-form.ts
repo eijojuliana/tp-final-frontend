@@ -71,7 +71,7 @@ export class EmpleadoForm {
       }
     });
   } else {
-    this.empleadoService.agregar(formValue).subscribe({
+    this.empleadoService.post(formValue).subscribe({
       next: () => {
         this.toast.success("Empleado registrado correctamente");
         this.form.reset();

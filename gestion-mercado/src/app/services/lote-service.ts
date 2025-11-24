@@ -47,11 +47,11 @@ export class LoteService {
   }
 
   // METODOS PARA EDITAR DESPUES
-  seleccionarLoteToEdit(lote:Lote) {
+  selectLoteToEdit(lote:Lote) {
     this.loteToEditState.set(lote);
   }
 
-  limpiarLoteToEdit() {
+  clearLoteToEdit() {
     this.loteToEditState.set(null);
   }
 }

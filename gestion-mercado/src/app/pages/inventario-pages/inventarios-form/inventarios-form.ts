@@ -67,14 +67,14 @@ export class InventariosForm {
     this.inventarioService.update(updated).subscribe({
       next: () => {
         this.toast.success("Inventario actualizado correctamente");
-        this.inventarioService.limpiarInventarioToEdit();
+        this.inventarioService.clearInventarioToEdit();
         this.router.navigate(['/menu/inventarios']);
       }
     });
   }
 
   cancelarUpdate() {
-    this.inventarioService.limpiarInventarioToEdit();
+    this.inventarioService.clearInventarioToEdit();
     this.router.navigate(['/menu/inventarios']);
   }
 }

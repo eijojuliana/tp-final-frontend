@@ -77,7 +77,7 @@ export class LotesForm {
       this.loteService.update({ ...this.loteToEdit, ...dto }).subscribe({
         next: () => {
           this.toast.success("Lote actualizado correctamente");
-          this.loteService.limpiarLoteToEdit();
+          this.loteService.clearLoteToEdit();
           this.router.navigate(['/menu/lotes']);
         }
       });
@@ -92,7 +92,7 @@ export class LotesForm {
     }
   }
   cancelEdit() {
-    this.loteService.limpiarLoteToEdit();
+    this.loteService.clearLoteToEdit();
     this.router.navigate(['/menu/lotes']);
   }
 }

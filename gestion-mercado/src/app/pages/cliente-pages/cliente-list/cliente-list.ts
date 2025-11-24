@@ -42,7 +42,7 @@ export class ClienteList {
 
   eliminarCliente(id: number) {
     if (confirm("¿Desea eliminar este cliente?")) {
-      this.service.eliminar(id).subscribe({
+      this.service.delete(id).subscribe({
         next: () => {
           this.toast.success("Cliente eliminado correctamente");
           console.log(`Cliente con el id: ${id} eliminado`);

@@ -55,11 +55,11 @@ export class TiendaService {
     );
   }
 
-  seleccionarTiendaToEdit(tienda:Tienda) {
+  selectTiendaToEdit(tienda:Tienda) {
     this.tiendaToEditState.set(tienda);
   }
 
-  limpiarTiendaToEdit() {
+  clearTiendaToEdit() {
     this.tiendaToEditState.set(null);
   }
 

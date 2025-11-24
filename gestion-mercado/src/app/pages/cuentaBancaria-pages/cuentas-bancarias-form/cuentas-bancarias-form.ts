@@ -73,6 +73,6 @@ export class CuentasBancariasForm {
 
 
   cancelarUpdate() {
-    this.cuentaBancariaService.limpiarCuentaBancariaToEdit();
+    this.cuentaBancariaService.clearCuentaBancariaToEdit();
   }
 }

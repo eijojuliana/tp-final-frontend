@@ -43,7 +43,7 @@ export class EmpleadoList {
 
   eliminarEmpleado(id:number){
     if(confirm("Desea eliminar este empleado?")){
-      this.service.eliminar(id).subscribe({
+      this.service.delete(id).subscribe({
         next: () => {
           this.toast.success("Empleado eliminado correctamente");
           console.log(`Empleado con id ${id} eliminado.`);

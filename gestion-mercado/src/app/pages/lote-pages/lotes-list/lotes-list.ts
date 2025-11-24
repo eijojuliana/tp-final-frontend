@@ -58,7 +58,7 @@ export class LotesList {
   }
 
   updateLote(lote:Lote) {
-    this.loteService.seleccionarLoteToEdit(lote);
+    this.loteService.selectLoteToEdit(lote);
     this.router.navigate(['/menu/lotes/form']);
   }
 }

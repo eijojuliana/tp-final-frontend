@@ -46,11 +46,11 @@ export class CuentaBancariaService {
     );
   }
 
-  seleccionarCuentaBancariaToEdit(cuentaBancaria:CuentaBancaria) {
+  selectCuentaBancariaToEdit(cuentaBancaria:CuentaBancaria) {
     this.cuentaBancariaToEditState.set(cuentaBancaria);
   }
 
-  limpiarCuentaBancariaToEdit() {
+  clearCuentaBancariaToEdit() {
     this.cuentaBancariaToEditState.set(null);
   }
 }

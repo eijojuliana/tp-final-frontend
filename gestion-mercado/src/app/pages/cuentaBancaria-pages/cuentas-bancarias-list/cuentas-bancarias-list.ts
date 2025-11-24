@@ -53,7 +53,7 @@ export class CuentasBancariasList {
   }
 
   updateCuentaBancaria(cuentaBancaria:CuentaBancaria) {
-    this.cuentaBancariaService.seleccionarCuentaBancariaToEdit(cuentaBancaria);
+    this.cuentaBancariaService.selectCuentaBancariaToEdit(cuentaBancaria);
     this.router.navigate(['menu/cuentas-bancarias/form']);
   }
 }

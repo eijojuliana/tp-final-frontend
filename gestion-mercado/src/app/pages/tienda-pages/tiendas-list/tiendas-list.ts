@@ -28,6 +28,6 @@ export class TiendasList {
   }
 
   updateTienda(tienda:Tienda) {
-    this.tiendaService.seleccionarTiendaToEdit(tienda);
+    this.tiendaService.selectTiendaToEdit(tienda);
   }
 }

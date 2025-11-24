@@ -69,7 +69,7 @@ export class InventariosList {
   }
 
   updateInventario(inventario:Inventario) {
-    this.inventarioService.seleccionarInventarioToEdit(inventario);
+    this.inventarioService.selectInventarioToEdit(inventario);
     this.router.navigate(['/menu/inventarios/form']);
   }
 }

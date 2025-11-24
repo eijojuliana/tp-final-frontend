@@ -77,7 +77,7 @@ export class DetallesPedido {
       });
     } else {
       // MODO CREACIÓN
-      this.detallePedidoService.agregarDetalle(this.pedido.pedidoId, dto).subscribe(() => {
+      this.detallePedidoService.post(this.pedido.pedidoId, dto).subscribe(() => {
         console.log('Detalle agregado');
         this.toast.success("Detalle agregado correctamente");
         this.obtenerDetallesDelPedido(this.pedido.pedidoId);
@@ -87,14 +87,14 @@ export class DetallesPedido {
   }
 
   obtenerDetallesDelPedido(pedidoId: number){
-    this.detallePedidoService.getDetallesByPedidoId(pedidoId).subscribe(
+    this.detallePedidoService.load(pedidoId).subscribe(
       (detalles) => {
         this.detallesPedido.set(detalles); // Actualiza el signal
       }
     );
   }
   eliminarDetalle(detalleId: number){
-    this.detallePedidoService.eliminarDetalle(detalleId).subscribe( () => {
+    this.detallePedidoService.delete(detalleId).subscribe( () => {
         console.log('Detalle de pedido eliminado: ' + detalleId);
         // Recarga la lista para reflejar el cambio
         this.obtenerDetallesDelPedido(this.pedido.pedidoId);
