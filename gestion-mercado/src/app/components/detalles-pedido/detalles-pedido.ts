@@ -48,7 +48,15 @@ export class DetallesPedido {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['pedido'] && this.pedido && this.pedido.pedidoId) {
-      this.obtenerDetallesDelPedido(this.pedido.pedidoId);
+      if (!this.pedido) {
+        this.detallesPedido.set([]);
+        this.cancelarEdicionDetalle();
+        return;
+      }
+      if (this.pedido && this.pedido.pedidoId) {
+        this.obtenerDetallesDelPedido(this.pedido.pedidoId);
+        this.cancelarEdicionDetalle();
+      }
     }
   }
 
