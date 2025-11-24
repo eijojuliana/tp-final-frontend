@@ -3,7 +3,7 @@
     <h2>Editar inventario</h2>
 
     <form [formGroup]="form" (ngSubmit)="saveInventario()">
-      <div class = "campo">
+      <div class="campo">
         <label>Producto:</label>
         <select formControlName="producto_id">
           <option [ngValue]="0" disabled selected>Seleccione un producto</option>
@@ -15,27 +15,36 @@
           }
         </select>
         @if (form.get('producto_id')?.invalid && form.get('producto_id')?.touched) {
-          <span class = "error">El producto es requerido.</span>
+          <span class="error">El producto es requerido.</span>
         }
       </div>
+@if (
+  loteService.lotes().length > 0 &&
+  form.value.producto_id &&
+  !loteService.hasLotesByProducto(toNumber(form.value.producto_id))
+) {
+  <span class="error">
+    Este producto no tiene lotes, no se puede modificar el inventario.
+  </span>
+}
 
 
-      <div class = "campo">
+
+      <div class="campo">
         <label>Stock Mínimo:</label>
-        <input type="number" formControlName="stockMin" min = 0>
+        <input type="number" formControlName="stockMin" min="0">
         @if (form.get('stockMin')?.invalid && form.get('stockMin')?.touched) {
-          <span class = "error">El stock mínimo es requerido.</span>
+          <span class="error">El stock mínimo es requerido.</span>
         }
       </div>
 
-      <div class = "campo">
+      <div class="campo">
         <label>Precio Venta:</label>
         <input type="number" formControlName="precioVenta" step="0.01">
         @if (form.get('precioVenta')?.invalid && form.get('precioVenta')?.touched) {
-          <span class = "error">El precio de venta debe ser superior a cero (0)</span>
+          <span class="error">El precio de venta debe ser superior a cero (0)</span>
         }
       </div>
-
 
       <div class="botones">
         <button type="submit" [disabled]="form.invalid">
