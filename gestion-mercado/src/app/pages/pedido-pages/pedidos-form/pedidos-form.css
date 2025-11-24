@@ -420,6 +420,11 @@ section.detalles .botones-detalles button.btn-finalizar:hover {
 
 /* --- menu detalles de pedido para el celular tonto --- */
 @media (max-width: 901px) {
+
+  main {
+    padding: 0.5rem;
+  }
+
   section.detalles {
     width: 100% !important;
     padding: 1.5rem;
@@ -427,8 +432,9 @@ section.detalles .botones-detalles button.btn-finalizar:hover {
     margin-top: 1.5rem;
   }
 
+
   section.detalles h2 {
-    font-size: 1.6rem;
+    font-size: 2rem;
     text-align: center;
     margin-bottom: 1rem;
   }
