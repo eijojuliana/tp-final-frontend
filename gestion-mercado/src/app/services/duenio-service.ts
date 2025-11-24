@@ -17,11 +17,9 @@ export class DuenioService {
   private duenioToEditState=signal<Duenio | null>(null);
   public duenioToEdit=this.duenioToEditState.asReadonly();
 
-
   constructor(private http: HttpClient){
     this.load();
   }
-
 
    load() {
     this.http.get<Duenio[]>(this.apiUrl).subscribe(
@@ -62,4 +60,8 @@ export class DuenioService {
     this.duenioToEditState.set(null);
   }
 
+  existeDuenio(): boolean {
+    const lista = this.duenios();
+    return lista.length > 0;
+  }
 }

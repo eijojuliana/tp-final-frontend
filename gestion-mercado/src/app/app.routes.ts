@@ -1,3 +1,4 @@
+import { setupGuard } from './auth/guard/setup.guard';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginLayout } from './auth/login-layout/login-layout';
 import { NgModule } from '@angular/core';
@@ -30,7 +31,6 @@ import { ProveedoresForm } from './pages/proveedor-pages/proveedores-form/provee
 import { authGuard } from './auth/guard/auth.guard';
 import { AccesoDenegado } from './pages/acceso-denegado-pages/acceso-denegado/acceso-denegado';
 import { YaLogueado } from './pages/ya-logueado-page/ya-logueado/ya-logueado';
-
 export const routes: Routes = [
   // Ruta por defecto que dirige a /login
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -41,7 +41,7 @@ export const routes: Routes = [
   { path: 'ya-logueado', component: YaLogueado,canActivate:[authGuard]},
 
   // Ruta para página principal
-  { path: 'menu', component: MenuPage, canActivate:[authGuard]},
+  { path: 'menu', component: MenuPage, canActivate:[authGuard, setupGuard]},
 
   // Rutas productos
   { path: 'menu/productos', component: ProductList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
