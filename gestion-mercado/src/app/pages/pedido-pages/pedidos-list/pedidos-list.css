@@ -1,1 +1,21 @@
 @import '../../../styles/tabla-style.scss';
+
+.tablaBody td.tipo-compra {
+  color: #d93025;
+  font-weight: bold;
+}
+
+.tablaBody td.tipo-venta {
+  color: #0f9d58;
+  font-weight: bold;
+}
+
+.tablaBody td.monto-compra {
+  color: #d93025;
+  font-weight: bold;
+}
+
+.tablaBody td.monto-venta {
+  color: #0f9d58; 
+  font-weight: bold;
+}
