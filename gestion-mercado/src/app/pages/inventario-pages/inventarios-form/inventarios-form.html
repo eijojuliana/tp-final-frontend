@@ -22,7 +22,7 @@
 
       <div class = "campo">
         <label>Stock Mínimo:</label>
-        <input type="number" formControlName="stockMin">
+        <input type="number" formControlName="stockMin" min = 0>
         @if (form.get('stockMin')?.invalid && form.get('stockMin')?.touched) {
           <span class = "error">El stock mínimo es requerido.</span>
         }

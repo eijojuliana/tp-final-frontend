@@ -45,6 +45,12 @@
           <button class="btnEditar" (click)="modificarProveedor(proveedor)">Editar</button>
         </td>
       </tr>
+      } @empty {
+        <tr>
+          <td colspan="4" class="sin-registros">
+            No se encontraron registros
+          </td>
+        </tr>
       }
     </tbody>
   </table>

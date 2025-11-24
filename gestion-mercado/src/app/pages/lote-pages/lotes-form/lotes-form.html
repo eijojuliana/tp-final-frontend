@@ -22,7 +22,7 @@
 
       <div class = "campo">
         <label>Cantidad Disponible: </label>
-        <input type="number" formControlName="cantidadDisponible">
+        <input type="number" formControlName="cantidadDisponible" min = 0>
         @if (form.get('cantidadDisponible')?.invalid && form.get('cantidadDisponible')?.touched) {
           <span class = "error">El la cantidad disponible es requerida.</span>
         }
@@ -30,7 +30,7 @@
 
       <div class = "campo">
         <label>Costo Unitario: </label>
-        <input type="number" formControlName="costoUnitario">
+        <input type="number" formControlName="costoUnitario" min = 0>
         @if (form.get('costoUnitario')?.invalid && form.get('costoUnitario')?.touched) {
           <span class = "error">El costo unitario debe ser superior a 0.</span>
         }

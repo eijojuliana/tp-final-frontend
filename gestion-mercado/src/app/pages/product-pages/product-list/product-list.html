@@ -37,6 +37,12 @@
           <button type="button" class="delete" (click)="deleteProduct(product.producto_id)">Eliminar</button>
         </div>
       </li>
+    } @empty {
+      <tr>
+        <td colspan="4" class="sin-registros">
+          No se encontraron registros
+        </td>
+      </tr>
     }
   </ul>
 </div>

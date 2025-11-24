@@ -42,8 +42,13 @@
           <td>{{ transaccion.monto }}</td>
           <td>{{ transaccion.fecha }}</td>
         </tr>
+      } @empty {
+        <tr>
+          <td colspan="4" class="sin-registros">
+            No se encontraron registros
+          </td>
+        </tr>
       }
     </tbody>
-
   </table>
 </section>
