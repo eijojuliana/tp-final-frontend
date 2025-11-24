@@ -34,10 +34,10 @@ export class DetallesPedido {
   detalleEnEdicion = signal<DetallePedido | null>(null);
 
   // Objeto para el formulario
-  nuevoDetalle: { productoId: number | undefined, cantidad: number | undefined, costoUnitario: number | undefined } = {
+  nuevoDetalle: { productoId: number | undefined, cantidad: number | undefined, costoUnitarioCompra: number | undefined } = {
     productoId: undefined,
     cantidad: undefined,
-    costoUnitario: undefined
+    costoUnitarioCompra: undefined
   };
 
   ngOnInit(){
@@ -61,7 +61,7 @@ export class DetallesPedido {
     const dto = {
       productoId: this.nuevoDetalle.productoId,
       cantidad: this.nuevoDetalle.cantidad,
-      costoUnitario: Number(this.nuevoDetalle.costoUnitario)
+      costoUnitarioCompra: Number(this.nuevoDetalle.costoUnitarioCompra)
     };
 
     console.log("Enviando DTO:", dto);
@@ -81,7 +81,7 @@ export class DetallesPedido {
         console.log('Detalle agregado');
         this.toast.success("Detalle agregado correctamente");
         this.obtenerDetallesDelPedido(this.pedido.pedidoId);
-        this.nuevoDetalle = { productoId: undefined, cantidad: undefined, costoUnitario: undefined };
+        this.nuevoDetalle = { productoId: undefined, cantidad: undefined, costoUnitarioCompra: undefined };
       });
     }
   }
@@ -107,12 +107,12 @@ export class DetallesPedido {
     this.nuevoDetalle = {
       productoId: detalle.producto_id,
       cantidad: detalle.cantidad,
-      costoUnitario: detalle.costoUnitario
+      costoUnitarioCompra: detalle.costoUnitarioCompra
     };
   }
 
   cancelarEdicionDetalle() {
     this.detalleEnEdicion.set(null);
-    this.nuevoDetalle = { productoId: undefined, cantidad: undefined, costoUnitario: undefined };
+    this.nuevoDetalle = { productoId: undefined, cantidad: undefined, costoUnitarioCompra: undefined };
   }
 }
