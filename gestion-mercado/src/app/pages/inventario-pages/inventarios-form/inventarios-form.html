@@ -18,16 +18,6 @@
           <span class="error">El producto es requerido.</span>
         }
       </div>
-@if (
-  loteService.lotes().length > 0 &&
-  form.value.producto_id &&
-  !loteService.hasLotesByProducto(toNumber(form.value.producto_id))
-) {
-  <span class="error">
-    Este producto no tiene lotes, no se puede modificar el inventario.
-  </span>
-}
-
 
 
       <div class="campo">
