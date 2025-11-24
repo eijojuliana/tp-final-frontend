@@ -61,6 +61,8 @@ export class PedidoService {
   }
 
   finalizar(id: number): Observable<boolean> {
-  return this.http.put<boolean>(`${this.url}/${id}/finalizar`, {});
+  return this.http.put<boolean>(`${this.url}/${id}/finalizar`, {}).pipe(
+    tap(()=>this.load())
+  );
   }
 }
