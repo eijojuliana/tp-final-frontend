@@ -21,8 +21,8 @@ export class InventariosForm {
   private toast = inject(ToastService);
   public loteService = inject(LoteService);
   toNumber(value: any): number {
-  return Number(value);
-}
+    return Number(value);
+  }
 
   productos = this.productService.productos;
 
@@ -31,10 +31,8 @@ export class InventariosForm {
 
   form = this.fb.nonNullable.group({
     producto_id: [0, [Validators.required, Validators.min(1)]],
-    cantidad: [0, Validators.required],
     stockMin: [0, Validators.required],
-    precioVenta: [0, [Validators.required, Validators.min(0.01)]],
-    costoAdquisicion: [0, [Validators.required, Validators.min(0.01)]]
+    precioVenta: [0, [Validators.required, Validators.min(0.01)]]
   });
 
   constructor() {
@@ -46,10 +44,8 @@ export class InventariosForm {
 
         this.form.patchValue({
           producto_id: this.inventarioToEdit.producto_id,
-          cantidad: this.inventarioToEdit.cantidad,
           stockMin: this.inventarioToEdit.stockMin,
-          precioVenta: this.inventarioToEdit.precioVenta,
-          costoAdquisicion: this.inventarioToEdit.costoAdquisicion
+          precioVenta: this.inventarioToEdit.precioVenta
         });
       } else {
         this.isEditMode.set(false);
@@ -65,41 +61,30 @@ export class InventariosForm {
 
 
  saveInventario() {
-  if (this.form.invalid || !this.isEditMode() || !this.inventarioToEdit) return;
+    if (this.form.invalid || !this.isEditMode() || !this.inventarioToEdit) return;
 
-  const productoId = Number(this.form.value.producto_id);
+    const productoId = Number(this.form.value.producto_id);
 
-  // Esperar carga de lotes para evitar falso negativo
-  const lotes = this.loteService.lotes();
-  if (lotes.length === 0) return;
+    const formValue = {
+      ...this.form.getRawValue(),
+      producto_id: productoId,
+      stockMin: Number(this.form.value.stockMin),
+      precioVenta: Number(this.form.value.precioVenta)
+    };
 
-  // Validar si ese producto tiene lotes
-  if (!this.loteService.hasLotesByProducto(productoId)) {
-    this.toast.error("El producto seleccionado no tiene lotes, no se puede modificar el inventario.");
-    return;
+    const updated = { ...this.inventarioToEdit, ...formValue };
+
+    this.inventarioService.update(updated).subscribe({
+      next: () => {
+        this.toast.success("Inventario actualizado correctamente");
+        this.inventarioService.clearInventarioToEdit();
+        this.router.navigate(['/menu/inventarios']);
+      },
+      error: () => {
+        this.toast.error("Error al actualizar el inventario");
+      }
+    });
   }
-
-  const formValue = {
-    ...this.form.getRawValue(),
-    producto_id: productoId,
-    stockMin: Number(this.form.value.stockMin),
-    precioVenta: Number(this.form.value.precioVenta),
-    costoAdquisicion: Number(this.form.value.costoAdquisicion),
-  };
-
-  const updated = { ...this.inventarioToEdit, ...formValue };
-
-  this.inventarioService.update(updated).subscribe({
-    next: () => {
-      this.toast.success("Inventario actualizado correctamente");
-      this.inventarioService.clearInventarioToEdit();
-      this.router.navigate(['/menu/inventarios']);
-    },
-    error: () => {
-      this.toast.error("Error al actualizar el inventario");
-    }
-  });
-}
 
 
   cancelarUpdate() {

@@ -46,13 +46,7 @@ export class LoteService {
     );
   }
 
-hasLotesByProducto(productoId: number): boolean {
-  return this.lotes().some(l => l.producto?.producto_id === productoId);
-}
-
-
-
-  // METODOS PARA EDITAR DESPUES
+  // METODOS PARA EDITAR
   selectLoteToEdit(lote:Lote) {
     this.loteToEditState.set(lote);
   }
