@@ -113,7 +113,7 @@ input[type="text"]:focus {
   box-shadow: 0 4px 8px rgba(255, 154, 158, 0.4);
 }
 
-/* Lista de productos - Grid de 2 columnas */
+/* Lista de productos */
 ul {
   list-style: none;
   padding: 0;
@@ -128,7 +128,7 @@ ul {
   margin-right: auto;
 }
 
-/* Tarjeta de producto - CON BORDE como en la presentación */
+/* Tarjeta de producto */
 ul li {
   background-color: #f5efe0;
   border: 5px solid #ffa6c9;
@@ -251,8 +251,8 @@ ul li .card-top {
   gap: 1rem;
 }
 ul li .card-top img {
-  width: 64px;
-  height: 64px;
+  width: 150px;
+  height: auto;
   object-fit: cover;
   border-radius: 12px;
   border: 3px solid rgba(255,166,201,0.08);
