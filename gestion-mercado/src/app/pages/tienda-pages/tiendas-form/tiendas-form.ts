@@ -23,8 +23,8 @@ export class TiendasForm {
   form = this.fb.nonNullable.group({
     nombre: ['', [Validators.required]],
     direccion: ['', [Validators.required]],
-    caja: [0, [Validators.required]],
-    duenioDni: []
+    caja: [0, [Validators.required, Validators.min(0)]],
+    duenioDni: [0,[Validators.required,Validators.pattern(/^\d{6,9}$/)]]
   });
 
   constructor() {

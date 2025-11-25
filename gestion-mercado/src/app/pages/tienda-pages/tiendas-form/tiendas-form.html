@@ -19,7 +19,7 @@
       </div>
       <div class = "campo">
         <label>Caja: </label>
-        <input type="number" formControlName="caja" />
+        <input type="number" formControlName="caja" min = 0 />
         @if (form.get('caja')?.invalid && form.get('caja')?.touched) {
           <span class = "error">El monto de caja es requerido.</span>
         }
@@ -28,7 +28,7 @@
         <label>Dni del Dueño: </label>
         <input type="number" formControlName="duenioDni" min = 0/>
         @if (form.get('duenioDni')?.invalid && form.get('duenioDni')?.touched) {
-          <span class = "error">El dueño es requerido.</span>
+          <span class = "error">El DNI debe tener entre 6 a 9 dígitos.</span>
         }
       </div>
 
