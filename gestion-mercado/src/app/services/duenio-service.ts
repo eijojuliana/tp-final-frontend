@@ -1,8 +1,9 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, Injector, signal } from '@angular/core';
 import { Duenio, NewDuenio } from '../models/duenio.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { filter, first, map, Observable, tap } from 'rxjs';
 import { environment } from './ip';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root'
@@ -17,17 +18,21 @@ export class DuenioService {
   private duenioToEditState=signal<Duenio | null>(null);
   public duenioToEdit=this.duenioToEditState.asReadonly();
 
-  constructor(private http: HttpClient){
+  constructor(private http: HttpClient, private injector:Injector){
     this.load();
   }
 
-   load() {
-    this.http.get<Duenio[]>(this.apiUrl).subscribe(
-      data => {
-        console.log(data)
-        this.dueniosState.set(data)
-      }
+  public get dueniosCargados$(): Observable<boolean> {
+    return toObservable(this.duenios, { injector: this.injector }).pipe(
+      map(duenios => duenios.length >= 0),
+      first()
     );
+  }
+
+  load() {
+    this.http.get<Duenio[]>(this.apiUrl).subscribe(data => {
+      this.dueniosState.set(data);
+    });
   }
 
   post(duenio:NewDuenio) :Observable<Duenio>{
@@ -58,10 +63,5 @@ export class DuenioService {
 
   clearDuenioToEdit(){
     this.duenioToEditState.set(null);
-  }
-
-  existeDuenio(): boolean {
-    const lista = this.duenios();
-    return lista.length > 0;
   }
 }

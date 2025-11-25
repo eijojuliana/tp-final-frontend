@@ -1,8 +1,9 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, Injector, signal } from '@angular/core';
 import { NewTienda, Tienda } from '../models/tienda.model';
 import { HttpClient } from '@angular/common/http';
-import { first, map, Observable, tap } from 'rxjs';
+import { filter, first, map, Observable, tap } from 'rxjs';
 import { environment } from './ip';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
@@ -19,9 +20,16 @@ export class TiendaService {
   private existeTiendaState = signal<boolean | undefined>(undefined);
   public existeTienda = this.existeTiendaState.asReadonly();
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient, private injector:Injector) {
     this.load();
     this.checkExistencia();
+  }
+
+  public get tiendaCargada$(): Observable<boolean> {
+    return toObservable(this.existeTienda, { injector: this.injector }).pipe(
+      filter((val): val is boolean => val !== undefined),
+      first()
+    );
   }
 
   load() {
