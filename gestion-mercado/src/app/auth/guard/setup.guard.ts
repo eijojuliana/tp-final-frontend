@@ -10,16 +10,21 @@ export const setupGuard: CanActivateFn = (route, state): Observable<boolean | Ur
   const tiendaService = inject(TiendaService);
 
   return forkJoin({
-    hayTienda: tiendaService.tiendaCargada$.pipe(map(() => tiendaService.tiendas().length > 0)),
-    hayDuenios: duenioService.dueniosCargados$.pipe(map(() => duenioService.duenios().length > 0)),
+    dueniosReady: duenioService.loaded$,
+    tiendaReady: tiendaService.loaded$
   }).pipe(
-    map(({ hayTienda, hayDuenios }) => {
+    map(() => {
+      const hayTienda = tiendaService.hayTienda;
+      const hayDuenios = duenioService.hayDuenios;
+
       if (hayTienda) {
         return true;
       }
+
       if (!hayDuenios) {
         return router.parseUrl('/menu/duenios/form');
       }
+
       return router.parseUrl('/menu/tienda');
     })
   );

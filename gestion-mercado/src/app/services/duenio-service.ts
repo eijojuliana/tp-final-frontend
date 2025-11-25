@@ -18,21 +18,30 @@ export class DuenioService {
   private duenioToEditState=signal<Duenio | null>(null);
   public duenioToEdit=this.duenioToEditState.asReadonly();
 
+  private loadedState = signal<boolean>(false);
+
   constructor(private http: HttpClient, private injector:Injector){
     this.load();
   }
 
-  public get dueniosCargados$(): Observable<boolean> {
-    return toObservable(this.duenios, { injector: this.injector }).pipe(
-      map(duenios => duenios.length >= 0),
+load(): void {
+    this.http.get<Duenio[]>(this.apiUrl).pipe(
+      tap(data => {
+        this.dueniosState.set(data);
+        this.loadedState.set(true);
+      })
+    ).subscribe();
+  }
+
+  public get loaded$(): Observable<boolean> {
+    return toObservable(this.loadedState, { injector: this.injector }).pipe(
+      filter(isLoaded => isLoaded === true),
       first()
     );
   }
 
-  load() {
-    this.http.get<Duenio[]>(this.apiUrl).subscribe(data => {
-      this.dueniosState.set(data);
-    });
+  public get hayDuenios(): boolean {
+    return this.duenios().length > 0;
   }
 
   post(duenio:NewDuenio) :Observable<Duenio>{

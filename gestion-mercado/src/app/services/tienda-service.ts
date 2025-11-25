@@ -20,23 +20,32 @@ export class TiendaService {
   private existeTiendaState = signal<boolean | undefined>(undefined);
   public existeTienda = this.existeTiendaState.asReadonly();
 
+  private loadedState = signal<boolean>(false);
+
   constructor(private http:HttpClient, private injector:Injector) {
     this.load();
     this.checkExistencia();
   }
 
-  public get tiendaCargada$(): Observable<boolean> {
-    return toObservable(this.existeTienda, { injector: this.injector }).pipe(
-      filter((val): val is boolean => val !== undefined),
-      first()
-    );
+  load(): void {
+    this.http.get<Tienda[]>(this.url).pipe(
+      tap(data => {
+        this.tiendaState.set(data);
+        this.existeTiendaState.set(data.length > 0);
+        this.loadedState.set(true);
+      })
+    ).subscribe();
   }
 
-  load() {
-    this.http.get<Tienda[]>(this.url).subscribe(data => {
-      this.tiendaState.set(data);
-      this.existeTiendaState.set(data.length > 0);
-    });
+  public get loaded$(): Observable<boolean> {
+      return toObservable(this.loadedState, { injector: this.injector }).pipe(
+          filter(isLoaded => isLoaded === true),
+          first()
+      );
+  }
+
+  public get hayTienda(): boolean {
+    return this.tiendas().length > 0;
   }
 
   post(tienda:NewTienda):Observable<Tienda> {
