@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { filter, first, map, Observable, tap } from 'rxjs';
 import { environment } from './ip';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -22,9 +23,14 @@ export class TiendaService {
 
   private loadedState = signal<boolean>(false);
 
-  constructor(private http:HttpClient, private injector:Injector) {
+  constructor(private http:HttpClient, private injector:Injector,private auth:AuthService) {
+
+     const rol = this.auth.getRole();
+
+  if (!rol || rol === 'ADMIN' || rol === 'DUENIO') {
     this.load();
     this.checkExistencia();
+  }
   }
 
   load(): void {
