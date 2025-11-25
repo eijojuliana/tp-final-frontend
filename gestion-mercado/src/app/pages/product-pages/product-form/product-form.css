@@ -8,15 +8,23 @@
   display: flex;
   justify-self: flex-end;
   position: relative;
+  width: 50%;
 }
 
 .image img {
-  width: 28rem;
   max-width: 100%;
 }
 
 @media screen and (max-width: 1024px) {
-    .image img {
-        max-width: 400px;
-    }
+  .image {
+    width: 30%;
+  }
+
+  .image img {
+      max-width: 100%;
+  }
+
+  .form-container {
+    gap: 1rem;
+  }
 }

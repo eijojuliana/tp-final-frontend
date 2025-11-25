@@ -17,7 +17,15 @@
 }
 
 @media screen and (max-width: 1024px) {
-    .image img {
-        max-width: 400px;
-    }
+  .image {
+    width: 50%;
+  }
+
+  .image img {
+      max-width: 100%;
+  }
+
+  .form-container {
+    gap: 1rem;
+  }
 }

@@ -3,7 +3,6 @@ import { Component, effect, inject, signal } from '@angular/core';
 import { CuentaBancariaService } from '../../../services/cuenta-bancaria-service';
 import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { single } from 'rxjs';
 import { ToastService } from '../../../services/toast.service';
 
 @Component({

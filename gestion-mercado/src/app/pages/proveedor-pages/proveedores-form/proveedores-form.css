@@ -9,16 +9,23 @@
   position: relative;
   align-items: flex-end;
   justify-content: flex-end;
-  width: 100%;
+  width: 15%;
 }
 
 .image img {
-  width: 80rem;
   max-width: 100%;
 }
 
 @media screen and (max-width: 1024px) {
-    .image img {
-        max-width: 400px;
-    }
+  .image {
+    width: 30%;
+  }
+
+  .image img {
+      max-width: 100%;
+  }
+
+  .form-container {
+    gap: 1rem;
+  }
 }
