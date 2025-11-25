@@ -10,13 +10,22 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((err) => {
 
       const status = err.status;
-      const msg =
-        err?.error?.mensaje ||
-        err?.error?.message ||
-        err?.message ||
-        'Error desconocido';
 
-      console.error(`[ERROR ${status}] ${msg}`);
+      let msg: string;
+
+
+      if (status === 401 && req.url.includes('/auth/profile')) {
+        msg = 'Usuario o contraseña incorrectos';
+      } else {
+        // Resto de errores: uso mensaje del back o genérico
+        msg =
+          err?.error?.mensaje ||
+          err?.error?.message ||
+          err?.message ||
+          'Error desconocido';
+      }
+
+      console.error(`[ERROR ${status}] ${msg}`, err);
 
       toast.error(msg);
 

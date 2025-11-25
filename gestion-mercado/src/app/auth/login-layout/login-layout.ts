@@ -71,10 +71,7 @@ login(): void {
 
         },
         error: (err) => {
-          console.error('Error en login:', err);
-          this.toast.error("Usuario o contraseña incorrectos");
           this.authService.clearCredentials();
-          this.errorMsg = 'Usuario o contraseña incorrectos';
         }
       });
   }
