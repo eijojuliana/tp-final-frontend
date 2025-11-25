@@ -31,6 +31,13 @@ import { ProveedoresForm } from './pages/proveedor-pages/proveedores-form/provee
 import { authGuard } from './auth/guard/auth.guard';
 import { AccesoDenegado } from './pages/acceso-denegado-pages/acceso-denegado/acceso-denegado';
 import { YaLogueado } from './pages/ya-logueado-page/ya-logueado/ya-logueado';
+
+
+// definimos guards en común
+const AUTH_AND_SETUP = [authGuard, setupGuard];
+const ADMIN_DUENIO_EMPLEADO = ['ADMIN','DUENIO','EMPLEADO'];
+const ADMIN_DUENIO = ['ADMIN','DUENIO'];
+
 export const routes: Routes = [
   // Ruta por defecto que dirige a /login
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -38,62 +45,62 @@ export const routes: Routes = [
   // Ruta del login
   { path: 'login', component: LoginLayout },
 
-  { path: 'ya-logueado', component: YaLogueado,canActivate:[authGuard]},
+  { path: 'ya-logueado', component: YaLogueado, canActivate:[authGuard]},
 
-  // Ruta para página principal
-  { path: 'menu', component: MenuPage, canActivate:[authGuard, setupGuard]},
+  // Ruta principal: sólo Auth Guard, ya no necesita setupGuard (así evitamos loops y errores)
+  { path: 'menu', component: MenuPage, canActivate:[authGuard]},
 
   // Rutas productos
-  { path: 'menu/productos', component: ProductList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
-  { path: 'menu/productos/form', component: ProductRegister,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
+  { path: 'menu/productos', component: ProductList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  { path: 'menu/productos/form', component: ProductRegister, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
 
   // Rutas lotes
-  { path:'menu/lotes', component: LotesList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']} },
-  { path:'menu/lotes/form', component: LotesForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']} },
+  { path:'menu/lotes', component: LotesList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO} },
+  { path:'menu/lotes/form', component: LotesForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO} },
 
   // Rutas inventarios
-  { path:'menu/inventarios', component: InventariosList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
-  { path:'menu/inventarios/form', component:InventariosForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
+  { path:'menu/inventarios', component: InventariosList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  { path:'menu/inventarios/form', component:InventariosForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
 
   // Rutas personas
-  { path:'menu/personas', component: PersonaList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']} },
-  { path:'menu/personas/form',component:PersonaForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
+  { path:'menu/personas', component: PersonaList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO} },
+  { path:'menu/personas/form',component:PersonaForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
 
   // Rutas de Cuentas Bancarias
-  {path:'menu/cuentas-bancarias', component: CuentasBancariasList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
-  {path:'menu/cuentas-bancarias/form', component: CuentasBancariasForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
+  {path:'menu/cuentas-bancarias', component: CuentasBancariasList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  {path:'menu/cuentas-bancarias/form', component: CuentasBancariasForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO}},
 
-  // Rutas de la Tienda
-  { path:'menu/tienda', component: TiendaPage ,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
+  // Rutas de la Tienda (Estas rutas SÍ deben estar protegidas)
+  { path:'menu/tienda', component: TiendaPage , canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO}},
 
   // Rutas usuarios
-  {path:'menu/usuarios', component: UsuariosList, canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
-  {path:'menu/usuarios/form', component: UsuarioForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
+  {path:'menu/usuarios', component: UsuariosList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  {path:'menu/usuarios/form', component: UsuarioForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO}},
 
-  // Rutas duenios
-  {path:'menu/duenios', component: DueniosList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
-  {path:'menu/duenios/form', component: DuenioForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
+  // Rutas duenios (Estas rutas SÍ deben estar protegidas)
+  {path:'menu/duenios', component: DueniosList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO}},
+  {path:'menu/duenios/form', component: DuenioForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO}},
 
   //Rutas empleados
-  { path: 'menu/empleados', component: EmpleadoList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
-  { path: 'menu/empleados/form', component: EmpleadoForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO']}},
+  { path: 'menu/empleados', component: EmpleadoList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  { path: 'menu/empleados/form', component: EmpleadoForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO}},
 
   //Rutas clientes
-  { path: 'menu/clientes', component: ClienteList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
-  { path: 'menu/clientes/form', component: ClienteForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
+  { path: 'menu/clientes', component: ClienteList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  { path: 'menu/clientes/form', component: ClienteForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
 
   //Rutas transacciones
-  { path: 'menu/transacciones', component: TransaccionesList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
-  { path: 'menu/transacciones/form', component: TransaccionForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
+  { path: 'menu/transacciones', component: TransaccionesList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  { path: 'menu/transacciones/form', component: TransaccionForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
 
   //Rutas pedidos
-  { path: 'menu/pedidos', component: PedidosList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
-  { path: 'menu/pedidos/form', component: PedidosForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
-  { path: 'menu/pedidos/form/:id', component: PedidosForm, canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
+  { path: 'menu/pedidos', component: PedidosList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  { path: 'menu/pedidos/form', component: PedidosForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  { path: 'menu/pedidos/form/:id', component: PedidosForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
 
   //Rutas proveedores
-  {path: 'menu/proveedores', component: ProveedoresList,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
-  {path: 'menu/proveedores/form', component: ProveedoresForm,canActivate:[authGuard], data:{roles:['ADMIN','DUENIO','EMPLEADO']}},
+  {path: 'menu/proveedores', component: ProveedoresList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  {path: 'menu/proveedores/form', component: ProveedoresForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
 
   //Acceso denegado
   { path: 'acceso-denegado', component: AccesoDenegado },
@@ -105,4 +112,3 @@ export const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-
