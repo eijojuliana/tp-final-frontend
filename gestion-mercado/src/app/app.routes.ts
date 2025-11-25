@@ -34,7 +34,7 @@ import { YaLogueado } from './pages/ya-logueado-page/ya-logueado/ya-logueado';
 
 
 // definimos guards en común
-const AUTH_AND_SETUP = [authGuard, setupGuard];
+const AUTH_AND_SETUP = [authGuard];
 const ADMIN_DUENIO_EMPLEADO = ['ADMIN','DUENIO','EMPLEADO'];
 const ADMIN_DUENIO = ['ADMIN','DUENIO'];
 
@@ -48,7 +48,7 @@ export const routes: Routes = [
   { path: 'ya-logueado', component: YaLogueado, canActivate:[authGuard]},
 
   // Ruta principal: sólo Auth Guard, ya no necesita setupGuard (así evitamos loops y errores)
-  { path: 'menu', component: MenuPage, canActivate:[authGuard]},
+  { path: 'menu', component: MenuPage, canActivate:[authGuard,setupGuard]},
 
   // Rutas productos
   { path: 'menu/productos', component: ProductList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
