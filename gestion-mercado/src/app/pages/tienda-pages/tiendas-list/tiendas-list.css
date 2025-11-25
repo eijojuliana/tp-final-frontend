@@ -127,3 +127,58 @@ ul li::before {
   box-shadow: 0 4px 12px rgba(255, 123, 156, 0.22);
 }
 
+@media (max-width: 768px) {
+  .tienda-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  h2 {
+    font-size: 2.75rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+  }
+
+  .botones {
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .botones button {
+    width: 80%;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+  }
+
+  ul li {
+    max-width: 100%;
+    padding: 2rem;
+  }
+
+  p {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
+  }
+
+  ul li::before {
+    top: 8px;
+    right: 12px;
+    font-size: 1.2rem;
+  }
+
+  .botones {
+    border-top: 2px dashed #ffe4ed;
+    padding-top: 1rem;
+  }
+
+  .botones button {
+    flex: 1;
+    padding: 0.6rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+}
