@@ -1,4 +1,4 @@
-@import '../../../styles/form-style.scss';
+@import '../../../styles/form-style.css';
 
 .form-container::before {
   background-image: url('/assets/images/shop-wallpaper.jpg');
