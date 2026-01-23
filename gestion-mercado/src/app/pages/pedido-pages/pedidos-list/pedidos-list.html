@@ -53,7 +53,7 @@
           </td>
           <td>{{ pedido.estado }}</td>
           <td [class.monto-compra]="pedido.tipo === 'COMPRA'" [class.monto-venta]="pedido.tipo === 'VENTA'">
-            {{ pedido.tipo === 'COMPRA' ? ('-' + pedido.transaccion.monto) : pedido.transaccion.monto }}
+            {{ pedido.tipo === 'COMPRA' ? ('- ' + pedido.transaccion.monto) : ('+ ' + pedido.transaccion.monto) }}
           </td>
           <td class="celda-acciones">
             <div class="botones">

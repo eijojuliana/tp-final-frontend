@@ -4,9 +4,10 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 5%;
+
+    height: 7rem;
+    padding: 0 5%;
+
     position: relative;
     filter: brightness(0.8) contrast(1.1);
     box-shadow: 0 2px 15px rgba(248, 157, 195, 0.377);
@@ -26,7 +27,7 @@
 }
 
 .logo {
-    width: 6rem;
+    width: 5.5rem;
     transition: transform 0.3s ease, filter 0.3s ease;
     border-radius: 50%;
 }
@@ -156,6 +157,35 @@
 
 .flecha-menu.girar {
   transform: rotate(180deg);
+}
+
+.header-izq {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.header-der {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: end;
+}
+
+.theme-btn {
+  margin: 2rem;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.theme-btn:hover {
+  transform: scale(1.10);
+  filter: drop-shadow(0 0 6px rgba(243, 243, 243, 0.5));
 }
 
 /* DISEÑO RESPONSIVO */

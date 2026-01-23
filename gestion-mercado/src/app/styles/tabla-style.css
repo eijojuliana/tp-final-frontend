@@ -2,7 +2,7 @@
 
 .list-container {
   padding: 2rem;
-  background: linear-gradient(180deg, #fff5f9 0%, #ffb7d5 100%);
+  background: var(--bg-pag);
   min-height: 100vh;
 }
 
@@ -18,21 +18,19 @@
 
 /* Botón agregar/registrar */
 .btn-agregar {
-  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-  color: #fff;
+  background: var(--btn);
+  color: var(--letra2);
   padding: 0.5rem 1.5rem;
   border: none;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(255, 154, 158, 0.3);
+  box-shadow: var(--sombra-leve);
 }
 
 .btn-agregar:hover {
-  background: linear-gradient(135deg, #ff6b81 0%, #fda4ba 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(255, 154, 158, 0.4);
+  box-shadow: var(--sombra);
 }
 
 /* Contenedor de filtros */
@@ -47,10 +45,10 @@
 /* Select de filtros */
 select {
   padding: 0.6rem 1rem;
-  border: 2px solid #ffc5d0;
+  border: 2px solid var(--borde);
   border-radius: 8px;
-  background-color: white;
-  color: #d4567f;
+  background-color: var(--bg-input);
+  color: var(--letra1);
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
@@ -59,60 +57,45 @@ select {
   min-width: 120px;
 }
 
-select:hover {
-  border-color: #ff9fb0;
+select:hover, input[type="text"]:hover {
+  border-color: var(--borde-hover);
 }
 
-select:focus {
-  border-color: #ff7b96;
-  box-shadow: 0 0 0 3px rgba(255, 154, 158, 0.1);
+select:focus, input[type="text"]:focus {
+  border-color: var(--borde-focus);
 }
 
 /* Input de búsqueda */
 input[type="text"] {
   flex: 1;
   padding: 0.6rem 1rem;
-  border: 2px solid #ffc5d0;
+  border: 2px solid var(--borde);
   border-radius: 8px;
-  background-color: white;
-  color: #d4567f;
+  background-color: var(--bg-input);
+  color: var(--letra1);
   font-size: 0.9rem;
   transition: all 0.3s ease;
   outline: none;
 }
 
 input[type="text"]::placeholder {
-  color: #ffb3c1;
+  color: var(--letra1-leve);
 }
-
-input[type="text"]:hover {
-  border-color: #ff9fb0;
-}
-
-input[type="text"]:focus {
-  border-color: #ff7b96;
-  box-shadow: 0 0 0 3px rgba(255, 154, 158, 0.1);
-}
-
 
 /* Tabla */
 .tabla {
   width: 100%;
   border-spacing: 0;
-  box-shadow: 0 4px 6px rgba(255, 182, 193, 0.15);
-
-  background-image:
-    linear-gradient(rgba(255, 249, 252, 0.959), rgba(245, 236, 242, 0.952)),
-    url('/assets/images/background-tabla-gemerius.jpg');
+  box-shadow: var(--sombra-leve);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  background-color: var(--color6);
+  background-color: var(--bg-tabla);
 }
 
 .encabezado {
-  background: linear-gradient(135deg, #ffa6c9 0%, #ffb7d5 100%);
-  color: white;
+  background: var(--encabezado);
+  color: var(--letra2);
 }
 
 .encabezado th {
@@ -126,7 +109,6 @@ input[type="text"]:focus {
 }
 
 .tablaBody tr {
-  border-bottom: 1px solid #ffe4ed;
   text-align: center;
 }
 
@@ -137,22 +119,15 @@ input[type="text"]:focus {
 .tablaBody td {
   padding: 1rem 1.25rem;
   font-size: 1.5rem;
-  color: var(--color3);
+  color: var(--letra3);
   text-align: center;
-}
-
-.tablaBody td.botones {
-  display: flex;
-  gap: 1rem;
-  justify-content: flex-start;
-  align-items: center;
 }
 
 .btnDetalle,
 .btnEliminar,
 .btnEditar,
 .btn {
-  color: white;
+  color: var(--letra2);
   font-weight: 600;
   font-size: 1.4rem;
   cursor: pointer;
@@ -166,54 +141,41 @@ input[type="text"]:focus {
 }
 
 .btnEditar {
-  background: rgb(169, 206, 255);
-  border: 2px solid rgba(120, 190, 255, 0.6);
+  background: var(--btn-editar);
+  border: 2px solid var(--btn-editar-borde);
 }
 
 .btnEditar:hover {
-  background: rgba(100, 141, 255, 0.7);
-  border-color: rgba(83, 80, 255, 0.7);
-  transform: translateY(-2px);
+  background: var(--btn-editar-hover);
+  border-color: var(--btn-editar-borde-hover);
 }
 
 .btnEliminar {
-  background: rgb(255, 160, 160);
-  border: 2px solid rgba(255, 120, 120, 0.6);
+  background: var(--btn-eliminar);
+  border: 2px solid var(--btn-eliminar-borde);
 }
 
 .btnEliminar:hover {
-  background: rgba(255, 100, 100, 0.7);
-  border-color: rgba(255, 80, 80, 0.7);
-  transform: translateY(-2px);
+  background: var(--btn-eliminar-hover);
+  border-color: var(--btn-eliminar-borde-hover);
 }
 
 .btnDetalle {
-  background: linear-gradient(135deg, #e0a9d5 0%, #f3c9e8 100%);
-  border: 2px solid #e0a9d5;
+  background: var(--btn-detalle);
+  border: 2px solid var(--btn-detalle-borde);
 }
 
 .btnDetalle:hover {
-  background: linear-gradient(135deg, #d087c5 0%, #e5b3da 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(224, 169, 213, 0.4);
+  background: var(--btn-detalle-hover)
 }
 
 .btnEliminar:disabled,
 .btnEditar:disabled {
-  background: #cccccc;
-  border-color: rgba(168, 168, 168, 0.7);
-  color: #888888;
+  background: var(--btn-disabled);
+  border-color: var(--btn-disabled-borde);
+  color: var(--btn-disabled-letra);
   cursor: not-allowed;
   opacity: 0.6;
-  transform: none;
-  box-shadow: none;
-}
-
-.btnEliminar:disabled:hover,
-.btnEditar:disabled:hover,
-.btnEliminar:disabled:focus,
-.btnEditar:disabled:focus {
-  background: #cccccc;
   transform: none;
   box-shadow: none;
 }
@@ -223,7 +185,7 @@ input[type="text"]:focus {
   padding-left: 4rem;
   font-style: italic;
   font-size: 2rem;
-  color: var(--color5);
+  color: var(--letra1);
   letter-spacing: 2px;
 }
 
