@@ -1,4 +1,4 @@
-@import '../../../styles/form-style.scss';
+@import '../../../styles/form-style.css';
 
 .form-container::before {
   background-image: url('/assets/images/fondoRegistro.png');
@@ -29,7 +29,7 @@
 
 .password-input-wrapper input {
   width: 100%;
-  padding-right: 3.5rem; 
+  padding-right: 3.5rem;
 }
 
 .toggle-password {

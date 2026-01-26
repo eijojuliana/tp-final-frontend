@@ -1,7 +1,7 @@
 main.contenido {
   min-height: 100vh;
   position: relative;
-  background: linear-gradient(135deg, #2c1b2e 0%, #1a0e1f 50%, #2c1b2e 100%);
+  background: var(--menu-bg);
   padding: 2rem;
   box-sizing: border-box;
 }
@@ -10,11 +10,11 @@ main.contenido::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('/assets/images/fondoRegistro.png');
+  background-image: var(--menu-bg-image);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  opacity: 0.4;
+  opacity: var(--menu-bg-image-opacity);
   z-index: 0;
   pointer-events: none;
 }
@@ -27,11 +27,11 @@ main.contenido::before {
 
 main.contenido h2 {
   font-family: "Proza Libre", sans-serif;
-  color: #fff;
+  color: var(--menu-title-color);
   text-align: center;
   margin-bottom: 3rem;
   font-size: 3rem;
-  text-shadow: 0 2px 10px rgba(255, 182, 193, 0.3);
+  text-shadow: var(--menu-title-shadow);
   letter-spacing: 1px;
   font-weight: 700;
 }
@@ -62,31 +62,29 @@ main.contenido h2 {
   width: 100%;
   height: 100%;
   background-color: transparent;
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--menu-card-bg);
   backdrop-filter: blur(20px);
 
   border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  border: 1px solid var(--menu-card-border);
+  box-shadow: var(--menu-card-shadow);
   transition: all 0.3s ease;
 }
 
 /* Efecto hover en el cristal */
 .card:hover a div.recuadro {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 182, 193, 0.5);
-    box-shadow: 0 8px 32px rgba(255, 182, 193, 0.2);
+  background: var(--menu-card-bg-hover);
+  border-color: var(--menu-card-border-hover);
+  box-shadow: var(--menu-card-shadow-hover);
 }
 
 .card p {
   font-family: "Proza Libre", sans-serif;
-  color: #fff;
+  color: var(--menu-text-color);
   font-weight: 600;
   font-size: 1.8rem;
   letter-spacing: 0.5px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: var(--menu-text-shadow);
   text-align: center;
 }
 
@@ -105,7 +103,7 @@ main.contenido h2 {
 .icon {
   width: 10rem;
   height: 10rem;
-  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.4));
+  filter: var(--menu-icon-shadow);
 }
 
 /* =========================================
@@ -118,7 +116,7 @@ main.contenido h2 {
   }
 
   main.contenido::before {
-    background-image: url('/assets/images/fondoRegistro.webp'); /* Cambiamos el formato a webp para disminuir la calidad y peso de la imagen */
+    background-image: var(--menu-bg-image-mobile);
   }
 
   main.contenido h2 {
@@ -151,7 +149,7 @@ main.contenido h2 {
     z-index: 0;
      /* Desactivamos el blur para celular ya que este disminuye el rendimiento */
     backdrop-filter: none;
-    background: rgba(0, 0, 0, 0.2);
+    background: var(--menu-card-bg-mobile);
   }
 
   .icon-container {

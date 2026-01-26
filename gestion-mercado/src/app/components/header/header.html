@@ -11,6 +11,11 @@
     </div>
 
     <div class="header-der">
+      <img
+        [src]="theme.isOscuro()? '/assets/images/sakura-icon.png': '/assets/images/luna-icon.png'"
+        class="theme-btn" (click)="toggleTheme()"
+      >
+
       <img src="https://i.pinimg.com/736x/1f/9a/91/1f9a91d7e4bce09f89e82c89e9d40e8c.jpg" alt=""
         class="user-icon icono-perfil-principal" (click)="toggleMenu()">
       <span class="material-symbols-outlined flecha-menu" [class.girar]="menuAbierto"
