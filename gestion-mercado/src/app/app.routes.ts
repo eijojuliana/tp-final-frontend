@@ -31,6 +31,7 @@ import { ProveedoresForm } from './pages/proveedor-pages/proveedores-form/provee
 import { authGuard } from './auth/guard/auth.guard';
 import { AccesoDenegado } from './pages/acceso-denegado-pages/acceso-denegado/acceso-denegado';
 import { YaLogueado } from './pages/ya-logueado-page/ya-logueado/ya-logueado';
+import { HistorialPersonaListComponent } from './pages/historial-pages/historial-persona-list';
 
 
 // definimos guards en común
@@ -65,6 +66,7 @@ export const routes: Routes = [
   // Rutas personas
   { path:'menu/personas', component: PersonaList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO} },
   { path:'menu/personas/form',component:PersonaForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  { path:'menu/historial/personas',component:HistorialPersonaListComponent, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
 
   // Rutas de Cuentas Bancarias
   {path:'menu/cuentas-bancarias', component: CuentasBancariasList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},

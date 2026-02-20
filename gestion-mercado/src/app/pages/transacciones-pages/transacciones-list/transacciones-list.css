@@ -2,11 +2,11 @@
 
 
 .tablaBody td.monto-entrada {
-  color: #128b51;
+  color: var(--verde);
   font-weight: bold;
 }
 
 .tablaBody td.monto-salida {
-  color: #d93025;
+  color: var(--rojo);
   font-weight: bold;
 }

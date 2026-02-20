@@ -2,186 +2,206 @@
   <h2>
     MENÚ DE
     @if(auth.getRole()=='DUENIO'){
-      DUEÑO
+    DUEÑO
     } @else {
-      {{auth.getRole()}}
+    {{auth.getRole()}}
     }
   </h2>
   <nav class="menus-container">
-    <ul class="menus">
-
-      <!-- PERSONAS -->
-       @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
-        <li class="card" id="personas">
-        <a routerLink="/menu/personas"> <div class="recuadro"></div>
-        <div class="icon-container">
-          <img class="icon" src="/assets/images/persona-icon.png" alt="persona-icon" />
-          <p> PERSONAS </p>
-        </div>
-        </a>
-      </li>
-       }
 
 
-      <!-- DUENIOS -->
-       @if (auth.hasRole(['ADMIN','DUENIO'])){
-         <li class="card" id="duenios">
-        <a routerLink="/menu/duenios"> <div class="recuadro"></div>
-        <div class="icon-container">
-          <img class="icon" src="/assets/images/duenio-icon.png" alt="duenio-icon" />
-          <p> DUEÑOS </p>
-        </div>
-        </a>
-      </li>
-       }
+      <section class="categoria-seccion">
+        <h3 class="categoria-titulo"> GESTIÓN DE PERSONAS </h3>
+        <ul class="menus">
+          <!-- PERSONAS -->
+          @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
+          <li class="card" id="personas">
+            <a routerLink="/menu/personas">
+              <div class="recuadro"></div>
+              <div class="icon-container">
+                <img class="icon" src="/assets/images/persona-icon.png" alt="persona-icon" />
+                <p> PERSONAS </p>
+              </div>
+            </a>
+          </li>
+          }
 
 
-      <!-- EMPLEADOS -->
-       @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
-        <li class="card" id="empleados">
-        <a routerLink="/menu/empleados"> <div class="recuadro"></div>
-        <div class="icon-container">
-          <img class="icon" src="/assets/images/empleado-icon.png" alt="duenio-icon" />
-          <p> EMPLEADOS </p>
-        </div>
-         </a>
-      </li>
-       }
+          <!-- DUENIOS -->
+          @if (auth.hasRole(['ADMIN','DUENIO'])){
+          <li class="card" id="duenios">
+            <a routerLink="/menu/duenios">
+              <div class="recuadro"></div>
+              <div class="icon-container">
+                <img class="icon" src="/assets/images/duenio-icon.png" alt="duenio-icon" />
+                <p> DUEÑOS </p>
+              </div>
+            </a>
+          </li>
+          }
 
 
-      <!-- CLIENTES -->
-       @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
-        <li class="card" id="clientes">
-        <a routerLink="/menu/clientes"> <div class="recuadro"></div>
-        <div class="icon-container">
-          <img class="icon" src="/assets/images/clientes-icon.png" alt="duenio-icon" />
-          <p> CLIENTES </p>
-        </div>
-         </a>
-      </li>}
-
-      <!-- Proveedores -->
-       @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
-         <li class="card" id="proveedores">
-        <a routerLink="/menu/proveedores"> <div class="recuadro"></div>
-        <div class="icon-container">
-          <img class="icon" src="/assets/images/proveedor-icon.png" alt="duenio-icon" />
-          <p> PROVEEDORES </p>
-        </div>
-         </a>
-      </li>}
+          <!-- EMPLEADOS -->
+          @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
+          <li class="card" id="empleados">
+            <a routerLink="/menu/empleados">
+              <div class="recuadro"></div>
+              <div class="icon-container">
+                <img class="icon" src="/assets/images/empleado-icon.png" alt="duenio-icon" />
+                <p> EMPLEADOS </p>
+              </div>
+            </a>
+          </li>
+          }
 
 
-      <!-- USUARIOS -->
-       @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
-      <li class="card" id="usuarios">
-        <a routerLink="/menu/usuarios"> <div class="recuadro"></div>
-        <div class="icon-container">
-          <img class="icon" src="/assets/images/user-icon.png" alt="usuario-icon" />
-          <p> USUARIOS </p>
-        </div>
-        </a>
-      </li>
-       }
+          <!-- CLIENTES -->
+          @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
+          <li class="card" id="clientes">
+            <a routerLink="/menu/clientes">
+              <div class="recuadro"></div>
+              <div class="icon-container">
+                <img class="icon" src="/assets/images/clientes-icon.png" alt="duenio-icon" />
+                <p> CLIENTES </p>
+              </div>
+            </a>
+          </li>}
 
+          <!-- Proveedores -->
+          @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
+          <li class="card" id="proveedores">
+            <a routerLink="/menu/proveedores">
+              <div class="recuadro"></div>
+              <div class="icon-container">
+                <img class="icon" src="/assets/images/proveedor-icon.png" alt="duenio-icon" />
+                <p> PROVEEDORES </p>
+              </div>
+            </a>
+          </li>
+          }
+
+
+          <!-- USUARIOS -->
+          @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
+          <li class="card" id="usuarios">
+            <a routerLink="/menu/usuarios">
+              <div class="recuadro"></div>
+              <div class="icon-container">
+                <img class="icon" src="/assets/images/user-icon.png" alt="usuario-icon" />
+                <p> USUARIOS </p>
+              </div>
+            </a>
+          </li>
+          }
+        </ul>
+      </section>
 
       <!-- -------------------------------------------------------------------------------------------------------- -->
 
-      <!-- PRODUCTOS -->
-        @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
+      <section class="categoria-seccion">
+        <h3 class="categoria-titulo"> GESTIÓN DE PRODUCTOS </h3>
+        <ul class="menus">
+          <!-- PRODUCTOS -->
+          @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
           <li class="card" id="productos">
-        <a routerLink="/menu/productos"> <div class="recuadro"></div>
-        <div class="icon-container">
-          <img class="icon" src="/assets/images/productos-icon.png" alt="producto-icon" />
-          <p> PRODUCTOS  </p>
-        </div>
-        </a>
-      </li>
-        }
+            <a routerLink="/menu/productos">
+              <div class="recuadro"></div>
+              <div class="icon-container">
+                <img class="icon" src="/assets/images/productos-icon.png" alt="producto-icon" />
+                <p> PRODUCTOS </p>
+              </div>
+            </a>
+          </li>
+          }
 
 
-      <!-- LOTES -->
-       @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
-        <li class="card" id="lotes">
-        <a routerLink="/menu/lotes"> <div class="recuadro"></div>
-        <div class="icon-container">
-          <img class="icon" src="/assets/images/lote-icon.png" alt="lote-icon" />
-          <p> LOTES </p>
-        </div>
-        </a>
-      </li>
-       }
+          <!-- LOTES -->
+          @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
+          <li class="card" id="lotes">
+            <a routerLink="/menu/lotes">
+              <div class="recuadro"></div>
+              <div class="icon-container">
+                <img class="icon" src="/assets/images/lote-icon.png" alt="lote-icon" />
+                <p> LOTES </p>
+              </div>
+            </a>
+          </li>
+          }
 
 
-      <!-- INVENTARIOS -->
-       @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
-        <li class="card" id="inventarios">
-        <a routerLink="/menu/inventarios"> <div class="recuadro"></div>
-        <div class="icon-container">
-          <img class="icon" src="/assets/images/inventario-icon.png" alt="inventarios-icon" />
-          <p> INVENTARIOS </p>
-        </div>
-        </a>
-      </li>
-       }
-
+          <!-- INVENTARIOS -->
+          @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
+          <li class="card" id="inventarios">
+            <a routerLink="/menu/inventarios">
+              <div class="recuadro"></div>
+              <div class="icon-container">
+                <img class="icon" src="/assets/images/inventario-icon.png" alt="inventarios-icon" />
+                <p> INVENTARIOS </p>
+              </div>
+            </a>
+          </li>
+          }
+        </ul>
+      </section>
 
       <!-- -------------------------------------------------------------------------------------------------------- -->
+      <section class="categoria-seccion">
+        <h3 class="categoria-titulo"> GESTIÓN DE FINANZAS Y TIENDA </h3>
+        <ul class="menus">
+          <!-- TIENDA -->
+          @if (auth.hasRole(['ADMIN','DUENIO'])){
+          <li class="card" id="tienda">
+            <a routerLink="/menu/tienda">
+              <div class="recuadro"></div>
+              <div class="icon-container">
+                <img class="icon" src="/assets/images/shop-icon.png" alt="tienda-icon" />
+                <p> TIENDA </p>
+              </div>
+            </a>
+          </li>
+          }
 
-      <!-- TIENDA -->
-       @if (auth.hasRole(['ADMIN','DUENIO'])){
-         <li class="card" id="tienda">
-        <a routerLink="/menu/tienda"> <div class="recuadro"></div>
-        <div class="icon-container">
-          <img class="icon" src="/assets/images/shop-icon.png" alt="tienda-icon" />
-          <p> TIENDA </p>
-        </div>
-        </a>
-      </li>
-       }
 
-
-      <!-- CUENTAS B -->
-        @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
+          <!-- CUENTAS B -->
+          @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
           <li class="card" id="cuentasB">
-        <a routerLink="/menu/cuentas-bancarias"> <div class="recuadro"></div>
-        <div class="icon-container">
-          <img class="icon" src="/assets/images/cuentaB-icon.png" alt="cuenta bancaria-icon" />
-          <p> CUENTA BANCARIA </p>
-        </div>
-        </a>
-      </li>
-        }
+            <a routerLink="/menu/cuentas-bancarias">
+              <div class="recuadro"></div>
+              <div class="icon-container">
+                <img class="icon" src="/assets/images/cuentaB-icon.png" alt="cuenta bancaria-icon" />
+                <p> CUENTA BANCARIA </p>
+              </div>
+            </a>
+          </li>
+          }
 
 
-      <!-- TRANSACCIONES -->
-        @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
+          <!-- TRANSACCIONES -->
+          @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
           <li class="card" id="transacciones">
-        <a routerLink="/menu/transacciones"> <div class="recuadro"></div>
-        <div class="icon-container">
-          <img class="icon" src="/assets/images/transaccion-icon.png" alt="transaccion-icon" />
-          <p> TRANSACCIONES </p>
-        </div>
-        </a>
-      </li>
-        }
+            <a routerLink="/menu/transacciones">
+              <div class="recuadro"></div>
+              <div class="icon-container">
+                <img class="icon" src="/assets/images/transaccion-icon.png" alt="transaccion-icon" />
+                <p> TRANSACCIONES </p>
+              </div>
+            </a>
+          </li>
+          }
 
-
-      <!-- -------------------------------------------------------------------------------------------------------- -->
-
-      <!-- PEDIDOS -->
-       @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
-         <li class="card" id="pedidos">
-        <a routerLink="/menu/pedidos"> <div class="recuadro"></div>
-        <div class="icon-container">
-          <img class="icon" src="/assets/images/pedido-icon.png" alt="pedido-icon" />
-          <p> PEDIDOS  </p>
-        </div>
-        </a>
-      </li>
-       }
-
-
-    </ul>
+          <!-- PEDIDOS -->
+          @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
+          <li class="card" id="pedidos">
+            <a routerLink="/menu/pedidos">
+              <div class="recuadro"></div>
+              <div class="icon-container">
+                <img class="icon" src="/assets/images/pedido-icon.png" alt="pedido-icon" />
+                <p> PEDIDOS </p>
+              </div>
+            </a>
+          </li>
+          }
+          </ul>
+      </section>
   </nav>
 </main>

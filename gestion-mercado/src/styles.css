@@ -24,13 +24,13 @@
     --amarillo: rgb(233, 191, 6);
     --amarillo-clarito: rgb(243, 216, 62);
     --amarillo-oscuro: rgb(146, 95, 0);
-    --verde: rgb(61, 145, 13);
+    --verde: #128b51;
     --verde-clarito: rgb(102, 173, 61);
     --verde-oscuro: rgb(38, 94, 6);
     --azul: rgb(27, 65, 190);
     --azul-clarito: rgb(74, 101, 190);
     --azul-oscuro: rgb(16, 45, 143);
-    --rojo: rgb(177, 18, 18);
+    --rojo: #d93025;
     --rojo-clarito: rgb(179, 58, 58);
     --rojo-oscuro: rgb(122, 11, 11);
 
@@ -305,7 +305,6 @@ body, html {
 
 main {
     background-color: #fcf1f1;
-    padding: 1rem 5%;
     min-height: 100%;
 }
 
@@ -331,7 +330,6 @@ form {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  margin-left: 2rem;
 }
 
 /*para que si los forms son inválidos no se rompa y se agregue margen o algo D:*/

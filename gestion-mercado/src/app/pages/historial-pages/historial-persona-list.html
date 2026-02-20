@@ -1,0 +1,70 @@
+<section class="list-container">
+  <div class="botones">
+    <select (change)="atributo.set($any($event.target).value)">
+      <option value="fecha" selected>Fecha</option>
+      <option value="accion">Acción</option>
+      <option value="personaId">Persona ID</option>
+      <option value="usuario">Usuario</option>
+    </select>
+
+    <select (change)="orden.set($any($event.target).value)">
+      <option value="desc">Descendente</option>
+      <option value="asc">Ascendente</option>
+    </select>
+
+    <input
+      type="text"
+      placeholder="Buscar..."
+      (input)="filtro.set($any($event.target).value)"
+    />
+  </div>
+
+  <div class="tabla-contenedor">
+    <table class="tabla">
+      <thead class="encabezado">
+        <tr>
+          <th>ID Hist</th>
+          <th>ID</th>
+          <th>Persona</th>
+          <th>Acción</th>
+          <th>Detalle</th>
+          <th>Fecha</th>
+          <th>Usuario</th>
+        </tr>
+      </thead>
+
+      <tbody class="tablaBody">
+        @for (h of historialFiltrado(); track h.historialPersonaId) {
+          <tr>
+            <td> {{ h.historialPersonaId }} </td>
+            <td> {{ h.personaId }} </td>
+            <td> {{ h.nombre }}</td>
+            <td>{{ h.accion }}</td>
+            <td>
+              @if (h.accion === 'UPDATE' && h.campoModificado) {
+                <span class="atributo-nombre">{{ h.campoModificado }}:</span>
+                <span class="valor-viejo">{{ h.valorAnterior }}</span>
+                <span class="flecha">→</span>
+                <span class="valor-nuevo">{{ h.valorNuevo }}</span>
+              } @else if (h.accion === 'INSERT') {
+                <span> Registro </span>
+              } @else if (h.accion === 'DELETE') {
+                <span> Eliminación </span>
+              } @else {
+                <span>-</span>
+              }
+            </td>
+            <td> {{ h.fechaEvento | date:'dd/MM/yyyy HH:mm' }} </td>
+            <td> Sistema </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td class="sin-registros" colspan="6">
+              No se encontraron registros
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

@@ -1,0 +1,31 @@
+@import '../../styles/tabla-style.css';
+
+.paginacion {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* CAMBIARRRRR A LA STYLE GENERAL  Clases para el detalle de cambios */
+.atributo-nombre {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--gris)
+}
+
+.valor-viejo {
+  color: var(--rojo);
+  text-decoration: line-through;
+  margin: 0 5px;
+}
+
+.valor-nuevo {
+  color: var(--verde);
+  font-weight: bold;
+  margin: 0 5px;
+}
+
+.flecha {
+  color: var(--gris);
+}

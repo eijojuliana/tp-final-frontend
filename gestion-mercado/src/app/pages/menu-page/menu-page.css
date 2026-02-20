@@ -38,17 +38,16 @@ main.contenido h2 {
 
 .menus {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 24rem);
-  gap: 3rem;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+  list-style: none;
+  gap: 1rem;
+  padding: 0 0 0 0;
 }
 
 .card {
   position: relative;
-  width: 24rem;
-  height: 30rem;
+  width: 22rem;
+  height: 28rem;
   justify-self: center;
   align-self: center;
   transition: transform 0.3s ease;
@@ -101,9 +100,44 @@ main.contenido h2 {
   text-align: center;
 }
 .icon {
-  width: 10rem;
-  height: 10rem;
+  width: 9rem;
+  height: 9rem;
   filter: var(--menu-icon-shadow);
+}
+
+.categoria-seccion {
+  display: flex;
+  flex-direction: column;
+}
+
+.menus-container {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Título de la categoría con la línea lateral */
+.categoria-titulo {
+  font-family: "Proza Libre", sans-serif;
+  color: var(--menu-title-color);
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* La línea después del texto (-----) */
+.categoria-titulo::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: var(--menu-title-color);
+  opacity: 0.5;
 }
 
 /* =========================================
@@ -112,7 +146,7 @@ main.contenido h2 {
 @media (max-width: 768px) {
 
   main.contenido {
-    padding: 0.5rem;
+    padding: 1rem;
   }
 
   main.contenido::before {
@@ -120,13 +154,13 @@ main.contenido h2 {
   }
 
   main.contenido h2 {
-    font-size: 5dvw; /* Título más pequeño */
+    font-size: 4.5dvw; /* Título más pequeño */
   }
 
   /* Preferimos descartar la idea de CARDS para celular y usar un listado */
   .menus {
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.3rem;
+    gap: 0.5rem;
     padding: 0;
   }
 
@@ -180,5 +214,9 @@ main.contenido h2 {
     line-height: 1.1;
     text-align: left;
     flex: 1;
+  }
+
+  .categoria-titulo {
+    font-size: 1.2rem;
   }
 }
