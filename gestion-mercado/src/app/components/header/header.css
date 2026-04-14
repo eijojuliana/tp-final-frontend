@@ -191,7 +191,7 @@
 /* DISEÑO RESPONSIVO */
 @media (max-width: 768px) {
   .titulo {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   .logo, .user-icon {

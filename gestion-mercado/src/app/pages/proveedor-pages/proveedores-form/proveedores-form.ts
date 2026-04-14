@@ -2,7 +2,7 @@ import { Component, effect, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProveedorService } from '../../../services/proveedor-service';
 import { Router } from '@angular/router';
-import { NewProveedor, Proveedor } from '../../../models/proveedor.model';
+import { Proveedor } from '../../../models/proveedor.model';
 import { ToastService } from '../../../services/toast.service';
 
 @Component({
@@ -21,35 +21,42 @@ export class ProveedoresForm {
   private proveedorToEdit:Proveedor|null=null;
 
   form = this.fb.nonNullable.group({
-      nombre:['',[Validators.required,Validators.maxLength(20),Validators.pattern(/^[A-Za-zÁÉÍÓÚÜáéíóúüÑñ\s]+$/)]],
-      dni:[0,[Validators.required,Validators.pattern(/^\d{6,9}$/)]],
-      edad:[0,[Validators.required,Validators.min(18),Validators.max(120)]]
-  })
+    cuit: [0, [Validators.required, Validators.pattern(/^\d{11}$/)]],
+    razonSocial: ['', [Validators.required]],
+    nombreFantasia: ['', [Validators.required]],
+    condicion: ['', [Validators.required]],
+    telefono: [0, [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    direccion: this.fb.nonNullable.group({
+      calle: ['', [Validators.required]],
+      altura: ['', [Validators.required]],
+      piso: [''],
+      codigoPostal: ['', [Validators.required]],
+      localidad: ['', [Validators.required]],
+      provincia: ['', [Validators.required]],
+      pais: ['', [Validators.required]]
+    })
+  });
 
 
-  constructor(){
-  effect(()=>{
-    this.proveedorToEdit=this.proveedorService.proveedorToEdit();
+  constructor() {
+    effect(() => {
+      this.proveedorToEdit = this.proveedorService.proveedorToEdit();
 
-    if(this.proveedorToEdit){
-      this.isEditMode.set(true);
-
-      this.form.patchValue({
-        nombre:this.proveedorToEdit.nombre,
-        dni:this.proveedorToEdit.dni,
-        edad:this.proveedorToEdit.edad
-      });
-    }else{
-      this.isEditMode.set(false);
-      this.form.reset();
-    }
-  })
-}
+      if (this.proveedorToEdit) {
+        this.isEditMode.set(true);
+        this.form.patchValue(this.proveedorToEdit);
+      } else {
+        this.isEditMode.set(false);
+        this.form.reset();
+      }
+    });
+  }
 
   saveProveedor(){
     if(this.form.invalid){return;}
 
-    const formValue: NewProveedor = this.form.getRawValue();
+    const formValue = this.form.getRawValue();
 
     if(this.isEditMode() && this.proveedorToEdit){
       const updateProveedor: Proveedor = { ...this.proveedorToEdit, ...formValue };
@@ -75,5 +82,11 @@ export class ProveedoresForm {
   cancelEdit(){
     this.proveedorService.clearProveedorToEdit();
     this.router.navigate(['menu/proveedores']);
+  }
+
+  isDireccionVisible = signal(false);
+
+  toggleDireccion() {
+    this.isDireccionVisible.update(v => !v);
   }
 }

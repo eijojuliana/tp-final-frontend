@@ -8,7 +8,6 @@ import { LotesList } from './pages/lote-pages/lotes-list/lotes-list';
 import { LotesForm } from './pages/lote-pages/lotes-form/lotes-form';
 import { InventariosList } from './pages/inventario-pages/inventarios-list/inventarios-list';
 import { InventariosForm } from './pages/inventario-pages/inventarios-form/inventarios-form';
-import { PersonaForm } from './pages/persona-pages/persona-form/persona-form';
 import { CuentasBancariasList } from './pages/cuentaBancaria-pages/cuentas-bancarias-list/cuentas-bancarias-list';
 import { CuentasBancariasForm } from './pages/cuentaBancaria-pages/cuentas-bancarias-form/cuentas-bancarias-form';
 import { MenuPage } from './pages/menu-page/menu-page';
@@ -65,7 +64,6 @@ export const routes: Routes = [
 
   // Rutas personas
   { path:'menu/personas', component: PersonaList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO} },
-  { path:'menu/personas/form',component:PersonaForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
   { path:'menu/historial/personas',component:HistorialPersonaListComponent, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
 
   // Rutas de Cuentas Bancarias

@@ -16,7 +16,7 @@ export class DueniosList {
   private toast = inject(ToastService);
 
   filtro = signal('');
-  atributo = signal<'personaId' | 'duenioId' | 'nombre' | 'dni' | 'edad' | 'email'>('personaId');
+  atributo = signal<'personaId' | 'duenioId' | 'nombre' | 'apellido' | 'dni' | 'fechaNacimiento' | 'email'>('personaId');
   orden = signal<'asc' | 'desc'>('asc');
 
   dueniosFiltrados = computed(() => {

@@ -17,7 +17,7 @@ export class EmpleadoList {
  private toast = inject(ToastService);
 
   filtro = signal('');
-  atributo = signal<'personaId' | 'empleadoId' | 'nombre' | 'dni' | 'edad' | 'email'>('personaId');
+  atributo = signal<'personaId' | 'empleadoId' | 'nombre' | 'apellido' | 'dni' | 'fechaNacimiento' | 'email'>('personaId');
   orden = signal<'asc' | 'desc'>('asc');
 
   empleadosFiltrados = computed(() => {

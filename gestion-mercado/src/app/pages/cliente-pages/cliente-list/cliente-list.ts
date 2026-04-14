@@ -16,7 +16,7 @@ export class ClienteList {
   private toast = inject(ToastService);
 
   filtro = signal('');
-  atributo = signal<'personaId' | 'clienteId' | 'nombre' | 'dni' | 'edad'>('personaId');
+  atributo = signal<'personaId' | 'clienteId' | 'nombre' | 'apellido' | 'dni' | 'fechaNacimiento'>('personaId');
   orden = signal<'asc' | 'desc'>('asc');
 
   clientesFiltrados = computed(() => {

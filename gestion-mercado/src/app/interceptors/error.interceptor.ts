@@ -25,7 +25,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           'Error desconocido';
       }
 
-      console.error(`[ERROR ${status}] ${msg}`, err);
+      //console.error(`[ERROR ${status}] ${msg}`, err);
 
       toast.error(msg);
 

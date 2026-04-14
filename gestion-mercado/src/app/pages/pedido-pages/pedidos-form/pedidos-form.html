@@ -69,7 +69,7 @@
                 <option [ngValue]="null" disabled selected>Seleccione un proveedor</option>
                 @for (prov of proveedores(); track $index) {
                   <option [ngValue]="prov.proveedorId">
-                    {{ prov.nombre }}
+                    {{ prov.nombreFantasia }}
                   </option>
                 }
               </select>

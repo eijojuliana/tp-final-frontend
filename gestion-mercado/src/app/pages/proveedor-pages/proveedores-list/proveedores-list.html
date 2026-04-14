@@ -3,11 +3,14 @@
     <button type="button" class="btn-agregar" routerLink="/menu/proveedores/form">Agregar</button>
 
     <select (change)="atributo.set($any($event.target).value)">
-      <option value="personaId" selected>Persona ID</option>
-      <option value="proveedorId">Proveedor ID</option>
-      <option value="nombre">Nombre</option>
-      <option value="dni">DNI</option>
-      <option value="edad">Edad</option>
+      <option value="proveedorId" selected>Proveedor ID</option>
+      <option value="cuit">CUIT</option>
+      <option value="razonSocial">Razón Social</option>
+      <option value="nombreFantasia">Nombre</option>
+      <option value="condicion">Condición IVA</option>
+      <option value="direccion">Dirección</option>
+      <option value="telefono">Teléfono</option>
+      <option value="email">Email</option>
     </select>
 
     <select (change)="orden.set($any($event.target).value)">
@@ -23,22 +26,32 @@
       <thead class="encabezado">
         <tr>
           <th>ID</th>
-          <th>ID.Pr</th>
+          <th>CUIT</th>
+          <th>Razón Social</th>
           <th>Nombre</th>
-          <th>Edad</th>
-          <th>DNI</th>
+          <th>Condición IVA</th>
+          <th>Dirección</th>
+          <th>Teléfono</th>
           <th>Email</th>
+          <th>Acciones</th>
         </tr>
       </thead>
 
       <tbody class="tablaBody">
         @for (proveedor of proveedoresFiltrados(); track $index){
         <tr>
-          <td>{{ proveedor.personaId }}</td>
           <td>{{ proveedor.proveedorId }}</td>
-          <td>{{ proveedor.nombre }}</td>
-          <td>{{ proveedor.edad }}</td>
-          <td>{{ proveedor.dni }}</td>
+          <td>{{ proveedor.cuit }}</td>
+          <td>{{ proveedor.razonSocial }}</td>
+          <td>{{ proveedor.nombreFantasia }}</td>
+          <td>{{ proveedor.condicion }}</td>
+          <td>
+            @if (proveedor.direccion) {
+              {{ proveedor.direccion.calle }} {{ proveedor.direccion.altura }} - {{ proveedor.direccion.localidad }}
+            }
+          </td>
+          <td>{{ proveedor.telefono }}</td>
+          <td>{{ proveedor.email }}</td>
           <td class="botones">
             <button class="btnEliminar" (click)="eliminarProveedor(proveedor.proveedorId)">
               Eliminar

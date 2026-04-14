@@ -3,40 +3,85 @@
     <h2> {{isEditMode() ? 'Editar Proveedor' : 'Registrar Proveedor'}} </h2>
 
     <form [formGroup]="form" (ngSubmit)="saveProveedor()">
-      <div class = "campo">
-        <label>Nombre: </label>
-        <input type="text" formControlName="nombre">
-        @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
-          <span class = "error">El campo no puede estar vacío ni contener caracteres no alfabéticos.</span>
+      <div class="campo">
+        <label>CUIT: </label>
+        <input type="number" formControlName="cuit" placeholder="Ej: 20301234567">
+        @if (form.get('cuit')?.invalid && form.get('cuit')?.touched) {
+          <span class="error">Debe ingresar un CUIT válido (11 dígitos).</span>
         }
       </div>
-      <div class = "campo">
-        <label>Dni: </label>
-        <input type="number" formControlName="dni">
-        @if (form.get('dni')?.invalid && form.get('dni')?.touched) {
-          <span class = "error">El DNI debe tener entre 6 y 9 dígitos</span>
-        }
+
+      <div class="campo">
+        <label>Razón Social: </label>
+        <input type="text" formControlName="razonSocial" placeholder="Ej: Logística S.A.">
       </div>
-      <div class = "campo">
-        <label>Edad: </label>
-        <input type="number" formControlName="edad">
-        @if (form.get('edad')?.invalid && form.get('edad')?.touched) {
-          <span class = "error">El proveedor debe tener entre 18 y 120 años.</span>
-        }
+
+      <div class="campo">
+        <label>Nombre Fantasía: </label>
+        <input type="text" formControlName="nombreFantasia" placeholder="Ej: Transportes Rápidos">
+      </div>
+
+      <div class="campo">
+        <label>Condición IVA: </label>
+        <select formControlName="condicion">
+          <option value="" disabled selected>Seleccione una opción</option>
+          <option value="ResponsableInscripto">Responsable Inscripto</option>
+          <option value="Monotributo">Monotributo</option>
+          <option value="Exento">Exento</option>
+          <option value="ConsumidorFinal">Consumidor Final</option>
+        </select>
+      </div>
+
+      <div formGroupName="direccion">
+        <div class="campo">
+          <label>Calle: </label>
+          <input type="text" formControlName="calle">
+        </div>
+        <div class="campo">
+          <label>Altura: </label>
+          <input type="text" formControlName="altura">
+        </div>
+        <div class="campo">
+          <label>Piso: </label>
+          <input type="text" formControlName="piso">
+        </div>
+        <div class="campo">
+          <label>Localidad: </label>
+          <input type="text" formControlName="localidad">
+        </div>
+        <div class="campo">
+          <label>Código Postal: </label>
+          <input type="text" formControlName="codigoPostal">
+        </div>
+        <div class="campo">
+          <label>Provincia: </label>
+          <input type="text" formControlName="provincia">
+        </div>
+        <div class="campo">
+          <label>País: </label>
+          <input type="text" formControlName="pais">
+        </div>
+      </div>
+
+      <div class="campo">
+        <label>Teléfono: </label>
+        <input type="number" formControlName="telefono" placeholder="Ej: 01145678900">
+      </div>
+
+      <div class="campo">
+        <label>Email: </label>
+        <input type="email" formControlName="email" placeholder="ejemplo@empresa.com">
       </div>
 
       <div class="botones">
-        <button type="submit"[disabled]="form.invalid">
+        <button type="submit" [disabled]="form.invalid">
           {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
         </button>
 
-      @if (isEditMode()) {
-        <button type="button" (click)="cancelEdit()" >Cancelar</button>
-      }
+        @if (isEditMode()) {
+          <button type="button" (click)="cancelEdit()">Cancelar</button>
+        }
       </div>
     </form>
-  </div>
-  <div class="image">
-    <img src="assets/images/proveedor.png" alt="Arbol">
   </div>
 </div>

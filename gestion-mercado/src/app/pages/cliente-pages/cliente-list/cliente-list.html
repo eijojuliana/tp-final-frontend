@@ -6,8 +6,9 @@
       <option value="personaId" selected>ID</option>
       <option value="clienteId">ID Cliente</option>
       <option value="nombre">Nombre</option>
+      <option value="apellido">Apellido</option>
       <option value="dni">Dni</option>
-      <option value="edad">Edad</option>
+      <option value="fechaNacimiento">Fecha Nac.</option>
     </select>
 
     <select (change)="orden.set($any($event.target).value)">
@@ -25,7 +26,8 @@
           <th>ID</th>
           <th>ID.CL</th>
           <th>Nombre</th>
-          <th>Edad</th>
+          <th>Apellido</th>
+          <th>Fecha Nac.</th>
           <th>DNI</th>
           <th>Acciones</th>
         </tr>
@@ -37,7 +39,8 @@
           <td>{{ cliente.personaId }}</td>
           <td>{{ cliente.clienteId }}</td>
           <td>{{ cliente.nombre }}</td>
-          <td>{{ cliente.edad }}</td>
+          <td>{{ cliente.apellido }}</td>
+          <td>{{ cliente.fechaNacimiento }}</td>
           <td>{{ cliente.dni }}</td>
           <td class="botones">
             <button class="btnEliminar" (click)="eliminarCliente(cliente.clienteId)">Eliminar</button>

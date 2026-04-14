@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { DuenioService } from '../../../services/duenio-service';
 import { Duenio, NewDuenio } from '../../../models/duenio.model';
 import { ToastService } from '../../../services/toast.service';
+import { Validaciones } from '../../../validations/Validaciones';
 
 @Component({
   selector: 'app-duenio-form',
@@ -17,6 +18,7 @@ export class DuenioForm {
   private service = inject(DuenioService);
   private router = inject(Router);
   private toast = inject(ToastService);
+  private validacion = inject(Validaciones);
   passwordVisible: boolean = false;
 
   isEditMode = signal(false);
@@ -26,10 +28,11 @@ export class DuenioForm {
 
   form = this.fb.nonNullable.group({
     nombre: ['', [Validators.required]],
+    apellido: ['', [Validators.required]],
     dni: [0, [Validators.required, Validators.min(100000), Validators.max(999999999)]],
-    edad: [0, [Validators.required, Validators.min(18)]],
+    fechaNacimiento: ['',[Validators.required, this.validacion.fechaValida]],
     email: ['', [Validators.required, Validators.email]],
-    contraseña: [''],
+    contraseña: ['']
   });
 
   constructor() {
@@ -40,8 +43,9 @@ export class DuenioForm {
         this.isEditMode.set(true);
         this.form.patchValue({
           nombre: this.duenioToEdit.nombre,
+          apellido: this.duenioToEdit.apellido,
           dni: this.duenioToEdit.dni,
-          edad: this.duenioToEdit.edad,
+          fechaNacimiento: this.duenioToEdit.fechaNacimiento,
           email:this.duenioToEdit.email
         });
       } else {
@@ -57,8 +61,9 @@ export class DuenioForm {
     const formValue = this.form.getRawValue();
     const dto = {
       nombre: formValue.nombre,
+      apellido: formValue.apellido,
       dni: formValue.dni,
-      edad: formValue.edad,
+      fechaNacimiento: formValue.fechaNacimiento,
       email: formValue.email,
       contraseña: formValue.contraseña,
     };

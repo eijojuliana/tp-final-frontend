@@ -3,7 +3,8 @@
     <select (change)="atributo.set($any($event.target).value)">
       <option value="personaId" selected>ID</option>
       <option value="nombre">Nombre</option>
-      <option value="edad">Edad</option>
+      <option value="apellido">Apellido</option>
+      <option value="fechaNacimiento">Fecha de Nacimiento</option>
       <option value="dni">DNI</option>
     </select>
 
@@ -21,7 +22,8 @@
         <tr>
           <th>ID</th>
           <th>Nombre</th>
-          <th>Edad</th>
+          <th>Apellido</th>
+          <th>Fecha Nac.</th>
           <th>DNI</th>
           <th>Acciones</th>
         </tr>
@@ -32,7 +34,8 @@
         <tr>
           <td>{{ persona.personaId }}</td>
           <td>{{ persona.nombre }}</td>
-          <td>{{ persona.edad }}</td>
+          <td>{{ persona.apellido }}</td>
+          <td>{{ persona.fechaNacimiento }}</td>
           <td>{{ persona.dni }}</td>
           <td class="acciones">
             <button class="btnEliminar" (click)="deletePersona(persona.personaId)">Eliminar</button>

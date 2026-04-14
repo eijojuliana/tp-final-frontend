@@ -17,7 +17,7 @@ export class ProveedoresList {
   private toast = inject(ToastService);
 
   filtro = signal('');
-  atributo = signal<'personaId' | 'proveedorId' | 'nombre' | 'dni' | 'edad'>('personaId');
+  atributo = signal<'proveedorId' | 'cuit' | 'razonSocial' | 'nombreFantasia' | 'condicion' | 'direccion' | 'telefono' | 'email'>('proveedorId');
   orden = signal<'asc' | 'desc'>('asc');
 
   proveedoresFiltrados = computed(() => {
