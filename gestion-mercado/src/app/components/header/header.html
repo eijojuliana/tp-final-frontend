@@ -4,6 +4,7 @@
 <header>
   <nav class="container">
     <div class="header-izq">
+      <!-- Logo -->
       <a href="/menu">
         <img src="https://i.pinimg.com/736x/97/b1/70/97b170d2f8f2dea37c4c465c8c9ceb14.jpg" alt="logo" class="logo">
         <h1 class="titulo"> Mercado del Cerezo </h1>
@@ -11,11 +12,13 @@
     </div>
 
     <div class="header-der">
+      <!-- Modo oscuro -->
       <img
         [src]="theme.isOscuro()? '/assets/images/sakura-icon.png': '/assets/images/luna-icon.png'"
         class="theme-btn" (click)="toggleTheme()"
       >
 
+      <!-- Menu desplegable -->
       <img src="https://i.pinimg.com/736x/1f/9a/91/1f9a91d7e4bce09f89e82c89e9d40e8c.jpg" alt=""
         class="user-icon icono-perfil-principal" (click)="toggleMenu()">
       <span class="material-symbols-outlined flecha-menu" [class.girar]="menuAbierto"

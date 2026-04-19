@@ -1,12 +1,14 @@
 import { Component, signal, computed, OnInit } from '@angular/core';
 import { HistorialPersonaService } from './historial-persona.service';
 import { DatePipe } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-historial-persona-list',
   templateUrl: './historial-persona-list.html',
   styleUrl: './historial-persona-list.css',
-  imports: [DatePipe]
+  imports: [DatePipe, ReactiveFormsModule,RouterLink]
 })
 export class HistorialPersonaListComponent implements OnInit {
 

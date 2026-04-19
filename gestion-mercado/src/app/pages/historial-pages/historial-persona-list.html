@@ -1,7 +1,8 @@
 <section class="list-container">
   <div class="botones">
     <select (change)="atributo.set($any($event.target).value)">
-      <option value="fecha" selected>Fecha</option>
+      <option [ngValue]="null" disabled selected>Ordenar por</option>
+      <option value="fecha">Fecha</option>
       <option value="accion">Acción</option>
       <option value="personaId">Persona ID</option>
       <option value="usuario">Usuario</option>
@@ -30,6 +31,11 @@
           <th>Detalle</th>
           <th>Fecha</th>
           <th>Usuario</th>
+          <th class="celda-boton">
+            <a class="volver-link" routerLink="/menu/personas">
+              <img class="volver-icon" src="/assets/images/volver-icon.png" alt="volver">
+            </a>
+          </th>
         </tr>
       </thead>
 

@@ -1,10 +1,11 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { PersonaService } from '../../../services/persona-service';
-import { Router} from '@angular/router';
+import { Router, RouterLink} from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-persona-list',
-  imports: [],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './persona-list.html',
   styleUrl: './persona-list.css',
 })

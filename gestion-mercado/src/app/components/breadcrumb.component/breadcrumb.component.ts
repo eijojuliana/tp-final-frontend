@@ -29,6 +29,7 @@ export class BreadcrumbComponent {
     'cuentas-bancarias': 'Cuentas Bancarias',
     personas: 'Personas',
     tienda: 'Tienda',
+    historial: 'Historial',
   };
 
   constructor(private router: Router) {
