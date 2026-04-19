@@ -44,7 +44,7 @@
           <tr>
             <td> {{ h.historialPersonaId }} </td>
             <td> {{ h.personaId }} </td>
-            <td> {{ h.nombre }}</td>
+            <td> {{ h.nombre }} {{h.apellido}}</td>
             <td>{{ h.accion }}</td>
             <td>
               @if (h.accion === 'UPDATE' && h.campoModificado) {
