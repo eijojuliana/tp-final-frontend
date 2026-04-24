@@ -73,7 +73,7 @@ export const routes: Routes = [
   {path:'menu/cuentas-bancarias/form', component: CuentasBancariasForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO}},
 
   // Rutas de la Tienda (Estas rutas SÍ deben estar protegidas)
-  { path:'menu/tienda', component: TiendaPage , canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO}},
+  { path:'configuracion-tienda', component: TiendaPage , canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO}},
 
   // Rutas usuarios
   {path:'menu/usuarios', component: UsuariosList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
