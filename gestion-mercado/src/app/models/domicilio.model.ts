@@ -7,6 +7,3 @@ export interface Domicilio {
   provincia?: string;
   pais: string;
 }
-
-export interface NewDomicilio extends Domicilio{
-}

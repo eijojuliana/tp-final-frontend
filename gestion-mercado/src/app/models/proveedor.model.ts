@@ -6,7 +6,7 @@ export interface Proveedor {
   razonSocial: string;
   nombreFantasia?: string;
   condicion: string;
-  direccion: Domicilio;
+  direccion?: Domicilio;
   telefono?: number;
   email?: string;
 }

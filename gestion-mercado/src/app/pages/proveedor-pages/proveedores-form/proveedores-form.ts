@@ -2,7 +2,7 @@ import { Component, effect, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProveedorService } from '../../../services/proveedor-service';
 import { Router } from '@angular/router';
-import { Proveedor } from '../../../models/proveedor.model';
+import { NewProveedor, Proveedor } from '../../../models/proveedor.model';
 import { ToastService } from '../../../services/toast.service';
 
 @Component({
@@ -24,17 +24,17 @@ export class ProveedoresForm {
     cuit: [0, [Validators.required, Validators.pattern(/^\d{11}$/)]],
     razonSocial: ['', [Validators.required]],
     nombreFantasia: ['', [Validators.required]],
-    condicion: ['', [Validators.required]],
+    condicion: ['Monotributo', [Validators.required]],
     telefono: [0, [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
-    direccion: this.fb.nonNullable.group({
-      calle: ['', [Validators.required]],
-      altura: ['', [Validators.required]],
+    direccion: this.fb.group({
+      calle: [''],
+      altura: [''],
       piso: [''],
-      codigoPostal: ['', [Validators.required]],
-      localidad: ['', [Validators.required]],
-      provincia: ['', [Validators.required]],
-      pais: ['', [Validators.required]]
+      codigopostal: ['7600'],
+      localidad: ['Mar del Plata'],
+      provincia: ['Buenos Aires'],
+      pais: ['Argentina']
     })
   });
 
@@ -56,10 +56,10 @@ export class ProveedoresForm {
   saveProveedor(){
     if(this.form.invalid){return;}
 
-    const formValue = this.form.getRawValue();
+    const formValue = this.form.getRawValue() as NewProveedor;
 
     if(this.isEditMode() && this.proveedorToEdit){
-      const updateProveedor: Proveedor = { ...this.proveedorToEdit, ...formValue };
+      const updateProveedor = { ...this.proveedorToEdit, ...formValue };
       this.proveedorService.update(updateProveedor).subscribe({
         next: () => {
           this.toast.success("Proveedor actualizado correctamente");
