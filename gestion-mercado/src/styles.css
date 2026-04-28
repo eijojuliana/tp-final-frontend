@@ -64,7 +64,8 @@
        VARIABLES SEMÁNTICAS (CLARO)
     ========================= */
 
-    --bg-pag: linear-gradient(180deg, var(--base-tema_claro-0), var(--salmon-tema_claro-2));
+    --bg-pag: linear-gradient(180deg, var(--base-tema_claro-2), var(--salmon-tema_claro-1));
+    --bg-pag2:linear-gradient(180deg, var(--salmon-tema_claro-2), var(--vino-tema_claro-0));
     --bg-input: white;
     --bg-tabla: white;
 
@@ -106,7 +107,8 @@
 ========================= */
 :root.tema-oscuro {
 
-    --bg-pag: linear-gradient(180deg, var(--base-tema_oscuro-4), var(--base-tema_oscuro-2));
+    --bg-pag: linear-gradient(180deg, var(--base-tema_oscuro-3), var(--base-tema_oscuro-2));
+    --bg-pag2:linear-gradient(180deg, var(--base-tema_oscuro-4), var(--base-tema_oscuro-3));
     --bg-input: var(--base-tema_oscuro-3);
     --bg-tabla: var(--base-tema_oscuro-3);
 
