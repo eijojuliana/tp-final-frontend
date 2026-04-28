@@ -4,7 +4,9 @@
   <aside class="sidebar">
 
     <div class="logo-container">
-      <img src="/assets/images/logo.png" class="logo">
+         <img class="logo"
+        [src]="theme.isOscuro()? '/assets/images/Logo-oscuro-MercadoCerezo.png': '/assets/images/Logo-MercadoCerezo.png'"
+      >
       <h2 class="titulo">Mercado del Cerezo</h2>
     </div>
 
