@@ -1,423 +1,117 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Proza+Libre:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap');
 
+/* =========================
+   PALETAS (ANTES root1)
+========================= */
 :root {
-    --color1: #FADDD5;
-    --color2: #785D68;
-    --color3: #6D3951;
-    --color4: #4A1B34;
-    --color5: #291C2C;
-    --color6: #130412;
-    --rosita: rgb(247, 192, 201);
-    --rosita-claro: rgb(243, 212, 217);
-    --rosa: rgb(245, 165, 179);
-    --rosa-oscuro: rgb(247, 130, 149);
 
-    /*Otros*/
-    --blanco: white;
-    --blanco-noFulminanteDeOjos: rgb(187, 187, 187);
-    --blanco-semitrans: rgba(255, 255, 255, 0.274);
-    --negro: black;
-    --negro-semitrans: rgba(0, 0, 0, 0.322);
-    --gris: grey;
+  /* -------- TEMA OSCURO (PALETA) -------- */
+  --rosita-o-0:#F5DFE9;
+  --rosita-o-1:#FAE1EC;
+  --rosita-o-2:#F3C8DC;
+  --rosita-o-3:#F4B6D3;
+  --rosita-o-4:#FE9BC9;
 
-    
-    --verde: #128b51;
-    --verde-clarito: rgb(102, 173, 61);
-    --verde-oscuro: rgb(38, 94, 6);
-    --azul: rgb(27, 65, 190);
-    --azul-clarito: rgb(74, 101, 190);
-    --azul-oscuro: rgb(16, 45, 143);
-    --rojo: #d93025;
-    --rojo-clarito: rgb(179, 58, 58);
-    --rojo-oscuro: rgb(122, 11, 11);
+  --violeta-o-0:#A18CA8;
+  --violeta-o-1:#866D8E;
+  --violeta-o-2:#71557B;
+  --violeta-o-3:#684F72;
+  --violeta-o-4:#4D3B54;
 
-    --negro-semitrans: rgba(255, 255, 255, 0.1);
-    --amarillo-semitrans: rgba(255, 196, 0, 0.1);
-    --verde-semitrans: rgba(61, 145, 13, 0.1);
-    --azul-semitrans: rgba(27, 65, 190, 0.1);
-    --rojo-semitrans: rgba(177, 18, 18, 0.1);
+  --base-o-0:#685CA2;
+  --base-o-1:#48416F;
+  --base-o-2:#3A335C;
+  --base-o-3:#322D4E;
+  --base-o-4:#242139;
 
-    /* TEMA ROSA - DEFAULT */
-    --bg-pag: linear-gradient(180deg, #fff5f9 0%, #ffb7d5 100%);
-    --bg-input: var(--blanco);
-    --bg-tabla: var(--blanco);
-    --encabezado: linear-gradient(135deg, #ffa6c9 0%, #ffb7d5 100%);
+  /* -------- TEMA CLARO (PALETA) -------- */
+  --vino-c-0:#DA99AF;
+  --vino-c-1:#AD4769;
+  --vino-c-2:#860F37;
+  --vino-c-3:#680E2C;
+  --vino-c-4:#3A0013;
 
-    --btn: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-    --btn-hover: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-    --sombra-leve: 0 2px 4px rgba(255, 154, 158, 0.3);
-    --sombra: 0 2px 8px rgba(112, 75, 76, 0.342);
+  --salmon-c-0:#FFEDED;
+  --salmon-c-1:#FFE2E2;
+  --salmon-c-2:#FFC6C5;
+  --salmon-c-3:#FFA8A7;
+  --salmon-c-4:#FF9694;
 
-    --borde: #ffc5d0;
-    --borde-hover: #ff9fb0;
-    --borde-focus: #ff7b96;
-    --letra1: #d4567f;
-    --letra1-leve: #ffb3c1;
-    --letra2: white;
+  --base-c-0:#FFFAF2;
+  --base-c-1:#FFFAF0;
+  --base-c-2:#FFF6E5;
+  --base-c-3:#F5E9D1;
+  --base-c-4:#EDD8B0;
 
-    --btn-editar: rgb(169, 206, 255);
-    --btn-editar-hover: rgba(100, 141, 255, 0.7);
-    --btn-editar-borde: rgba(120, 190, 255, 0.6);
-    --btn-editar-borde-hover: rgba(83, 80, 255, 0.7);
+  /* -------- ESTADOS -------- */
+  --error-2:#D81B18;
+  --error-1:#F17A78;
+  --error-0:#FCDBDA;
 
-    --btn-eliminar: rgb(255, 160, 160);
-    --btn-eliminar-hover: rgba(255, 100, 100, 0.7);
-    --btn-eliminar-borde: rgba(255, 120, 120, 0.6);
-    --btn-eliminar-borde-hover: rgba(255, 80, 80, 0.7);
+  --exito-2:#33EE46;
+  --exito-1:#93F29D;
+  --exito-0:#D6FFDA;
 
-    --btn-detalle: linear-gradient(135deg, #e0a9d5 0%, #f3c9e8 100%);
-    --btn-detalle-hover: linear-gradient(135deg, #d087c5 0%, #e5b3da 100%);
-    --btn-detalle-borde: #e0a9d5;
-
-    --btn-disabled: #cccccc;
-    --btn-disabled-borde: rgba(168, 168, 168, 0.7);
-    --btn-disabled-letra: #888888;
-
-    /* Variables de color para los formularios */
-    /* Form container */
-    --form-bg: linear-gradient(135deg, #2c1b2e 0%, #1a0e1f 50%, #2c1b2e 100%);
-    --form-bg-image: none;
-    --form-bg-image-opacity: 0.7;
-
-    /* Card glass */
-    --form-card-bg: rgba(0, 0, 0, 0.05);
-    --form-card-shadow-1: 0 8px 32px rgba(255, 182, 193, 0.15);
-    --form-card-shadow-2: 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-    --form-card-border: rgba(255, 255, 255, 0.4);
-
-    /* Title */
-    --form-title: #fff;
-
-    /* Labels */
-    --form-label: rgba(255, 255, 255, 0.9);
-    --form-label-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-
-    /* Inputs */
-    --form-input-border: rgba(255, 197, 208, 0.3);
-    --form-input-bg: rgba(255, 255, 255, 0.12);
-    --form-input-color: #fff;
-    --form-placeholder: rgba(255, 255, 255, 0.4);
-
-    --form-input-hover-border: rgba(255, 159, 176, 0.5);
-    --form-input-hover-bg: rgba(255, 255, 255, 0.15);
-
-    --form-input-focus-border: #ffa6c9;
-    --form-input-focus-bg: rgba(255, 255, 255, 0.18);
-    --form-input-focus-ring: 0 0 0 3px rgba(255, 166, 201, 0.2);
-
-    --form-option-color: var(--color4);
-
-    /* Buttons */
-    --form-submit-bg: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-    --form-submit-color: white;
-    --form-submit-shadow: 0 4px 15px rgba(255, 154, 158, 0.3);
-    --form-submit-hover-bg: linear-gradient(135deg, #ff6b81 0%, #fda4ba 100%);
-    --form-submit-disabled-bg: rgba(255, 154, 158, 0.3);
-
-    --form-cancel-bg: rgba(255, 255, 255, 0.15);
-    --form-cancel-color: white;
-    --form-cancel-border: rgba(255, 182, 193, 0.3);
-    --form-cancel-hover-bg: rgba(255, 255, 255, 0.25);
-    --form-cancel-hover-border: rgba(255, 182, 193, 0.5);
-
-    /* Error */
-    --form-error-bg: rgba(255, 123, 156, 0.15);
-    --form-error-color: #ffb3c1;
-    --form-error-border: rgba(255, 123, 156, 0.4);
-
-    /* MENU */
-    --menu-bg: linear-gradient(135deg, #2c1b2e 0%, #1a0e1f 50%, #2c1b2e 100%);
-    --menu-bg-image: url('/assets/images/fondoRegistro.png');
-    --menu-bg-image-opacity: 0.4;
-
-    --menu-title-color: #fff;
-    --menu-title-shadow: 0 2px 10px rgba(255, 182, 193, 0.3);
-
-    --menu-card-bg: rgba(255, 255, 255, 0.07);
-    --menu-card-bg-hover: rgba(255, 255, 255, 0.15);
-
-    --menu-card-border: rgba(255, 255, 255, 0.4);
-    --menu-card-border-hover: rgba(255, 182, 193, 0.5);
-
-    --menu-card-shadow: 0 8px 32px rgba(0, 0, 0, 0.2),
-      0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-
-    --menu-card-shadow-hover: 0 8px 32px rgba(255, 182, 193, 0.2);
-
-    --menu-text-color: #fff;
-    --menu-text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-
-    --menu-icon-shadow: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.4));
-
-    /* Mobile */
-    --menu-bg-image-mobile: url('/assets/images/fondoRegistro.webp');
-    --menu-card-bg-mobile: rgba(0, 0, 0, 0.2);
-
+  --info-2:#218BFF;
+  --info-1:#80CCFF;
+  --info-0:#DDF4FF;
 }
 
+/* =========================
+   TEMA CLARO (DEFAULT)
+========================= */
+:root {
+
+  --bg-pag: linear-gradient(180deg, var(--base-c-0), var(--salmon-c-2));
+
+  --texto: var(--vino-c-2);
+  --texto-secundario: var(--vino-c-1);
+  --texto-inverso: white;
+
+  --bg-input: white;
+  --bg-tabla: white;
+
+  --borde: var(--salmon-c-3);
+  --borde-hover: var(--salmon-c-4);
+
+  --btn: linear-gradient(135deg, var(--salmon-c-3), var(--vino-c-0));
+  --btn-hover: linear-gradient(135deg, var(--salmon-c-4), var(--vino-c-1));
+
+  --sombra: 0 4px 10px rgba(0,0,0,0.15);
+
+  /* FORM */
+  --form-bg: linear-gradient(135deg, var(--base-c-4), var(--base-c-2));
+  --form-card-bg: rgba(255,255,255,0.2);
+  --form-input-bg: rgba(255,255,255,0.7);
+  --form-input-border: var(--salmon-c-3);
+}
+
+/* =========================
+   TEMA OSCURO REAL (USANDO TU PALETA)
+========================= */
 :root.tema-oscuro {
-  color-scheme: dark;
 
-  /* Paleta */
-  --mono-0: #0b0c0e;   /* fondo */
-  --mono-1: #111317;   /* surface 1 */
-  --mono-2: #181b20;   /* surface 2 */
-  --mono-3: #23262d;   /* borde / hover */
-  --mono-t: #e7e7e7;   /* texto principal */
-  --mono-m: #a8a8a8;   /* texto secundario */
+  --bg-pag: linear-gradient(180deg, var(--base-o-4), var(--base-o-2));
 
-  --bg-pag: linear-gradient(180deg, var(--mono-0) 0%, #0f1114 100%);
+  --texto: var(--rosita-o-1);
+  --texto-secundario: var(--rosita-o-3);
+  --texto-inverso: black;
 
-  /* Inputs / tablas */
-  --bg-input: var(--mono-1);
-  --bg-tabla: var(--mono-1);
-  --encabezado: linear-gradient(180deg, var(--mono-2) 0%, var(--mono-1) 100%);
+  --bg-input: var(--base-o-3);
+  --bg-tabla: var(--base-o-3);
 
-  /* Bordes */
-  --borde: var(--mono-3);
-  --borde-hover: var(--mono-3);
-  --borde-focus: #2f333c;
+  --borde: var(--violeta-o-3);
+  --borde-hover: var(--violeta-o-1);
 
-  /* Texto */
-  --letra1: var(--mono-t);
-  --letra1-leve: var(--mono-m);
-  --letra2: var(--mono-t);
-  --letra3: var(--rosita);
-  --letra4: var(--rosita-claro);
+  --btn: linear-gradient(135deg, var(--violeta-o-2), var(--rosita-o-3));
+  --btn-hover: linear-gradient(135deg, var(--violeta-o-1), var(--rosita-o-4));
 
-  /* Botón principal*/
-  --btn: linear-gradient(180deg, #2a2d34 0%, #1c1f25 100%);
-  --btn-hover: linear-gradient(180deg, #343844 0%, #22262e 100%);
-  --sombra-leve: 0 10px 28px rgba(0, 0, 0, 0.45);
-  --sombra: 0 18px 48px rgba(0, 0, 0, 0.55);
+  --sombra: 0 10px 30px rgba(0,0,0,0.6);
 
-  /* Acciones */
-  --btn-editar: linear-gradient(180deg, #2a2d34 0%, #1c1f25 100%);
-  --btn-editar-hover: linear-gradient(180deg, #343844 0%, #22262e 100%);
-  --btn-editar-borde: var(--mono-3);
-  --btn-editar-borde-hover: #3a3f4b;
-
-  --btn-eliminar: linear-gradient(180deg, #2a2d34 0%, #1c1f25 100%);
-  --btn-eliminar-hover: linear-gradient(180deg, #343844 0%, #22262e 100%);
-  --btn-eliminar-borde: var(--mono-3);
-  --btn-eliminar-borde-hover: #3a3f4b;
-
-  --btn-detalle: linear-gradient(180deg, #2a2d34 0%, #1c1f25 100%);
-  --btn-detalle-hover: linear-gradient(180deg, #343844 0%, #22262e 100%);
-  --btn-detalle-borde: var(--mono-3);
-
-  /* Disabled */
-  --btn-disabled: #1b1e24;
-  --btn-disabled-borde: #2a2e37;
-  --btn-disabled-letra: #6f6f6f;
-
-  /* Fondo del form */
-  --form-bg: linear-gradient(180deg, var(--mono-0) 0%, #000000 100%);
-  --form-bg-image: none;
-  --form-bg-image-opacity: 0;
-
-  /* Card */
-  --form-card-bg: rgba(20, 22, 26, 0.9);
-  --form-card-border: rgba(255, 255, 255, 0.06);
-  --form-card-shadow-1: 0 20px 60px rgba(0, 0, 0, 0.65);
-  --form-card-shadow-2: none;
-
-  /* Título */
-  --form-title: var(--mono-t);
-
-  /* Labels */
-  --form-label: #cfcfcf;
-  --form-label-shadow: none;
-
-  /* Inputs */
-  --form-input-bg: rgba(255, 255, 255, 0.04);
-  --form-input-border: rgba(255, 255, 255, 0.08);
-  --form-input-color: var(--mono-t);
-  --form-placeholder: rgba(255, 255, 255, 0.35);
-
-  --form-input-hover-bg: rgba(255, 255, 255, 0.06);
-  --form-input-hover-border: rgba(255, 255, 255, 0.15);
-
-  --form-input-focus-bg: rgba(255, 255, 255, 0.08);
-  --form-input-focus-border: rgba(255, 255, 255, 0.25);
-  --form-input-focus-ring: 0 0 0 2px rgba(255, 255, 255, 0.08);
-
-  /* Botón submit del form */
-  --form-submit-bg: var(--btn);
-  --form-submit-hover-bg: var(--btn-hover);
-  --form-submit-shadow: 0 10px 28px rgba(0, 0, 0, 0.6);
-  --form-submit-disabled-bg: var(--btn-disabled);
-
-  /* Cancelar */
-  --form-cancel-bg: rgba(255, 255, 255, 0.04);
-  --form-cancel-border: rgba(255, 255, 255, 0.12);
-  --form-cancel-hover-bg: rgba(255, 255, 255, 0.08);
-  --form-cancel-hover-border: rgba(255, 255, 255, 0.25);
-
-  /* Error */
-  --form-error-bg: rgba(255, 255, 255, 0.04);
-  --form-error-color: var(--mono-t);
-  --form-error-border: rgba(255, 255, 255, 0.15);
-
-  /* MENU */
-  --menu-bg: var(--bg-pag);
-  --menu-bg-image: none;
-  --menu-bg-image-opacity: 0;
-
-  --menu-title-color: var(--letra3);
-  --menu-title-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
-
-  --menu-card-bg: rgba(255, 255, 255, 0.04);
-  --menu-card-bg-hover: rgba(255, 255, 255, 0.06);
-
-  --menu-card-border: rgba(255, 255, 255, 0.08);
-  --menu-card-border-hover: rgba(255, 255, 255, 0.16);
-
-  --menu-card-shadow: var(--sombra-leve);
-  --menu-card-shadow-hover: var(--sombra);
-
-  --menu-text-color: var(--letra4);
-  --menu-text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
-
-  --menu-icon-shadow: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.55));
-
-  /* Mobile */
-  --menu-bg-image-mobile: none;
-  --menu-card-bg-mobile: rgba(255, 255, 255, 0.04);
-}
-
-body, html {
-    margin: 0;
-    padding: 0;
-    font-size: 62.5%;
-    height: 100%;
-    transition: background-color .2s ease, color .2s ease;
-}
-
-*, ::before, ::after { box-sizing: border-box; }
-
-* {
-  transition: background-color .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease;
-}
-
-main {
-    background-color: #fcf1f1;
-    min-height: 100%;
-}
-
-a { text-decoration: none; }
-
-li { list-style: none; }
-
-h1, h2, h3, h4, h5, h6 {
-    font-size: 3rem;
-    font-weight: 800;
-    font-family: "Kanit", sans-serif;
-}
-
-p, span, label, :placeholder-shown, button, a, th, td {
-    font-size: 1.75rem;
-    font-weight: 400;
-    font-family: "Proza Libre", sans-serif;
-    margin: 0;
-}
-
-/* --- pruebas para form (los demonios de mi cabeza debaten si esto va acá o en cada form.css debido a que sería código repetido) ---*/
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-/*para que si los forms son inválidos no se rompa y se agregue margen o algo D:*/
-form[class*="ng-"] {
-    margin-left: 0 !important;
-    box-sizing: border-box !important;
-}
-
-.campo {
-  display: flex;
-  flex-direction: column;
-  width: 25%;
-}
-
-.error {
-  background-color: var(--rojo-semitrans);
-  color: var(--rojo-clarito);
-  border: solid var(--rojo-clarito) 0.25rem;
-  border-radius: 2.5rem;
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
-  padding: 0.5rem;
-}
-
-
-:root1{
-/*TEMA OSCURO*/
---rosita-tema_oscuro-0:#F5DFE9;
---rosita-tema_oscuro-1:#FAE1EC;
---rosita-tema_oscuro-2:#F3C8DC;
---rosita-tema_oscuro-3:#F4B6D3;
---rosita-tema_oscuro-4:#FE9BC9;
-
---violeta-tema_oscuro-0:#A18CA8;
---violeta-tema_oscuro-1:#866D8E;
---violeta-tema_oscuro-2:#71557B;
---violeta-tema_oscuro-3:#684F72;
---violeta-tema_oscuro-4:#4D3B54;
-
---base-tema_oscuro-0:#685CA2;
---base-tema_oscuro-1:#48416F;
---base-tema_oscuro-2:#3A335C;
---base-tema_oscuro-3:#322D4E;
---base-tema_oscuro-4:#242139;
-
-/*TEMA CLARO*/
---vino-tema_claro-0:#DA99AF;
---vino-tema_claro-1:#AD4769;
---vino-tema_claro-2:#860F37;
---vino-tema_claro-3:#680E2C;
---vino-tema_claro-4:#3A0013;
-
---salmon-tema_claro-0:#FFEDED;
---salmon-tema_claro-1:#FFE2E2;
---salmon-tema_claro-2:#FFC6C5;
---salmon-tema_claro-3:#FFA8A7;
---salmon-tema_claro-4:#FF9694;
-
---base-tema_claro-0:#FFFAF2;
---base-tema_claro-1:#FFFAF0;
---base-tema_claro-2:#FFF6E5;
---base-tema_claro-3:#F5E9D1;
---base-tema_claro-4:#EDD8B0;
-
-/*ERROR*/
---error-0:#FCDBDA;
---error-1:#F17A78;
---error-2:#D81B18;
---error-3:#A60D0A;
---error-4:#800402;
-
-/*EXITO*/
---exito-0:#D6FFDA;
---exito-1:#93F29D;
---exito-2:#33EE46;
---exito-3:#10B220;
---exito-4:#078013;
-
-/*INFO*/
---info-0:#DDF4FF;
---info-1:#B6E3FF;
---info-2:#80CCFF;
---info-3:#54AEFF;
---info-4:#218BFF;
-
-/*NEUTROS*/
---neutro-0:#F6F8FA;
---neutro-1:#EAEEF2;
---neutro-2:#D0D7DE;
---neutro-3:#AFB8C1;
---neutro-4:#8C959F;
-
+  /* FORM */
+  --form-bg: linear-gradient(135deg, var(--base-o-4), var(--base-o-1));
+  --form-card-bg: rgba(0,0,0,0.4);
+  --form-input-bg: rgba(255,255,255,0.05);
+  --form-input-border: var(--violeta-o-3);
 }
