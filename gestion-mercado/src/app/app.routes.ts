@@ -30,8 +30,10 @@ import { ProveedoresForm } from './pages/proveedor-pages/proveedores-form/provee
 import { authGuard } from './auth/guard/auth.guard';
 import { AccesoDenegado } from './pages/acceso-denegado-pages/acceso-denegado/acceso-denegado';
 import { YaLogueado } from './pages/ya-logueado-page/ya-logueado/ya-logueado';
-import { HistorialPersonaListComponent } from './pages/historial-pages/historial-persona-list';
+
 import { PersonaForm } from './pages/persona-pages/persona-form/persona-form';
+import { HistorialPersonaListComponent } from './pages/historial-pages/historial-persona-page/historial-persona-list';
+import { HistorialClienteListComponent } from './pages/historial-pages/historial-cliente-page/historial-cliente-list';
 
 
 // definimos guards en común
@@ -90,7 +92,7 @@ export const routes: Routes = [
   //Rutas clientes
   { path: 'menu/clientes', component: ClienteList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
   { path: 'menu/clientes/form', component: ClienteForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
-
+{ path:'menu/historial/clientes',component:HistorialClienteListComponent, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
   //Rutas transacciones
   { path: 'menu/transacciones', component: TransaccionesList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
   { path: 'menu/transacciones/form', component: TransaccionForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},

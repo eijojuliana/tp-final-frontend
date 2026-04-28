@@ -1,4 +1,4 @@
-@import '../../styles/tabla-style.css';
+@import '../../../styles/tabla-style.css';
 
 .paginacion {
   display: flex;
