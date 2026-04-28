@@ -84,6 +84,7 @@ DIV TABLA
   background-position: center center;
   background-size: cover;
   background-color: var(--bg-tabla);
+  border-radius: 2rem;
 }
 
 .encabezado {

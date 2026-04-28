@@ -50,7 +50,7 @@
 }
 
 .menu-desplegable {
-    background: var(--color2);
+    background: var(--bg-pag);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 1rem;
