@@ -1,105 +1,165 @@
+/* FONDO */
 .login-page {
   height: 100vh;
+  background-color: var(--vino-c-2);
   display: flex;
-  align-items: center;
   justify-content: center;
-  background-image: url('../../../assets/images/background-login.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  image-rendering: auto;
-  position: relative;
-  color: var(--color1);
+  align-items: center;
 }
 
-.login-page::before {
-  content: '';
+/* CARD */
+.login-card {
+  width: 70%;
+  height: 70%;
+  display: flex;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+/* IZQUIERDA */
+.login-izquierda {
+  width: 42%;
+  background-color: var(--salmon-c-2);
+  position: relative;
+}
+
+.badge {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(14, 2, 12, 0.849);
-  z-index: 0;
-}
+  top: 22%;
+  right: -5%;
 
-.login-formulario {
-  position: relative;
-  z-index: 1;
-  background-color: rgba(15, 3, 15, 0.842);
-  color: var(--color1);
-  text-align: center;
-  padding: 4.5rem 2rem;
-  border-radius: 1rem;
-  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.199);
-  min-width: 35%;
-}
+  background: var(--base-c-2);
+  color: var(--vino-c-2);
 
-.login-formulario h2 {
-  margin-bottom: 2.5rem;
-  color: var(--color1);
-}
+  padding: 2.5% 10%;
+  border-radius: 20px;
 
-.inputs {
-  margin-bottom: 1rem;
-  text-align: left;
-}
-
-.inputs label {
-  display: block;
-  margin-bottom: 0.5rem;
-  color: var(--color2);
-}
-
-.inputs input {
-  width: 100%;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  border: 0.1rem solid var(--color2);
-  background-color: var(--color5);
-  color: var(--color1);
-}
-
-.btn-add {
-  width: 100%;
-  padding: 0.75rem;
-  background-color: var(--color1);
-  color: var(--color5);
+  font-size: 1vw;
   font-weight: 700;
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: all .3s ease-in-out
+  letter-spacing: 10%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  white-space: nowrap;
 }
 
-.btn-add:hover {
-  background-color: var(--color2);
+/* DERECHA */
+.login-derecha {
+  width: 58%;
+  background: var(--base-c-2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-content {
+  width: 60%;
+  text-align: center;
+}
+
+/* ICONO */
+.icon {
+  width: 18%;
+  aspect-ratio: 1;
+  background: var(--vino-c-2);
+  border-radius: 50%;
+  margin: 0 auto 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2vw;
+  box-shadow: 0px 0.5vw 1.5vw rgba(0,0,0,0.25);
+}
+
+/* TITULO */
+.login-content h2 {
+  color: var(--vino-c-2);
+  margin-bottom: 5%;
+  font-weight: 500;
+  font-size: 1.5vw;
+}
+
+/* INPUTS */
+.input-group {
+  margin-bottom: 5%;
+  position: relative;
+}
+
+.input-group input {
+  width: 100%;
+  border: none;
+  border-bottom: 0.1vw solid #C9BFB6;
+  padding: 2% 1%;
+  background: transparent;
+  outline: none;
+  font-size: 0.9vw;
+  color: #333;
+}
+
+/* PLACEHOLDER */
+.input-group input::placeholder {
+  color: var(--salmon-c-2);
+}
+
+/* BOTÓN */
+.btn-login {
+  background: var(--vino-c-2);
+  color: var(--base-c-2);
+  border: none;
+  padding: 2% 8%;
+  border-radius: 2vw;
+  margin-top: 5%;
+  cursor: pointer;
+  transition: 0.25s;
+  font-size: 0.9vw;
+}
+
+/* HOVER */
+.btn-login:hover {
+  background: var(--vino-c-2);
+}
+
+.error {
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  margin-top: 0.3rem;
+
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--salmon-c-4);
+
+  background: var(--base-c-2);
+  border: 0.1rem solid var(--salmon-c-4);
+  padding: 0.1rem 0.4rem;
+  border-radius: 30px;
+
+  white-space: nowrap;
 }
 
 .password-input-wrapper {
   position: relative;
 }
 
-.password-input-wrapper input {
-  width: 100%;
-  padding-right: 3.5rem;
-}
-
-
+/* ICONO DEL OJARDOVICH*/
 .toggle-password {
   position: absolute;
-  right: 0.75rem;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
-  background: transparent;
+  background: none;
   border: none;
-  color: var(--color2);
-  font-size: 0.8rem;
-  font-weight: 600;
   cursor: pointer;
-  padding: 0;
+  color: var(--vino-c-2);
+  font-size: 1.5vw;
+  display: flex;
+  align-items: center;
 }
 
-.toggle-password:focus {
-  outline: none;
+.toggle-password:hover {
+  opacity: 0.7;
 }

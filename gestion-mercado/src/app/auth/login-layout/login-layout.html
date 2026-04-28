@@ -1,42 +1,66 @@
 <div class="login-page">
-  <div class="login-formulario">
-    <h2>Mercado del Cerezo</h2>
-    <form (ngSubmit)="login()">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <div class="login-card">
 
-      <div class="inputs">
-        <label for="username">Usuario:</label>
-        <input type="text" id="username" name="username" placeholder="Ingresa tu usuario" [(ngModel)]="username" required>
+    <div class="login-izquierda">
+      <span class="badge">Iniciar Sesión</span>
+    </div>
+
+    <div class="login-derecha">
+
+      <div class="login-content">
+
+        <div class="icon">
+          <span class="material-icons">person</span>
+        </div>
+
+        <h2>Login</h2>
+
+        <form (ngSubmit)="login()">
+
+          <div class="input-group">
+            <input
+              type="text"
+              name="username"
+              placeholder="Email"
+              [(ngModel)]="username"
+              required
+            >
+          </div>
+
+          <div class="input-group password-input-wrapper">
+            <input
+              [type]="passwordVisible ? 'text' : 'password'"
+              name="password"
+              placeholder="Contraseña"
+              [(ngModel)]="password"
+              required
+            >
+
+            <button
+              type="button"
+              class="toggle-password"
+              (click)="togglePasswordVisibility()"
+            >
+              <span class="material-icons">
+                {{ passwordVisible ? 'visibility_off' : 'visibility' }}
+              </span>
+            </button>
+
+            @if (errorMsg!='') {
+              <p class="error">{{ errorMsg }}</p>
+            }
+
+          </div>
+
+          <button type="submit" class="btn-login">Login</button>
+
+        </form>
+
       </div>
 
-      <div class="inputs">
-  <label for="password">Contraseña:</label>
+    </div>
 
-  <div class="password-input-wrapper">
-    <input
-      [type]="passwordVisible ? 'text' : 'password'"
-      id="password"
-      name="password"
-      placeholder="Contraseña"
-      [(ngModel)]="password"
-      required
-    >
-
-    <button
-      type="button"
-      class="toggle-password"
-      (click)="togglePasswordVisibility()"
-    >
-      {{ passwordVisible ? 'Ocultar' : 'Mostrar' }}
-    </button>
   </div>
-</div>
 
-      <button type="submit" class="btn-add">Ingresar</button>
-
-      <!-- Mensaje de error -->
-      @if (errorMsg!='') {
-        <p class="error">{{ errorMsg }}</p>
-      }
-    </form>
-  </div>
 </div>
