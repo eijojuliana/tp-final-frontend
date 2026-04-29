@@ -33,7 +33,12 @@
           <th>Dirección</th>
           <th>Teléfono</th>
           <th>Email</th>
-          <th>Acciones</th>
+          <th class="celda-acciones"> Acciones </th>
+          <th class="celda-boton">
+            <a class="historial-link" routerLink="/menu/historial/proveedores">
+              <img class="historial-icon" src="/assets/images/historial-icon.png" alt="historial">
+            </a>
+          </th>
         </tr>
       </thead>
 
@@ -52,7 +57,7 @@
           </td>
           <td>{{ proveedor.telefono }}</td>
           <td>{{ proveedor.email }}</td>
-          <td class="botones">
+          <td class="acciones">
             <button class="btnEliminar" (click)="eliminarProveedor(proveedor.proveedorId)">
               Eliminar
             </button>

@@ -31,7 +31,12 @@
           <th>Fecha Nac.</th>
           <th>DNI</th>
           <th>Email</th>
-          <th>Acciones</th>
+          <th class="celda-acciones">Acciones</th>
+          <th class="celda-boton">
+            <a class="historial-link" routerLink="/menu/historial/empleados">
+              <img class="historial-icon" src="/assets/images/historial-icon.png" alt="historial">
+            </a>
+          </th>
         </tr>
       </thead>
 
@@ -45,11 +50,9 @@
           <td>{{ empleado.fechaNacimiento }}</td>
           <td>{{ empleado.dni }}</td>
           <td>{{ empleado.email }}</td>
-          <td class="botones">
-            <button class="btnEliminar" (click)="eliminarEmpleado(empleado.empleadoId)">
-              Eliminar
-            </button>
-            <button class="btnEditar" (click)="modificarEmpleado(empleado)">Editar</button>
+          <td class="acciones">
+            <button class="btnEliminar" (click)="eliminarEmpleado(empleado.empleadoId)"> Eliminar </button>
+            <button class="btnEditar" (click)="modificarEmpleado(empleado)"> Editar </button>
           </td>
         </tr>
         } @empty {

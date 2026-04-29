@@ -1,6 +1,4 @@
 <section class="list-container">
-  <h2>Listado de Cuentas Bancarias</h2>
-
   <div class="botones">
     <button type="button" class="btn-agregar" routerLink="/menu/cuentas-bancarias/form"> Agregar </button>
 
@@ -24,7 +22,12 @@
           <th>ID</th>
           <th>CBU</th>
           <th>Saldo</th>
-          <th>Acciones</th>
+          <th class="celda-acciones">Acciones</th>
+          <th class="celda-boton">
+            <a class="historial-link" routerLink="/menu/historial/cuentas-bancarias">
+              <img class="historial-icon" src="/assets/images/historial-icon.png" alt="historial">
+            </a>
+          </th>
         </tr>
       </thead>
 
@@ -34,10 +37,9 @@
             <td>{{c.cuentaBancariaId}}</td>
             <td>{{c.cbu}}</td>
             <td>{{c.saldo}}</td>
-
-            <td class="botones">
-              <button class="btnEliminar" type="button" (click)="deleteCuentaBancaria(c.cuentaBancariaId)">Eliminar</button>
-              <button class="btnEditar" type="button" (click)="updateCuentaBancaria(c)">Editar</button>
+            <td class="acciones">
+              <button class="btnEliminar" (click)="deleteCuentaBancaria(c.cuentaBancariaId)">Eliminar</button>
+              <button class="btnEditar" (click)="updateCuentaBancaria(c)">Editar</button>
             </td>
           </tr>
         } @empty {

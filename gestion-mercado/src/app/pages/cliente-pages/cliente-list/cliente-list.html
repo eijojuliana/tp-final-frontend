@@ -29,7 +29,12 @@
           <th>Apellido</th>
           <th>Fecha Nac.</th>
           <th>DNI</th>
-          <th>Acciones</th>
+          <th class="celda-acciones">Acciones</th>
+          <th class="celda-boton">
+            <a class="historial-link" routerLink="/menu/historial/clientes">
+              <img class="historial-icon" src="/assets/images/historial-icon.png" alt="historial">
+            </a>
+          </th>
         </tr>
       </thead>
 
@@ -42,7 +47,7 @@
           <td>{{ cliente.apellido }}</td>
           <td>{{ cliente.fechaNacimiento }}</td>
           <td>{{ cliente.dni }}</td>
-          <td class="botones">
+          <td class="acciones">
             <button class="btnEliminar" (click)="eliminarCliente(cliente.clienteId)">Eliminar</button>
             <button class="btnEditar" (click)="modificarCliente(cliente)">Editar</button>
           </td>

@@ -1,6 +1,4 @@
 <div class="list-container">
-  <h2>PRODUCTOS</h2>
-
   <div class="filter-search-container">
   <div class="filters-group">
     <select (change)="atributo.set($any($event.target).value)">
@@ -35,7 +33,6 @@
             <p class="categoria">{{product.categoria}}</p>
           </div>
         </div>
-
         <div class="actions">
           <button type="button" class="edit" (click)="updateProduct(product)">Editar</button>
           <button type="button" class="delete" (click)="deleteProduct(product.producto_id)">Eliminar</button>

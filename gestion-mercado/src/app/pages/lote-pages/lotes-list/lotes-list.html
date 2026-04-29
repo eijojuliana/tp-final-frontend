@@ -33,7 +33,12 @@
           <th>Cantidad Disponible</th>
           <th>Costo Unitario</th>
           <th>Fecha de Ingreso</th>
-          <th>Acciones</th>
+          <th class="celda-acciones">Acciones</th>
+          <th class="celda-boton">
+            <a class="historial-link" routerLink="/menu/historial/lotes">
+              <img class="historial-icon" src="/assets/images/historial-icon.png" alt="historial">
+            </a>
+          </th>
         </tr>
       </thead>
 
@@ -41,15 +46,12 @@
         @for(lote of lotesFiltrados(); track $index) {
           <tr>
             <td>{{ lote.lote_id }}</td>
-
             <td>{{ lote.producto.nombre }}</td>
             <td>{{ lote.producto.categoria }}</td>
-
             <td>{{ lote.cantidadDisponible }}</td>
             <td>${{ lote.costoUnitario }}</td>
             <td>{{ lote.fechaIngreso }}</td>
-
-            <td class="botones">
+            <td class="acciones">
               <button class="btnEliminar" type="button" (click)="deleteLote(lote.lote_id)">Eliminar</button>
               <button class="btnEditar" type="button" (click)="updateLote(lote)">Editar</button>
             </td>

@@ -76,6 +76,21 @@ input[type="text"]::placeholder {
 /* ---------------------------------
 DIV TABLA
 ------------------------------------ */
+.list-container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  align-items: center;
+}
+
+.tabla-contenedor {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
 .tabla {
   width: 100%;
   border-spacing: 0;
@@ -119,19 +134,27 @@ DIV TABLA
 
 /* BOTONES */
 
+.celda-acciones {
+  width: 20rem;
+}
+
 .tabla .acciones {
   display: flex;
   justify-content: space-evenly;
+  width: 20rem;
 }
 
-.btnDetalle, .btnEliminar, .btnEditar, .btn {
-  color: var(--letra2);
+.btnDetalle, .btnEliminar, .btnEditar, .btn, .btn-agregar {
+  color: white;
   font-weight: 600;
   font-size: 1.4rem;
   cursor: pointer;
   transition: 0.3s;
   white-space: nowrap;
   /* Propiedades de Contenedor */
+  display: flex; /* Para que la letras estén centradas */
+  align-items: center;
+  justify-content: center;
   padding: 0.7rem 1.5rem;
   border-radius: 10px;
   border: none;
