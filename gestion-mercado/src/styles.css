@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800&display=swap');
 
 /* =========================
-   VARIABLES BASE (TU SISTEMA)
+   VARIABLES BASE
 ========================= */
 :root {
 
@@ -103,7 +103,7 @@
 }
 
 /* =========================
-   TEMA OSCURO (USANDO TU PALETA)
+   TEMA OSCURO
 ========================= */
 :root.tema-oscuro {
 
@@ -142,6 +142,7 @@
 /* =========================
    BASE
 ========================= */
+
 html {
     font-size: 62.5%;
 }
@@ -153,6 +154,49 @@ body {
     color: var(--letra1);
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.main-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+}
+
+.app-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.contenido {
+  display: flex;
+  width: 100%;
+  flex: 1;
+  align-items: stretch;
+}
+
+app-sidebar {
+  display: flex;
+}
+
+main {
+  flex-grow: 1;
+  width: auto;
+  padding: 2rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+app-footer {
+    width: 100%;
+    margin-top: auto;
+}
 /* =========================
    TIPOGRAFÍA
 ========================= */

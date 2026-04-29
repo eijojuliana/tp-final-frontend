@@ -1,5 +1,11 @@
-<app-header/>
-<app-breadcrumb/>
-<router-outlet/>
-<app-toast/>
-<app-footer/>
+<div class="app-wrapper">
+  <app-header/>
+  <app-breadcrumb/>
+  <div class="contenido">
+    <app-sidebar/>
+    <div class="main-container">
+      <router-outlet/>
+    </div>
+  </div>
+  <app-footer/>
+</div>

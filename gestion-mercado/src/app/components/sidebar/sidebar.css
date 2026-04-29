@@ -1,0 +1,57 @@
+
+/* =========================
+   SIDEBAR
+========================= */
+.sidebar {
+  width: 260px;
+  height: 100;
+  background: var(--bg-pag2);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  border-right: 1px solid var(--borde);
+}
+
+/* logo + título */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo {
+  width: 50px;
+  border-radius: 50%;
+}
+
+.titulo {
+  font-size: 1.6rem;
+  color: var(--letra1);
+}
+
+/* menú */
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.item {
+  text-decoration: none;
+  color: var(--btn);
+  padding: 0.8rem;
+  border-radius: 0.8rem;
+  transition: 0.2s;
+}
+
+.item:hover {
+  background: var(--btn-hover);
+}
+
+.item.active {
+  background: var(--btn-hover);
+  color: var(--letra2);
+  font-weight: 600;
+
+}
