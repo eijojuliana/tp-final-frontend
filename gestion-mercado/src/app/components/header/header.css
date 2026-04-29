@@ -1,180 +1,42 @@
+/*HEADERCITO*/
 .container {
     display: flex;
-    background-image: url("https://i.pinimg.com/1200x/58/91/20/589120c15dac8e539d992a5f952f3026.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    align-items: center;
+    justify-content: space-between;
 
-    height: 7rem;
+    height: 6rem;
     padding: 0 5%;
 
     position: relative;
-    filter: brightness(0.8) contrast(1.1);
-    box-shadow: 0 2px 15px rgba(248, 157, 195, 0.377);
-    position:relative;
     z-index: 3;
-}
 
-.container::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.781);
-    z-index: -1;
-}
+    background: var(--salmon-tema_claro-2);
 
-.logo {
-    width: 5.5rem;
-    transition: transform 0.3s ease, filter 0.3s ease;
-    border-radius: 50%;
-}
+    box-shadow: 0 4px 25px rgba(233, 52, 142, 0.2),
+      inset 0 0 30px rgba(255, 214, 231, 0.986),
+      inset 0 0 60px rgb(168, 51, 69);;
+  }
 
-.logo:hover {
-    transform: scale(1.10);
-    filter: drop-shadow(0 0 6px rgba(243, 243, 243, 0.5));
-}
-
+/* PERFIL */
 .user-icon {
     border-radius: 50%;
-    width: 5.5rem;
+    width: 4rem;
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-    transition: box-shadow 0.2s ease-in-out;
+
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, var(--salmon-tema_claro-1), var(--salmon-tema_claro-2)) border-box;
+
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.4);
+    transition: 0.3s;
 }
 
 .user-icon:hover {
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+    transform: scale(1.05);
+    box-shadow: 0 0 18px var(--salmon-tema_claro-1);
 }
 
-.menu-desplegable {
-    background: var(--bg-pag);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 1rem;
-    position: absolute;
-    top: 110%;
-    right: 7%;
-    width: 90%;
-    max-width: 30rem;
-    max-height: 0;
-    overflow: hidden;
-    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
-    transform: scaleY(0);
-    transition: transform 0.3s ease, max-height 0.3s ease;
-}
-
-.abrir-menu {
-    transform: scaleY(1);
-    max-height: 30rem;
-}
-
-.contenedor-menu {
-    padding: 1.5rem;
-    max-height: 100%;
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.user-info h2 {
-    font-size: 1.75rem;
-    font-weight: 500;
-}
-
-.menu-desplegable hr {
-    margin: 1rem 0;
-    border: 0;
-    height: 0.01rem;
-    background-color: var(--color1);
-}
-
-.opciones-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.opcion {
-  display: flex;
-  align-items: center;
-  padding: 0.75rem;
-  border-radius: 0.75rem;
-  width: 100%;
-}
-
-.opciones-menu .opcion:hover {
-  background-color: rgba(255, 255, 255, 0.397);
-  cursor: pointer;
-}
-
-.opciones-menu button {
-  background: none;
-  border: 0;
-}
-
-.opciones-menu button:hover {
-  cursor: pointer;
-}
-
-.opciones-menu .material-symbols-outlined {
-    border-radius: 50%;
-    padding: 1rem;
-    background-color: var(--color1);
-    color: var(--color5);
-}
-
-.opciones-menu p {
-    flex: 1;
-    margin-left: 1rem;
-    font-size: 1.25rem;
-}
-
-.header-izq a {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-}
-
-.titulo {
-  color: white;
-  margin: 0;
-}
-
-.flecha-menu {
-  font-size: 24px;
-  color: #fff;
-  text-shadow: 0 0 6px #00ffff, 0 0 10px #00ffff;
-  margin-left: 4px;
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
-
-.flecha-menu.girar {
-  transform: rotate(180deg);
-}
-
-.header-izq {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.header-der {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  justify-content: end;
-}
-
+/* BOTON TEMA */
 .theme-btn {
   margin: 2rem;
   width: 2rem;
@@ -184,17 +46,142 @@
 }
 
 .theme-btn:hover {
-  transform: scale(1.10);
-  filter: drop-shadow(0 0 6px rgba(243, 243, 243, 0.5));
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 6px var(--rosa1));
 }
 
-/* DISEÑO RESPONSIVO */
-@media (max-width: 768px) {
-  .titulo {
-    font-size: 1.5rem;
-  }
+/* FLECHA */
+.flecha-menu {
+  font-size: 24px;
+  color: var(--rosa1);
+  text-shadow: 0 0 10px var(--rosa1);
+  margin-left: 4px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
 
-  .logo, .user-icon {
+.flecha-menu.girar {
+  transform: rotate(180deg);
+}
+
+/* MENU */
+.menu-desplegable {
+    background: var(--bg-menu);
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1.2rem;
+
+    position: absolute;
+    top: 110%;
+    right: 7%;
+
+    width: 90%;
+    max-width: 30rem;
+
+    max-height: 0;
+    overflow: hidden;
+
+    transform: scaleY(0);
+    transform-origin: top;
+
+    transition: transform 0.3s ease, max-height 0.3s ease;
+
+    box-shadow: 0 10px 40px rgba(255, 105, 180, 0.25);
+}
+
+.abrir-menu {
+    transform: scaleY(1);
+    max-height: 30rem;
+}
+
+/* CONTENIDO */
+.contenedor-menu {
+    padding: 1.5rem;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-info h2 {
+    font-size: 1.6rem;
+    color: var(--texto);
+}
+
+/* LINEA */
+.menu-desplegable hr {
+    margin: 1rem 0;
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--rosa1), transparent);
+}
+
+/* OPCIONES */
+.opciones-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.opcion {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem;
+  border-radius: 0.8rem;
+  width: 100%;
+  transition: 0.25s;
+}
+
+/* HOVER LINDO */
+.opcion:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 105, 180, 0.25),
+    rgba(255, 182, 193, 0.15)
+  );
+
+  transform: translateX(6px);
+  cursor: pointer;
+}
+
+/* ICONOS */
+.opciones-menu .material-symbols-outlined {
+    border-radius: 50%;
+    padding: 0.8rem;
+
+    background: linear-gradient(
+        135deg,
+        var(--rosa1),
+        var(--rosa2)
+    );
+
+    color: white;
+
+    box-shadow: 0 0 12px var(--rosa1);
+}
+
+/* TEXTO */
+.opciones-menu p {
+    flex: 1;
+    margin-left: 1rem;
+    font-size: 1.2rem;
+    color: var(--texto);
+}
+
+/* LAYOUT */
+.header-der {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 100%;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .user-icon {
     width: 4rem;
   }
 }
