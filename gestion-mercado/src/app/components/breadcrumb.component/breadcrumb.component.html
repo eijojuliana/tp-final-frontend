@@ -1,12 +1,13 @@
 <nav
   class="breadcrumbs"
   [style.display]="crumbs.length === 0 ? 'none' : 'flex'"
->
-  <a
-    *ngFor="let c of crumbs; let i = index"
-    [routerLink]="c.url"
-    [class.active]="i === crumbs.length - 1"
   >
-    {{ c.label }}
-  </a>
+  @for (c of crumbs; track c; let i = $index) {
+    <a
+      [routerLink]="c.url"
+      [class.active]="i === crumbs.length - 1"
+      >
+      {{ c.label }}
+    </a>
+  }
 </nav>
