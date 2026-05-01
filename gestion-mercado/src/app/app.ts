@@ -8,7 +8,7 @@ import { Sidebar } from './components/sidebar/sidebar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Footer, ToastComponent, BreadcrumbComponent,Sidebar],
+  imports: [RouterOutlet, Header, Footer, BreadcrumbComponent,Sidebar],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

@@ -1,0 +1,78 @@
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+}
+
+.filtros-stats {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+/* Inputs */
+.filtros-stats input {
+  background: var(--bg-pag2);
+  border: 1px solid var(--borde);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* Cards simples */
+.card-stat {
+  background: var(--bg-pag2);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.card-stat .label {
+  color: var(--letra1);
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.card-stat .valor {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #ff4d8d;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+.card-grafico {
+  background: var(--bg-pag2);
+  border: 1px solid var(--borde);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.card-grafico h3 {
+  margin-bottom: 20px;
+  color: var(--letra1);
+}
+
+.canvas-container {
+  height: 300px;
+  position: relative;
+}
+
+@media (max-width: 900px) {
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+}

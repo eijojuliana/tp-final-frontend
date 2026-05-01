@@ -6,6 +6,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { BasicAuthInterceptorFn } from './auth/basic-auth.interceptor';
 import { AuthService } from './auth/auth.service';
 import { errorInterceptor} from './interceptors/error.interceptor';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,6 +19,7 @@ export const appConfig: ApplicationConfig = {
         errorInterceptor
       ])
     ),
+    provideCharts(withDefaultRegisterables()),
     AuthService,
   ]
 };

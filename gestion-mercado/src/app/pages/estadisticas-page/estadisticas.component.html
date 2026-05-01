@@ -1,0 +1,47 @@
+<section class="stats-container">
+  <div class="filtros-stats">
+    <input type="date" #inicio (change)="cargarDatos(inicio.value, fin.value)">
+    <input type="date" #fin (change)="cargarDatos(inicio.value, fin.value)">
+  </div>
+
+  <!-- KPIs Superiores-->
+  <div class="kpi-grid">
+    <div class="card-stat">
+      <span class="label">Ventas Totales</span>
+      <p class="valor">{{ stats()?.ventasTotales | currency:'USD' }}</p>
+    </div>
+    <div class="card-stat">
+      <span class="label">Gastos Totales</span>
+      <p class="valor">{{ stats()?.gastosTotales | currency:'USD' }}</p>
+    </div>
+    <div class="card-stat">
+      <span class="label">Nuevos Clientes</span>
+      <p class="valor">{{ stats()?.nuevosClientes }}</p>
+    </div>
+  </div>
+
+  <!-- Gráficos Principales -->
+  <div class="charts-grid">
+    <div class="card-grafico">
+      <h3>Ventas por Método</h3>
+      <div class="canvas-container">
+        <canvas baseChart
+          [data]="donutData"
+          [type]="'doughnut'"
+          [options]="donutOptions">
+        </canvas>
+      </div>
+    </div>
+
+    <div class="card-grafico">
+      <h3>Tendencia Mensual</h3>
+      <div class="canvas-container">
+        <canvas baseChart
+          [data]="lineData"
+          [type]="'line'"
+          [options]="lineOptions">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</section>
