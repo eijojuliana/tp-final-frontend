@@ -12,12 +12,37 @@
 }
 
 /* Inputs */
-.filtros-stats input {
+.filtros-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.botones-rango {
+  display: flex;
+  gap: 10px;
+}
+
+.botones-rango button {
   background: var(--bg-pag2);
   border: 1px solid var(--borde);
   color: white;
-  padding: 8px 12px;
-  border-radius: 8px;
+  padding: 8px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.botones-rango button:hover {
+  background: #ff4d8d;
+  border-color: #ff4d8d;
+}
+
+.filtros-stats input {
+  border-radius: 50px;
+  padding: 8px 15px;
 }
 
 .kpi-grid {

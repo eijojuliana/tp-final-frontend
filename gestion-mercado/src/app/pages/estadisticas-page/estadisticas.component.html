@@ -1,7 +1,24 @@
 <section class="stats-container">
   <div class="filtros-stats">
-    <input type="date" #inicio (change)="cargarDatos(inicio.value, fin.value)">
-    <input type="date" #fin (change)="cargarDatos(inicio.value, fin.value)">
+    <div class="botones-rango">
+      <button
+        (click)="seleccionarRango('hoy')"
+        [class.active]="rangoSeleccionado() === 'hoy'">Hoy</button>
+      <button
+        (click)="seleccionarRango('mes')"
+        [class.active]="rangoSeleccionado() === 'mes'">Mes</button>
+      <button
+        (click)="seleccionarRango('año')"
+        [class.active]="rangoSeleccionado() === 'año'">Año</button>
+      <button
+        (click)="seleccionarRango('todo')"
+        [class.active]="rangoSeleccionado() === 'todo'">Todo</button>
+    </div>
+
+    <div class="inputs-fecha">
+      <input type="date" #inicio (change)="cargarDatos(inicio.value, fin.value)">
+      <input type="date" #fin (change)="cargarDatos(inicio.value, fin.value)">
+    </div>
   </div>
 
   <!-- KPIs Superiores-->
@@ -34,7 +51,11 @@
     </div>
 
     <div class="card-grafico">
-      <h3>Tendencia Mensual</h3>
+      <h3>
+        Tendencia
+        {{ rangoSeleccionado() === 'hoy' ? 'por Hora' :
+          (rangoSeleccionado() === 'mes' ? 'Diaria' : 'Mensual') }}
+      </h3>
       <div class="canvas-container">
         <canvas baseChart
           [data]="lineData"

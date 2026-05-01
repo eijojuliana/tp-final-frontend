@@ -34,6 +34,7 @@ import { YaLogueado } from './pages/ya-logueado-page/ya-logueado/ya-logueado';
 import { PersonaForm } from './pages/persona-pages/persona-form/persona-form';
 import { HistorialPersonaListComponent } from './pages/historial-pages/historial-persona-page/historial-persona-list';
 import { HistorialClienteListComponent } from './pages/historial-pages/historial-cliente-page/historial-cliente-list';
+import { EstadisticasComponent } from './pages/estadisticas-page/estadisticas.component';
 
 
 // definimos guards en común
@@ -108,6 +109,9 @@ export const routes: Routes = [
 
   //Acceso denegado
   { path: 'acceso-denegado', component: AccesoDenegado },
+
+  // Estadisticas
+  { path: 'menu/estadisticas', component: EstadisticasComponent }
 
 ];
 
