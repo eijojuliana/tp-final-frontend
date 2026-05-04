@@ -46,28 +46,38 @@
 }
 
 .kpi-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.operador {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--letra1);
+  padding: 0 10px;
 }
 
 /* Cards simples */
 .card-stat {
+  flex: 1;
   background: var(--bg-pag2);
   border: 1px solid var(--borde);
   border-radius: 12px;
-  padding: 20px;
+  padding: 25px;
   text-align: center;
 }
 
 .card-stat .label {
   color: var(--letra1);
-  font-size: 0.9rem;
-  opacity: 0.8;
+  font-size: 1.2rem;
+  font-weight: 500;
+  opacity: 0.9;
 }
 
 .card-stat .valor {
-  font-size: 1.8rem;
+  font-size: 2.5rem;
   font-weight: bold;
   margin-top: 10px;
   color: #ff4d8d;
@@ -89,11 +99,20 @@
 .card-grafico h3 {
   margin-bottom: 20px;
   color: var(--letra1);
+  font-size: 1.4rem;
+  font-weight: bold;
 }
 
 .canvas-container {
   height: 300px;
   position: relative;
+}
+
+.descripcion-card {
+  text-align: center;
+  color: var(--letra1);
+  margin-top: 15px;
+  opacity: 0.7;
 }
 
 @media (max-width: 900px) {

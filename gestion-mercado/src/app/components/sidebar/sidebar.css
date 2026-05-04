@@ -1,19 +1,18 @@
-
 /* =========================
    SIDEBAR
 ========================= */
 .sidebar {
-  width: 260px;
-  height: 100;
+  width: 280px;
+  height: 100vh;
   background: var(--bg-pag2);
-  padding: 2rem 1.5rem;
+  padding: 2rem 1.2rem;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2.5rem;
   border-right: 1px solid var(--borde);
+  overflow-y: auto;
 }
 
-/* logo + título */
 .logo-container {
   display: flex;
   align-items: center;
@@ -21,28 +20,42 @@
 }
 
 .logo {
-  width: 50px;
+  width: 45px;
   border-radius: 50%;
 }
 
 .titulo {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   color: var(--letra1);
 }
 
-/* menú */
 .sidebar-menu {
   display: flex;
   flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* Contenedor interno para icono + texto */
+.item-content {
+  display: flex;
+  align-items: center;
   gap: 1rem;
+}
+
+.menu-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
 }
 
 .item {
   text-decoration: none;
   color: var(--btn);
-  padding: 0.8rem;
+  padding: 0.7rem 0.9rem;
   border-radius: 0.8rem;
   transition: 0.2s;
+  display: block;
+  cursor: pointer;
 }
 
 .item:hover {
@@ -53,5 +66,45 @@
   background: var(--btn-hover);
   color: var(--letra2);
   font-weight: 600;
+}
 
+/* Iconos específicos para el estado activo */
+.item.active .menu-icon {
+  filter: brightness(1.2);
+}
+
+.dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon-arrow {
+  font-size: 0.6rem;
+  transition: transform 0.2s;
+  opacity: 0.7;
+}
+
+.icon-arrow.rotated {
+  transform: rotate(180deg);
+}
+
+.submenu {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+  margin-top: 0.2rem;
+  gap: 0.2rem;
+  border-left: 1px solid var(--borde);
+  padding-left: 0.5rem;
+}
+
+.submenu .item {
+  font-size: 0.9rem;
+  padding: 0.5rem 0.8rem;
+}
+
+.submenu .menu-icon {
+  width: 18px;
+  height: 18px;
 }

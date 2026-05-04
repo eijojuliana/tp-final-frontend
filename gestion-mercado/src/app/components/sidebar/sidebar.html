@@ -1,79 +1,176 @@
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-
-    <div class="logo-container">
-         <img class="logo"
-        [src]="theme.isOscuro()? '/assets/images/Logo-oscuro-MercadoCerezo.png': '/assets/images/Logo-MercadoCerezo.png'"
-      >
-      <h2 class="titulo">Mercado del Cerezo</h2>
-    </div>
-
- <nav class="sidebar-menu">
-
-  <a routerLink="/menu" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="item">
-    Inicio
-  </a>
-
-  <!-- VENTAS -->
-  <div>
-    <div class="item" (click)="toggleMenu('ventas')" style="display:flex; justify-content:space-between; align-items:center;">
-      Ventas
-      <span [style.transform]="openMenu === 'ventas' ? 'rotate(180deg)' : 'rotate(0deg)'" style="transition:0.2s;">
-        ▼
-      </span>
-    </div>
-
-    @if (openMenu === 'ventas') {
-      <div style="display:flex; flex-direction:column; margin-left:1.5rem; margin-top:0.3rem;">
-
-        <a routerLink="/menu/ventas" routerLinkActive="active" class="item">
-          Ver ventas
-        </a>
-
-        <a routerLink="/menu/pedidos" routerLinkActive="active" class="item">
-          Pedidos
-        </a>
-
-        <a routerLink="/menu/transacciones" routerLinkActive="active" class="item">
-          Transacciones
-        </a>
-
-      </div>
-    }
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="logo-container">
+    <img class="logo" [src]="theme.isOscuro()? 'assets/images/Logo-oscuro-MercadoCerezo.png': 'assets/images/Logo-MercadoCerezo.png'">
+    <h2 class="titulo">Mercado del Cerezo</h2>
   </div>
 
-  <!-- CAJA -->
-  <div>
-    <div class="item" (click)="toggleMenu('caja')" style="display:flex; justify-content:space-between; align-items:center;">
-      Caja
-      <span [style.transform]="openMenu === 'caja' ? 'rotate(180deg)' : 'rotate(0deg)'" style="transition:0.2s;">
-        ▼
-      </span>
+  <nav class="sidebar-menu">
+    <!-- INICIO -->
+    <a routerLink="/menu" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="item">
+      <div class="item-content">
+        <img src="assets/images/sakura-white-icon.png" class="menu-icon">
+        <span>Inicio</span>
+      </div>
+    </a>
+
+    <!-- INVENTARIO -->
+    <div>
+      <div class="item dropdown-header" (click)="toggleMenu('inventario')">
+        <div class="item-content">
+          <img src="assets/images/inventario-icon.png" class="menu-icon">
+          <span>Inventario</span>
+        </div>
+        <span class="icon-arrow" [class.rotated]="openMenu === 'inventario'">▼</span>
+      </div>
+      @if (openMenu === 'inventario') {
+        <div class="submenu">
+          <a routerLink="/menu/productos" routerLinkActive="active" class="item">
+            <div class="item-content">
+              <img src="assets/images/productos-icon.png" class="menu-icon">
+              <span>Productos</span>
+            </div>
+          </a>
+          <a routerLink="/menu/lotes" routerLinkActive="active" class="item">
+            <div class="item-content">
+              <img src="assets/images/lote-icon.png" class="menu-icon">
+              <span>Lotes</span>
+            </div>
+          </a>
+          <a routerLink="/menu/inventarios" routerLinkActive="active" class="item">
+            <div class="item-content">
+              <img src="assets/images/inventario-icon.png" class="menu-icon">
+              <span>Inventarios</span>
+            </div>
+          </a>
+        </div>
+      }
     </div>
 
-    @if (openMenu === 'caja') {
-      <div style="display:flex; flex-direction:column; margin-left:1.5rem; margin-top:0.3rem;">
-
-        <a routerLink="/menu/caja" routerLinkActive="active" class="item">
-          Ver caja
-        </a>
-
-        <a routerLink="/menu/cierre-caja" routerLinkActive="active" class="item">
-          Cierre de caja
-        </a>
-
+    <!-- OPERACIONES -->
+    <div>
+      <div class="item dropdown-header" (click)="toggleMenu('comercial')">
+        <div class="item-content">
+          <img src="assets/images/pedido-icon.png" class="menu-icon">
+          <span>Operaciones</span>
+        </div>
+        <span class="icon-arrow" [class.rotated]="openMenu === 'comercial'">▼</span>
       </div>
-    }
-  </div>
+      @if (openMenu === 'comercial') {
+        <div class="submenu">
+          <a routerLink="/menu/pedidos" routerLinkActive="active" class="item">
+            <div class="item-content">
+              <img src="assets/images/pedido-icon.png" class="menu-icon">
+              <span>Pedidos</span>
+            </div>
+          </a>
+          <a routerLink="/menu/transacciones" routerLinkActive="active" class="item">
+            <div class="item-content">
+              <img src="assets/images/transaccion-icon.png" class="menu-icon">
+              <span>Transacciones</span>
+            </div>
+          </a>
+          <a routerLink="/menu/cuentas-bancarias" routerLinkActive="active" class="item">
+            <div class="item-content">
+              <img src="assets/images/cuentaB-icon.png" class="menu-icon">
+              <span>Cuentas Bancarias</span>
+            </div>
+          </a>
+          <a routerLink="/menu/proveedores" routerLinkActive="active" class="item">
+            <div class="item-content">
+              <img src="assets/images/proveedor-icon.png" class="menu-icon">
+              <span>Proveedores</span>
+            </div>
+          </a>
+        </div>
+      }
+    </div>
 
-  <a routerLink="/menu/estadisticas" routerLinkActive="active" class="item">
-    Estadísticas
-  </a>
+    <!-- ENTIDADES -->
+    <div>
+      <div class="item dropdown-header" (click)="toggleMenu('entidades')">
+        <div class="item-content">
+          <img src="assets/images/user-icon.png" class="menu-icon">
+          <span>Entidades</span>
+        </div>
+        <span class="icon-arrow" [class.rotated]="openMenu === 'entidades'">▼</span>
+      </div>
+      @if (openMenu === 'entidades') {
+        <div class="submenu">
+          <a routerLink="/menu/personas" routerLinkActive="active" class="item">
+            <div class="item-content">
+              <img src="assets/images/persona-icon.png" class="menu-icon">
+              <span>Personas</span>
+            </div>
+          </a>
+          <a routerLink="/menu/clientes" routerLinkActive="active" class="item">
+            <div class="item-content">
+              <img src="assets/images/clientes-icon.png" class="menu-icon">
+              <span>Clientes</span>
+            </div>
+          </a>
+          <a routerLink="/menu/empleados" routerLinkActive="active" class="item">
+            <div class="item-content">
+              <img src="assets/images/empleado-icon.png" class="menu-icon">
+              <span>Empleados</span>
+            </div>
+          </a>
+          <a routerLink="/menu/duenios" routerLinkActive="active" class="item">
+            <div class="item-content">
+              <img src="assets/images/duenio-icon.png" class="menu-icon">
+              <span>Dueños</span>
+            </div>
+          </a>
+          <a routerLink="/menu/usuarios" routerLinkActive="active" class="item">
+            <div class="item-content">
+              <img src="assets/images/user-icon.png" class="menu-icon">
+              <span>Usuarios</span>
+            </div>
+          </a>
+        </div>
+      }
+    </div>
 
-  <a routerLink="/menu/personal" routerLinkActive="active" class="item">
-    Personal
-  </a>
+    <!-- HISTORIALES -->
+    <div>
+      <div class="item dropdown-header" (click)="toggleMenu('historial')">
+        <div class="item-content">
+          <img src="assets/images/historial-icon.png" class="menu-icon">
+          <span>Historiales</span>
+        </div>
+        <span class="icon-arrow" [class.rotated]="openMenu === 'historial'">▼</span>
+      </div>
+      @if (openMenu === 'historial') {
+        <div class="submenu">
+          <a routerLink="/menu/historial/personas" routerLinkActive="active" class="item">
+            <div class="item-content">
+              <img src="assets/images/historial-icon.png" class="menu-icon">
+              <span>Historial Personas</span>
+            </div>
+          </a>
+          <a routerLink="/menu/historial/clientes" routerLinkActive="active" class="item">
+            <div class="item-content">
+              <img src="assets/images/historial-icon.png" class="menu-icon">
+              <span>Historial Clientes</span>
+            </div>
+          </a>
+        </div>
+      }
+    </div>
 
-</nav>
+    <!-- ESTADÍSTICAS Y CONFIG -->
+    <a routerLink="/menu/estadisticas" routerLinkActive="active" class="item">
+      <div class="item-content">
+        <img src="assets/images/display.png" class="menu-icon">
+        <span>Estadísticas</span>
+      </div>
+    </a>
 
-  </aside>
+    <a routerLink="/configuracion-tienda" routerLinkActive="active" class="item">
+      <div class="item-content">
+        <img src="assets/images/shop-icon.png" class="menu-icon">
+        <span>Configuración Tienda</span>
+      </div>
+    </a>
+  </nav>
+</aside>

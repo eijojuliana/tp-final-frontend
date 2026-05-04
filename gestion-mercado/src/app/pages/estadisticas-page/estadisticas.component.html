@@ -24,16 +24,24 @@
   <!-- KPIs Superiores-->
   <div class="kpi-grid">
     <div class="card-stat">
-      <span class="label">Ventas Totales</span>
-      <p class="valor">{{ stats()?.ventasTotales | currency:'USD' }}</p>
+      <span class="label"> Ventas Totales </span>
+      <p class="valor">{{ stats()?.ventasTotales | currency: 'USD' }}</p>
     </div>
+
+    <div class="operador">-</div>
+
     <div class="card-stat">
-      <span class="label">Gastos Totales</span>
+      <span class="label"> Gastos Totales </span>
       <p class="valor">{{ stats()?.gastosTotales | currency:'USD' }}</p>
     </div>
+
+    <div class="operador">=</div>
+
     <div class="card-stat">
-      <span class="label">Nuevos Clientes</span>
-      <p class="valor">{{ stats()?.nuevosClientes }}</p>
+      <span class="label"> Ganancia </span>
+      <p class="valor">
+        {{ (stats()?.ventasTotales - stats()?.gastosTotales) | currency:'USD' }}
+      </p>
     </div>
   </div>
 
@@ -42,7 +50,7 @@
     <div class="card-grafico">
       <h3>Ventas por Método</h3>
       <div class="canvas-container">
-        <canvas baseChart
+        <canvas baseChart [plugins]="donutPlugins"
           [data]="donutData"
           [type]="'doughnut'"
           [options]="donutOptions">

@@ -13,7 +13,6 @@ import { ThemeService } from '../../styles/theme.service';
 })
 export class Sidebar {
 
-
   public authService=inject(AuthService);
   constructor(public auth: AuthService , public theme: ThemeService) { }
 
@@ -21,13 +20,10 @@ export class Sidebar {
     return this.auth.getRole();
   }
 
+  openMenu: string | null = null;
 
-openMenu: string | null = null;
-
-toggleMenu(menu: string) {
-  this.openMenu = this.openMenu === menu ? null : menu;
-}
-
-
+  toggleMenu(menu: string) {
+    this.openMenu = this.openMenu === menu ? null : menu;
+  }
 
 }

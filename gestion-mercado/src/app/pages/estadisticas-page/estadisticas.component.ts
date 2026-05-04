@@ -17,6 +17,7 @@ export class EstadisticasComponent implements OnInit {
 
   private http = inject(HttpClient);
   rangoSeleccionado = signal<string>('mes');
+  public donutPlugins = [centerTextPlugin];
 
   // Signal para los datos del backend
   stats = signal<any>(null);
@@ -100,8 +101,12 @@ export class EstadisticasComponent implements OnInit {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: { position: 'top', labels: { color: 'white' } }
-    }
+      legend: {
+        position: 'bottom',
+        labels: { color: 'white', padding: 20 }
+      }
+    },
+    cutout: '70%'
   };
 
   // Configuración de Gráfico de Líneas (Tendencia)
@@ -128,7 +133,25 @@ export class EstadisticasComponent implements OnInit {
       }
     },
     plugins: {
-      legend: { labels: { color: 'white' } }
+      legend: {
+        position: 'bottom',
+        labels: { color: 'white', padding: 20 }
+      }
     }
   };
 }
+
+const centerTextPlugin = {
+  id: 'centerText',
+  afterDraw: (chart: any) => {
+    const { ctx, chartArea: { top, width, height } } = chart;
+    ctx.save();
+    const total = chart.data.datasets[0].data.reduce((a: number, b: number) => a + b, 0);
+    ctx.font = 'bold 2.5rem Poppins';
+    ctx.fillStyle = 'white';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(`$${total.toFixed(2)}`, width / 2, (height / 2) + top + 10);
+    ctx.restore();
+  }
+};
