@@ -2,43 +2,44 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1.25rem;
-  margin: 0;
+  padding: 0.6rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  background: var(--bg-pag2);
+  border: 1px solid var(--borde);
+  border-radius: 0.8rem;
+  width: fit-content;
+  margin: 0.5rem 0 0 1rem;
 }
 
 .breadcrumbs a {
   text-decoration: none;
-  color: var(--rosa);
-  transition: 0.25s ease;
-  font-weight: 600;
-  font-size: 1.5rem;
+  color: var(--letra1-leve);
+  font-weight: 500;
+  transition: 0.2s ease;
 }
 
 .breadcrumbs a:hover {
-  color: var(--rosa);
-  transform: translateY(-1px);
-  text-shadow: 0 0 8px rgba(255, 185, 210, 0.7);
+  color: var(--vino-tema_claro-2);
 }
 
 .breadcrumbs a.active {
-  color: var(--rosa);
-  cursor: default;
-  pointer-events: none;
-  font-weight: 700;
-  text-shadow: 0 0 6px rgba(255, 210, 226, 0.9);
+  color: var(--vino-tema_claro-2);
+  font-weight: 600;
 }
 
 .breadcrumbs a::after {
-  content: " > ";
-  color: var(--rosa);
-  font-weight: 400;
-  opacity: 0.7;
+  content: "›";
+  margin: 0 0.5rem;
+  color: var(--salmon-tema_claro-3);
 }
 
 .breadcrumbs a:last-child::after,
 .breadcrumbs a.active::after {
   content: "";
 }
+
+/*ESTA CAGADA NO ESTÁ CONFIG AÚN SABÉS*/
 
 @media screen and (max-width: 768px) {
   .breadcrumbs {

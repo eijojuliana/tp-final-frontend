@@ -1,44 +1,43 @@
 /*HEADERCITO*/
 .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 5.5rem;
+  padding: 0 5%;
+  position: relative;
+  z-index: 3;
 
-    height: 6rem;
-    padding: 0 5%;
+  background: linear-gradient(
+    135deg,
+    var(--salmon-tema_claro-2),
+    var(--vino-tema_claro-0)
+  );
 
-    position: relative;
-    z-index: 3;
-
-    background: var(--salmon-tema_claro-2);
-
-    box-shadow: 0 4px 25px rgba(233, 52, 142, 0.2),
-      inset 0 0 30px rgba(255, 214, 231, 0.986),
-      inset 0 0 60px rgb(168, 51, 69);;
-  }
+  border-bottom: 1px solid var(--borde);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
 
 /* PERFIL */
 .user-icon {
-    border-radius: 50%;
-    width: 4rem;
-    cursor: pointer;
+  border-radius: 50%;
+  width: 3.6rem;
+  cursor: pointer;
 
-    border: 2px solid transparent;
-    background: linear-gradient(white, white) padding-box,
-                linear-gradient(135deg, var(--salmon-tema_claro-1), var(--salmon-tema_claro-2)) border-box;
+  border: 2px solid var(--salmon-tema_claro-3);
+  background: white;
 
-    box-shadow: 0 0 10px rgba(255, 105, 180, 0.4);
-    transition: 0.3s;
+  transition: 0.25s;
 }
 
 .user-icon:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 18px var(--salmon-tema_claro-1);
+  transform: scale(1.05);
+  border-color: var(--salmon-tema_claro-4);
 }
 
 /* BOTON TEMA */
 .theme-btn {
-  margin: 2rem;
+  margin-right: 1rem;
   width: 2rem;
   height: 2rem;
   cursor: pointer;
@@ -46,15 +45,14 @@
 }
 
 .theme-btn:hover {
-  transform: scale(1.15);
-  filter: drop-shadow(0 0 6px var(--rosa1));
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 4px var(--salmon-tema_claro-3));
 }
 
 /* FLECHA */
 .flecha-menu {
-  font-size: 24px;
-  color: var(--rosa1);
-  text-shadow: 0 0 10px var(--rosa1);
+  font-size: 20px;
+  color: var(--vino-tema_claro-2);
   margin-left: 4px;
   transition: transform 0.3s ease;
   cursor: pointer;
@@ -66,33 +64,31 @@
 
 /* MENU */
 .menu-desplegable {
-    background: var(--bg-menu);
-    backdrop-filter: blur(20px);
+  background: var(--bg-pag2);
+  border: 1px solid var(--borde);
+  border-radius: 1rem;
 
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 1.2rem;
+  position: absolute;
+  top: 110%;
+  right: 5%;
 
-    position: absolute;
-    top: 110%;
-    right: 7%;
+  width: 100%;
+  max-width: 26rem;
 
-    width: 90%;
-    max-width: 30rem;
+  max-height: 0;
+  overflow: hidden;
 
-    max-height: 0;
-    overflow: hidden;
+  transform: scaleY(0);
+  transform-origin: top;
 
-    transform: scaleY(0);
-    transform-origin: top;
+  transition: transform 0.25s ease, max-height 0.25s ease;
 
-    transition: transform 0.3s ease, max-height 0.3s ease;
-
-    box-shadow: 0 10px 40px rgba(255, 105, 180, 0.25);
+  box-shadow: var(--sombra);
 }
 
 .abrir-menu {
-    transform: scaleY(1);
-    max-height: 30rem;
+  transform: scaleY(1);
+  max-height: 30rem;
 }
 
 /* CONTENIDO */
@@ -107,68 +103,59 @@
 }
 
 .user-info h2 {
-    font-size: 1.6rem;
-    color: var(--texto);
+  font-size: 1.4rem;
+  color: var(--vino-tema_claro-3);
 }
 
 /* LINEA */
 .menu-desplegable hr {
-    margin: 1rem 0;
-    border: none;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--rosa1), transparent);
+  margin: 1rem 0;
+  border: none;
+  height: 1px;
+  background: var(--borde);
 }
 
 /* OPCIONES */
 .opciones-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .opcion {
   display: flex;
   align-items: center;
-  padding: 0.8rem;
-  border-radius: 0.8rem;
+  padding: 0.7rem;
+  border-radius: 0.7rem;
   width: 100%;
-  transition: 0.25s;
+  transition: background 0.2s ease;
+  box-sizing: border-box;
 }
 
-/* HOVER LINDO */
-.opcion:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 105, 180, 0.25),
-    rgba(255, 182, 193, 0.15)
-  );
+.opcion > * {
+  transition: transform 0.2s ease;
+}
 
-  transform: translateX(6px);
+.opcion:hover {
+  background: var(--salmon-tema_claro-2);
   cursor: pointer;
 }
 
 /* ICONOS */
 .opciones-menu .material-symbols-outlined {
-    border-radius: 50%;
-    padding: 0.8rem;
+  border-radius: 0.6rem;
+  padding: 0.6rem;
 
-    background: linear-gradient(
-        135deg,
-        var(--rosa1),
-        var(--rosa2)
-    );
-
-    color: white;
-
-    box-shadow: 0 0 12px var(--rosa1);
+  background: var(--salmon-tema_claro-2);
+  color: var(--vino-tema_claro-2);
 }
 
 /* TEXTO */
 .opciones-menu p {
-    flex: 1;
-    margin-left: 1rem;
-    font-size: 1.2rem;
-    color: var(--texto);
+  flex: 1;
+  margin-left: 1rem;
+  font-size: 1rem;
+  color: var(--letra1);
 }
 
 /* LAYOUT */

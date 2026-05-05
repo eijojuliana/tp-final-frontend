@@ -11,7 +11,7 @@
 ========================= */
 
 main.contenido {
-  display: block; 
+  display: block;
   width: 100%;
   padding: 3rem;
   background: var(--bg-pag);
@@ -30,7 +30,7 @@ main.contenido {
    DASHBOARD
 ========================= */
 .dashboard {
-  margin-top: 3rem;
+  margin-top: 2rem;
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
@@ -40,11 +40,17 @@ main.contenido {
    CARDS
 ========================= */
 .card {
-  background:var(--bg-pag2);
-  border-radius: 2rem;
+  background: var(--bg-pag2);
+  border-radius: 1.5rem;
   padding: 1.5rem;
   border: 1px solid var(--borde);
-  backdrop-filter: blur(10px);
+  box-shadow: var(--sombra);
+  transition: 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
 }
 
 /* grande */
@@ -62,14 +68,15 @@ main.contenido {
 ========================= */
 .accesos h3 {
   margin-bottom: 1rem;
+  color: var(--letra1);
 }
 
 .accesos-grid {
   display: flex;
-  gap: 3rem;
+  gap: 2rem;
 }
 
-/* mini cards */
+/* MINI CARDS */
 .mini-card {
   display: flex;
   flex-direction: column;
@@ -82,19 +89,25 @@ main.contenido {
   width: 90px;
   height: 90px;
 
-  border-radius: 1.5rem;
-  transition: 0.2s;
+  border-radius: 1rem;
+  border: 1px solid var(--borde);
+  background: var(--bg-pag2);
+
+  transition: 0.2s ease;
 }
 
 .mini-card:hover {
-  background: var(--btn-hover);
+  background: var(--salmon-tema_claro-2);
+  border-color: var(--salmon-tema_claro-3);
   transform: translateY(-4px);
 }
 
 .mini-card img {
   width: 40px;
+  margin-bottom: 5px;
 }
 
 .mini-card span {
-  font-size: 1.2rem;
+  font-size: 0.85rem;
+  color: var(--letra1-leve);
 }

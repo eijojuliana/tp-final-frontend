@@ -18,15 +18,15 @@
 
     --salmon-tema_claro-0:#FFEDED;
     --salmon-tema_claro-1:#FFE2E2;
-    --salmon-tema_claro-2:#FFC6C5;
-    --salmon-tema_claro-3:#FFA8A7;
-    --salmon-tema_claro-4:#FF9694;
+    --salmon-tema_claro-2: #FADADD;
+    --salmon-tema_claro-3: #F5B7C2;
+    --salmon-tema_claro-4: #EC8FA1;
 
-    --base-tema_claro-0:#FFFAF2;
-    --base-tema_claro-1:#FFFAF0;
-    --base-tema_claro-2:#FFF6E5;
-    --base-tema_claro-3:#F5E9D1;
-    --base-tema_claro-4:#EDD8B0;
+    --base-tema_claro-0: #FFFFFF;
+    --base-tema_claro-1: rgb(251, 250, 250);
+    --base-tema_claro-2: #F4F5F7;
+    --base-tema_claro-3: #E9ECF1;
+    --base-tema_claro-4: #DDE1E7;
 
     /* -------- PALETA OSCURO -------- */
     --rosita-tema_oscuro-0:#F5DFE9;
@@ -64,23 +64,24 @@
        VARIABLES SEMÁNTICAS (CLARO)
     ========================= */
 
-    --bg-pag: linear-gradient(180deg, var(--base-tema_claro-2), var(--salmon-tema_claro-1));
-    --bg-pag2:linear-gradient(180deg, var(--salmon-tema_claro-2), var(--vino-tema_claro-0));
+    --bg-pag: var(--base-tema_claro-1);
+    --bg-pag2: var(--base-tema_claro-0);
+
     --bg-input: white;
     --bg-tabla: white;
 
-    --letra1: var(--vino-tema_claro-2);
+    --letra1: var(--vino-tema_claro-3);
     --letra1-leve: var(--vino-tema_claro-1);
     --letra2: white;
 
-    --borde: var(--salmon-tema_claro-3);
-    --borde-hover: var(--salmon-tema_claro-4);
-    --borde-focus: var(--vino-tema_claro-1);
+    --borde: var(--base-tema_claro-3);
+    --borde-hover: var(--salmon-tema_claro-3);
+    --borde-focus: var(--salmon-tema_claro-4);
 
-    --btn: linear-gradient(135deg, var(--salmon-tema_claro-3), var(--vino-tema_claro-0));
-    --btn-hover: linear-gradient(135deg, var(--salmon-tema_claro-4), var(--vino-tema_claro-1));
+    --btn: var(--salmon-tema_claro-3);
+    --btn-hover: var(--salmon-tema_claro-4);
 
-    --sombra: 0 4px 10px rgba(0,0,0,0.15);
+    --sombra: 0 6px 20px rgba(0,0,0,0.08);
 
     /* BOTONES ACCIÓN */
     --btn-editar: linear-gradient(135deg, var(--info-1), var(--info-0));
@@ -92,10 +93,10 @@
     --btn-eliminar-borde: var(--error-1);
 
     /* FORM */
-    --form-bg: linear-gradient(135deg, var(--base-tema_claro-4), var(--base-tema_claro-2));
-    --form-card-bg: rgba(255,255,255,0.2);
-    --form-input-bg: rgba(255,255,255,0.7);
-    --form-input-border: var(--salmon-tema_claro-3);
+    --form-bg: var(--base-tema_claro-1);
+    --form-card-bg: white;
+    --form-input-bg: white;
+    --form-input-border: var(--base-tema_claro-3);
 
     /* FONTS */
     --font-heading: "Poppins", sans-serif;

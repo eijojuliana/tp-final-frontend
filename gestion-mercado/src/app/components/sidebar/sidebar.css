@@ -27,6 +27,7 @@
 .titulo {
   font-size: 1.4rem;
   color: var(--letra1);
+  font-weight: 600;
 }
 
 .sidebar-menu {
@@ -46,26 +47,30 @@
   width: 22px;
   height: 22px;
   object-fit: contain;
+  opacity: 0.7;
+  transition: 0.2s;
 }
 
 .item {
   text-decoration: none;
-  color: var(--btn);
+  color: var(--letra1-leve);
   padding: 0.7rem 0.9rem;
   border-radius: 0.8rem;
-  transition: 0.2s;
+  transition: all 0.2s ease;
   display: block;
   cursor: pointer;
 }
 
 .item:hover {
-  background: var(--btn-hover);
+  background: var(--salmon-tema_claro-2);
+  color: var(--letra1);
 }
 
 .item.active {
-  background: var(--btn-hover);
+  background: var(--btn);
   color: var(--letra2);
   font-weight: 600;
+  box-shadow: var(--sombra);
 }
 
 /* Iconos específicos para el estado activo */
@@ -82,7 +87,7 @@
 .icon-arrow {
   font-size: 0.6rem;
   transition: transform 0.2s;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .icon-arrow.rotated {
@@ -97,11 +102,12 @@
   gap: 0.2rem;
   border-left: 1px solid var(--borde);
   padding-left: 0.5rem;
+  color: var(--letra1-leve);
 }
 
-.submenu .item {
-  font-size: 0.9rem;
-  padding: 0.5rem 0.8rem;
+.submenu .item:hover {
+  background: var(--salmon-tema_claro-2);
+  color: var(--letra1);
 }
 
 .submenu .menu-icon {
