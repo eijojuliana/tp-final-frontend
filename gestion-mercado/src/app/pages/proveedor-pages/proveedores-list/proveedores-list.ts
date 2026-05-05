@@ -56,4 +56,8 @@ export class ProveedoresList {
     this.service.selectProveedorToEdit(proveedor);
     this.router.navigate(['menu/proveedores/form']);
   }
+
+  exportarExcel() {
+    this.service.exportarExcel();
+  }
 }
