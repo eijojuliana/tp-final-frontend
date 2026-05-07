@@ -37,9 +37,9 @@
           }
 
           @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
-          <a routerLink="/menu/inventarios" class="mini-card">
-            <img src="/assets/images/inventario-icon.png">
-            <span>Inventario</span>
+          <a routerLink="/menu/pedidos" class="mini-card">
+            <img src="/assets/images/pedido-icon.png">
+            <span>Pedidos</span>
           </a>
           }
 
@@ -50,10 +50,18 @@
           </a>
           }
 
+          @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
+          <a routerLink="/menu/cuentas-bancarias" class="mini-card">
+            <img src="/assets/images/cuentaB-icon.png">
+            <span>Cuentas Bancarias</span>
+          </a>
+          }
+
         </div>
       </div>
 
     </section>
 
   </main>
+
 
