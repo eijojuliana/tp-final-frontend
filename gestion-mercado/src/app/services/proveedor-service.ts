@@ -55,15 +55,15 @@ export class ProveedorService {
   }
 
   exportarExcel() {
-  return this.http.get(`${this.url}/exportar`, {
-    responseType: 'blob'
-  }).subscribe(blob => {
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'reporte-proveedores.xlsx';
-    a.click();
-    window.URL.revokeObjectURL(url);
-  });
-}
+    return this.http.get(`${this.url}/exportar`, {
+      responseType: 'blob'
+    }).subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'reporte-proveedores.xlsx';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
+  }
 }

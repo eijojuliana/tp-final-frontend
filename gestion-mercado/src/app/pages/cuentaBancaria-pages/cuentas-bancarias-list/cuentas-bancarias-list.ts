@@ -56,4 +56,8 @@ export class CuentasBancariasList {
     this.cuentaBancariaService.selectCuentaBancariaToEdit(cuentaBancaria);
     this.router.navigate(['menu/cuentas-bancarias/form']);
   }
+
+  exportarExcel() {
+    this.cuentaBancariaService.exportarExcel();
+  }
 }

@@ -47,7 +47,11 @@ export class ProductList {
   }
 
   updateProduct(producto: any) {
-  this.productService.selectProductToEdit(producto);
-  this.router.navigate(['/menu/productos/form']);
-}
+    this.productService.selectProductToEdit(producto);
+    this.router.navigate(['/menu/productos/form']);
+  }
+
+  exportarExcel() {
+    this.productService.exportarExcel();
+  }
 }

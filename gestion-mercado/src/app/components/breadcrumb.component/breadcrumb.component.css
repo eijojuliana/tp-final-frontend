@@ -24,7 +24,7 @@
 }
 
 .breadcrumbs a.active {
-  color: var(--vino-tema_claro-2);
+  color: var(--letra1);
   font-weight: 600;
 }
 

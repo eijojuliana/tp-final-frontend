@@ -11,7 +11,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class DuenioService {
 
-  private apiUrl = environment.apiBaseUrl + "/duenios";
+  private url = environment.apiBaseUrl + "/duenios";
 
   private dueniosState = signal<Duenio[]>([]);
   public duenios = this.dueniosState.asReadonly();
@@ -27,14 +27,14 @@ export class DuenioService {
 
 
   if (!rol || rol === 'ADMIN' || rol === 'DUENIO') {
-   
+
     this.load();
   }
 
   }
 
 load(): void {
-    this.http.get<Duenio[]>(this.apiUrl).pipe(
+    this.http.get<Duenio[]>(this.url).pipe(
       tap(data => {
         this.dueniosState.set(data);
         this.loadedState.set(true);
@@ -54,13 +54,13 @@ load(): void {
   }
 
   post(duenio:NewDuenio) :Observable<Duenio>{
-    return this.http.post<Duenio>(this.apiUrl,duenio).pipe(
+    return this.http.post<Duenio>(this.url,duenio).pipe(
       tap( () => this.load() )
     );
   }
 
   delete(id:number):Observable<Duenio>{
-    return this.http.delete<Duenio>(`${this.apiUrl}/${id}`).pipe(
+    return this.http.delete<Duenio>(`${this.url}/${id}`).pipe(
       tap(()=> {
         this.dueniosState.update(currentDuenio =>
           currentDuenio.filter(duenio => duenio.duenioId !== id )
@@ -70,7 +70,7 @@ load(): void {
   }
 
   update (duenioToUpdate:Duenio):Observable<Duenio>{
-    return this.http.put<Duenio>(`${this.apiUrl}/${duenioToUpdate.duenioId}`,duenioToUpdate).pipe(
+    return this.http.put<Duenio>(`${this.url}/${duenioToUpdate.duenioId}`,duenioToUpdate).pipe(
       tap( () => this.load() )
     );
   }
@@ -81,5 +81,18 @@ load(): void {
 
   clearDuenioToEdit(){
     this.duenioToEditState.set(null);
+  }
+
+  exportarExcel() {
+    return this.http.get(`${this.url}/exportar`, {
+      responseType: 'blob'
+    }).subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'reporte-personas.xlsx';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
   }
 }

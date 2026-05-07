@@ -68,11 +68,13 @@
     --bg-pag2: var(--base-tema_claro-0);
 
     --bg-input: white;
-    --bg-tabla: white;
+    --bg-tabla: var(--salmon-tema_claro-0);
+    --tabla-encabezado: var(--salmon-tema_claro-4);
 
     --letra1: var(--vino-tema_claro-3);
     --letra1-leve: var(--vino-tema_claro-1);
     --letra2: white;
+    --letra3: white; /* Blanco en los dos */
 
     --borde: var(--base-tema_claro-3);
     --borde-hover: var(--salmon-tema_claro-3);
@@ -112,10 +114,12 @@
     --bg-pag2:linear-gradient(180deg, var(--base-tema_oscuro-4), var(--base-tema_oscuro-3));
     --bg-input: var(--base-tema_oscuro-3);
     --bg-tabla: var(--base-tema_oscuro-3);
+    --tabla-encabezado: var(--base-tema_oscuro-2);
 
     --letra1: var(--rosita-tema_oscuro-1);
     --letra1-leve: var(--rosita-tema_oscuro-3);
     --letra2: black;
+    --letra3: rgb(255, 255, 255);
 
     --borde: var(--violeta-tema_oscuro-3);
     --borde-hover: var(--violeta-tema_oscuro-1);

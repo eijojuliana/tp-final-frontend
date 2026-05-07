@@ -55,4 +55,8 @@ export class ClienteList {
     this.service.selectClienteToEdit(cliente);
     this.router.navigate(['menu/clientes/form']);
   }
+
+  exportarExcel() {
+    this.service.exportarExcel();
+  }
 }

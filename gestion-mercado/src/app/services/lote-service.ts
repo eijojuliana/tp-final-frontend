@@ -54,4 +54,17 @@ export class LoteService {
   clearLoteToEdit() {
     this.loteToEditState.set(null);
   }
+
+  exportarExcel() {
+    return this.http.get(`${this.url}/exportar`, {
+      responseType: 'blob'
+    }).subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'reporte-personas.xlsx';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
+  }
 }

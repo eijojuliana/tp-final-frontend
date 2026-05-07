@@ -40,6 +40,13 @@
   border-color: #ff4d8d;
 }
 
+.botones-rango button.active {
+  background: #a32e59;
+  border-color: #b13562;
+  color: white;
+  font-weight: bold;
+}
+
 .filtros-stats input {
   border-radius: 50px;
   padding: 8px 15px;

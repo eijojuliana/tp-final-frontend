@@ -61,4 +61,8 @@ export class LotesList {
     this.loteService.selectLoteToEdit(lote);
     this.router.navigate(['/menu/lotes/form']);
   }
+
+  exportarExcel() {
+    this.loteService.exportarExcel();
+  }
 }

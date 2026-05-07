@@ -56,4 +56,8 @@ export class UsuariosList {
     this.usuarioService.selectUsuarioToEdit(usuario);
     this.router.navigate(['menu/usuarios/form']);
   }
+
+  exportarExcel() {
+    this.usuarioService.exportarExcel();
+  }
 }

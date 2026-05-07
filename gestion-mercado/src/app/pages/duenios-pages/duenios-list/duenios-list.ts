@@ -56,4 +56,8 @@ export class DueniosList {
     this.service.selectDuenioToEdit(duenio);
     this.router.navigate(['menu/duenios/form']);
   }
+
+  exportarExcel() {
+    this.service.exportarExcel();
+  }
 }

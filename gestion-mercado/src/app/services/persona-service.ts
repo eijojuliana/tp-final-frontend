@@ -10,7 +10,7 @@ import { environment } from './ip';
 })
 export class PersonaService {
 
-  private apiUrl = environment.apiBaseUrl + "/personas";
+  private url = environment.apiBaseUrl + "/personas";
 
   private personasState = signal<Persona[]>([]);
   public personas = this.personasState.asReadonly();
@@ -25,7 +25,7 @@ export class PersonaService {
 
 
    load() {
-    this.http.get<Persona[]>(this.apiUrl).subscribe(
+    this.http.get<Persona[]>(this.url).subscribe(
       data => {
         console.log(data)
         this.personasState.set(data)
@@ -34,14 +34,14 @@ export class PersonaService {
   }
 
   post(persona:NewPersona) :Observable<Persona>{
-    return this.http.post<Persona>(this.apiUrl,persona).pipe(
+    return this.http.post<Persona>(this.url,persona).pipe(
     tap( () => this.load() )
     );
   }
 
   delete(id:number):Observable<Persona>{
     console.log(id);
-    return this.http.delete<Persona>(`${this.apiUrl}/${id}`).pipe(
+    return this.http.delete<Persona>(`${this.url}/${id}`).pipe(
       tap( () =>{
          this.personasState.update(currentPersonas=>
         currentPersonas.filter(persona=>
@@ -50,7 +50,7 @@ export class PersonaService {
   }
 
   update (personaToUpdate:Persona):Observable<Persona>{
-    return this.http.put<Persona>(`${this.apiUrl}/${personaToUpdate.personaId}`,personaToUpdate).pipe(
+    return this.http.put<Persona>(`${this.url}/${personaToUpdate.personaId}`,personaToUpdate).pipe(
       tap(()=>this.load())
     )
   }
@@ -63,4 +63,16 @@ export class PersonaService {
     this.personaToEditState.set(null);
   }
 
+  exportarExcel() {
+    return this.http.get(`${this.url}/exportar`, {
+      responseType: 'blob'
+    }).subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'reporte-personas.xlsx';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
+  }
 }

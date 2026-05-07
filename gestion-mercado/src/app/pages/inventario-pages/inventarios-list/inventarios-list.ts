@@ -72,4 +72,8 @@ export class InventariosList {
     this.inventarioService.selectInventarioToEdit(inventario);
     this.router.navigate(['/menu/inventarios/form']);
   }
+
+  exportarExcel() {
+    this.inventarioService.exportarExcel();
+  }
 }

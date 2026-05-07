@@ -91,23 +91,20 @@ DIV TABLA
   align-items: center;
 }
 
-.tabla {
+.tabla, .tabla-historial {
   width: 100%;
   border-spacing: 0;
-  box-shadow: var(--sombra-leve);
+  box-shadow: var(--sombra);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   background-color: var(--bg-tabla);
-  border-radius: 2rem;
-}
-
-.encabezado {
-  background: var(--encabezado);
-  color: var(--letra2);
+  border-radius: 1rem;
 }
 
 .encabezado th {
+  background-color: var(--tabla-encabezado);
+  color: var(--letra3);
   padding: 1rem 1rem;
   text-align: center;
   font-weight: 600;
@@ -115,6 +112,18 @@ DIV TABLA
   text-transform: uppercase;
   letter-spacing: 0.5px;
   white-space: nowrap;
+}
+
+.encabezado th:first-child{
+  border-radius: 1rem 0 0 0;
+}
+
+.encabezado th:last-child{
+  border-radius: 0 1rem 0 0;
+}
+
+.encabezado tr {
+  box-shadow: var(--sombra);
 }
 
 .tablaBody tr {
@@ -128,7 +137,7 @@ DIV TABLA
 .tablaBody td {
   padding: 1rem 1.25rem;
   font-size: 1.5rem;
-  color: var(--letra3);
+  color: var(--letra1);
   text-align: center;
 }
 
@@ -137,7 +146,7 @@ DIV TABLA
 .tabla .acciones {
   display: flex;
   justify-content: space-evenly;
-  width: 20rem;
+  width: auto;
 }
 
 .btnDetalle, .btnEliminar, .btnEditar, .btn, .btn-agregar {
@@ -210,10 +219,13 @@ DIV TABLA
 
 /* BOTON HISTORIAL */
 
-.tabla .celda-acciones {
+.celda-acciones {
   width: 20rem;
   padding: 0 1.5rem;
-  min-width: 8rem;
+}
+
+.tabla-historial .celda-acciones {
+  width: auto;
 }
 
 .celda-acciones-div {
@@ -229,14 +241,14 @@ DIV TABLA
   gap: 0.5rem;
 }
 
-.tabla .celda-acciones a {
+.celda-acciones a {
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
 }
 
-.tabla .celda-acciones img {
+.celda-acciones img {
   width: 2.1rem;
   height: auto;
 }

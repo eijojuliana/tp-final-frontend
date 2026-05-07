@@ -49,16 +49,20 @@ export class TransaccionesList {
   }
 
 
-esEntrada(t: Transaccion): boolean {
+  esEntrada(t: Transaccion): boolean {
 
-  const pedidoEncontrado = this.pedidos()
-    .find((p: Pedido) => p.transaccion?.transaccion_id === t.transaccion_id);
+    const pedidoEncontrado = this.pedidos()
+      .find((p: Pedido) => p.transaccion?.transaccion_id === t.transaccion_id);
 
-  if (!pedidoEncontrado) {
+    if (!pedidoEncontrado) {
 
-    return false;
+      return false;
+    }
+
+    return pedidoEncontrado.tipo === 'VENTA';
   }
 
-  return pedidoEncontrado.tipo === 'VENTA';
-}
+  exportarExcel() {
+    this.service.exportarExcel();
+  }
 }

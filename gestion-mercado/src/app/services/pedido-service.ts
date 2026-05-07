@@ -61,8 +61,21 @@ export class PedidoService {
   }
 
   finalizar(id: number): Observable<boolean> {
-  return this.http.put<boolean>(`${this.url}/${id}/finalizar`, {}).pipe(
-    tap(()=>this.load())
-  );
+    return this.http.put<boolean>(`${this.url}/${id}/finalizar`, {}).pipe(
+      tap(()=>this.load())
+    );
+  }
+  
+  exportarExcel() {
+    return this.http.get(`${this.url}/exportar`, {
+      responseType: 'blob'
+    }).subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'reporte-personas.xlsx';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
   }
 }

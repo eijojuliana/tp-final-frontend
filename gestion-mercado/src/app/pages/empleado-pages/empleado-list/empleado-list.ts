@@ -56,4 +56,8 @@ export class EmpleadoList {
     this.service.selectEmpleadoToEdit(empleado);
     this.router.navigate(['menu/empleados/form'])
   }
+
+  exportarExcel() {
+    this.service.exportarExcel();
+  }
 }

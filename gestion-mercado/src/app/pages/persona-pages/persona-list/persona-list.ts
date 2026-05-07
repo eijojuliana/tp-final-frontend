@@ -42,4 +42,8 @@ export class PersonaList {
     this.personaService.selectPersonaToEdit(persona);
     this.router.navigate(['menu/personas/form']);
   }
+
+  exportarExcel() {
+    this.personaService.exportarExcel();
+  }
 }

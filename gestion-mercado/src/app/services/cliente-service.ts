@@ -8,31 +8,31 @@ import { environment } from './ip';
   providedIn: 'root',
 })
 export class ClienteService {
-  private apiurls= environment.apiBaseUrl + "/clientes";
+  private url= environment.apiBaseUrl + "/clientes";
   private state=signal<Cliente[]>([]);
   public clientes=this.state.asReadonly();
 
   private clienteToEditState=signal<Cliente | null> (null);
   public clienteToEdit=this.clienteToEditState.asReadonly();
 
-  constructor(private httpClient:HttpClient){
+  constructor(private http:HttpClient){
     this.load()
   }
 
   load(){
-    this.httpClient.get<Cliente[]>(this.apiurls).subscribe(
+    this.http.get<Cliente[]>(this.url).subscribe(
       data => this.state.set(data)
     );
   }
 
   post(cliente:NewCliente): Observable<Cliente>{
-    return this.httpClient.post<Cliente>(this.apiurls,cliente).pipe(
+    return this.http.post<Cliente>(this.url,cliente).pipe(
       tap( () => this.load() )
     );
   }
 
   delete(id:number) : Observable<Cliente>{
-    return this.httpClient.delete<Cliente>(`${this.apiurls}/${id}`).pipe(
+    return this.http.delete<Cliente>(`${this.url}/${id}`).pipe(
       tap(
         () => this.state.update(currentCliente =>
           currentCliente.filter(nuevoCliente => nuevoCliente.clienteId!=id)
@@ -42,7 +42,7 @@ export class ClienteService {
   }
 
   update(cliente:Cliente): Observable<Cliente>{
-    return this.httpClient.put<Cliente>(`${this.apiurls}/${cliente.clienteId}`,cliente).pipe(
+    return this.http.put<Cliente>(`${this.url}/${cliente.clienteId}`,cliente).pipe(
       tap( () => this.load() )
     );
   }
@@ -55,6 +55,18 @@ export class ClienteService {
     this.clienteToEditState.set(null);
   }
 
+  exportarExcel() {
+    return this.http.get(`${this.url}/exportar`, {
+      responseType: 'blob'
+    }).subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'reporte-personas.xlsx';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
+  }
 }
 
 

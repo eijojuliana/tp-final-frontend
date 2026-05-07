@@ -42,26 +42,31 @@ export class UsuarioService {
       );
     }
 
-    update (usuarioToUpdate:Usuario):Observable<Usuario>{
-      return this.http.put<Usuario>(`${this.url}/${usuarioToUpdate.usuarioId}`,usuarioToUpdate).pipe(
-        tap( () => this.load() )
-      );
-    }
+  update (usuarioToUpdate:Usuario):Observable<Usuario>{
+    return this.http.put<Usuario>(`${this.url}/${usuarioToUpdate.usuarioId}`,usuarioToUpdate).pipe(
+      tap( () => this.load() )
+    );
+  }
 
-    selectUsuarioToEdit(usuario:Usuario){
-      this.usuarioToEditState.set(usuario);
-    }
+  selectUsuarioToEdit(usuario:Usuario){
+    this.usuarioToEditState.set(usuario);
+  }
 
-    clearUsuarioToEdit(){
-      this.usuarioToEditState.set(null);
-    }
+  clearUsuarioToEdit(){
+    this.usuarioToEditState.set(null);
+  }
 
-
-
-
-
-
-
-
+  exportarExcel() {
+    return this.http.get(`${this.url}/exportar`, {
+      responseType: 'blob'
+    }).subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'reporte-personas.xlsx';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
+  }
 }
 

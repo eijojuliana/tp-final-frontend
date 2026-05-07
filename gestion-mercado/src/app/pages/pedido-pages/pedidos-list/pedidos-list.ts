@@ -69,4 +69,8 @@ export class PedidosList {
     this.pedidoService.selectPedidoToEdit(pedido);
     this.router.navigate(['/menu/pedidos/form', pedido.pedidoId]);
   }
+
+  exportarExcel() {
+    this.pedidoService.exportarExcel();
+  }
 }

@@ -22,11 +22,22 @@
           <th>ID</th>
           <th>CBU</th>
           <th>Saldo</th>
-          <th class="celda-acciones">Acciones</th>
-          <th class="celda-boton">
-            <a class="historial-link" routerLink="/menu/historial/cuentas-bancarias">
-              <img class="historial-icon" src="/assets/images/historial-icon.png" alt="historial">
-            </a>
+          <th class="celda-acciones">
+            <div class="celda-acciones-div">
+              Acciones
+
+              <div class="acciones-botones">
+                <!-- Botón Excel -->
+                <a (click)="exportarExcel()">
+                  <img class="historial-icon" src="/assets/images/excel-icon.png" alt="exportar excel" title="Exportar a Excel">
+                </a>
+
+                <!-- Botón Historial -->
+                <a routerLink="/menu/historial/cuentas-bancarias">
+                  <img class="historial-icon" src="/assets/images/historial-icon.png" alt="historial">
+                </a>
+              </div>
+            </div>
           </th>
         </tr>
       </thead>
