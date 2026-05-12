@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet, Router } from '@angular/router'; 
+import { RouterOutlet, Router } from '@angular/router';
 import { Header } from "./components/header/header";
 import { Footer } from "./components/footer/footer";
 import { ToastComponent } from "./components/toast-component/toast.component";
@@ -16,7 +16,8 @@ import { CommonModule } from '@angular/common';
     Footer,
     BreadcrumbComponent,
     Sidebar,
-    CommonModule
+    CommonModule,
+    ToastComponent
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'

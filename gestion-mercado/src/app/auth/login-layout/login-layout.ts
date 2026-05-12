@@ -72,6 +72,7 @@ login(): void {
         },
         error: (err) => {
           this.authService.clearCredentials();
+          this.errorMsg = 'Credenciales inválidas';
         }
       });
   }

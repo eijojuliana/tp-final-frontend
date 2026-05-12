@@ -1,4 +1,3 @@
-import { Theme } from './../../styles/theme.service';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';

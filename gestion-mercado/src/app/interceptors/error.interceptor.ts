@@ -6,6 +6,7 @@ import { ToastService } from '../services/toast.service';
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const toast = inject(ToastService);
 
+  console.log("Interceptor de errores activo");
   return next(req).pipe(
     catchError((err) => {
 

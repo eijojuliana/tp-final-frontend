@@ -1,9 +1,6 @@
 <div class="toast-container">
   @for (t of toast.toasts(); track t) {
-    <div
-      class="toast"
-      [style.background]="t.type === 'error' ? '#e74c3c' : '#2ecc71'"
-      >
+    <div class="toast" [ngClass]="t.type">
       {{ t.message }}
     </div>
   }
