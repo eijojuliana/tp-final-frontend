@@ -1,20 +1,5 @@
 @import '../../../styles/form-style.css';
 
-.form-container::before {
-  background-image: url('/assets/images/shop-wallpaper.jpg');
-}
-
-.image {
-  display: flex;
-  justify-self: flex-end;
-  position: relative;
-  width: 30rem;
-}
-
-.image img {
-  max-width: 100%;
-}
-
 @media screen and (max-width: 1024px) {
   .image {
     width: 30%;

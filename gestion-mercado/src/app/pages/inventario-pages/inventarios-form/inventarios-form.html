@@ -1,50 +1,55 @@
 <div class="form-container">
   <div class="card">
-    <h2>Editar inventario</h2>
 
-    <form [formGroup]="form" (ngSubmit)="saveInventario()">
-      <div class="campo">
-        <label>Producto:</label>
-        <select formControlName="producto_id">
-          <option [ngValue]="0" disabled selected>Seleccione un producto</option>
+    <div class = "rectangulito"></div>
 
-          @for(p of productos(); track $index) {
-            <option [ngValue]="p.producto_id">
-              {{ p.nombre }} ({{ p.categoria }} )
-            </option>
+    <div>
+      <h2>Editar inventario</h2>
+
+      <form [formGroup]="form" (ngSubmit)="saveInventario()">
+        <div class="campo">
+          <label>Producto:</label>
+          <select formControlName="producto_id">
+            <option [ngValue]="0" disabled selected>Seleccione un producto</option>
+
+            @for(p of productos(); track $index) {
+              <option [ngValue]="p.producto_id">
+                {{ p.nombre }} ({{ p.categoria }} )
+              </option>
+            }
+          </select>
+          @if (form.get('producto_id')?.invalid && form.get('producto_id')?.touched) {
+            <span class="error">El producto es requerido.</span>
           }
-        </select>
-        @if (form.get('producto_id')?.invalid && form.get('producto_id')?.touched) {
-          <span class="error">El producto es requerido.</span>
-        }
-      </div>
+        </div>
 
 
-      <div class="campo">
-        <label>Stock Mínimo:</label>
-        <input type="number" formControlName="stockMin" min="0">
-        @if (form.get('stockMin')?.invalid && form.get('stockMin')?.touched) {
-          <span class="error">El stock mínimo es requerido.</span>
-        }
-      </div>
+        <div class="campo">
+          <label>Stock Mínimo:</label>
+          <input type="number" formControlName="stockMin" min="0">
+          @if (form.get('stockMin')?.invalid && form.get('stockMin')?.touched) {
+            <span class="error">El stock mínimo es requerido.</span>
+          }
+        </div>
 
-      <div class="campo">
-        <label>Precio Venta:</label>
-        <input type="number" formControlName="precioVenta" step="0.01">
-        @if (form.get('precioVenta')?.invalid && form.get('precioVenta')?.touched) {
-          <span class="error">El precio de venta debe ser superior a cero (0)</span>
-        }
-      </div>
+        <div class="campo">
+          <label>Precio Venta:</label>
+          <input type="number" formControlName="precioVenta" step="0.01">
+          @if (form.get('precioVenta')?.invalid && form.get('precioVenta')?.touched) {
+            <span class="error">El precio de venta debe ser superior a cero (0)</span>
+          }
+        </div>
 
-      <div class="botones">
-        <button type="submit" [disabled]="form.invalid">
-          {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
-        </button>
+        <div class="botones">
+          <button type="submit" [disabled]="form.invalid">
+            {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
+          </button>
 
-        @if (isEditMode()) {
-          <button type="button" (click)="cancelarUpdate()">Cancelar</button>
-        }
-      </div>
-    </form>
+          @if (isEditMode()) {
+            <button type="button" (click)="cancelarUpdate()">Cancelar</button>
+          }
+        </div>
+      </form>
+    </div>
   </div>
 </div>
