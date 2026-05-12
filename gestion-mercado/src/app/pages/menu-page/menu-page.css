@@ -91,14 +91,14 @@ main.contenido {
 
   border-radius: 1rem;
   border: 1px solid var(--borde);
-  background: var(--bg-pag2);
+  background: var(--bg-pag3);
 
   transition: 0.2s ease;
 }
 
 .mini-card:hover {
-  background: var(--salmon-tema_claro-2);
-  border-color: var(--salmon-tema_claro-3);
+  background: var(--mini_cards-hover);
+  border-color: var(--mini_cards-hover_border);
   transform: translateY(-4px);
 }
 

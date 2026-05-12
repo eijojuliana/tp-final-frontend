@@ -62,7 +62,7 @@
 }
 
 .item:hover {
-  background: var(--salmon-tema_claro-2);
+  background: var(--btn);
   color: var(--letra1);
 }
 

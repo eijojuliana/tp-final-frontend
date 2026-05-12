@@ -66,6 +66,7 @@
 
     --bg-pag: var(--base-tema_claro-1);
     --bg-pag2: var(--base-tema_claro-0);
+    --bg-pag3:var(--salmon-tema_claro-3);
 
     --bg-input: white;
     --bg-tabla: var(--salmon-tema_claro-0);
@@ -82,6 +83,9 @@
 
     --btn: var(--salmon-tema_claro-3);
     --btn-hover: var(--salmon-tema_claro-4);
+
+    --mini_cards-hover:var(--salmon-tema_claro-2);
+    --mini_cards-hover_border:var(--salmon-tema_claro-3);
 
     --sombra: 0 6px 20px rgba(0,0,0,0.08);
 
@@ -112,6 +116,8 @@
 
     --bg-pag: linear-gradient(180deg, var(--base-tema_oscuro-3), var(--base-tema_oscuro-2));
     --bg-pag2:linear-gradient(180deg, var(--base-tema_oscuro-4), var(--base-tema_oscuro-3));
+    --bg-pag3:linear-gradient(180deg, var(--base-tema_oscuro-4), var(--base-tema_oscuro-3));
+
     --bg-input: var(--base-tema_oscuro-3);
     --bg-tabla: var(--base-tema_oscuro-3);
     --tabla-encabezado: var(--base-tema_oscuro-2);
@@ -127,6 +133,9 @@
 
     --btn: linear-gradient(135deg, var(--violeta-tema_oscuro-2), var(--rosita-tema_oscuro-3));
     --btn-hover: linear-gradient(135deg, var(--violeta-tema_oscuro-1), var(--rosita-tema_oscuro-4));
+
+    --mini_cards-hover:var(--violeta-tema_oscuro-2);
+    --mini_cards-hover_border:var(--violeta-tema_oscuro-3);
 
     /* BOTONES ACCIÓN */
     --btn-editar: linear-gradient(135deg, var(--violeta-tema_oscuro-2), var(--violeta-tema_oscuro-1));
