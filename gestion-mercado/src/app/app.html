@@ -1,15 +1,15 @@
 <div class="app-wrapper">
-  <app-header/>
+  <app-header *ngIf="!isLoginRoute()"/>
 
   <div class="contenido">
-    <app-sidebar/>
+    <app-sidebar *ngIf="!isLoginRoute()"/>
 
     <div class="main-container">
-      <app-breadcrumb/>
+      <app-breadcrumb *ngIf="!isLoginRoute()"/>
+
       <router-outlet/>
     </div>
-
   </div>
 
-  <app-footer/>
+  <app-footer *ngIf="!isLoginRoute()"/>
 </div>
