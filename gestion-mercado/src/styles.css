@@ -68,6 +68,10 @@
     --bg-pag2: var(--base-tema_claro-0);
     --bg-pag3:var(--salmon-tema_claro-3);
 
+    --login-bg-pantalla: var(--salmon-tema_claro-3);
+    --login-bg-card-izq: var(--base-tema_claro-0);
+    --login-bg-card-der: var(--salmon-tema_claro-0);
+
     --bg-input: white;
     --bg-tabla: var(--salmon-tema_claro-0);
     --tabla-encabezado: var(--salmon-tema_claro-4);
@@ -116,7 +120,11 @@
 
     --bg-pag: linear-gradient(180deg, var(--base-tema_oscuro-3), var(--base-tema_oscuro-2));
     --bg-pag2:linear-gradient(180deg, var(--base-tema_oscuro-4), var(--base-tema_oscuro-3));
-    --bg-pag3:linear-gradient(180deg, var(--base-tema_oscuro-4), var(--base-tema_oscuro-3));
+    --bg-pag3:linear-gradient(180deg, var(--base-tema_oscuro-1), var(--base-tema_oscuro-0));
+
+    --login-bg-pantalla: var(--base-tema_oscuro-4);
+    --login-bg-card-izq: var(--base-tema_oscuro-3);
+    --login-bg-card-der: var(--base-tema_oscuro-1);
 
     --bg-input: var(--base-tema_oscuro-3);
     --bg-tabla: var(--base-tema_oscuro-3);

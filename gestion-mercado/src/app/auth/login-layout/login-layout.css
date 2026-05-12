@@ -1,7 +1,7 @@
 /* FONDO */
 .login-page {
   height: 100vh;
-  background-color: var(--vino-tema_claro-2);
+  background: var(--login-bg-pantalla);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,7 +19,7 @@
 /* IZQUIERDA */
 .login-izquierda {
   width: 42%;
-  background-color: var(--salmon-tema_claro-2);
+  background: var(--login-bg-card-izq);
   position: relative;
 }
 
@@ -48,7 +48,7 @@
 /* DERECHA */
 .login-derecha {
   width: 58%;
-  background: var(--base-tema_claro-2);
+  background: var(--login-bg-card-der);
   display: flex;
   justify-content: center;
   align-items: center;
