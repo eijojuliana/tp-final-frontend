@@ -1,81 +1,80 @@
 <div class="form-container">
   <div class="card">
-    <div class = "rectangulito"></div>
+    <h2> {{isEditMode() ? 'Editar Duenio' : 'Registrar Duenio'}} </h2>
 
-      <div>
-      <h2> {{isEditMode() ? 'Editar Duenio' : 'Registrar Duenio'}} </h2>
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="campo">
+        <label> Nombre: </label>
+        <input type="text" formControlName="nombre" placeholder="Ingrese el nombre">
+        @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
+        <span class="error">El campo no puede estar vacío ni contener caracteres no alfabéticos.</span>
+        }
+      </div>
 
-      <form [formGroup]="form" (ngSubmit)="save()">
-        <div class="campo">
-          <label> Nombre: </label>
-          <input type="text" formControlName="nombre" placeholder="Ingrese el nombre">
-          @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
-          <span class="error">El campo no puede estar vacío ni contener caracteres no alfabéticos.</span>
-          }
-        </div>
+      <!-- Campo Apellido -->
+      <div class="campo">
+        <label>Apellido:</label>
+        <input type="text" formControlName="apellido" placeholder="Ingrese el apellido">
+        @if (form.get('apellido')?.invalid && form.get('apellido')?.touched) {
+        <span class="error">El campo no puede estar vacío ni contener caracteres no alfabéticos.</span>
+        }
+      </div>
 
-        <!-- Campo Apellido -->
-        <div class="campo">
-          <label>Apellido:</label>
-          <input type="text" formControlName="apellido" placeholder="Ingrese el apellido">
-          @if (form.get('apellido')?.invalid && form.get('apellido')?.touched) {
-          <span class="error">El campo no puede estar vacío ni contener caracteres no alfabéticos.</span>
-          }
-        </div>
+      <div class="campo">
+        <label> Dni: </label>
+        <input type="number" formControlName="dni">
+        @if (form.get('dni')?.invalid && form.get('dni')?.touched) {
+        <span class="error">El DNI debe tener entre 6 y 9 dígitos</span>
+        }
+      </div>
 
-        <div class="campo">
-          <label> Dni: </label>
-          <input type="number" formControlName="dni">
-          @if (form.get('dni')?.invalid && form.get('dni')?.touched) {
-          <span class="error">El DNI debe tener entre 6 y 9 dígitos</span>
-          }
-        </div>
+      <!-- Campo Edad -->
+      <div class="campo">
+        <label>Fecha de Nacimiento:</label>
+        <input type="date" formControlName="fechaNacimiento">
+        @if (form.get('fechaNacimiento')?.invalid && form.get('fechaNacimiento')?.touched) {
+        <span class="error">El campo no puede estar vacío y debe ser una fecha válida (menor a 120 y mayor a 0
+          años)</span>
+        }
+      </div>
 
-        <!-- Campo Edad -->
-        <div class="campo">
-          <label>Fecha de Nacimiento:</label>
-          <input type="date" formControlName="fechaNacimiento">
-          @if (form.get('fechaNacimiento')?.invalid && form.get('fechaNacimiento')?.touched) {
-          <span class="error">El campo no puede estar vacío y debe ser una fecha válida (menor a 120 y mayor a 0
-            años)</span>
-          }
-        </div>
+      <div class="campo">
+        <label> Email: </label>
+        <input type="text" formControlName="email">
+        @if (form.get('email')?.invalid && form.get('email')?.touched) {
+        <span class="error">El email del Dueño es requerido en formato correcto.</span>
+        }
+      </div>
 
-        <div class="campo">
-          <label> Email: </label>
-          <input type="text" formControlName="email">
-          @if (form.get('email')?.invalid && form.get('email')?.touched) {
-          <span class="error">El email del Dueño es requerido en formato correcto.</span>
-          }
-        </div>
+      <div class="campo">
+        <label> Contraseña: </label>
 
-        <div class="campo">
-          <label> Contraseña: </label>
+        <div class="password-input-wrapper">
+          <input [type]="passwordVisible ? 'text' : 'password'" formControlName="contraseña">
 
-          <div class="password-input-wrapper">
-            <input [type]="passwordVisible ? 'text' : 'password'" formControlName="contraseña">
-
-            <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
-              {{ passwordVisible ? 'Ocultar' : 'Mostrar' }}
-            </button>
-          </div>
-
-          @if (form.get('contraseña')?.invalid && form.get('contraseña')?.touched) {
-          <span class="error">La contraseña del Dueño es requerida.</span>
-          }
-        </div>
-
-        <div class="botones">
-          <button type="submit" [disabled]="form.invalid">
-            {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
+          <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+            {{ passwordVisible ? 'Ocultar' : 'Mostrar' }}
           </button>
-
-          @if (isEditMode()) {
-          <button type="button" (click)="cancelEdit()">Cancelar</button>
-          }
         </div>
 
-      </form>
-    </div>
+        @if (form.get('contraseña')?.invalid && form.get('contraseña')?.touched) {
+        <span class="error">La contraseña del Dueño es requerida.</span>
+        }
+      </div>
+
+      <div class="botones">
+        <button type="submit" [disabled]="form.invalid">
+          {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
+        </button>
+
+        @if (isEditMode()) {
+        <button type="button" (click)="cancelEdit()">Cancelar</button>
+        }
+      </div>
+
+    </form>
+  </div>
+  <div class="image">
+    <img src="assets/images/arbol-sakura.png" alt="Personaje">
   </div>
 </div>

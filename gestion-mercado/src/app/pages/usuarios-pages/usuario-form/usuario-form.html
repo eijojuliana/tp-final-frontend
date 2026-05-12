@@ -1,48 +1,43 @@
 <div class="form-container">
   <div class="card">
+    <h2> {{editMode() ? 'Editar Usuario' : 'Registrar Usuario'}} </h2>
 
-    <div class = "rectangulito"></div>
-
-      <div>
-      <h2> {{editMode() ? 'Editar Usuario' : 'Registrar Usuario'}} </h2>
-
-      <form [formGroup]="form" (ngSubmit)="save()">
-      <div class="campo">
-          <label>Email: </label>
-          <input type="text" formControlName="email">
-          @if (form.get('email')?.invalid && form.get('email')?.touched) {
-            <span class = "error">El email es requerido en el formato correcto.</span>
-          }
-      </div>
-      <div class="campo">
-    <label>Contraseña: </label>
-
-    <div class="password-input-wrapper">
-      <input
-        [type]="passwordVisible ? 'text' : 'password'"
-        formControlName="contraseña"
-      >
-
-      <button
-        type="button"
-        class="toggle-password"
-        (click)="togglePasswordVisibility()"
-      >
-        {{ passwordVisible ? 'Ocultar' : 'Mostrar' }}
-      </button>
+    <form [formGroup]="form" (ngSubmit)="save()">
+    <div class="campo">
+        <label>Email: </label>
+        <input type="text" formControlName="email">
+        @if (form.get('email')?.invalid && form.get('email')?.touched) {
+          <span class = "error">El email es requerido en el formato correcto.</span>
+        }
     </div>
+    <div class="campo">
+  <label>Contraseña: </label>
 
-    @if (form.get('contraseña')?.invalid && form.get('contraseña')?.touched) {
-      <span class = "error">La contraseña es requerida.</span>
-    }
+  <div class="password-input-wrapper">
+    <input
+      [type]="passwordVisible ? 'text' : 'password'"
+      formControlName="contraseña"
+    >
+
+    <button
+      type="button"
+      class="toggle-password"
+      (click)="togglePasswordVisibility()"
+    >
+      {{ passwordVisible ? 'Ocultar' : 'Mostrar' }}
+    </button>
   </div>
 
-      <div class="botones">
-        <button type="submit"[disabled]="form.invalid">
-        {{ editMode() ? 'Actualizar' : 'Registrar' }}
-        </button>
-      </div>
-      </form>
+  @if (form.get('contraseña')?.invalid && form.get('contraseña')?.touched) {
+    <span class = "error">La contraseña es requerida.</span>
+  }
+</div>
+
+    <div class="botones">
+      <button type="submit"[disabled]="form.invalid">
+      {{ editMode() ? 'Actualizar' : 'Registrar' }}
+      </button>
     </div>
+    </form>
   </div>
 </div>

@@ -3,208 +3,165 @@
 .form-container {
   min-height: 85vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 2rem;
-  background: var(--bg-pag);
-}
-
-/* CARD */
-.card {
+  justify-content: center;
   width: 100%;
-  max-width: 850px;
-  display: flex;
-  overflow: hidden;
-  padding-right: 4rem;
+  gap: 3rem;
+  position: relative;
+  background: var(--form-bg);
 
-  background: var(--bg-pag2);
-
-  border-radius: 2rem;
-  border: 1px solid var(--borde-focus);
-
-  box-shadow:
-    0 10px 25px rgba(104, 14, 44, 0.08),
-    0 2px 10px rgba(104, 14, 44, 0.04);
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--form-bg-image);
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: var(--form-bg-image-opacity);
+    z-index: 0;
+    pointer-events: none;
+  }
 }
 
-/* PANEL ROSA */
-.rectangulito {
-  width: 260px;
-  background: linear-gradient(
-    180deg,
-    var(--borde-focus),
-    var(--borde-hover)
-  );
-}
-
-/* CONTENIDO */
-.card > div:last-child {
-  flex: 1;
+/* Tarjeta Glassmorphism */
+.card {
+  position: relative;
+  z-index: 2;
+  background: var(--form-card-bg);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
   padding: 3rem;
+  margin-top: 3rem;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: var(--form-card-shadow-1), var(--form-card-shadow-2);
+  border: 1px solid var(--form-card-border);
+
+  h2 {
+    color: var(--form-title);
+    text-align: center;
+    margin-bottom: 2.5rem;
+    font-size: 3rem;
+    letter-spacing: 1px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
 }
 
-/* TITULO */
-.card h2 {
-  color: var(--letra1);
-
-  font-size: 2.4rem;
-  font-weight: 700;
-
-  margin-bottom: 2rem;
-}
-
-/* FORM */
-.card form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-/* CAMPOS */
+/* Inputs y Labels */
 .campo {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-}
-
-/* LABEL */
-.campo label {
-  color: var(--letra1-leve);
-
-  font-size: 1.1rem;
-  font-weight: 600;
-}
-
-/* INPUTS */
-.campo input {
   width: 100%;
+  gap: 0.5rem;
 
-  padding: 1rem 1.2rem;
+  label {
+    color: var(--form-label);
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    text-shadow: var(--form-label-shadow);
+  }
 
-  border-radius: 999px;
-  border: 1.5px solid var(--borde-hover);
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="password"],
+  input[type="date"],
+  input[type="url"],
+  select {
+    padding: 1rem 1.25rem;
+    border: 2px solid var(--form-input-border);
+    border-radius: 12px;
+    background: var(--form-input-bg);
+    backdrop-filter: blur(10px);
+    color: var(--form-input-color);
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    outline: none;
+    font-family: "Proza Libre", sans-serif;
 
-  background: var(--bg-input);
+    &::placeholder { color: var(--form-placeholder); }
 
-  color: var(--letra1);
+    &:hover {
+      border-color: var(--form-input-hover-border);
+      background: var(--form-input-hover-bg);
+    }
 
-  font-size: 1rem;
-  font-family: var(--font-body);
+    &:focus {
+      border-color: var(--form-input-focus-border);
+      background: var(--form-input-focus-bg);
+      box-shadow: var(--form-input-focus-ring);
+    }
+  }
 
-  outline: none;
-  transition: 0.25s ease;
+  option {
+    color: var(--form-option-color);
+    font-weight: 600;
+  }
 }
 
-/* PLACEHOLDER */
-.campo input::placeholder {
-  color: var(--letra1-leve);
-}
-
-/* HOVER */
-.campo input:hover {
-  border-color: var(--borde-focus);
-  background: var(--bg-tabla);
-}
-
-/* FOCUS */
-.campo input:focus {
-  border-color: var(--borde-focus);
-
-  box-shadow: 0 0 0 4px rgba(236, 143, 161, 0.18);
-
-  background: var(--bg-tabla);
-}
-
-/* BOTONES */
+/* Botones */
 .botones {
   display: flex;
-  justify-content: flex-end;
   gap: 1rem;
   margin-top: 1rem;
+  justify-content: center;
+
+  button {
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: "Proza Libre", sans-serif;
+
+    &.btn-submit {
+      background: var(--form-submit-bg);
+      color: white;
+      box-shadow: var(--form-submit-shadow);
+      min-width: 150px;
+
+      &:hover:not(:disabled) {
+        background: var(--form-submit-bg-hover);
+        transform: translateY(-2px);
+      }
+
+      &:disabled {
+        background: var(--form-submit-disabled-bg);
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+    }
+
+    &.btn-cancel {
+      background: var(--form-cancel-bg);
+      color: white;
+      border: 2px solid var(--form-cancel-border);
+
+      &:hover {
+        background: var(--form-cancel-bg-hover);
+        border-color: var(--form-cancel-border-hover);
+        transform: translateY(-2px);
+      }
+    }
+  }
 }
 
-/* BOTON */
-.botones button {
-  padding: 0.9rem 2rem;
-
-  border: none;
-  border-radius: 999px;
-
-  font-size: 1rem;
-  font-weight: 600;
-
-  cursor: pointer;
-  transition: 0.25s ease;
-
-  font-family: var(--font-body);
-}
-
-/* BOTON PRINCIPAL */
-.botones button[type="submit"] {
-  background: linear-gradient(
-    135deg,
-    var(--borde-hover),
-    var(--borde-focus)
-  );
-
-  color: var(--letra1);
-
-  box-shadow: 0 8px 18px rgba(134, 15, 55, 0.2);
-}
-
-.botones button[type="submit"]:hover:not(:disabled) {
-  transform: translateY(-2px);
-
-  background: linear-gradient(
-    135deg,
-    var(--borde-focus),
-    var(--letra1)
-  );
-
-  color: var(--letra2);
-}
-
-.botones button[type="submit"]:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* CANCELAR */
-.botones button[type="button"] {
-  background: var(--letra1-leve);
-  color: var(--letra1);
-  border: 1px solid var(--borde-focus);
-}
-
-.botones button[type="button"]:hover {
-  background: var(--letra1);
-  color: var(--letra2);
-}
-
-/* ERROR */
+/* Mensajes de error */
 .error {
-  background: var(--error-0);
-  color: var(--error-2);
-  border: 1px solid var(--error-1);
-  border-radius: 1rem;
-  padding: 0.7rem 1rem;
-  font-size: 0.95rem;
-}
-
-/* RESPONSIVE claramente no chequeado no nada no tien sentido alguno tnego tanto miedo en este preciso momento*/
-@media (max-width: 850px) {
-
-  .card {
-    flex-direction: column;
-    padding-right: 0;
-  }
-
-  .rectangulito {
-    width: 100%;
-    height: 140px;
-  }
-
-  .card > div:last-child {
-    padding: 2rem;
-  }
+  background: var(--form-error-bg);
+  color: var(--form-error-color);
+  border: 2px solid var(--form-error-border);
+  border-radius: 12px;
+  font-size: 1.3rem;
+  padding: 0.75rem 1rem;
+  margin-top: 0.25rem;
+  backdrop-filter: blur(10px);
 }

@@ -1,37 +1,35 @@
 <div class="form-container">
   <div class="card">
+    <h2> {{ isEditMode() ? 'Editar Cuenta Bancaria' : 'Registrar Cuenta Bancaria' }} </h2>
 
-    <div class = "rectangulito"></div>
+    <form [formGroup]="form" (ngSubmit)="saveCuentaBancaria()">
+      <div class = "campo">
+        <label>CBU: </label>
+        <input type ="number" formControlName="cbu">
+        @if (form.get('cbu')?.invalid && form.get('cbu')?.touched) {
+          <span class = "error">El CBU de la cuenta bancaria es requerido.</span>
+        }
+      </div>
+      <div class = "campo">
+        <label>Saldo: </label>
+        <input type="number" formControlName="saldo">
+        @if (form.get('saldo')?.invalid && form.get('saldo')?.touched) {
+          <span class = "error">El saldo de la cuenta bancaria es requerido.</span>
+        }
+      </div>
 
-      <div>
-      <h2> {{ isEditMode() ? 'Editar Cuenta Bancaria' : 'Registrar Cuenta Bancaria' }} </h2>
+      <div class = "botones">
+        <button type="submit" [disabled]="form.invalid">
+            {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
+          </button>
 
-      <form [formGroup]="form" (ngSubmit)="saveCuentaBancaria()">
-        <div class = "campo">
-          <label>CBU: </label>
-          <input type ="number" formControlName="cbu">
-          @if (form.get('cbu')?.invalid && form.get('cbu')?.touched) {
-            <span class = "error">El CBU de la cuenta bancaria es requerido.</span>
+          @if (isEditMode()){
+            <button type="button" (click)="cancelarUpdate()">Cancelar</button>
           }
-        </div>
-        <div class = "campo">
-          <label>Saldo: </label>
-          <input type="number" formControlName="saldo">
-          @if (form.get('saldo')?.invalid && form.get('saldo')?.touched) {
-            <span class = "error">El saldo de la cuenta bancaria es requerido.</span>
-          }
-        </div>
-
-        <div class = "botones">
-          <button type="submit" [disabled]="form.invalid">
-              {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
-            </button>
-
-            @if (isEditMode()){
-              <button type="button" (click)="cancelarUpdate()">Cancelar</button>
-            }
-        </div>
-      </form>
-    </div>
+      </div>
+    </form>
+  </div>
+  <div class="image">
+    <img src="assets/images/cuentas-bancarias.png" alt="">
   </div>
 </div>

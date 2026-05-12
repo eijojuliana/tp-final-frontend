@@ -1,6 +1,5 @@
 <div class="form-container">
   <div class="card">
-    
     <h2> {{ isEditMode() ? 'Editar Producto' : 'Registrar Producto' }} </h2>
 
     <form [formGroup]="form" (ngSubmit)="saveProduct()">
