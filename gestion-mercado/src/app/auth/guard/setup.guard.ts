@@ -1,3 +1,4 @@
+import { Empleado } from './../../models/empleado.model';
 import { inject } from '@angular/core';
 import { CanActivateFn, Router, UrlTree } from '@angular/router';
 import { DuenioService } from '../../services/duenio-service';
@@ -18,7 +19,7 @@ export const setupGuard: CanActivateFn = (route, state): Observable<boolean | Ur
   const currentUrl = state.url;
 
   // Los empleados no configuran la tienda, pasan directo
-  if (rol === 'EMPLEADO') {
+  if (rol == 'EMPLEADO' || rol == 'Empleado') {
     return true;
   }
 

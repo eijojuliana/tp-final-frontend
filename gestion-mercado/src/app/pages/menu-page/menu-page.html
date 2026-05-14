@@ -22,7 +22,7 @@
 
         <div class="accesos-grid">
 
-          @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
+          @if (auth.hasRole(['ADMIN'])){
           <a routerLink="/menu/personas" class="mini-card">
             <img src="/assets/images/persona-icon.png">
             <span>Personas</span>

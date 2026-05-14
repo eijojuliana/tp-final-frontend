@@ -12,8 +12,6 @@ export class BasicAuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authHeaderValue = this.authService.getAuthHeaderValue();
 
-    console.log('Interceptor ejecutándose. Valor del encabezado:', authHeaderValue);
-
     // Si tenemos un valor de cabecera de autenticación, lo adjuntamos
     if (authHeaderValue) {
       // Clona la petición (las peticiones en Angular son inmutables) y añade el nuevo encabezado
@@ -31,13 +29,10 @@ export class BasicAuthInterceptor implements HttpInterceptor {
 }
 
 export const BasicAuthInterceptorFn: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> => {
-  
+
   // 1. Inyecta el AuthService dentro de la función interceptor
   const authService = inject(AuthService);
   const authHeaderValue = authService.getAuthHeaderValue();
-  
-  // Si esta línea no se muestra, el problema es que el service no se cargó correctamente
-  console.log('--- Interceptor Fn Ejecutándose. Header:', authHeaderValue); 
 
   if (authHeaderValue) {
     // 2. Clona y añade el encabezado 'Authorization'

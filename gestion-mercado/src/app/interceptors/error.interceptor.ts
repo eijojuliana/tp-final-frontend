@@ -6,7 +6,6 @@ import { ToastService } from '../services/toast.service';
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const toast = inject(ToastService);
 
-  console.log("Interceptor de errores activo");
   return next(req).pipe(
     catchError((err) => {
 
@@ -17,7 +16,10 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
       if (status === 401 && req.url.includes('/auth/profile')) {
         msg = 'Usuario o contraseña incorrectos';
-      } else {
+      } else if (status === 500) {
+        msg = 'URL no reconocida por la API:';
+      }
+      else {
         // Resto de errores: uso mensaje del back o genérico
         msg =
           err?.error?.mensaje ||
@@ -26,7 +28,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           'Error desconocido';
       }
 
-      //console.error(`[ERROR ${status}] ${msg}`, err);
+      console.error(`[ERROR ${status}] ${msg}`, err);
 
       toast.error(msg);
 
