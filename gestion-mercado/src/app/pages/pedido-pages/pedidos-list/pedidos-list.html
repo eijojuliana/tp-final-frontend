@@ -63,7 +63,7 @@
           <td>{{ pedido.pedidoId }}</td>
           <td>{{ pedido.transaccion.transaccion_id }}</td>
           <td>{{ pedido.transaccion.tipo }}</td>
-          <td>{{ pedido.transaccion.fecha }}</td>
+          <td>{{ pedido.transaccion.fecha | date:'dd/MM/yyyy HH:mm' }}</td>
           <td [class.tipo-compra]="pedido.tipo === 'COMPRA'" [class.tipo-venta]="pedido.tipo === 'VENTA'">
             {{ pedido.tipo }}
           </td>

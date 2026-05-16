@@ -2,10 +2,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 <header>
-<nav class="container" [style]="theme.isOscuro()
-    ? 'background:#3A335C; box-shadow: inset 0 0 30px rgba(36,33,57,7);'
-    : ''">
-  <div class="header-der">
+<nav class="container" [style]="theme.isOscuro() ? 'background:#3A335C; box-shadow: inset 0 0 30px rgba(36,33,57,7);': ''">
+    <div class="header-der">
+      <!-- Stats -->
+      <div class="estadisticas">
+        <div class="caja">
+          <span class="nombre"> (prueba) CAJA: </span>
+          <span class="monto"> $100 </span>
+        </div>
+        <div class="banco">
+          <span class="nombre"> BANCO: </span>
+          <span class="monto"> $200 </span>
+        </div>
+      </div>
       <!-- Modo oscuro -->
       <img
         [src]="theme.isOscuro()? '/assets/images/sakura-icon.png': '/assets/images/luna-icon.png'"
@@ -37,7 +46,6 @@
               <p>Cerrar Sesión</p>
               <span>></span>
             </div>
-
           </div>
         </div>
       </div>

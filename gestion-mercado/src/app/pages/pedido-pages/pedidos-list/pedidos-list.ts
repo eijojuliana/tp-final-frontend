@@ -1,10 +1,11 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { PedidoService } from '../../../services/pedido-service';
 import { Router, RouterLink } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-pedidos-list',
-  imports: [RouterLink],
+  imports: [RouterLink, DatePipe],
   templateUrl: './pedidos-list.html',
   styleUrl: './pedidos-list.css',
 })

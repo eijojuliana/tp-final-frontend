@@ -25,14 +25,14 @@
   <div class="kpi-grid">
     <div class="card-stat">
       <span class="label"> Ventas Totales </span>
-      <p class="valor">{{ stats()?.ventasTotales | currency: 'USD' }}</p>
+      <p class="valor">{{ stats()?.ventasTotales | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</p>
     </div>
 
     <div class="operador">-</div>
 
     <div class="card-stat">
       <span class="label"> Gastos Totales </span>
-      <p class="valor">{{ stats()?.gastosTotales | currency:'USD' }}</p>
+      <p class="valor">{{ stats()?.gastosTotales | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</p>
     </div>
 
     <div class="operador">=</div>
@@ -40,7 +40,7 @@
     <div class="card-stat">
       <span class="label"> Ganancia </span>
       <p class="valor">
-        {{ (stats()?.ventasTotales - stats()?.gastosTotales) | currency:'USD' }}
+        {{ (stats()?.ventasTotales - stats()?.gastosTotales) | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}
       </p>
     </div>
   </div>
@@ -48,7 +48,7 @@
   <!-- Gráficos Principales -->
   <div class="charts-grid">
     <div class="card-grafico">
-      <h3>Ventas por Método</h3>
+      <h3>Ventas: efectivo VS transferencia </h3>
       <div class="canvas-container">
         <canvas baseChart [plugins]="donutPlugins"
           [data]="donutData"
@@ -62,7 +62,8 @@
       <h3>
         Tendencia
         {{ rangoSeleccionado() === 'hoy' ? 'por Hora' :
-          (rangoSeleccionado() === 'mes' ? 'Diaria' : 'Mensual') }}
+          (rangoSeleccionado() === 'mes' ? 'Diaria' : 'Mensual')}}
+        (probablemente lo borramo)
       </h3>
       <div class="canvas-container">
         <canvas baseChart

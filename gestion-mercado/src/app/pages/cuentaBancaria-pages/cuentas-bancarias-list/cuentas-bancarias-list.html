@@ -20,6 +20,7 @@
       <thead class="encabezado">
         <tr>
           <th>ID</th>
+          <th>Banco</th>
           <th>CBU</th>
           <th>Saldo</th>
           <th class="celda-acciones">
@@ -46,6 +47,7 @@
         @for (c of cuentasFiltradas(); track $index) {
           <tr>
             <td>{{c.cuentaBancariaId}}</td>
+            <td>No se implemento en el back todavia</td>
             <td>{{c.cbu}}</td>
             <td>{{c.saldo}}</td>
             <td class="acciones">

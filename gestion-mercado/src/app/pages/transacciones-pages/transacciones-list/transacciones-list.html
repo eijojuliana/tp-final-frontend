@@ -59,7 +59,7 @@
           <td [class.monto-entrada]="esEntrada(transaccion)" [class.monto-salida]="!esEntrada(transaccion)">
             {{ !esEntrada(transaccion) ? ('-' + transaccion.monto) : transaccion.monto }}
           </td>
-          <td>{{ transaccion.fecha }}</td>
+          <td>{{ transaccion.fecha | date:'dd/MM/yyyy HH:mm' }}</td>
         </tr>
         } @empty {
         <tr>

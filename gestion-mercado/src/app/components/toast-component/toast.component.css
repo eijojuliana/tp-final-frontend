@@ -1,6 +1,6 @@
 .toast-container {
   position: fixed;
-  top: 1.25rem;
+  top: 6.25rem;
   right: 1.25rem;
   display: flex;
   flex-direction: column;
@@ -9,6 +9,9 @@
 }
 
 .toast {
+  display: flex;
+  justify-content:space-around;
+  align-items: center;
   padding: 1rem 1.5rem;
   border-radius: 1rem;
   color: var(--letra3);
@@ -19,14 +22,19 @@
   animation: slideIn 0.3s ease-out;
 }
 
+.toast img {
+  height: 2rem;
+  width: 2rem;
+}
+
 .toast.error {
   background-color: var(--error-2);
-  border: 1px solid var(--error-1);
+  border: 1px solid white;
 }
 
 .toast.success {
   background-color: var(--exito-2);
-  border: 1px solid var(--exito-1);
+  border: 1px solid white;
 }
 
 @keyframes slideIn {
