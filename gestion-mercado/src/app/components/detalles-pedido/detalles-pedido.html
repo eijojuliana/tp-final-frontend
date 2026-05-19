@@ -4,13 +4,13 @@
   <form>
 
     <div class="campo">
-      <label for="productoId">Producto:</label>
-      <select [(ngModel)]="nuevoDetalle.productoId" name="productoId">
-        <option [ngValue]="null" disabled selected>Seleccione un producto</option>
-        @for (producto of productos(); track $index) {
-          <option [ngValue]="producto.producto_id">{{ producto.nombre }}</option>
-        }
-      </select>
+      <label>Producto:</label>
+      <app-buscador-generico
+        [datos]="productosMapeados()"
+        [mostrarImagen]="true"
+        placeholder="Seleccione un producto..."
+        (alSeleccionar)="alSeleccionarProducto($event)">
+      </app-buscador-generico>
     </div>
 
     <div class="campo">
@@ -25,27 +25,20 @@
       </div>
     }
 
-
     <div class="acciones-form">
       <button type="button" class="agregar-detalle" (click)="agregarDetalle()">
         {{ detalleEnEdicion() ? 'Actualizar' : 'Agregar' }}
       </button>
 
       @if (detalleEnEdicion()) {
-        <button type="button" class="btn-cancel-detalle" (click)="cancelarEdicionDetalle()">
-          Cancelar
-        </button>
+        <button type="button" class="btn-cancelar" (click)="cancelarEdicionDetalle()">Cancelar</button>
       }
     </div>
 
   </form>
   }
 
-
   @if (detallesPedido().length > 0) {
-    <hr>
-    <h3>Detalles Cargados ({{ detallesPedido().length }})</h3>
-
     <div class="tabla-contenedor">
       <table class="tabla">
         <thead class="encabezado">
@@ -59,7 +52,6 @@
             <th>Acciones</th>
           </tr>
         </thead>
-
         <tbody class="tablaBody">
           @for (detalle of detallesPedido(); track detalle.producto_id) {
             <tr>
@@ -70,18 +62,8 @@
               <td>${{ detalle.costoUnitario }}</td>
               <td>{{ detalle.subtotal }}</td>
               <td class="botones">
-                <button
-                  class="btnEditar"
-                  (click)="editarDetalle(detalle)"
-                  [disabled]="pedido.estado === 'FINALIZADO'">
-                  Editar
-                </button>
-                <button
-                  class="btnEliminar"
-                  (click)="eliminarDetalle(detalle.detallePedidoId)"
-                  [disabled]="pedido.estado === 'FINALIZADO'">
-                  Eliminar
-                </button>
+                <button class="btnEditar" (click)="editarDetalle(detalle)" [disabled]="pedido.estado === 'FINALIZADO'">Editar</button>
+                <button class="btnEliminar" (click)="eliminarDetalle(detalle.detallePedidoId)" [disabled]="pedido.estado === 'FINALIZADO'">Eliminar</button>
               </td>
             </tr>
           }
@@ -95,4 +77,3 @@
     </div>
   }
 </section>
-

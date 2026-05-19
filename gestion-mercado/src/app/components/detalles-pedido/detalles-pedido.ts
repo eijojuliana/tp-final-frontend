@@ -5,88 +5,80 @@ import { FormsModule } from '@angular/forms';
 import { Pedido } from '../../models/pedido.model';
 import { ProductService } from '../../services/product-service';
 import { ToastService } from '../../services/toast.service';
+import { BuscadorGenericoComponent } from '../buscador/buscador';
+import { BuscadorItem } from '../buscador/buscador-item';
 
 @Component({
   selector: 'app-detalles-pedido',
-  imports: [FormsModule],
+  imports: [FormsModule, BuscadorGenericoComponent],
   templateUrl: './detalles-pedido.html',
   styleUrl: './detalles-pedido.css',
 })
 export class DetallesPedido {
-  @Input({ required: true }) pedido!: Pedido;// Recibe el pedido
+  @Input({ required: true }) pedido!: Pedido;
 
-  //Para producto
-  private productService=inject(ProductService);
-  public productos=this.productService.productos;
+  private productService = inject(ProductService);
+  public productos = this.productService.productos;
 
   private detallePedidoService = inject(DetallePedidoService);
   private toast = inject(ToastService);
 
-  // Signal de la lista de detalles
   detallesPedido = signal<DetallePedido[]>([]);
 
-  //Variable para el total
   total = computed(() => {
     return this.detallesPedido().reduce((acc, curr) => acc + curr.subtotal, 0);
   });
 
-  //Signal para editar
   detalleEnEdicion = signal<DetallePedido | null>(null);
 
-  // Objeto para el formulario
-  nuevoDetalle: { productoId: number | undefined, cantidad: number | undefined, costoUnitario: number | undefined } = {
+  nuevoDetalle: { productoId: number | undefined; cantidad: number | undefined; costoUnitario: number | undefined } = {
     productoId: undefined,
     cantidad: undefined,
-    costoUnitario: undefined
+    costoUnitario: undefined,
   };
 
-  ngOnInit(){
-    if (this.pedido && this.pedido.pedidoId) {
+  productosMapeados = computed<BuscadorItem[]>(() => {
+    return this.productos().map(p => ({
+      id: p.producto_id,
+      textoPrincipal: p.nombre,
+      subtexto: `Categoría: ${p.categoria}`,
+      imagenUrl: p.url || 'assets/images/default-product.png'
+    }));
+  });
+
+  public alSeleccionarProducto(id: number | string): void {
+    this.nuevoDetalle.productoId = id as number;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['pedido'] && this.pedido) {
       this.obtenerDetallesDelPedido(this.pedido.pedidoId);
     }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['pedido'] && this.pedido && this.pedido.pedidoId) {
-      if (!this.pedido) {
-        this.detallesPedido.set([]);
-        this.cancelarEdicionDetalle();
-        return;
-      }
-      if (this.pedido && this.pedido.pedidoId) {
-        this.obtenerDetallesDelPedido(this.pedido.pedidoId);
-        this.cancelarEdicionDetalle();
-      }
-    }
-  }
-
-  agregarDetalle(){
-    if (this.nuevoDetalle.productoId === undefined || this.nuevoDetalle.cantidad === undefined) {
-      console.error('Producto ID y Cantidad son requeridos.');
+  agregarDetalle() {
+    if (!this.nuevoDetalle.productoId || !this.nuevoDetalle.cantidad) {
+      this.toast.error('Debe seleccionar un producto y especificar una cantidad');
       return;
     }
 
-    const dto = {
+    const dto: any = {
       productoId: this.nuevoDetalle.productoId,
       cantidad: this.nuevoDetalle.cantidad,
-      costoUnitario: Number(this.nuevoDetalle.costoUnitario)
+      costoUnitario: this.nuevoDetalle.costoUnitario ?? 0,
     };
 
-    console.log("Enviando DTO:", dto);
-
-    if (this.detalleEnEdicion()) {
-      // MODO EDICIÓN
-      const idDetalle = this.detalleEnEdicion()!.detallePedidoId;
-      this.detallePedidoService.update(idDetalle, dto).subscribe(() => {
-        console.log('Detalle actualizado');
+    const edicion = this.detalleEnEdicion();
+    if (edicion) {
+      // MODO EDICIÓN - Usando tu método update real
+      this.detallePedidoService.update(edicion.detallePedidoId, dto).subscribe(() => {
         this.toast.success("Detalle actualizado correctamente");
         this.obtenerDetallesDelPedido(this.pedido.pedidoId);
         this.cancelarEdicionDetalle();
       });
     } else {
-      // MODO CREACIÓN
+      // MODO CREACIÓN - Usando tu método post real
       this.detallePedidoService.post(this.pedido.pedidoId, dto).subscribe(() => {
-        console.log('Detalle agregado');
         this.toast.success("Detalle agregado correctamente");
         this.obtenerDetallesDelPedido(this.pedido.pedidoId);
         this.nuevoDetalle = { productoId: undefined, cantidad: undefined, costoUnitario: undefined };
@@ -97,14 +89,13 @@ export class DetallesPedido {
   obtenerDetallesDelPedido(pedidoId: number){
     this.detallePedidoService.load(pedidoId).subscribe(
       (detalles) => {
-        this.detallesPedido.set(detalles); // Actualiza el signal
+        this.detallesPedido.set(detalles);
       }
     );
   }
+
   eliminarDetalle(detalleId: number){
     this.detallePedidoService.delete(detalleId).subscribe( () => {
-        console.log('Detalle de pedido eliminado: ' + detalleId);
-        // Recarga la lista para reflejar el cambio
         this.obtenerDetallesDelPedido(this.pedido.pedidoId);
       }
     );
@@ -115,7 +106,7 @@ export class DetallesPedido {
     this.nuevoDetalle = {
       productoId: detalle.producto_id,
       cantidad: detalle.cantidad,
-      costoUnitario: detalle.costoUnitario
+      costoUnitario: detalle.costoUnitario,
     };
   }
 

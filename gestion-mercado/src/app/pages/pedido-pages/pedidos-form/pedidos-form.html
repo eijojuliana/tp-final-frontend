@@ -37,14 +37,11 @@
           @if (form.get('tipoPedido')?.value === 'VENTA') {
             <div class="campo">
               <label>Cliente:</label>
-              <select formControlName="origen_id">
-                <option [ngValue]="null" disabled selected>Seleccione un cliente</option>
-                @for (cliente of clientes(); track $index) {
-                  <option [ngValue]="cliente.clienteId">
-                    {{ cliente.nombre }} {{ cliente.dni }}
-                  </option>
-                }
-              </select>
+              <app-buscador-generico
+                [datos]="clientesMapeados"
+                placeholder="Buscar cliente por nombre o DNI..."
+                (alSeleccionar)="alSeleccionarCliente($event)">
+              </app-buscador-generico>
             </div>
 
             @if (form.get('tipoTransaccion')?.value === 'DEBITO') {
@@ -65,14 +62,11 @@
           @if (form.get('tipoPedido')?.value === 'COMPRA') {
             <div class="campo">
               <label>Proveedor:</label>
-              <select formControlName="destino_id">
-                <option [ngValue]="null" disabled selected>Seleccione un proveedor</option>
-                @for (prov of proveedores(); track $index) {
-                  <option [ngValue]="prov.proveedorId">
-                    {{ prov.nombreFantasia }}
-                  </option>
-                }
-              </select>
+              <app-buscador-generico
+                [datos]="proveedoresMapeados"
+                placeholder="Buscar proveedor por razón social..."
+                (alSeleccionar)="alSeleccionarProveedor($event)">
+              </app-buscador-generico>
             </div>
 
             @if (form.get('tipoTransaccion')?.value === 'DEBITO') {
@@ -89,7 +83,6 @@
               </div>
             }
           }
-
 
           <div class="botones">
             <button type="submit" [disabled]="form.invalid || (isEditMode() && pedidoToEdit?.estado === 'FINALIZADO')">

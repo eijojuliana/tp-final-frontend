@@ -1,0 +1,36 @@
+<div class="buscador-container">
+  <div class="input-wrapper">
+    <input
+      type="text"
+      [(ngModel)]="textoBusqueda"
+      (input)="alEscribir()"
+      (focus)="alEscribir()"
+      [placeholder]="placeholder"
+      autocomplete="off"
+      class="input-busqueda"
+    />
+    <span class="icon-arrow" [class.rotated]="mostrarDropdown">▼</span>
+  </div>
+
+  @if (mostrarDropdown) {
+    <div class="resultados-dropdown">
+      @for (item of resultadosFiltrados; track item.id) {
+        <div class="buscador-item" (click)="seleccionarItem(item)">
+
+          @if (mostrarImagen && item.imagenUrl) {
+            <img [src]="item.imagenUrl" alt="Miniatura" class="mini-imagen" />
+          }
+
+          <div class="info-texto">
+            <span class="titulo-item">{{ item.textoPrincipal }}</span>
+            @if (item.subtexto) {
+              <span class="subtexto-item">{{ item.subtexto }}</span>
+            }
+          </div>
+        </div>
+      } @empty {
+        <div class="buscador-item sin-resultados">Sin resultados</div>
+      }
+    </div>
+  }
+</div>

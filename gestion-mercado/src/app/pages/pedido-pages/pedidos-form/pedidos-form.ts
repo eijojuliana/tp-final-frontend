@@ -5,17 +5,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NewPedido, Pedido } from '../../../models/pedido.model';
 import { ProveedorService } from '../../../services/proveedor-service';
 import { DetallesPedido } from "../../../components/detalles-pedido/detalles-pedido";
-import { NewTransaccion, Transaccion } from '../../../models/transaccion.model';
+import { NewTransaccion } from '../../../models/transaccion.model';
 import { ClienteService } from '../../../services/cliente-service';
 import { CuentaBancariaService } from '../../../services/cuenta-bancaria-service';
 import { TransaccionService } from '../../../services/transaccion-service';
 import { ToastService } from '../../../services/toast.service';
 import { DetallePedidoService } from '../../../services/detallePedido-service';
-
+import { BuscadorGenericoComponent } from '../../../components/buscador/buscador';
+import { BuscadorItem } from '../../../components/buscador/buscador-item';
 
 @Component({
   selector: 'app-pedidos-form',
-  imports: [ReactiveFormsModule, DetallesPedido],
+  imports: [ReactiveFormsModule, DetallesPedido, BuscadorGenericoComponent],
   templateUrl: './pedidos-form.html',
   styleUrl: './pedidos-form.css',
 })
@@ -36,12 +37,28 @@ export class PedidosForm {
   public cuentasBancarias= this.cuentaService.cuentasBancarias;
 
   private transaccionService = inject(TransaccionService);
-
   private detallePedidoService = inject(DetallePedidoService);
 
   isEditMode = signal(false);
   public pedidoToEdit: Pedido | null = null;
   pedidoCreado = signal<Pedido | null>(null);
+
+  get proveedoresMapeados(): BuscadorItem[] {
+    return this.proveedores().map(p => ({
+      id: p.proveedorId,
+      textoPrincipal: p.razonSocial,
+      subtexto: `Tel: ${p.telefono || ''}`
+    }));
+  }
+
+  get clientesMapeados(): BuscadorItem[] {
+    return this.clientes().map(c => ({
+      id: c.clienteId,
+      textoPrincipal: `${c.nombre} ${c.apellido}`,
+      subtexto: `DNI: ${c.dni || ''}`
+    }));
+  }
+
 
   form = this.fb.nonNullable.group({
     tipoPedido: [undefined as unknown as 'COMPRA' | 'VENTA', [Validators.required]],
@@ -82,6 +99,18 @@ export class PedidosForm {
         this.form.enable();
       }
     });
+  }
+
+
+  public alSeleccionarProveedor(id: number | string): void {
+   
+    this.form.get('destino_id')?.setValue(id as number);
+    this.form.get('destino_id')?.markAsTouched();
+  }
+
+  public alSeleccionarCliente(id: number | string): void {
+    this.form.get('origen_id')?.setValue(id as number);
+    this.form.get('origen_id')?.markAsTouched();
   }
 
   cargarDatosEnFormulario() {
@@ -126,7 +155,6 @@ export class PedidosForm {
       finalDestinoId = formValue.destino_id as number;
     }
 
-
     if (formValue.tipoTransaccion === 'DEBITO' && formValue.cuentaBancaria) {
       if(tipoPedido ==='COMPRA'){
         finalOrigenId=formValue.cuentaBancaria;
@@ -152,7 +180,7 @@ export class PedidosForm {
       const id = this.pedidoToEdit.pedidoId;
       const updateDto: NewPedido = {
         tipo: dto.tipo,
-        transaccion: {...dto.transaccion,transaccion_id: this.pedidoToEdit.transaccion.transaccion_id
+        transaccion: {...dto.transaccion, transaccion_id: this.pedidoToEdit.transaccion.transaccion_id
         } as NewTransaccion
       };
 
@@ -185,33 +213,33 @@ export class PedidosForm {
     this.router.navigate(['/menu/pedidos']);
   }
 
-finalizarPedido() {
-  const pedido = this.pedidoCreado();
-  if (!pedido) return;
-  this.detallePedidoService.load(pedido.pedidoId).subscribe({
-    next: (detalles) => {
-      if (!detalles || detalles.length === 0) {
-        this.toast.error('El detalle no puede estar vacío');
-        return;
-      }
+  finalizarPedido() {
+    const pedido = this.pedidoCreado();
+    if (!pedido) return;
+    this.detallePedidoService.load(pedido.pedidoId).subscribe({
+      next: (detalles) => {
+        if (!detalles || detalles.length === 0) {
+          this.toast.error('El detalle no puede estar vacío');
+          return;
+        }
 
-      if (confirm('¿Desea finalizar el pedido? Una vez finalizado no podrá modificarse.')) {
-        this.pedidoService.finalizar(pedido.pedidoId).subscribe({
-          next: () => {
-            this.toast.success('Pedido finalizado correctamente');
-            this.pedidoService.clearPedidoToEdit();
-            this.transaccionService.load();
-            this.router.navigate(['/menu/pedidos']);
-          },
-          error: () => this.toast.error('Ocurrió un error al finalizar el pedido')
-        });
-      }
-    },
-    error: () => this.toast.error('No se pudieron cargar los detalles del pedido')
-  });
-}
+        if (confirm('¿Desea finalizar el pedido? Una vez finalizado no podrá modificarse.')) {
+          this.pedidoService.finalizar(pedido.pedidoId).subscribe({
+            next: () => {
+              this.toast.success('Pedido finalizado correctamente');
+              this.pedidoService.clearPedidoToEdit();
+              this.transaccionService.load();
+              this.router.navigate(['/menu/pedidos']);
+            },
+            error: () => this.toast.error('Ocurrió un error al finalizar el pedido')
+          });
+        }
+      },
+      error: () => this.toast.error('No se pudieron cargar los detalles del pedido')
+    });
+  }
 
-  // CONFIG PARA QUE MENU DESPLEGABLE NE CELULAR
+
   formCollapsed = signal(true);
 
   toggleForm() {
