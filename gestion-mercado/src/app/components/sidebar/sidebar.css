@@ -36,7 +36,6 @@
   gap: 0.4rem;
 }
 
-/* Contenedor interno para icono + texto */
 .item-content {
   display: flex;
   align-items: center;
@@ -73,7 +72,6 @@
   box-shadow: var(--sombra);
 }
 
-/* Iconos específicos para el estado activo */
 .item.active .menu-icon {
   filter: brightness(1.2);
 }
@@ -106,7 +104,7 @@
 }
 
 .submenu .item:hover {
-  background: var(--salmon-tema_claro-2);
+  background: var(--btn);
   color: var(--letra1);
 }
 
