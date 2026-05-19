@@ -3,9 +3,9 @@ import { Injectable, signal } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class ToastService {
 
-  toasts = signal<{ message: string, type: 'error' | 'success' }[]>([]);
+  toasts = signal<{ message: string, type: 'error' | 'success' | 'warning'}[]>([]);
 
-  private addToast(message: string, type: 'error' | 'success') {
+  private addToast(message: string, type: 'error' | 'success' | 'warning') {
     const toastObj = { message, type };
 
     this.toasts.update(arr => [...arr, toastObj]);
@@ -23,5 +23,9 @@ export class ToastService {
 
   success(message: string) {
     this.addToast(message, 'success');
+  }
+
+  warning(message: string) {
+    this.addToast(message, 'warning');
   }
 }

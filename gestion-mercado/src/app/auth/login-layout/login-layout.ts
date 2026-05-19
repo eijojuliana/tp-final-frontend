@@ -62,6 +62,15 @@ login(): void {
           console.log('Perfil recibido:', profile);
           this.toast.success("Login realizado correctamente.");
 
+          if (
+            profile.roles.includes('ROLE_ADMIN') &&
+            this.username == '123' && this.password == '0000'
+          ) {
+            this.toast.warning(
+              'Recuerda cambiar tu contraseña para más seguridad.'
+            );
+          }
+
           // 3. Guardar rol y nombre en el AuthService
           this.authService.setRoleFromBackendRoles(profile.roles);
           this.authService.fetchAndSetPersonaName();

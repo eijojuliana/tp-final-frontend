@@ -37,6 +37,12 @@
   border: 1px solid white;
 }
 
+.toast.warning {
+  background-color: var(--info-2);
+  border: 1px solid white;
+  padding-left: 3rem;
+}
+
 @keyframes slideIn {
   from { transform: translateX(100%); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
