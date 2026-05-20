@@ -64,7 +64,7 @@ export class EmpleadoService {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'reporte-personas.xlsx';
+      a.download = 'reporte-empleados.xlsx';
       a.click();
       window.URL.revokeObjectURL(url);
     });

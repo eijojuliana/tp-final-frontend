@@ -62,7 +62,7 @@ export class ClienteService {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'reporte-personas.xlsx';
+      a.download = 'reporte-clientes.xlsx';
       a.click();
       window.URL.revokeObjectURL(url);
     });

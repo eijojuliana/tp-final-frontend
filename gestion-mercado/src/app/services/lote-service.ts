@@ -62,7 +62,7 @@ export class LoteService {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'reporte-personas.xlsx';
+      a.download = 'reporte-lotes.xlsx';
       a.click();
       window.URL.revokeObjectURL(url);
     });
