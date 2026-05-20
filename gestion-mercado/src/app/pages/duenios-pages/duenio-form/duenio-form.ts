@@ -2,13 +2,14 @@ import { Component, effect, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DuenioService } from '../../../services/duenio-service';
-import { Duenio, NewDuenio } from '../../../models/duenio.model';
+import { Duenio } from '../../../models/duenio.model';
 import { ToastService } from '../../../services/toast.service';
 import { Validaciones } from '../../../validations/Validaciones';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-duenio-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './duenio-form.html',
   styleUrl: './duenio-form.css',
 })
@@ -96,6 +97,6 @@ export class DuenioForm {
   }
 
   togglePasswordVisibility(): void {
-  this.passwordVisible = !this.passwordVisible;
+    this.passwordVisible = !this.passwordVisible;
   }
 }

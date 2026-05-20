@@ -52,11 +52,21 @@
         <div class="campo">
           <label> Contraseña: </label>
 
-          <div class="password-input-wrapper">
-            <input [type]="passwordVisible ? 'text' : 'password'" formControlName="contraseña">
+          <div class="input-group password-input-wrapper">
+            <input
+              [type]="passwordVisible ? 'text' : 'password'"
+              formControlName="contraseña"
+              placeholder="Ingrese la contraseña"
+            >
 
-            <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
-              {{ passwordVisible ? 'Ocultar' : 'Mostrar' }}
+            <button
+              type="button"
+              class="toggle-password"
+              (click)="togglePasswordVisibility()"
+            >
+              <span class="material-icons">
+                {{ passwordVisible ? 'visibility_off' : 'visibility' }}
+              </span>
             </button>
           </div>
 

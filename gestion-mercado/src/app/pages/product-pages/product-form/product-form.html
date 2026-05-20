@@ -1,43 +1,44 @@
 <div class="form-container">
   <div class="card">
-    
-    <h2> {{ isEditMode() ? 'Editar Producto' : 'Registrar Producto' }} </h2>
 
-    <form [formGroup]="form" (ngSubmit)="saveProduct()">
-      <div class = "campo">
-        <label>Nombre: </label>
-        <input type ="text" formControlName="nombre">
-        @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
-          <span class = "error">El nombre del producto es requerido.</span>
-        }
-      </div>
-      <div class = "campo">
-        <label>Categoría: </label>
-        <input type="text" formControlName="categoria">
-        @if (form.get('categoria')?.invalid && form.get('categoria')?.touched) {
-          <span class = "error">La categoría del producto es requerido.</span>
-        }
-      </div>
-      <div class = "campo">
-        <label> Url imagen del producto: </label>
-        <input type="url" formControlName="url">
-        @if (form.get('url')?.invalid && form.get('url')?.touched) {
-          <span class = "error">La url del producto debe ser válida.</span>
-        }
-      </div>
+    <div class = "rectangulito"></div>
 
-      <div class = "botones">
-        <button type="submit" [disabled]="form.invalid">
-            {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
-          </button>
+    <div>
+      <h2> {{ isEditMode() ? 'Editar Producto' : 'Registrar Producto' }} </h2>
 
-          @if (isEditMode()){
-            <button type="button" (click)="cancelEdit()">Cancelar</button>
+      <form [formGroup]="form" (ngSubmit)="saveProduct()">
+        <div class = "campo">
+          <label>Nombre: </label>
+          <input type ="text" formControlName="nombre">
+          @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
+            <span class = "error">El nombre del producto es requerido.</span>
           }
-      </div>
-    </form>
-  </div>
-  <div class="image">
-    <img src="assets/images/producto-fruta.png" alt="Personaje">
+        </div>
+        <div class = "campo">
+          <label>Categoría: </label>
+          <input type="text" formControlName="categoria">
+          @if (form.get('categoria')?.invalid && form.get('categoria')?.touched) {
+            <span class = "error">La categoría del producto es requerido.</span>
+          }
+        </div>
+        <div class = "campo">
+          <label> Url imagen del producto: </label>
+          <input type="url" formControlName="url">
+          @if (form.get('url')?.invalid && form.get('url')?.touched) {
+            <span class = "error">La url del producto debe ser válida.</span>
+          }
+        </div>
+
+        <div class = "botones">
+          <button type="submit" [disabled]="form.invalid">
+              {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
+            </button>
+
+            @if (isEditMode()){
+              <button type="button" (click)="cancelEdit()">Cancelar</button>
+            }
+        </div>
+      </form>
+    </div>
   </div>
 </div>

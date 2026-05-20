@@ -65,7 +65,9 @@
               class="toggle-password"
               (click)="togglePasswordVisibility()"
             >
-              {{ passwordVisible ? 'Ocultar' : 'Mostrar' }}
+              <span class = "material-icons">
+                {{ passwordVisible ? 'visibility' : 'visibility_off ' }}
+              </span>
             </button>
           </div>
 

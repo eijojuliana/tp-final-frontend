@@ -15,7 +15,6 @@
   max-width: 850px;
   display: flex;
   overflow: hidden;
-  padding-right: 4rem;
 
   background: var(--bg-pag2);
 
@@ -40,7 +39,7 @@
 /* CONTENIDO */
 .card > div:last-child {
   flex: 1;
-  padding: 3rem;
+  padding: 3rem 0rem 3rem 3rem;
 }
 
 /* TITULO */
@@ -78,6 +77,7 @@
 /* INPUTS */
 .campo input {
   width: 100%;
+  max-width: 60%;
 
   padding: 1rem 1.2rem;
 
@@ -118,7 +118,6 @@
 /* BOTONES */
 .botones {
   display: flex;
-  justify-content: flex-end;
   gap: 1rem;
   margin-top: 1rem;
 }
@@ -181,6 +180,14 @@
   color: var(--letra2);
 }
 
+.form-select {
+  width: 100%;
+  max-width: 65%;
+  border-radius: 50px;
+  border-color: var(--borde-hover);
+  color: var(--letra1-leve);
+}
+
 /* ERROR */
 .error {
   background: var(--error-0);
@@ -189,6 +196,35 @@
   border-radius: 1rem;
   padding: 0.7rem 1rem;
   font-size: 0.95rem;
+}
+
+/*CSS DEL OJO PARA OCULTAR CONTRASEÑITA*/
+.password-input-wrapper input {
+  max-width: 100%;
+  padding-right: 3rem;
+}
+
+/*ojardovich*/
+.toggle-password {
+  position: absolute;
+  right: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: var(--letra1-leve);
+  padding: 0.5rem;
+}
+
+.toggle-password:hover {
+  color: var(--letra1);
+  background-color: var(--borde-hover);
+}
+
+/* NO TOCAR PORQUE SE ROMPE TODO (NO SE ROMPE TODO PERO LO FUNCIONAN LOS ÍCONOS*/
+.material-icons {
+  font-family: 'Material Icons' !important;
 }
 
 /* RESPONSIVE claramente no chequeado no nada no tien sentido alguno tnego tanto miedo en este preciso momento*/
@@ -207,4 +243,11 @@
   .card > div:last-child {
     padding: 2rem;
   }
+}
+
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 65%;
 }
