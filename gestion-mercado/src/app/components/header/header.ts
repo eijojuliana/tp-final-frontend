@@ -1,10 +1,11 @@
-// header.ts (CORREGIDO)
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from "../../app.routes";
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
 import { ThemeService } from '../../styles/theme.service';
+import { TiendaService } from '../../services/tienda-service';
+import { CuentaBancariaService } from '../../services/cuenta-bancaria-service';
 
 @Component({
   selector: 'app-header',
@@ -13,30 +14,40 @@ import { ThemeService } from '../../styles/theme.service';
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
-export class Header implements OnInit{
+export class Header implements OnInit {
   menuAbierto: boolean = false;
+  animating = false;
 
-  public logout=inject(AuthService);
-  public authService=inject(AuthService);
-  route=inject(Router);
+  public logout = inject(AuthService);
+  public authService = inject(AuthService);
+  public theme = inject(ThemeService);
+  public tiendaService = inject(TiendaService);
+  private cuentaBancariaService = inject(CuentaBancariaService);
+  private route = inject(Router);
 
+  // Trae el efectivo en caja directamente de la tienda
+  efectivoEnCaja = computed(() => {
+    const tienda = this.tiendaService.tienda();
+    return tienda ? tienda.caja : 0;
+  });
 
-  cerrarSesion(){
+  // Suma el saldo de todas las cuentas bancarias usando la señal correcta: cuentasBancarias()
+  saldoEnCuentas = computed(() => {
+    return this.cuentaBancariaService.cuentasBancarias().reduce((total, c) => total + (c.saldo || 0), 0);
+  });
+
+  ngOnInit(): void {
+    this.theme.init();
+    this.tiendaService.load(); // Asegura que la info de la tienda esté cargada para la caja
+  }
+
+  cerrarSesion() {
     this.logout.clearCredentials();
-    this.route.navigate(['/login'])
+    this.route.navigate(['/login']);
   }
 
   toggleMenu() {
     this.menuAbierto = !this.menuAbierto;
-  }
-
-  //Temas
-  animating = false;
-
-  constructor(public theme: ThemeService) {}
-
-  ngOnInit(): void {
-    this.theme.init();
   }
 
   toggleTheme(): void {

@@ -2,30 +2,36 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 <header>
-<nav class="container" [style]="theme.isOscuro() ? 'background:#3A335C; box-shadow: inset 0 0 30px rgba(36,33,57,7);': ''">
+  <nav class="container" [style]="theme.isOscuro() ? 'background:#3A335C; box-shadow: inset 0 0 30px rgba(36,33,57,0.7);': ''">
+
+    <div class="header-izq">
+      <h1 class="brand-title">
+        {{ tiendaService.tienda()?.nombreFantasia || 'Mercado del Cerezo' }}
+      </h1>
+    </div>
+
     <div class="header-der">
-      <!-- Stats -->
       <div class="estadisticas">
-        <div class="caja">
-          <span class="nombre"> (prueba) CAJA: </span>
-          <span class="monto"> $100 </span>
+        <div class="stat-card caja">
+          <span class="nombre">CAJA</span>
+          <span class="monto">${{ efectivoEnCaja() | number:'1.0-0' }}</span>
         </div>
-        <div class="banco">
-          <span class="nombre"> BANCO: </span>
-          <span class="monto"> $200 </span>
+        <div class="stat-card banco">
+          <span class="nombre">BANCO</span>
+          <span class="monto">${{ saldoEnCuentas() | number:'1.0-0' }}</span>
         </div>
       </div>
-      <!-- Modo oscuro -->
+
       <img
-        [src]="theme.isOscuro()? '/assets/images/sakura-icon.png': '/assets/images/luna-icon.png'"
+        [src]="theme.isOscuro() ? '/assets/images/sakura-icon.png': '/assets/images/luna-icon.png'"
         class="theme-btn" (click)="toggleTheme()"
       >
 
-      <!-- Menu desplegable -->
-      <img src="https://i.pinimg.com/736x/1f/9a/91/1f9a91d7e4bce09f89e82c89e9d40e8c.jpg" alt=""
-        class="user-icon icono-perfil-principal" (click)="toggleMenu()">
-      <span class="material-symbols-outlined flecha-menu" [class.girar]="menuAbierto"
-        (click)="toggleMenu()">expand_more</span>
+      <div class="perfil-wrapper" (click)="toggleMenu()">
+        <img src="https://i.pinimg.com/736x/1f/9a/91/1f9a91d7e4bce09f89e82c89e9d40e8c.jpg" alt="User profile"
+          class="user-icon icono-perfil-principal">
+        <span class="material-symbols-outlined flecha-menu" [class.girar]="menuAbierto">expand_more</span>
+      </div>
 
       <div class="menu-desplegable" [ngClass]="{'abrir-menu': menuAbierto}">
         <div class="contenedor-menu">
