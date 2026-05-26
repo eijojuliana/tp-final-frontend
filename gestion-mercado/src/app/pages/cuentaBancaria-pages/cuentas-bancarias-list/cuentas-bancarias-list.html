@@ -5,15 +5,15 @@
   <section class="summary-cards">
     <div class="card">
       <h3>Efectivo en caja</h3>
-      <p class="amount text-yellow">${{ efectivoEnCaja() | number:'1.0-0' }}</p>
+      <p class="amount text-yellow">{{ efectivoEnCaja() | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</p>
     </div>
     <div class="card">
       <h3>Saldo en cuentas</h3>
-      <p class="amount text-pink">${{ saldoEnCuentas() | number:'1.0-0' }}</p>
+      <p class="amount text-pink">{{ saldoEnCuentas() | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</p>
     </div>
     <div class="card">
       <h3>Total disponible</h3>
-      <p class="amount text-green">${{ totalDisponible() | number:'1.0-0' }}</p>
+      <p class="amount text-green">{{ totalDisponible() | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</p>
     </div>
   </section>
 
@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="account-balance">
-          <span class="balance-total">${{ efectivoEnCaja() | number:'1.0-0' }}</span>
+          <span class="balance-total">{{ efectivoEnCaja() | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</span>
           <span class="balance-trend trend-up">+$45.000 hoy</span>
         </div>
       </div>
@@ -57,7 +57,7 @@
           </div>
           <div class="account-balance-wrapper">
             <div class="account-balance">
-              <span class="balance-total">${{ c.saldo | number:'1.0-0' }}</span>
+              <span class="balance-total">{{ c.saldo | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</span>
               <span class="balance-trend trend-muted">Banco vinculado</span>
             </div>
             <div class="item-actions">

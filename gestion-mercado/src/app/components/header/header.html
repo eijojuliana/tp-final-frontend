@@ -14,11 +14,11 @@
       <div class="estadisticas">
         <div class="stat-card caja">
           <span class="nombre">CAJA</span>
-          <span class="monto">${{ efectivoEnCaja() | number:'1.0-0' }}</span>
+          <span class="monto">{{ efectivoEnCaja() | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</span>
         </div>
         <div class="stat-card banco">
           <span class="nombre">BANCO</span>
-          <span class="monto">${{ saldoEnCuentas() | number:'1.0-0' }}</span>
+          <span class="monto">{{ saldoEnCuentas() | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</span>
         </div>
       </div>
 
