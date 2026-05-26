@@ -73,5 +73,50 @@
         </canvas>
       </div>
     </div>
+
+</div> <div class="categoria-separador">
+    <span>Inteligencia de Productos y Categorías</span>
+  </div>
+
+  <div class="charts-grid">
+    <div class="card-grafico">
+      <h3>TOP 5 Productos más vendidos</h3>
+      <div class="canvas-container">
+        <canvas baseChart
+          [data]="barData"
+          [type]="'bar'"
+          [options]="barOptions">
+        </canvas>
+      </div>
+    </div>
+
+    <div class="analiticas-subgrid">
+
+      <div class="card-mini-stat">
+        <span class="mini-label">Producto menos vendido</span>
+        <p class="mini-valor-destacado rojo">{{ stats()?.productoMenosVendido?.label || 'Sin registros' }}</p>
+        <span class="mini-subtext">Vendido: {{ stats()?.productoMenosVendido?.value || 0 }} u.</span>
+      </div>
+
+      <div class="card-mini-stat">
+        <span class="mini-label">Categoría Líder</span>
+        <p class="mini-valor-destacado violeta">{{ stats()?.categoriaTop || 'Sin registros' }}</p>
+        <span class="mini-subtext">Mayor volumen monetario</span>
+      </div>
+
+      <div class="card-mini-stat">
+        <span class="mini-label">Ganancia promedio por día</span>
+        <p class="mini-valor">{{ stats()?.gananciasPromedioDia | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</p>
+        <span class="mini-subtext">Rendimiento diario</span>
+      </div>
+
+      <div class="card-mini-stat">
+        <span class="mini-label">Mes récord de Ganancia</span>
+        <p class="mini-valor-destacado rosa">{{ stats()?.mejorMes || 'Sin registros' }}</p>
+        <span class="mini-subtext">Pico histórico</span>
+      </div>
+
+    </div>
+
   </div>
 </section>

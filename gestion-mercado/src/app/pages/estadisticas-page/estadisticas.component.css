@@ -122,7 +122,98 @@
   opacity: 0.7;
 }
 
-@media (max-width: 900px) {
+/* -- EL MARDITO CSS DE LOS KPIS AVANZADOS -- */
+.categoria-separador {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 30px 0 10px 0;
+}
+
+.categoria-separador::before,
+.categoria-separador::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--borde);
+  opacity: 0.4;
+}
+
+.categoria-separador span {
+  padding: 0 20px;
+  color: var(--letra1);
+  font-weight: 500;
+  font-size: 1.15rem;
+  letter-spacing: 0.6px;
+  opacity: 0.8;
+}
+
+.analiticas-subgrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.card-mini-stat {
+  background: var(--bg-pag2);
+  border: 1px solid var(--borde);
+  border-radius: 15px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.card-mini-stat .mini-label {
+  color: var(--letra1-leve);
+  font-size: 0.9rem;
+}
+
+.card-mini-stat .mini-valor {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--letra1);
+  margin: 10px 0;
+}
+
+.card-mini-stat .mini-valor-destacado {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--letra1);
+  margin: 10px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-mini-stat .mini-valor-destacado.rojo { color: var(--error-1); }
+.card-mini-stat .mini-valor-destacado.violeta { color: var(--info-1); }
+
+.card-mini-stat .mini-subtext {
+  font-size: 0.85rem;
+  color: var(--letra1-leve);
+}
+
+.badge-comparativa {
+  font-size: 0.85rem;
+  padding: 4px 12px;
+  border-radius: 50px;
+  margin-top: 10px;
+  display: inline-block;
+  background: var(--error-0);
+  color: var(--error-2);
+}
+
+.badge-comparativa.positivo {
+  background: var(--info-0);
+  color: var(--info-2);
+}
+
+@media (max-width: 650px) {
+  .analiticas-subgrid {
+    grid-template-columns: 1fr;
+  }
+
   .charts-grid {
     grid-template-columns: 1fr;
   }

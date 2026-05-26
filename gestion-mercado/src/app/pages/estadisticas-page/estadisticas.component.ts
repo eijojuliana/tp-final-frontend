@@ -1,4 +1,3 @@
-
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -19,8 +18,21 @@ export class EstadisticasComponent implements OnInit {
   rangoSeleccionado = signal<string>('mes');
   public donutPlugins = [centerTextPlugin];
 
-  // Signal para los datos del backend
+  // Signal para los datos del backend (contiene todo este tanto kpi base como avanzados)
   stats = signal<any>(null);
+
+  // TOP 5 PRODUCTITOS
+  public barData: ChartData<'bar'> = { labels: [], datasets: [] };
+  public barOptions: ChartConfiguration<'bar'>['options'] = {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: { beginAtZero: true, ticks: { color: 'white' }, grid: { color: 'rgba(255, 255, 255, 0.1)' } },
+      y: { ticks: { color: 'white' }, grid: { display: false } }
+    },
+    plugins: { legend: { display: false } }
+  };
 
   ngOnInit() {
     this.seleccionarRango('mes'); // Carga el mes actual por defecto
@@ -88,6 +100,17 @@ export class EstadisticasComponent implements OnInit {
         ]
       };
       this.lineOptions = { ...this.lineOptions };
+
+      // Actualizar gráfico de los 5 más vendiditos
+      this.barData = {
+        labels: (res.topProductos || []).map((p: any) => p.label),
+        datasets: [{
+          data: (res.topProductos || []).map((p: any) => p.value),
+          backgroundColor: '#7c4dff',
+          borderRadius: 6
+        }]
+      };
+      this.barOptions = { ...this.barOptions };
     });
   }
 
