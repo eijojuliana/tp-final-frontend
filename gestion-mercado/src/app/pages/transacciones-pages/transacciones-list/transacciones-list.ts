@@ -3,11 +3,11 @@ import { TransaccionService } from '../../../services/transaccion-service';
 import { Transaccion } from '../../../models/transaccion.model';
 import { PedidoService } from '../../../services/pedido-service';
 import { Pedido } from '../../../models/pedido.model';
-import { DatePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-transacciones-list',
-  imports: [DatePipe],
+  imports: [DatePipe,CurrencyPipe],
   templateUrl: './transacciones-list.html',
   styleUrl: './transacciones-list.css',
 })

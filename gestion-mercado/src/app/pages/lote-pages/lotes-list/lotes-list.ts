@@ -3,10 +3,11 @@ import { LoteService } from '../../../services/lote-service';
 import { Component, computed, inject, signal } from '@angular/core';
 import { Lote } from '../../../models/lote.model';
 import { ToastService } from '../../../services/toast.service';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-lotes-list',
-  imports: [RouterLink],
+  imports: [RouterLink,CurrencyPipe],
   templateUrl: './lotes-list.html',
   styleUrl: './lotes-list.css',
 })

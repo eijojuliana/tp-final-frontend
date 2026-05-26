@@ -23,7 +23,7 @@
       <button type="button" class="btn-agregar" routerLink="/menu/lotes/form"> Agregar </button>
   </div>
 
-    <div class="tabla-contenedor">
+  <div class="tabla-contenedor">
     <table class="tabla">
       <thead class="encabezado">
         <tr>
@@ -38,12 +38,10 @@
               Acciones
 
               <div class="acciones-botones">
-                <!-- Botón Excel -->
                 <a (click)="exportarExcel()">
                   <img class="historial-icon" src="/assets/images/excel-icon.png" alt="exportar excel" title="Exportar a Excel">
                 </a>
 
-                <!-- Botón Historial -->
                 <a routerLink="/menu/historial/lotes">
                   <img class="historial-icon" src="/assets/images/historial-icon.png" alt="historial">
                 </a>
@@ -60,7 +58,7 @@
             <td>{{ lote.producto.nombre }}</td>
             <td>{{ lote.producto.categoria }}</td>
             <td>{{ lote.cantidadDisponible }}</td>
-            <td>${{ lote.costoUnitario }}</td>
+            <td>{{ lote.costoUnitario | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</td>
             <td>{{ lote.fechaIngreso }}</td>
             <td class="acciones">
               <button class="btnEliminar" type="button" (click)="deleteLote(lote.lote_id)">Eliminar</button>
@@ -69,7 +67,7 @@
           </tr>
         } @empty {
           <tr>
-            <td colspan="4" class="sin-registros">
+            <td colspan="7" class="sin-registros">
               No se encontraron registros
             </td>
           </tr>

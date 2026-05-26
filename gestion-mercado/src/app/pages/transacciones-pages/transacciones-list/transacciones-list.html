@@ -20,7 +20,7 @@
     </select>
   </div>
 
-    <div class="tabla-contenedor">
+  <div class="tabla-contenedor">
     <table class="tabla-historial">
       <thead class="encabezado">
         <tr>
@@ -32,14 +32,11 @@
           <th> Fecha </th>
           <th class="celda-acciones">
             <div class="celda-acciones-div">
-
               <div class="acciones-botones">
-                <!-- Botón Excel -->
                 <a (click)="exportarExcel()">
                   <img class="historial-icon" src="/assets/images/excel-icon.png" alt="exportar excel" title="Exportar a Excel">
                 </a>
 
-                <!-- Botón Historial -->
                 <a routerLink="/menu/historial/transacciones">
                   <img class="historial-icon" src="/assets/images/historial-icon.png" alt="historial">
                 </a>
@@ -57,13 +54,13 @@
           <td>{{ transaccion.origen_id }}</td>
           <td>{{ transaccion.destino_id }}</td>
           <td [class.monto-entrada]="esEntrada(transaccion)" [class.monto-salida]="!esEntrada(transaccion)">
-            {{ !esEntrada(transaccion) ? ('-' + transaccion.monto) : transaccion.monto }}
+            {{ !esEntrada(transaccion) ? '- ' : '+ ' }}{{ transaccion.monto | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}
           </td>
           <td>{{ transaccion.fecha | date:'dd/MM/yyyy HH:mm' }}</td>
         </tr>
         } @empty {
         <tr>
-          <td colspan="4" class="sin-registros">
+          <td colspan="7" class="sin-registros">
             No se encontraron registros
           </td>
         </tr>
