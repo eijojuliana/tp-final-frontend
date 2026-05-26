@@ -1,3 +1,32 @@
-<footer>
-    <p>Copyright &copy; {{ currentYear }} | Equipo de Desarrollo</p>
+<footer class="footer-container">
+  <div class="footer-content">
+
+    <div class="footer-brand">
+      <div class="brand-logo">
+        <img class="logo" [src]="theme.isOscuro()? 'assets/images/Logo-oscuro-MercadoCerezo.png': 'assets/images/Logo-MercadoCerezo.png'">
+      </div>
+      <h2 class="brand-title">Mercado del Cerezo</h2>
+      <p class="brand-slogan">Gestión operativa y flujos de caja simplificados</p>
+    </div>
+
+    <div class="footer-links">
+      <h3>Soporte y Legal</h3>
+      <ul>
+        <li><a href="#">Ayuda y Soporte</a></li>
+        <li><a href="#">Términos de Uso</a></li>
+        <li><a href="#">Políticas de Privacidad</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-contact">
+      <h3>Contacto</h3>
+      <p class="contact-email">mercadodelcerezo@cutemail.com</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2026 Mercado del Cerezo. Todos los derechos reservados.</p>
+    <span class="system-version">v1.4.2</span>
+  </div>
 </footer>

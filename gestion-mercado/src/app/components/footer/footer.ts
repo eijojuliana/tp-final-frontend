@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ThemeService } from '../../styles/theme.service';
 
 @Component({
   selector: 'app-footer',
@@ -8,4 +9,19 @@ import { Component } from '@angular/core';
 })
 export class Footer {
   currentYear: number = new Date().getFullYear();
+
+
+   animating = false;
+
+     constructor(public theme: ThemeService) {}
+
+     ngOnInit(): void {
+       this.theme.init();
+     }
+
+     toggleTheme(): void {
+       this.animating = true;
+       this.theme.toggle();
+       setTimeout(() => (this.animating = false), 200);
+     }
 }
