@@ -1,1 +1,215 @@
-@import '../../../styles/tabla-style.css';
+.dashboard-container {
+  width: 95%;
+  max-width: 1200px;
+  margin: 2rem auto;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.breadcrumbs {
+  color: var(--letra1-leve, #b5a2b1);
+  font-size: 1.1rem;
+}
+
+.breadcrumbs .active {
+  color: var(--letra1, #ffffff);
+  font-weight: bold;
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.card {
+  background: var(--bg-pag2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card h3 {
+  color: var(--letra1-leve);
+  font-size: 1.1rem;
+  margin: 0 0 0.8rem 0;
+  font-weight: 400;
+}
+
+.card .amount {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.text-yellow { color: #ffca28; }
+.text-pink { color: #f48fb1; }
+.text-green { color: #69f0ae; }
+
+.accounts-section {
+  background: var(--bg-pag2);
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 2.5rem;
+  box-shadow: 0 20px 40px rgba(95, 7, 51, 0.2);
+}
+
+.accounts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 1rem;
+}
+
+.accounts-header h2 {
+  color: var(--letra1);
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.btn-icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.btn-icon img {
+  width: 25px;
+  height: 25px;
+  transition: transform 0.2s;
+}
+
+.btn-icon img:hover {
+  transform: scale(1.1);
+}
+
+.btn-agregar {
+  background-color: var(--btn);
+  color: var(--letra1);
+  border: none;
+  padding: 0.8rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-agregar:hover {
+  background-color: var(--borde-hover);
+  transform: translateY(-2px);
+}
+
+.accounts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.account-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.2s;
+  border-radius: 10px;
+}
+
+.account-item:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.box-caja {
+  background: rgba(161, 68, 183, 0.05);
+}
+
+.account-info {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.account-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+}
+
+.icon-purple { background-color: #a144b7; }
+.icon-blue { background-color: #1e88e5; }
+
+.account-name {
+  color: var(--letra1);
+  margin: 0 0 0.3rem 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.account-detail {
+  color: var(--letra1-leve);
+  font-size: 0.9rem;
+}
+
+.account-balance-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.account-balance {
+  text-align: right;
+}
+
+.balance-total {
+  display: block;
+  color: var(--letra1);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.balance-trend {
+  font-size: 0.85rem;
+}
+
+.trend-up { color: #69f0ae; }
+.trend-muted { color: var(--letra1-leve); }
+
+.item-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-item-edit, .btn-item-delete {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-item-edit:hover { background: rgba(255, 255, 255, 0.15); }
+.btn-item-delete:hover { background: rgba(255, 82, 82, 0.3); }
+
+.sin-registros {
+  text-align: center;
+  color: var(--letra1-leve);
+  padding: 2rem;
+}

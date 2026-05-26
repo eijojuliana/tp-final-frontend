@@ -1,58 +1,54 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { CuentaBancariaService } from '../../../services/cuenta-bancaria-service';
+import { TiendaService } from '../../../services/tienda-service';
 import { Router, RouterLink } from '@angular/router';
 import { CuentaBancaria } from '../../../models/cuentaBancaria.model';
 import { ToastService } from '../../../services/toast.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cuentas-bancarias-list',
-  imports: [RouterLink],
+  standalone: true,
+  imports: [RouterLink, CommonModule],
   templateUrl: './cuentas-bancarias-list.html',
   styleUrl: './cuentas-bancarias-list.css',
 })
-export class CuentasBancariasList {
+export class CuentasBancariasList implements OnInit {
   private cuentaBancariaService = inject(CuentaBancariaService);
+  private tiendaService = inject(TiendaService);
   private router = inject(Router);
-  public cuentasBancarias = this.cuentaBancariaService.cuentasBancarias;
   private toast = inject(ToastService);
 
-  filtro = signal('');
-  atributo = signal<'cbu' | 'saldo'>('cbu');
-  orden = signal<'asc' | 'desc'>('asc');
+  public cuentasBancarias = this.cuentaBancariaService.cuentasBancarias;
 
-  cuentasFiltradas = computed(() => {
-    const filtro = this.filtro();
-    const attr = this.atributo();
-    const ord = this.orden();
+  ngOnInit() {
+    this.tiendaService.load();
+  }
 
-    return this.cuentasBancarias()
-      .filter(c => filtro ? String((c as any)[attr]).toLowerCase().includes(filtro.toLowerCase()) : true)
-      .sort((a, b) => {
-        const A = (a as any)[attr];
-        const B = (b as any)[attr];
-
-        if (typeof A === 'number' && typeof B === 'number') {
-          return ord === 'asc' ? A - B : B - A;
-        }
-
-        return ord === 'asc'
-          ? String(A).localeCompare(String(B))
-          : String(B).localeCompare(String(A));
-      });
+  efectivoEnCaja = computed(() => {
+    const tienda = this.tiendaService.tienda();
+    return tienda ? tienda.caja : 0;
   });
 
-  deleteCuentaBancaria(id:number) {
-    if(confirm("¿Desea eliminar?")) {
+  saldoEnCuentas = computed(() => {
+    return this.cuentasBancarias().reduce((total, c) => total + (c.saldo || 0), 0);
+  });
+
+  totalDisponible = computed(() => {
+    return this.efectivoEnCaja() + this.saldoEnCuentas();
+  });
+
+  deleteCuentaBancaria(id: number) {
+    if (confirm("¿Desea eliminar?")) {
       this.cuentaBancariaService.delete(id).subscribe({
         next: () => {
-        this.toast.success("Cuenta Bancaria eliminada correctamente");
-        console.log(`Cuenta Bancaria con id: ${id} eliminada`);
-      }
-      })
+          this.toast.success("Cuenta Bancaria eliminada correctamente");
+        }
+      });
     }
   }
 
-  updateCuentaBancaria(cuentaBancaria:CuentaBancaria) {
+  updateCuentaBancaria(cuentaBancaria: CuentaBancaria) {
     this.cuentaBancariaService.selectCuentaBancariaToEdit(cuentaBancaria);
     this.router.navigate(['menu/cuentas-bancarias/form']);
   }
