@@ -1,5 +1,29 @@
 <div class="list-container">
 
+  <div class="filtros-stats">
+    <div class="botones-rango">
+      <button
+        (click)="seleccionarRango('hoy')"
+        [class.active]="rangoSeleccionado() === 'hoy'">Hoy</button>
+      <button
+        (click)="seleccionarRango('ayer')"
+        [class.active]="rangoSeleccionado() === 'ayer'">Ayer</button>
+      <button
+        (click)="seleccionarRango('semana')"
+        [class.active]="rangoSeleccionado() === 'semana'">Semana</button>
+      <button
+        (click)="seleccionarRango('mes')"
+        [class.active]="rangoSeleccionado() === 'mes'">Mes</button>
+      <button
+        (click)="seleccionarRango('todo')"
+        [class.active]="rangoSeleccionado() === 'todo'">Todo</button>
+    </div>
+
+    <div class="inputs-fecha">
+      <input type="date" #inicio (change)="cambioFechaManual(inicio.value, fin.value)">
+      <input type="date" #fin (change)="cambioFechaManual(inicio.value, fin.value)">
+    </div>
+  </div>
 
   <div class="botones">
     <button type="button" class="btn-agregar" routerLink="/menu/pedidos/form" (click)="pedidoService.clearPedidoToEdit()"> Registrar PEDIDO </button>
@@ -26,7 +50,7 @@
     <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)" />
   </div>
 
-    <div class="tabla-contenedor">
+  <div class="tabla-contenedor">
     <table class="tabla">
       <thead class="encabezado">
         <tr>
@@ -34,31 +58,14 @@
           <th> ID.Tr </th>
           <th> Tipo </th>
           <th> Fecha </th>
-          <th> Tipo </th>
+          <th> Tipo Pedido </th>
           <th> Estado </th>
-          <th> Total </th>
-          <th class="celda-acciones">
-            <div class="celda-acciones-div">
-              Acciones
-
-              <div class="acciones-botones">
-                <!-- Botón Excel -->
-                <a (click)="exportarExcel()">
-                  <img class="historial-icon" src="/assets/images/excel-icon.png" alt="exportar excel" title="Exportar a Excel">
-                </a>
-
-                <!-- Botón Historial -->
-                <a routerLink="/menu/historial/pedidos">
-                  <img class="historial-icon" src="/assets/images/historial-icon.png" alt="historial">
-                </a>
-              </div>
-            </div>
-          </th>
+          <th> Monto </th>
+          <th> Acciones </th>
         </tr>
       </thead>
-
       <tbody class="tablaBody">
-        @for (pedido of pedidosFiltrados(); track $index){
+        @for (pedido of pedidosFiltrados(); track pedido.pedidoId) {
         <tr>
           <td>{{ pedido.pedidoId }}</td>
           <td>{{ pedido.transaccion.transaccion_id }}</td>
@@ -90,9 +97,7 @@
         </tr>
         } @empty {
         <tr>
-          <td colspan="4" class="sin-registros">
-            No se encontraron registros
-          </td>
+          <td colspan="8" style="text-align: center;">No se encontraron pedidos en este rango de fechas.</td>
         </tr>
         }
       </tbody>
