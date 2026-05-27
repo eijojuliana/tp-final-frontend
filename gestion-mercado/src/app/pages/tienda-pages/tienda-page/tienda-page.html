@@ -53,10 +53,12 @@
             }
           </div>
 
-          <div class="campo">
-            <label>Saldo de Caja</label>
-            <input type="number" formControlName="caja" placeholder="Saldo inicial. Ej: 5000">
-          </div>
+          @if (!isEditMode()) {
+            <div class="campo">
+              <label>Saldo de Caja</label>
+              <input type="number" formControlName="caja" placeholder="Saldo inicial. Ej: 5000">
+            </div>
+          }
         </div>
 
         <details formGroupName="direccion" open>

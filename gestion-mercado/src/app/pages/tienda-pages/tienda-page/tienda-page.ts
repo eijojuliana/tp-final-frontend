@@ -70,6 +70,12 @@ export class TiendaPage implements OnInit {
     formValue.condicion = 'Monotributo';
 
     if (this.isEditMode()) {
+      // eto es para el campo de monto de caja, que se mantenga siempre igual (porque está oculto solamente, es para evitar errores)
+      const tiendaActual = this.tiendaService.tienda();
+      if (tiendaActual) {
+        formValue.caja = tiendaActual.caja;
+      }
+
       // Usamos el ID del formulario para la actualización
       this.tiendaService.update(formValue).subscribe({
         next: (exito) => {
