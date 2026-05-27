@@ -16,6 +16,8 @@ export class PedidoService {
   private pedidoToEditState = signal<Pedido | null>(null);
   public pedidoToEdit = this.pedidoToEditState.asReadonly();
 
+  isCajaCerradaHoy = signal<boolean>(false);
+
   constructor(private http: HttpClient) {
     this.load();
   }
@@ -76,6 +78,24 @@ export class PedidoService {
       a.download = 'reporte-pedidos.xlsx';
       a.click();
       window.URL.revokeObjectURL(url);
+    });
+  }
+
+  verificarEstadoCaja() {
+    const hoy = new Date().toLocaleDateString('en-CA');
+
+    this.http.get<string>(`${environment.apiBaseUrl}/configuracion-tienda/ultimoCierre`).subscribe({
+      next: (fechaCierre) => {
+        console.log(fechaCierre);
+        console.log(hoy);
+        // Si la fecha que devuelve el back es igual a hoy, el semáforo pasa a true
+        if (!fechaCierre) {
+          this.isCajaCerradaHoy.set(false);
+        } else {
+          this.isCajaCerradaHoy.set(fechaCierre === hoy);
+        }
+      },
+      error: () => this.isCajaCerradaHoy.set(false) // Por seguridad, si falla asume abierta
     });
   }
 }

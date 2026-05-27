@@ -200,6 +200,45 @@ button.btn-cancel:hover {
     width: 100%;
   }
 }
+
+/* ==== AVISO DE CAJA CERRADA ==== */
+.caja-cerrada-aviso {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  background: rgba(255, 77, 141, 0.12); 
+  border: 1px solid #ff4d8d;
+  border-radius: 16px;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 15px rgba(255, 77, 141, 0.2);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.icon-aviso {
+  color: #ff4d8d;
+  font-size: 2.2rem;
+}
+
+.texto-aviso strong {
+  color: #ff4d8d;
+  font-size: 1.4rem;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.texto-aviso p {
+  color: var(--letra1, #ffffff);
+  font-size: 1.1rem;
+  margin: 0;
+  opacity: 0.85;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* ===== SECCIÓN DE DETALLES DEL PEDIDO ===== */
 
 /* Igual que .form */

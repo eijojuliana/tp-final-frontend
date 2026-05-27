@@ -12,6 +12,15 @@
       </div>
 
       <div class="form-content" [class.collapsed]="formCollapsed()">
+        @if (pedidoService.isCajaCerradaHoy()) {
+          <div class="caja-cerrada-aviso">
+            <span class="material-symbols-outlined icon-aviso">lock</span>
+            <div class="texto-aviso">
+              <strong>Atención: La caja de hoy está cerrada</strong>
+              <p>No se admiten compras ni ventas en efectivo por el resto del día.</p>
+            </div>
+          </div>
+        }
         <form [formGroup]="form" (ngSubmit)="savePedido()">
           <div class="campo">
             <label>Tipo de Pedido: </label>

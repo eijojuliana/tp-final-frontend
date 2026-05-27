@@ -61,6 +61,12 @@ export class TiendaService {
     );
   }
 
+  cerrarCaja(): Observable<boolean> {
+    return this.http.get<boolean>(`${this.url}/cerrarCaja`).pipe(
+      tap(()=>this.load())
+    );
+  }
+
   update(tienda: any): Observable<boolean> {
     return this.http.put<any>(`${this.url}/${tienda.tiendaId}`, tienda).pipe(
       map(() => true), // Si no hay error, asumimos éxito

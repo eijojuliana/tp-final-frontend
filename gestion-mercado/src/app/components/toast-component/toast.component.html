@@ -1,11 +1,16 @@
 <div class="toast-container">
   @for (t of toast.toasts(); track t) {
     <div class="toast" [ngClass]="t.type">
-      @if (t.type == 'success') { <img src="/assets/images/success-icon.png"> }
-      @else { <img src="/assets/images/warning-icon-white.png"> }
+      <div class="toast-content">
+        @if (t.type == 'success') {
+          <img src="/assets/images/success-icon.png" alt="success">
+        } @else {
+          <img src="/assets/images/warning-icon-white.png" alt="warning">
+        }
+        <span class="toast-text">{{ t.message }}</span> 
+      </div>
 
-
-      {{ t.message }}
+      <button class="toast-close-btn" (click)="toast.remove(t)">&times;</button>
     </div>
   }
 </div>

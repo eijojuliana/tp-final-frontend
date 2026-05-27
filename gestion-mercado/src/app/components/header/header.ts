@@ -1,3 +1,4 @@
+import { PedidoService } from './../../services/pedido-service';
 import { Component, inject, OnInit, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from "../../app.routes";
@@ -23,6 +24,7 @@ export class Header implements OnInit {
   public theme = inject(ThemeService);
   public tiendaService = inject(TiendaService);
   private cuentaBancariaService = inject(CuentaBancariaService);
+  public pedidoService = inject(PedidoService);
   private route = inject(Router);
 
   // Trae el efectivo en caja directamente de la tienda
@@ -37,6 +39,7 @@ export class Header implements OnInit {
   });
 
   ngOnInit(): void {
+    this.pedidoService.verificarEstadoCaja();
     this.theme.init();
     this.tiendaService.load(); // Asegura que la info de la tienda esté cargada para la caja
   }

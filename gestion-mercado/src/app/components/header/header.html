@@ -13,12 +13,22 @@
     <div class="header-der">
       <div class="estadisticas">
         <div class="stat-card caja">
-          <span class="nombre">CAJA</span>
-          <span class="monto">{{ efectivoEnCaja() | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</span>
+          <div class="stat-info">
+            <span class="nombre">CAJA</span>
+            <span class="monto">{{ efectivoEnCaja() | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</span>
+          </div>
+          <span class="material-symbols-outlined icono-candado"
+                [class.caja-cerrada]="pedidoService.isCajaCerradaHoy()"
+                [title]="pedidoService.isCajaCerradaHoy() ? 'La caja está cerrada. No se pueden registrar ventas.' : 'La caja está abierta y activa.'">
+            {{ pedidoService.isCajaCerradaHoy() ? 'lock' : 'lock_open' }}
+          </span> 
         </div>
+
         <div class="stat-card banco">
-          <span class="nombre">BANCO</span>
-          <span class="monto">{{ saldoEnCuentas() | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</span>
+          <div class="stat-info">
+            <span class="nombre">BANCO</span>
+            <span class="monto">{{ saldoEnCuentas() | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</span>
+          </div>
         </div>
       </div>
 

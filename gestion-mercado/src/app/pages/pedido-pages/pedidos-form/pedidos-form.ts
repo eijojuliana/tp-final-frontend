@@ -86,6 +86,7 @@ export class PedidosForm implements OnInit {
       this.persistenceService.clearState();
     }
 
+    this.pedidoService.verificarEstadoCaja();
     this.activatedRoute.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
@@ -118,6 +119,7 @@ export class PedidosForm implements OnInit {
   }
 
   public alSeleccionarProveedor(id: number | string): void {
+
     this.form.get('destino_id')?.setValue(id as number);
     this.form.get('destino_id')?.markAsTouched();
   }
@@ -148,6 +150,8 @@ export class PedidosForm implements OnInit {
     if (this.form.invalid) return;
     const formValue = this.form.getRawValue();
     const tipoPedido = formValue.tipoPedido;
+    const tipoTransaccion = this.form.get('tipoTransaccion')?.value;
+
     let finalOrigenId: number | null = formValue.origen_id;
     let finalDestinoId: number | null = formValue.destino_id;
     const TIENDA_ID = 1;
@@ -172,6 +176,14 @@ export class PedidosForm implements OnInit {
 
     const destinoIdValue = finalDestinoId !== null ? finalDestinoId : (formValue.destino_id as number);
     const origenIdValue = finalOrigenId;
+
+    //Verificación de q no se haya cerrado la caja
+    if (this.pedidoService.isCajaCerradaHoy()) {
+      if (tipoTransaccion === 'EFECTIVO') {
+        this.toast.error('Operación denegada: La caja física de hoy ya se encuentra cerrada.');
+        return;
+      }
+    }
 
     const dto: NewPedido = {
       tipo: formValue.tipoPedido,

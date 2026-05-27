@@ -1,31 +1,48 @@
 import { Injectable, signal } from '@angular/core';
 
+export interface Toast {
+  message: string;
+  type: 'success' | 'error' | 'warning';
+  timeoutId?: any;
+}
+
 @Injectable({ providedIn: 'root' })
 export class ToastService {
+  toasts = signal<Toast[]>([]);
 
-  toasts = signal<{ message: string, type: 'error' | 'success' | 'warning'}[]>([]);
+  // Duración de 5000ms = 5 segundos)
+  private DEFAULT_DURATION = 5000;
 
-  private addToast(message: string, type: 'error' | 'success' | 'warning') {
-    const toastObj = { message, type };
+  // Método para mostar los toast centralizado
+  show(message: string, type: 'success' | 'error' | 'warning', duration = this.DEFAULT_DURATION) {
+    const nuevoToast: Toast = { message, type };
 
-    this.toasts.update(arr => [...arr, toastObj]);
+    // Auto-eliminar después del tiempo configurado
+    const timeoutId = setTimeout(() => {
+      this.remove(nuevoToast);
+    }, duration);
 
-    setTimeout(() => {
-      this.toasts.update(arr =>
-        arr.filter(t => t !== toastObj)
-      );
-    }, 3000);
+    nuevoToast.timeoutId = timeoutId;
+
+    this.toasts.update(current => [...current, nuevoToast]);
   }
 
-  error(message: string) {
-    this.addToast(message, 'error');
+  success(message: string, duration?: number) {
+    this.show(message, 'success', duration);
   }
 
-  success(message: string) {
-    this.addToast(message, 'success');
+  warning(message: string, duration?: number) {
+    this.show(message, 'warning', duration);
   }
 
-  warning(message: string) {
-    this.addToast(message, 'warning');
+  error(message: string, duration?: number) {
+    this.show(message, 'error', duration);
+  }
+
+  remove(toastToRemove: Toast) {
+    if (toastToRemove.timeoutId) {
+      clearTimeout(toastToRemove.timeoutId); // Limpia el timer para evitar bugs
+    }
+    this.toasts.update(current => current.filter(t => t !== toastToRemove));
   }
 }

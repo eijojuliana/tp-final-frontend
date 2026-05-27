@@ -27,7 +27,7 @@
         <button type="button" class="btn-icon" routerLink="/menu/historial/cuentas-bancarias">
           <img src="/assets/images/historial-icon.png" alt="historial">
         </button>
-        <button type="button" class="btn-agregar" routerLink="/menu/cuentas-bancarias/form"> Agregar cuenta ↗ </button>
+        <button type="button" class="btn-agregar" routerLink="/menu/cuentas-bancarias/form"> Agregar cuenta </button>
       </div>
     </div>
 
@@ -37,12 +37,10 @@
           <div class="account-icon icon-purple"></div>
           <div>
             <h4 class="account-name">Caja chica</h4>
-            <span class="account-detail">Último mov: hoy 09:14 hs</span>
           </div>
         </div>
         <div class="account-balance">
           <span class="balance-total">{{ efectivoEnCaja() | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</span>
-          <span class="balance-trend trend-up">+$45.000 hoy</span>
         </div>
       </div>
 

@@ -44,21 +44,22 @@
 
 .stat-card {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 0.6rem 1.4rem;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 1.2rem;
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  min-width: 130px;
+  min-width: 150px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s;
 }
 
-.stat-card:hover {
-  transform: translateY(-1px);
-  background: rgba(255, 255, 255, 0.09);
+.stat-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .stat-card .nombre {
@@ -84,6 +85,20 @@
   color: var(--letra1);
 }
 
+/* ==== INDICADOR DE ESTADO DE CAJA ==== */
+.icono-candado {
+  font-size: 2.2rem;
+  color: #8cd49d;
+  margin-left: 1rem;
+  opacity: 0.95;
+  text-shadow: none;
+}
+
+.icono-candado.caja-cerrada {
+  color: #e5989b;
+}
+
+/* ==== TEMA OSCURO ==== */
 .theme-btn {
   width: 2.2rem;
   height: 2.2rem;
@@ -97,6 +112,7 @@
   filter: drop-shadow(0 0 6px var(--salmon-tema_claro-3));
 }
 
+/* ==== PERFIL ==== */
 .perfil-wrapper {
   display: flex;
   align-items: center;
@@ -236,3 +252,4 @@
     height: 5.8rem;
   }
 }
+

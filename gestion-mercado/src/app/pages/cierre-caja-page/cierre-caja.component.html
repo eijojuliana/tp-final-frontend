@@ -1,0 +1,92 @@
+<section class="cierre-container">
+  <h2>Cierre de Caja</h2>
+
+  <div class="card-caja">
+    <h3>MOVIMIENTOS DEL DÍA</h3>
+    <div class="fila-movimiento">
+      <span>Saldo inicial</span>
+      <span>$ {{ saldoInicial() | number:'1.2-2' }}</span>
+    </div>
+    <div class="fila-movimiento estado-exito">
+      <span>↑ Ingresos (ventas en efectivo)</span>
+      <span>+ $ {{ ingresosEfectivo() | number:'1.2-2' }}</span>
+    </div>
+    <div class="fila-movimiento estado-error">
+      <span>↓ Egresos (gastos / retiros)</span>
+      <span>- $ {{ egresosGastos() | number:'1.2-2' }}</span>
+    </div>
+    @if (ajustesHoy() !== 0) {
+      <div class="fila-movimiento estado-ajuste">
+        <span>↺ Ajuste de caja</span>
+        <span>{{ ajustesHoy() > 0 ? '+' : '' }}$ {{ ajustesHoy() | number:'1.2-2' }}</span>
+      </div>
+    }
+    <hr>
+    <div class="fila-movimiento total-esperado">
+      <span>Saldo digital esperado</span>
+      <span>$ {{ saldoDigitalEsperado() | number:'1.2-2' }}</span>
+    </div>
+  </div>
+
+  <div class="card-caja unificada">
+    <h3>CONTEO Y AJUSTE DE CAJA</h3>
+
+    <div class="comparador-grid">
+      <div class="bloque-monto">
+        <label>Saldo digital de la caja</label>
+        <div class="monto-grande destacado-digital">
+          $ {{ saldoDigitalEsperado() | number:'1.2-2' }}
+        </div>
+      </div>
+
+      <div class="simbolo-operador" [ngClass]="{'estado-error': diferencia() !== 0 && diferencia() !== null, 'estado-exito': diferencia() === 0}">
+        {{ diferencia() === 0 ? '=' : '≠' }}
+      </div>
+
+      <div class="bloque-monto">
+        <label>Ingresá el monto real contado de la caja</label>
+        <div class="input-monto-wrapper">
+          <span>$</span>
+          <input type="number" placeholder="0,00" [ngModel]="saldoRealContado()" (ngModelChange)="saldoRealContado.set($event)">
+        </div>
+      </div>
+    </div>
+
+    @if (saldoRealContado() !== null) {
+      <div class="diferencia-box">
+        <span class="label-muted">Diferencia:</span>
+        <span class="valor-diferencia" [ngClass]="{'estado-error': diferencia() !== 0, 'estado-exito': diferencia() === 0}">
+          {{ diferencia() === 0 ? 'Sin diferencias' : (diferencia()! > 0 ? '+' : '') + '$ ' + (diferencia() | number:'1.2-2') }}
+        </span>
+      </div>
+    }
+
+    @if (ajusteRegistrado() !== null) {
+      <div class="ajuste-exitoso">
+        <span class="ajuste-icono">✓</span>
+        <span>Ajuste registrado: <strong>$ {{ ajusteRegistrado()! > 0 ? '+' : '' }}{{ ajusteRegistrado() | number:'1.2-2' }}</strong></span>
+      </div>
+    }
+
+    @if (diferencia() !== 0 && diferencia() !== null && ajusteRegistrado() === null) {
+      <div class="btn-container-derecha">
+        <button type="button" class="btn-ajuste" (click)="registrarAjusteAutocalculado()">
+          Registrar Ajuste
+        </button>
+      </div>
+    }
+  </div>
+
+  <div class="card-caja alerta-borde">
+    <h3 class="estado-error">CERRAR CAJA</h3>
+
+    <div class="alerta-bloque">
+      <img src="/assets/images/warning-icon-white.png">
+      <p>Una vez cerrada la caja no se podrán agregar más movimientos en este turno. Esta acción no se puede deshacer.</p>
+    </div>
+
+    <button class="btn-cierre-total" (click)="cerrarCajaDelDia()">
+      🔒 Cerrar caja del día
+    </button>
+  </div>
+</section>

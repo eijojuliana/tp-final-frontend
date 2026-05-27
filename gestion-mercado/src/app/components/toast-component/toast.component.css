@@ -10,7 +10,7 @@
 
 .toast {
   display: flex;
-  justify-content:space-around;
+  justify-content: space-between;
   align-items: center;
   padding: 1rem 1.5rem;
   border-radius: 1rem;
@@ -18,13 +18,21 @@
   font-size: 1.4rem;
   font-family: var(--font-body);
   box-shadow: var(--sombra);
-  min-width: 250px;
+  min-width: 280px;
+  gap: 1.5rem;
   animation: slideIn 0.3s ease-out;
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .toast img {
   height: 2rem;
   width: 2rem;
+  flex-shrink: 0; /* Evita que el icono se deforme si el texto es muy largo */
 }
 
 .toast.error {
@@ -46,4 +54,22 @@
 @keyframes slideIn {
   from { transform: translateX(100%); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
+}
+
+.toast-close-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s, transform 0.2s;
+  padding: 0;
+  line-height: 1;
+}
+
+.toast-close-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
 }
