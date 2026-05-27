@@ -1,7 +1,7 @@
 import { Component, effect, inject, signal, OnInit } from '@angular/core';
 import { PedidoService } from '../../../services/pedido-service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { NewPedido, Pedido } from '../../../models/pedido.model';
 import { ProveedorService } from '../../../services/proveedor-service';
 import { DetallesPedido } from "../../../components/detalles-pedido/detalles-pedido";
@@ -17,7 +17,7 @@ import { PedidoPersistenceService } from '../../../services/pedido-persistence-s
 
 @Component({
   selector: 'app-pedidos-form',
-  imports: [ReactiveFormsModule, DetallesPedido, BuscadorGenericoComponent,RouterLink],
+  imports: [ReactiveFormsModule, DetallesPedido, BuscadorGenericoComponent],
   templateUrl: './pedidos-form.html',
   styleUrl: './pedidos-form.css',
 })

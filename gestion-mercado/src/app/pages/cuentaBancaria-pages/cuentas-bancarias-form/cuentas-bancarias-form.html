@@ -7,6 +7,13 @@
       <h2> {{ isEditMode() ? 'Editar Cuenta Bancaria' : 'Registrar Cuenta Bancaria' }} </h2>
 
       <form [formGroup]="form" (ngSubmit)="saveCuentaBancaria()">
+           <div class = "campo">
+          <label>Nombre del banco: </label>
+          <input type ="text" formControlName="nombre_banco">
+          @if (form.get('nombre_banco')?.invalid && form.get('nombre_banco')?.touched) {
+            <span class = "error">El nombre del banco es requerido.</span>
+          }
+        </div>
         <div class = "campo">
           <label>CBU: </label>
           <input type ="number" formControlName="cbu">

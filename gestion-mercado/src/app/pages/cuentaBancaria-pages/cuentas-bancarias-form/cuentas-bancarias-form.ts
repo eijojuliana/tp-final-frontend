@@ -21,6 +21,7 @@ export class CuentasBancariasForm {
   private cuentaBancariaToEdit: CuentaBancaria | null = null
 
   form = this.fb.nonNullable.group({
+    nombre_banco:['',[Validators.required]],
     cbu: [0, [Validators.required, Validators.min(1)]],
     saldo: [0, [Validators.required]]
   });
@@ -32,6 +33,7 @@ export class CuentasBancariasForm {
       if(this.cuentaBancariaToEdit) {
         this.isEditMode.set(true);
         this.form.patchValue({
+          nombre_banco:this.cuentaBancariaToEdit.nombre_banco,
           cbu: this.cuentaBancariaToEdit.cbu,
           saldo: this.cuentaBancariaToEdit.saldo
         });
