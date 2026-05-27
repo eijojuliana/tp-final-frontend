@@ -1,7 +1,7 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal, OnInit } from '@angular/core';
 import { PedidoService } from '../../../services/pedido-service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NewPedido, Pedido } from '../../../models/pedido.model';
 import { ProveedorService } from '../../../services/proveedor-service';
 import { DetallesPedido } from "../../../components/detalles-pedido/detalles-pedido";
@@ -13,16 +13,18 @@ import { ToastService } from '../../../services/toast.service';
 import { DetallePedidoService } from '../../../services/detallePedido-service';
 import { BuscadorGenericoComponent } from '../../../components/buscador/buscador';
 import { BuscadorItem } from '../../../components/buscador/buscador-item';
+import { PedidoPersistenceService } from '../../../services/pedido-persistence-service';
 
 @Component({
   selector: 'app-pedidos-form',
-  imports: [ReactiveFormsModule, DetallesPedido, BuscadorGenericoComponent],
+  imports: [ReactiveFormsModule, DetallesPedido, BuscadorGenericoComponent,RouterLink],
   templateUrl: './pedidos-form.html',
   styleUrl: './pedidos-form.css',
 })
-export class PedidosForm {
+export class PedidosForm implements OnInit {
   private toast = inject(ToastService);
   private fb = inject(FormBuilder);
+  private persistenceService = inject(PedidoPersistenceService);
   pedidoService = inject(PedidoService);
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
@@ -59,7 +61,6 @@ export class PedidosForm {
     }));
   }
 
-
   form = this.fb.nonNullable.group({
     tipoPedido: [undefined as unknown as 'COMPRA' | 'VENTA', [Validators.required]],
     tipoTransaccion: [undefined as unknown as 'EFECTIVO' | 'DEBITO', [Validators.required]],
@@ -79,9 +80,14 @@ export class PedidosForm {
   }
 
   ngOnInit() {
+    const savedData = this.persistenceService.getState();
+    if (savedData) {
+      this.form.patchValue(savedData);
+      this.persistenceService.clearState();
+    }
+
     this.activatedRoute.paramMap.subscribe(params => {
       const id = params.get('id');
-
       if (id) {
         this.pedidoService.getById(Number(id)).subscribe({
           next: (pedido) => {
@@ -92,7 +98,7 @@ export class PedidosForm {
           },
           error: (err) => console.error('Error al recuperar pedido', err)
         });
-      } else {
+      } else if (!savedData) {
         this.isEditMode.set(false);
         this.pedidoCreado.set(null);
         this.form.reset();
@@ -101,9 +107,17 @@ export class PedidosForm {
     });
   }
 
+  public irAProveedor() {
+    this.persistenceService.saveState(this.form.getRawValue());
+    this.router.navigate([`/menu/proveedores/form`]);
+  }
+
+    public irACliente() {
+    this.persistenceService.saveState(this.form.getRawValue());
+    this.router.navigate([`/menu/clientes/form`]);
+  }
 
   public alSeleccionarProveedor(id: number | string): void {
-   
     this.form.get('destino_id')?.setValue(id as number);
     this.form.get('destino_id')?.markAsTouched();
   }
@@ -115,15 +129,12 @@ export class PedidosForm {
 
   cargarDatosEnFormulario() {
     if (!this.pedidoToEdit) return;
-
     this.isEditMode.set(true);
-
     if (this.pedidoToEdit.estado === 'FINALIZADO') {
       this.form.disable();
     } else {
       this.form.enable();
     }
-
     this.form.patchValue({
       tipoPedido: this.pedidoToEdit.tipo,
       tipoTransaccion: this.pedidoToEdit.transaccion?.tipo as 'EFECTIVO' | 'DEBITO',
@@ -135,26 +146,21 @@ export class PedidosForm {
 
   savePedido() {
     if (this.form.invalid) return;
-
     const formValue = this.form.getRawValue();
     const tipoPedido = formValue.tipoPedido;
-
     let finalOrigenId: number | null = formValue.origen_id;
     let finalDestinoId: number | null = formValue.destino_id;
-
     const TIENDA_ID = 1;
 
     if (tipoPedido === 'COMPRA' && formValue.tipoTransaccion === 'EFECTIVO') {
       finalOrigenId = TIENDA_ID;
     }
-
     if (tipoPedido === 'VENTA') {
       finalDestinoId = TIENDA_ID;
     } else if (tipoPedido === 'COMPRA') {
       finalOrigenId = TIENDA_ID;
       finalDestinoId = formValue.destino_id as number;
     }
-
     if (formValue.tipoTransaccion === 'DEBITO' && formValue.cuentaBancaria) {
       if(tipoPedido ==='COMPRA'){
         finalOrigenId=formValue.cuentaBancaria;
@@ -183,19 +189,15 @@ export class PedidosForm {
         transaccion: {...dto.transaccion, transaccion_id: this.pedidoToEdit.transaccion.transaccion_id
         } as NewTransaccion
       };
-
       this.pedidoService.update(updateDto,id).subscribe(() => {
-        console.log('Pedido Actualizado');
         this.pedidoService.clearPedidoToEdit();
         this.router.navigate(['/menu/pedidos']);
       });
     } else {
       this.pedidoService.post(dto).subscribe((pedidoCreado) => {
         if (pedidoCreado) {
-          console.log('Pedido Registrado con ID:', pedidoCreado.pedidoId);
           this.pedidoCreado.set(pedidoCreado);
         } else {
-          console.error('Error al registrar el pedido.');
           this.pedidoCreado.set(null);
         }
       });
@@ -222,26 +224,20 @@ export class PedidosForm {
           this.toast.error('El detalle no puede estar vacío');
           return;
         }
-
-        if (confirm('¿Desea finalizar el pedido? Una vez finalizado no podrá modificarse.')) {
+        if (confirm('¿Desea finalizar el pedido?')) {
           this.pedidoService.finalizar(pedido.pedidoId).subscribe({
             next: () => {
-              this.toast.success('Pedido finalizado correctamente');
               this.pedidoService.clearPedidoToEdit();
               this.transaccionService.load();
               this.router.navigate(['/menu/pedidos']);
-            },
-            error: () => this.toast.error('Ocurrió un error al finalizar el pedido')
+            }
           });
         }
-      },
-      error: () => this.toast.error('No se pudieron cargar los detalles del pedido')
+      }
     });
   }
 
-
   formCollapsed = signal(true);
-
   toggleForm() {
     if (window.innerWidth <= 1000) {
       this.formCollapsed.update(v => !v);

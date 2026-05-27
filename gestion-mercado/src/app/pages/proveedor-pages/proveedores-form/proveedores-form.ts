@@ -4,6 +4,7 @@ import { ProveedorService } from '../../../services/proveedor-service';
 import { Router } from '@angular/router';
 import { NewProveedor, Proveedor } from '../../../models/proveedor.model';
 import { ToastService } from '../../../services/toast.service';
+import { PedidoPersistenceService } from '../../../services/pedido-persistence-service';
 
 @Component({
   selector: 'app-proveedores-form',
@@ -16,6 +17,7 @@ export class ProveedoresForm {
   proveedorService=inject(ProveedorService);
   private router=inject(Router);
   private toast = inject(ToastService);
+   private persistenceService = inject(PedidoPersistenceService);
 
   isEditMode=signal(false);
   private proveedorToEdit:Proveedor|null=null;
@@ -73,7 +75,13 @@ export class ProveedoresForm {
         next: () => {
           this.toast.success("Proveedor registrado correctamente");
           this.form.reset();
-          this.router.navigate(['menu/proveedores']);
+          const estadoPedido = this.persistenceService.getState();
+
+      if (estadoPedido) {
+          this.router.navigate(['/menu/pedidos/form']);
+        } else {
+          this.router.navigate(['/menu/proveedores']);
+        }
         }
       });
     }

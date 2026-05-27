@@ -5,6 +5,7 @@ import { ClienteService } from '../../../services/cliente-service';
 import { Router } from '@angular/router';
 import { Cliente, NewCliente } from '../../../models/cliente.model';
 import { ToastService } from '../../../services/toast.service';
+import { PedidoPersistenceService } from '../../../services/pedido-persistence-service';
 
 @Component({
   selector: 'app-cliente-form',
@@ -19,6 +20,7 @@ export class ClienteForm {
   private router = inject(Router);
   private toast = inject(ToastService);
   private validacion = inject(Validaciones);
+  private persistenceService = inject(PedidoPersistenceService);
 
   isEditMode=signal(false);
   private clienteToEdit:Cliente|null=null;
@@ -69,7 +71,14 @@ export class ClienteForm {
           this.toast.success("Dueño registrado correctamente");
           console.log('Cliente Registrado');
           this.form.reset();
+          const estadoPedido = this.persistenceService.getState();
+
+      if (estadoPedido) {
+          this.router.navigate(['/menu/pedidos/form']);
+        } else {
           this.router.navigate(['/menu/clientes']);
+        }
+
         }
       });
     }

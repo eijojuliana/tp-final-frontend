@@ -8,6 +8,9 @@
     <div class="form-wrapper" [class.collapsed]="formCollapsed()">
       <h2 class="form-title">Pedido</h2>
 
+      <div class="botones-navegacion">
+      </div>
+
       <div class="form-content" [class.collapsed]="formCollapsed()">
         <form [formGroup]="form" (ngSubmit)="savePedido()">
           <div class="campo">
@@ -42,6 +45,7 @@
                 placeholder="Buscar cliente por nombre o DNI..."
                 (alSeleccionar)="alSeleccionarCliente($event)">
               </app-buscador-generico>
+             <button type="button" (click)="irACliente()">Nuevo Cliente</button>
             </div>
 
             @if (form.get('tipoTransaccion')?.value === 'DEBITO') {
@@ -67,6 +71,7 @@
                 placeholder="Buscar proveedor por razón social..."
                 (alSeleccionar)="alSeleccionarProveedor($event)">
               </app-buscador-generico>
+              <button type="button" (click)="irAProveedor()">Nuevo Proveedor</button>
             </div>
 
             @if (form.get('tipoTransaccion')?.value === 'DEBITO') {
