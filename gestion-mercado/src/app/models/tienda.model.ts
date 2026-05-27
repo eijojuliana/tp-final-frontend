@@ -14,6 +14,7 @@ export interface Tienda {
   nombreFantasia?: string;
   cuit: number;
   condicion: string;
+  url?: string;
   ingresosBrutos?: string;
   fechaInicioActividades?: string;
   puntoDeVenta: number;
@@ -27,6 +28,7 @@ export interface newTienda {
   nombreFantasia?: string;
   cuit: number;
   condicion: string;
+  url?: string;
   ingresosBrutos?: string;
   fechaInicioActividades?: string;
   puntoDeVenta: number;

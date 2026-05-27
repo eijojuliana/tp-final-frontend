@@ -44,14 +44,20 @@
               <option value="Monotributo" selected>Monotributo</option>
             </select>
           </div>
-        </div>
-        <div class="grid-form">
+
+          <div class = "campo">
+            <label> Url imagen de tu TIENDA: </label>
+            <input type="url" formControlName="url">
+            @if (form.get('url')?.invalid && form.get('url')?.touched) {
+              <span class = "error">La url de la tienda debe ser válida.</span>
+            }
+          </div>
+
           <div class="campo">
             <label>Saldo de Caja</label>
             <input type="number" formControlName="caja" placeholder="Saldo inicial. Ej: 5000">
           </div>
         </div>
-
 
         <details formGroupName="direccion" open>
           <summary>Dirección</summary>

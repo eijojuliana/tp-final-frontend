@@ -26,6 +26,7 @@ export class TiendaPage implements OnInit {
     cuit: [0, Validators.required],
     duenioDni: [0, Validators.required],
     condicion: ['Monotributo'],
+    url: ['', [Validators.required]],
     ingresosBrutos: [''],
     fechaInicioActividades: ['', Validators.required],
     puntoDeVenta: [1, Validators.required],

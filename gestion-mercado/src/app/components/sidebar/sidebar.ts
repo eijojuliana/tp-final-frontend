@@ -1,9 +1,8 @@
-
-import { Component, inject } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { ThemeService } from '../../styles/theme.service';
-
+import { TiendaService } from '../../services/tienda-service';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,10 +10,11 @@ import { ThemeService } from '../../styles/theme.service';
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.css',
 })
-export class Sidebar {
+export class Sidebar implements OnInit {
 
-  public authService=inject(AuthService);
-  constructor(public auth: AuthService , public theme: ThemeService) { }
+  public auth = inject(AuthService);
+  public theme = inject(ThemeService);
+  public tiendaService = inject(TiendaService);
 
   get currentRole(): string | null {
     return this.auth.getRole();
@@ -22,8 +22,13 @@ export class Sidebar {
 
   openMenu: string | null = null;
 
+  ngOnInit() {
+    const tiendaActual = this.tiendaService.tienda();
+
+    if (!tiendaActual || !tiendaActual.tiendaId || tiendaActual.tiendaId <= 0) { this.tiendaService.load(); }
+  }
+
   toggleMenu(menu: string) {
     this.openMenu = this.openMenu === menu ? null : menu;
   }
-
 }

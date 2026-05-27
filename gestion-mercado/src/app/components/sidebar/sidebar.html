@@ -1,8 +1,21 @@
 <!-- SIDEBAR -->
 <aside class="sidebar">
   <div class="logo-container">
-    <img class="logo" [src]="theme.isOscuro()? 'assets/images/Logo-oscuro-MercadoCerezo.png': 'assets/images/Logo-MercadoCerezo.png'">
-    <h2 class="titulo">Mercado del Cerezo</h2>
+    @if (tiendaService.tienda(); as infoTienda) {
+      @if (infoTienda.url) {
+        <img class="logo" [src]="infoTienda.url" alt="Logo Tienda">
+      } @else {
+        <img class="logo" [src]="theme.isOscuro() ? 'assets/images/Logo-oscuro-MercadoCerezo.png' : 'assets/images/Logo-MercadoCerezo.png'" alt="Logo Defecto">
+      }
+
+      <h2 class="titulo">
+        {{ infoTienda.nombreFantasia ? infoTienda.nombreFantasia : 'Mercado del Cerezo' }}
+      </h2>
+
+    } @else {
+      <img class="logo" [src]="theme.isOscuro() ? 'assets/images/Logo-oscuro-MercadoCerezo.png' : 'assets/images/Logo-MercadoCerezo.png'" alt="Logo Defecto">
+      <h2 class="titulo">Mercado del Cerezo</h2>
+    }
   </div>
 
   <nav class="sidebar-menu">
