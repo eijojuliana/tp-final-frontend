@@ -1,10 +1,12 @@
 <div class="list-container">
-  <div class="filter-search-container">
-    <div class="filters-group">
+  <h2>Productos</h2>
+
+  <div class="toolbar">
+    <div class="filters">
       <select (change)="atributo.set($any($event.target).value)">
-        <option value="producto_id" selected>Producto ID</option>
         <option value="nombre">Nombre</option>
         <option value="categoria">Categoría</option>
+        <option value="producto_id">Código</option>
       </select>
 
       <select (change)="orden.set($any($event.target).value)">
@@ -15,45 +17,73 @@
       <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)">
     </div>
 
-    <button type="button" class="btnAgregar" routerLink="/menu/productos/form"> Agregar </button>
+    <div class="toolbar-actions">
+      <button class="btn-add" routerLink="/menu/productos/form">
+        <span class="material-icons">add</span> Agregar
+      </button>
 
-    <div class="acciones-botones">
-      <!-- Botón Excel -->
-      <a (click)="exportarExcel()">
-        <img class="historial-icon" src="/assets/images/excel-icon.png" alt="exportar excel" title="Exportar a Excel">
-      </a>
-
-      <!-- Botón Historial -->
-      <a routerLink="/menu/historial/productos">
-        <img class="historial-icon" src="/assets/images/historial-icon.png" alt="historial">
-      </a>
+      <button class="btn-icon" (click)="exportarExcel()" title="Exportar a Excel">
+        <span class="material-icons">download</span>
+      </button>
     </div>
   </div>
 
-  <ul>
-    @for(product of productsFiltrados(); track $index) {
-      <li>
-        <div class="card-top">
-          <div class="image-contenedor">
-            <img src={{product.url}} alt="{{product.nombre}}">
+  <div class="grid">
+    @for (p of productosConInventario(); track p.producto_id) {
+      <div class="card" [class.stock-bajo]="p.stockBajo" [title]="p.stockBajo ? 'Stock por debajo del mínimo' : ''">
+        @if (p.stockBajo) {
+          <div class="stock-alert">
+            <span class="material-icons">warning_amber</span>
+            <div class="stock-tooltip">
+              Stock actual: {{ p.inventario?.cantidad }} / Mínimo: {{ p.inventario?.stockMin }}
+            </div>
           </div>
-          <div class="card-text">
-            <p class="codigo">Código producto: {{product.producto_id}}</p>
-            <p class="nombre">{{product.nombre}}</p>
-            <p class="categoria">{{product.categoria}}</p>
+        }
+
+        <div class="card-img">
+          <img [src]="p.url" [alt]="p.nombre" loading="lazy">
+          <div class="card-head">
+            <span class="card-code">#{{ p.producto_id }}</span>
+            <h3 class="card-title">{{ p.nombre }}</h3>
+            <span class="card-cat">{{ p.categoria }}</span>
           </div>
         </div>
-        <div class="actions">
-          <button type="button" class="edit" (click)="updateProduct(product)">Editar</button>
-          <button type="button" class="delete" (click)="deleteProduct(product.producto_id)">Eliminar</button>
+
+        <div class="card-body">
+          <div class="card-stats">
+            <div class="stat">
+              <span class="stat-label">Disponible</span>
+              <span class="stat-value" [class.danger]="p.stockBajo">{{ p.inventario?.cantidad ?? '—' }}</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Stock Min</span>
+              <span class="stat-value">{{ p.inventario?.stockMin ?? '—' }}</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Precio Venta</span>
+              <span class="stat-value">{{ p.inventario?.precioVenta ? ('$' + p.inventario?.precioVenta) : '—' }}</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Costo Adq.</span>
+              <span class="stat-value">{{ p.inventario?.costoAdquisicion ? ('$' + p.inventario?.costoAdquisicion) : '—' }}</span>
+            </div>
+          </div>
         </div>
-      </li>
+
+        <div class="card-actions">
+          <button class="btn-icon edit" (click)="updateProduct(p)" title="Editar producto">
+            <span class="material-icons">edit</span>
+          </button>
+          <button class="btn-icon delete" (click)="deleteProduct(p)" title="Eliminar producto">
+            <span class="material-icons">delete</span>
+          </button>
+        </div>
+      </div>
     } @empty {
-      <tr>
-        <td colspan="4" class="sin-registros">
-          No se encontraron registros
-        </td>
-      </tr>
+      <div class="empty">
+        <span class="material-icons">inventory_2</span>
+        <p>No se encontraron productos</p>
+      </div>
     }
-  </ul>
+  </div>
 </div>

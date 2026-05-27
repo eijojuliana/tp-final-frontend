@@ -8,5 +8,7 @@ export interface Producto {
 export interface nuevoProducto {
   nombre: string,
   categoria: string,
-  url?: string
+  url?: string,
+  stockMin?: number,
+  precioVenta?: number
 }

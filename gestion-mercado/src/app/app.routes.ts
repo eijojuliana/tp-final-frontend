@@ -6,12 +6,10 @@ import { ProductList } from './pages/product-pages/product-list/product-list';
 import { PersonaList } from './pages/persona-pages/persona-list/persona-list';
 import { LotesList } from './pages/lote-pages/lotes-list/lotes-list';
 import { LotesForm } from './pages/lote-pages/lotes-form/lotes-form';
-import { InventariosList } from './pages/inventario-pages/inventarios-list/inventarios-list';
-import { InventariosForm } from './pages/inventario-pages/inventarios-form/inventarios-form';
+import { ProductRegister } from './pages/product-pages/product-form/product-form';
 import { CuentasBancariasList } from './pages/cuentaBancaria-pages/cuentas-bancarias-list/cuentas-bancarias-list';
 import { CuentasBancariasForm } from './pages/cuentaBancaria-pages/cuentas-bancarias-form/cuentas-bancarias-form';
 import { MenuPage } from './pages/menu-page/menu-page';
-import { ProductRegister } from './pages/product-pages/product-form/product-form';
 import { TiendaPage } from './pages/tienda-pages/tienda-page/tienda-page';
 import { UsuariosList } from './pages/usuarios-pages/usuarios-list/usuarios-list';
 import { UsuarioForm } from './pages/usuarios-pages/usuario-form/usuario-form';
@@ -63,9 +61,8 @@ export const routes: Routes = [
   { path:'menu/lotes', component: LotesList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO} },
   { path:'menu/lotes/form', component: LotesForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO} },
 
-  // Rutas inventarios
-  { path:'menu/inventarios', component: InventariosList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
-  { path:'menu/inventarios/form', component:InventariosForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  // Ruta inventarios (form unificado)
+  { path:'menu/inventarios/form', component:ProductRegister, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
 
   // Rutas personas
   { path:'menu/personas', component: PersonaList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO} },
