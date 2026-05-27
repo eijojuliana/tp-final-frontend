@@ -1,0 +1,11 @@
+/* ----- marca de agua ----- */
+.sakura-watermark {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 4rem;
+  height: auto;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+}
