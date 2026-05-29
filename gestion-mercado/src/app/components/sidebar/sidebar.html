@@ -1,5 +1,15 @@
 <!-- SIDEBAR -->
-<aside class="sidebar">
+<button class="mobile-toggle" (click)="toggleMobileMenu()" aria-label="Menu">
+  <span class="bar" [class.open]="isMobileMenuOpen"></span>
+  <span class="bar" [class.open]="isMobileMenuOpen"></span>
+  <span class="bar" [class.open]="isMobileMenuOpen"></span>
+</button>
+
+@if (isMobileMenuOpen) {
+  <div class="sidebar-overlay" (click)="closeMobileMenu()"></div>
+}
+
+<aside class="sidebar" [class.mobile-open]="isMobileMenuOpen">
   <div class="logo-container">
     @if (tiendaService.tienda(); as infoTienda) {
       @if (infoTienda.url) {
@@ -7,11 +17,9 @@
       } @else {
         <img class="logo" [src]="theme.isOscuro() ? 'assets/images/Logo-oscuro-MercadoCerezo.png' : 'assets/images/Logo-MercadoCerezo.png'" alt="Logo Defecto">
       }
-
       <h2 class="titulo">
         {{ infoTienda.nombreFantasia ? infoTienda.nombreFantasia : 'Mercado del Cerezo' }}
       </h2>
-
     } @else {
       <img class="logo" [src]="theme.isOscuro() ? 'assets/images/Logo-oscuro-MercadoCerezo.png' : 'assets/images/Logo-MercadoCerezo.png'" alt="Logo Defecto">
       <h2 class="titulo">Mercado del Cerezo</h2>
@@ -19,17 +27,15 @@
   </div>
 
   <nav class="sidebar-menu">
-    <!-- INICIO -->
-    <a routerLink="/menu" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="item">
+    <a routerLink="/menu" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="item" (click)="closeMobileMenu()">
       <div class="item-content">
         <img src="assets/images/sakura-white-icon.png" class="menu-icon">
         <span>Inicio</span>
       </div>
     </a>
 
-    <!-- TIENDA -->
     @if(currentRole == "ADMIN"){
-      <a routerLink="/configuracion-tienda" routerLinkActive="active" class="item">
+      <a routerLink="/configuracion-tienda" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
         <div class="item-content">
           <img src="assets/images/shop-icon.png" class="menu-icon">
           <span>Mi tienda</span>
@@ -37,15 +43,13 @@
       </a>
     }
 
-    <!-- ESTADÍSTICAS Y CONFIG -->
-    <a routerLink="/menu/estadisticas" routerLinkActive="active" class="item">
+    <a routerLink="/menu/estadisticas" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
       <div class="item-content">
         <img src="assets/images/excel-icon.png" class="menu-icon">
-        <span>Resumen  del negocio</span>
+        <span>Resumen del negocio</span>
       </div>
     </a>
 
-    <!-- INVENTARIO -->
     <div>
       <div class="item dropdown-header" (click)="toggleMenu('inventario')">
         <div class="item-content">
@@ -56,13 +60,13 @@
       </div>
       @if (openMenu === 'inventario') {
         <div class="submenu">
-          <a routerLink="/menu/productos" routerLinkActive="active" class="item">
+          <a routerLink="/menu/productos" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
             <div class="item-content">
               <img src="assets/images/productos-icon.png" class="menu-icon">
               <span>Productos</span>
             </div>
           </a>
-          <a routerLink="/menu/lotes" routerLinkActive="active" class="item">
+          <a routerLink="/menu/lotes" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
             <div class="item-content">
               <img src="assets/images/lote-icon.png" class="menu-icon">
               <span>Lotes</span>
@@ -72,7 +76,6 @@
       }
     </div>
 
-    <!-- OPERACIONES -->
     <div>
       <div class="item dropdown-header" (click)="toggleMenu('comercial')">
         <div class="item-content">
@@ -83,19 +86,19 @@
       </div>
       @if (openMenu === 'comercial') {
         <div class="submenu">
-          <a routerLink="/menu/pedidos" routerLinkActive="active" class="item">
+          <a routerLink="/menu/pedidos" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
             <div class="item-content">
               <img src="assets/images/pedido-icon.png" class="menu-icon">
               <span>Pedidos</span>
             </div>
           </a>
-          <a routerLink="/menu/transacciones" routerLinkActive="active" class="item">
+          <a routerLink="/menu/transacciones" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
             <div class="item-content">
               <img src="assets/images/transaccion-icon.png" class="menu-icon">
               <span>Transacciones</span>
             </div>
           </a>
-          <a routerLink="/menu/cuentas-bancarias" routerLinkActive="active" class="item">
+          <a routerLink="/menu/cuentas-bancarias" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
             <div class="item-content">
               <img src="assets/images/cuentaB-icon.png" class="menu-icon">
               <span>Cuentas Bancarias</span>
@@ -105,7 +108,6 @@
       }
     </div>
 
-    <!-- ENTIDADES -->
     <div>
       <div class="item dropdown-header" (click)="toggleMenu('entidades')">
         <div class="item-content">
@@ -117,43 +119,40 @@
       @if (openMenu === 'entidades') {
         <div class="submenu">
           @if(currentRole == 'ADMIN') {
-            <a routerLink="/menu/personas" routerLinkActive="active" class="item">
+            <a routerLink="/menu/personas" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
               <div class="item-content">
                 <img src="assets/images/persona-icon.png" class="menu-icon">
                 <span>Personas</span>
               </div>
             </a>
-            <a routerLink="/menu/usuarios" routerLinkActive="active" class="item">
+            <a routerLink="/menu/usuarios" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
               <div class="item-content">
                 <img src="assets/images/user-icon.png" class="menu-icon">
                 <span>Usuarios</span>
               </div>
             </a>
           }
-
           @if(currentRole == 'ADMIN' || currentRole == 'DUENIO') {
-            <a routerLink="/menu/duenios" routerLinkActive="active" class="item">
+            <a routerLink="/menu/duenios" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
               <div class="item-content">
                 <img src="assets/images/duenio-icon.png" class="menu-icon">
                 <span>Dueños</span>
               </div>
             </a>
-            <a routerLink="/menu/empleados" routerLinkActive="active" class="item">
+            <a routerLink="/menu/empleados" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
               <div class="item-content">
                 <img src="assets/images/empleado-icon.png" class="menu-icon">
                 <span>Empleados</span>
               </div>
             </a>
           }
-
-          <a routerLink="/menu/clientes" routerLinkActive="active" class="item">
+          <a routerLink="/menu/clientes" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
             <div class="item-content">
               <img src="assets/images/clientes-icon.png" class="menu-icon">
               <span>Clientes</span>
             </div>
           </a>
-
-          <a routerLink="/menu/proveedores" routerLinkActive="active" class="item">
+          <a routerLink="/menu/proveedores" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
             <div class="item-content">
               <img src="assets/images/proveedor-icon.png" class="menu-icon">
               <span>Proveedores</span>
@@ -163,7 +162,6 @@
       }
     </div>
 
-    <!-- HISTORIALES -->
     <div>
       <div class="item dropdown-header" (click)="toggleMenu('historial')">
         <div class="item-content">
@@ -174,13 +172,13 @@
       </div>
       @if (openMenu === 'historial') {
         <div class="submenu">
-          <a routerLink="/menu/historial/personas" routerLinkActive="active" class="item">
+          <a routerLink="/menu/historial/personas" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
             <div class="item-content">
               <img src="assets/images/historial-icon.png" class="menu-icon">
               <span>Historial Personas</span>
             </div>
           </a>
-          <a routerLink="/menu/historial/clientes" routerLinkActive="active" class="item">
+          <a routerLink="/menu/historial/clientes" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
             <div class="item-content">
               <img src="assets/images/historial-icon.png" class="menu-icon">
               <span>Historial Clientes</span>
@@ -190,12 +188,11 @@
       }
     </div>
 
-    <a routerLink="/menu/cierre-caja" routerLinkActive="active" class="item">
+    <a routerLink="/menu/cierre-caja" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
       <div class="item-content">
         <img src="assets/images/warning-icon-white.png" class="menu-icon">
         <span>Cierre de Caja</span>
       </div>
     </a>
-
   </nav>
 </aside>

@@ -22,6 +22,9 @@ export class Sidebar implements OnInit {
 
   openMenu: string | null = null;
 
+  // para habilitar el sidebar en el celu
+  isMobileMenuOpen: boolean = false;
+
   ngOnInit() {
     const tiendaActual = this.tiendaService.tienda();
 
@@ -30,5 +33,13 @@ export class Sidebar implements OnInit {
 
   toggleMenu(menu: string) {
     this.openMenu = this.openMenu === menu ? null : menu;
+  }
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  closeMobileMenu() {
+    this.isMobileMenuOpen = false;
   }
 }
