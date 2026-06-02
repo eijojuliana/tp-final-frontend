@@ -5,20 +5,20 @@ import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-usuarios-list',
+  standalone: true,
   imports: [RouterLink],
   templateUrl: './usuarios-list.html',
   styleUrl: './usuarios-list.css',
 })
 export class UsuariosList {
-
   private usuarioService = inject(UsuarioService);
   public usuarios = this.usuarioService.usuarios;
-  router=inject(Router);
+  router = inject(Router);
   private toast = inject(ToastService);
 
   filtro = signal('');
-  atributo = signal<'usuarioId' | 'email'>('usuarioId');
-  orden = signal<'asc' | 'desc'>('asc');
+  atributo = signal<string>('');
+  orden = signal<'asc' | 'desc' | ''>('');
 
   usuariosFiltrados = computed(() => {
     const filtro = this.filtro().toLowerCase().trim();
@@ -26,8 +26,10 @@ export class UsuariosList {
     const ord = this.orden();
 
     return this.usuarios()
-      .filter(u => filtro ? String((u as any)[attr]).toLowerCase().includes(filtro) : true)
+      .filter(u => (attr && filtro ? String((u as any)[attr]).toLowerCase().includes(filtro) : true))
       .sort((a, b) => {
+        if (!ord || !attr) return 0;
+
         const A = (a as any)[attr];
         const B = (b as any)[attr];
 
@@ -46,7 +48,6 @@ export class UsuariosList {
       this.usuarioService.delete(id).subscribe({
         next: () => {
           this.toast.success("Usuario eliminado correctamente");
-          console.log(`Usuario con id ${id} eliminado.`);
         }
       });
     }
@@ -54,7 +55,7 @@ export class UsuariosList {
 
   modificarUsuario(usuario: any) {
     this.usuarioService.selectUsuarioToEdit(usuario);
-    this.router.navigate(['menu/usuarios/form']);
+    this.router.navigate(['/menu/usuarios/form']);
   }
 
   exportarExcel() {

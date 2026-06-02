@@ -5,6 +5,7 @@ import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-duenio-list',
+  standalone: true,
   imports: [RouterLink],
   templateUrl: './duenios-list.html',
   styleUrl: './duenios-list.css',
@@ -12,12 +13,12 @@ import { ToastService } from '../../../services/toast.service';
 export class DueniosList {
   service = inject(DuenioService);
   duenios = this.service.duenios;
-  router=inject(Router);
+  router = inject(Router);
   private toast = inject(ToastService);
 
   filtro = signal('');
-  atributo = signal<'personaId' | 'duenioId' | 'nombre' | 'apellido' | 'dni' | 'fechaNacimiento' | 'email'>('personaId');
-  orden = signal<'asc' | 'desc'>('asc');
+  atributo = signal<string>('');
+  orden = signal<'asc' | 'desc' | ''>('');
 
   dueniosFiltrados = computed(() => {
     const filtro = this.filtro().toLowerCase().trim();
@@ -25,8 +26,10 @@ export class DueniosList {
     const ord = this.orden();
 
     return this.duenios()
-      .filter(d => filtro ? String((d as any)[attr]).toLowerCase().includes(filtro) : true)
+      .filter(d => (attr && filtro ? String((d as any)[attr]).toLowerCase().includes(filtro) : true))
       .sort((a, b) => {
+        if (!ord || !attr) return 0;
+
         const A = (a as any)[attr];
         const B = (b as any)[attr];
 
@@ -43,18 +46,14 @@ export class DueniosList {
   eliminarDuenio(id: number) {
     if (confirm('Desea eliminar este duenio?')) {
       this.service.delete(id).subscribe({
-        next: () => {
-          this.toast.success("Dueño eliminado correctamente");
-          console.log(`Duenio con id ${id} eliminado.`);
-        }
+        next: () => this.toast.success("Dueño eliminado correctamente")
       });
     }
   }
 
-
   modificarDuenio(duenio: any) {
     this.service.selectDuenioToEdit(duenio);
-    this.router.navigate(['menu/duenios/form']);
+    this.router.navigate(['/menu/duenios/form']);
   }
 
   exportarExcel() {

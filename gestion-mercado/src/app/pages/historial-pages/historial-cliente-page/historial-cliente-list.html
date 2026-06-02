@@ -1,18 +1,19 @@
 <section class="list-container">
   <div class="botones">
-    <select (change)="atributo.set($any($event.target).value)">
-      <option [ngValue]="null" disabled selected>Ordenar por</option>
+    <select (change)="atributo.set($any($event.target).value); cargar()">
+      <option value="" disabled selected>Filtrar por...</option>
       <option value="fecha">Fecha</option>
       <option value="accion">Acción</option>
       <option value="clienteId">Cliente ID</option>
     </select>
 
-    <select (change)="orden.set($any($event.target).value)">
-      <option value="desc">Descendente</option>
+    <select (change)="orden.set($any($event.target).value); cargar()">
+      <option value="" disabled selected>Ordenar por...</option>
       <option value="asc">Ascendente</option>
+      <option value="desc">Descendente</option>
     </select>
 
-    <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)" />
+    <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value); cargar()" />
   </div>
 
   <div class="tabla-contenedor">
@@ -33,7 +34,7 @@
         </tr>
       </thead>
       <tbody class="tablaBody">
-        @for (h of historialFiltrado(); track h.historialClienteId) {
+        @for (h of historial(); track h.historialClienteId) {
           <tr>
             <td> {{ h.historialClienteId }} </td>
             <td> {{ h.clienteId }} </td>
@@ -54,7 +55,7 @@
             <td> {{ h.fechaEvento | date:'dd/MM/yyyy HH:mm' }} </td>
           </tr>
         } @empty {
-          <tr><td colspan="7">No se encontraron registros</td></tr>
+          <tr><td colspan="7">No se encontraron registros en el historial.</td></tr>
         }
       </tbody>
     </table>

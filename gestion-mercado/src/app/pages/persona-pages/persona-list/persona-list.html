@@ -1,7 +1,7 @@
 <section class="list-container">
   <div class="botones">
     <select (change)="atributo.set($any($event.target).value)">
-      <option [ngValue]="null" disabled selected>Ordenar por</option>
+      <option value="" disabled selected>Filtrar por...</option>
       <option value="personaId">ID</option>
       <option value="nombre">Nombre</option>
       <option value="apellido">Apellido</option>
@@ -10,6 +10,7 @@
     </select>
 
     <select (change)="orden.set($any($event.target).value)">
+      <option value="" disabled selected>Ordenar por...</option>
       <option value="asc">Ascendente</option>
       <option value="desc">Descendente</option>
     </select>
@@ -29,14 +30,10 @@
           <th class="celda-acciones">
             <div class="celda-acciones-div">
               Acciones
-
               <div class="acciones-botones">
-                <!-- Botón Excel -->
                 <a (click)="exportarExcel()">
                   <img class="historial-icon" src="/assets/images/excel-icon.png" alt="exportar excel" title="Exportar a Excel">
                 </a>
-
-                <!-- Botón Historial -->
                 <a routerLink="/menu/historial/personas">
                   <img class="historial-icon" src="/assets/images/historial-icon.png" alt="historial">
                 </a>
@@ -61,9 +58,7 @@
         </tr>
         } @empty {
           <tr>
-            <td class="sin-registros">
-              No se encontraron registros
-            </td>
+            <td colspan="6" class="sin-registros">No se encontraron registros</td>
           </tr>
         }
       </tbody>

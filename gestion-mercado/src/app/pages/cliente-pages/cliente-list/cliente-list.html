@@ -3,15 +3,17 @@
     <button type="button" class="btn-agregar" routerLink="/menu/clientes/form">Agregar</button>
 
     <select (change)="atributo.set($any($event.target).value)">
-      <option value="personaId" selected>ID</option>
+      <option value="" disabled selected>Filtrar por...</option>
+      <option value="personaId">ID</option>
       <option value="clienteId">ID Cliente</option>
       <option value="nombre">Nombre</option>
       <option value="apellido">Apellido</option>
-      <option value="dni">Dni</option>
+      <option value="dni">DNI</option>
       <option value="fechaNacimiento">Fecha Nac.</option>
     </select>
 
     <select (change)="orden.set($any($event.target).value)">
+      <option value="" disabled selected>Ordenar por...</option>
       <option value="asc">Ascendente</option>
       <option value="desc">Descendente</option>
     </select>
@@ -32,14 +34,10 @@
           <th class="celda-acciones">
             <div class="celda-acciones-div">
               Acciones
-
               <div class="acciones-botones">
-                <!-- Botón Excel -->
                 <a (click)="exportarExcel()">
                   <img class="historial-icon" src="/assets/images/excel-icon.png" alt="exportar excel" title="Exportar a Excel">
                 </a>
-
-                <!-- Botón Historial -->
                 <a routerLink="/menu/historial/clientes">
                   <img class="historial-icon" src="/assets/images/historial-icon.png" alt="historial">
                 </a>
@@ -50,22 +48,22 @@
       </thead>
 
       <tbody class="tablaBody">
-        @for (cliente of clientesFiltrados(); track $index){
-        <tr>
-          <td>{{ cliente.personaId }}</td>
-          <td>{{ cliente.clienteId }}</td>
-          <td>{{ cliente.nombre }}</td>
-          <td>{{ cliente.apellido }}</td>
-          <td>{{ cliente.fechaNacimiento }}</td>
-          <td>{{ cliente.dni }}</td>
-          <td class="acciones">
-            <button class="btnEliminar" (click)="eliminarCliente(cliente.clienteId)">Eliminar</button>
-            <button class="btnEditar" (click)="modificarCliente(cliente)">Editar</button>
-          </td>
-        </tr>
+        @for (cliente of clientesFiltrados(); track cliente.clienteId){
+          <tr>
+            <td>{{ cliente.personaId }}</td>
+            <td>{{ cliente.clienteId }}</td>
+            <td>{{ cliente.nombre }}</td>
+            <td>{{ cliente.apellido }}</td>
+            <td>{{ cliente.fechaNacimiento }}</td>
+            <td>{{ cliente.dni }}</td>
+            <td class="acciones">
+              <button class="btnEliminar" (click)="eliminarCliente(cliente.clienteId)">Eliminar</button>
+              <button class="btnEditar" (click)="modificarCliente(cliente)">Editar</button>
+            </td>
+          </tr>
         } @empty {
           <tr>
-            <td colspan="4" class="sin-registros">
+            <td colspan="7" class="sin-registros">
               No se encontraron registros
             </td>
           </tr>

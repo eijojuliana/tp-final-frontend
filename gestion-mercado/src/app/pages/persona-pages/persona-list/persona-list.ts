@@ -1,46 +1,55 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { PersonaService } from '../../../services/persona-service';
-import { Router, RouterLink} from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Persona } from '../../../models/persona.model';
 
 @Component({
   selector: 'app-persona-list',
+  standalone: true,
   imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './persona-list.html',
   styleUrl: './persona-list.css',
 })
 export class PersonaList {
-
   personaService = inject(PersonaService);
   personas = this.personaService.personas;
-  router=inject(Router);
+  router = inject(Router);
 
   filtro = signal('');
-  atributo = signal<'personaId' | 'nombre' | 'apellido' | 'dni' | 'fechaNacimiento'>('personaId');
-  orden = signal<'asc' | 'desc'>('asc');
+  atributo = signal<string>('');
+  orden = signal<'asc' | 'desc' | ''>('');
 
   personasFiltradas = computed(() => {
-  const filtro = this.filtro(), attr = this.atributo(), ord = this.orden();
-  return this.personas()
-      .filter((p) => (filtro ? (p as any)[attr] === filtro : true))
-      .sort((a,b)=> ord==='asc'
-        ? String((a as any)[attr]).localeCompare(String((b as any)[attr]), undefined, { numeric:true })
-        : String((b as any)[attr]).localeCompare(String((a as any)[attr]), undefined, { numeric:true })
-      );
+    const filtro = this.filtro().toLowerCase();
+    const attr = this.atributo();
+    const ord = this.orden();
+
+    return this.personas()
+      .filter((p) => {
+        if (!attr || !filtro) return true;
+        return String((p as any)[attr]).toLowerCase().includes(filtro);
+      })
+      .sort((a, b) => {
+        if (!ord || !attr) return 0;
+        const valA = String((a as any)[attr]);
+        const valB = String((b as any)[attr]);
+
+        return ord === 'asc'
+          ? valA.localeCompare(valB, undefined, { numeric: true })
+          : valB.localeCompare(valA, undefined, { numeric: true });
+      });
   });
 
-  deletePersona(id:number){
-    if(confirm("¿Desea eliminar esta persona?")){
-      console.log(id);
-      this.personaService.delete(id).subscribe(()=>
-      {console.log(`Persona con el id: ${id} Eliminada.`)}
-      )
+  deletePersona(id: number) {
+    if (confirm("¿Desea eliminar esta persona?")) {
+      this.personaService.delete(id).subscribe();
     }
   }
 
-  updatePersona(persona:any){
+  updatePersona(persona: Persona) {
     this.personaService.selectPersonaToEdit(persona);
-    this.router.navigate(['menu/personas/form']);
+    this.router.navigate(['/menu/personas/form']);
   }
 
   exportarExcel() {

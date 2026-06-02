@@ -1,4 +1,4 @@
-import { Component, signal, computed, OnInit } from '@angular/core';
+import { Component, signal, OnInit } from '@angular/core';
 import { HistorialClienteService } from './historial-cliente.service';
 import { DatePipe } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -13,18 +13,24 @@ import { RouterLink } from '@angular/router';
 })
 export class HistorialClienteListComponent implements OnInit {
   historial = signal<any[]>([]);
-  atributo = signal('fecha');
-  orden = signal('desc');
-  filtro = signal('');
+
+  atributo = signal<string>('');
+  orden = signal<string>('');
+  filtro = signal<string>('');
 
   constructor(private historialService: HistorialClienteService) {}
 
-  ngOnInit(): void { this.cargar(); }
+  ngOnInit(): void {
+    this.atributo.set('fecha');
+    this.orden.set('desc');
+    this.cargar();
+  }
 
   cargar(): void {
     this.historialService.getHistorial(this.atributo(), this.orden(), this.filtro())
-      .subscribe(data => this.historial.set(data));
+      .subscribe({
+        next: (data) => this.historial.set(data),
+        error: (err) => console.error("Error", err)
+      });
   }
-
-  historialFiltrado = computed(() => this.historial());
 }

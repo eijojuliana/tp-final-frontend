@@ -20,8 +20,8 @@ export class ProductList {
   inventarios = this.inventarioService.inventarios;
 
   filtro = signal('');
-  atributo = signal('nombre' as string);
-  orden = signal<'asc' | 'desc'>('asc');
+  atributo = signal('');
+  orden = signal<'asc' | 'desc' | ''>('');
 
   private _warned = false;
 
@@ -41,8 +41,7 @@ export class ProductList {
       if (stockBajo.length > 0) {
         this._warned = true;
         setTimeout(() => {
-          const msg =
-            stockBajo.length === 1
+          const msg = stockBajo.length === 1
               ? `Stock bajo: ${stockBajo[0]}`
               : `${stockBajo.length} productos con stock bajo`;
           this.toast.warning(msg, 6000);
@@ -57,8 +56,9 @@ export class ProductList {
     const ord = this.orden();
 
     return this.productos()
-      .filter(p => (filtro ? String((p as any)[attr]).toLowerCase().includes(filtro) : true))
+      .filter(p => (filtro && attr ? String((p as any)[attr]).toLowerCase().includes(filtro) : true))
       .sort((a, b) => {
+        if (!ord || !attr) return 0;
         const A = (a as any)[attr];
         const B = (b as any)[attr];
         if (typeof A === 'number' && typeof B === 'number') {

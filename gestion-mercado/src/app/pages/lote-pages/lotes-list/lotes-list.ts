@@ -7,7 +7,7 @@ import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-lotes-list',
-  imports: [RouterLink,CurrencyPipe],
+  imports: [RouterLink, CurrencyPipe],
   templateUrl: './lotes-list.html',
   styleUrl: './lotes-list.css',
 })
@@ -18,21 +18,21 @@ export class LotesList {
   private toast = inject(ToastService);
 
   filtro = signal('');
-  atributo = signal<'lote_id' | 'nombre' | 'categoria' | 'cantidadDisponible' | 'costoUnitario' | 'fechaIngreso'>('lote_id');
-  orden = signal<'asc' | 'desc'>('asc');
+  atributo = signal<string>('');
+  orden = signal<'asc' | 'desc' | ''>('');
 
   lotesFiltrados = computed(() => {
     const filtro = this.filtro().toLowerCase();
     const attr = this.atributo();
     const ord = this.orden();
 
-    // filtrar acá se alarga por el tema de que recibo un Producto completo y no es sólo id je
     const getValue = (l: any) =>
       (attr === 'nombre' || attr === 'categoria') ? l.producto[attr] : l[attr];
 
     return this.lotes()
-      .filter(l => String(getValue(l)).toLowerCase().includes(filtro))
+      .filter(l => attr ? String(getValue(l)).toLowerCase().includes(filtro) : true)
       .sort((a, b) => {
+        if (!ord || !attr) return 0;
         const A = getValue(a);
         const B = getValue(b);
 
@@ -46,19 +46,17 @@ export class LotesList {
       });
   });
 
-
-  deleteLote(id:number) {
-    if(confirm("Desea eliminar?")) {
+  deleteLote(id: number) {
+    if (confirm("Desea eliminar?")) {
       this.loteService.delete(id).subscribe({
         next: () => {
           this.toast.success("Lote eliminado correctamente");
-          console.log(`Lote de ID: ${id} eliminado.`);
         }
       });
     }
   }
 
-  updateLote(lote:Lote) {
+  updateLote(lote: Lote) {
     this.loteService.selectLoteToEdit(lote);
     this.router.navigate(['/menu/lotes/form']);
   }

@@ -1,12 +1,13 @@
 <section class="list-container">
   <div>
     <select (change)="onTipoChange($event)">
-      <option value="">Todos</option>
+      <option value="">Todos los tipos</option>
       <option value="EFECTIVO">Efectivo</option>
       <option value="TRANSFERENCIA">Transferencia</option>
     </select>
 
     <select (change)="atributo.set($any($event.target).value)">
+      <option value="" disabled selected>Filtrar por...</option>
       <option value="transaccion_id">Transacción ID</option>
       <option value="origen_id">Origen ID</option>
       <option value="destino_id">Destino ID</option>
@@ -15,6 +16,7 @@
     </select>
 
     <select (change)="orden.set($any($event.target).value)">
+      <option value="" disabled selected>Ordenar por...</option>
       <option value="asc">Ascendente</option>
       <option value="desc">Descendente</option>
     </select>
@@ -36,7 +38,6 @@
                 <a (click)="exportarExcel()">
                   <img class="historial-icon" src="/assets/images/excel-icon.png" alt="exportar excel" title="Exportar a Excel">
                 </a>
-
                 <a routerLink="/menu/historial/transacciones">
                   <img class="historial-icon" src="/assets/images/historial-icon.png" alt="historial">
                 </a>
@@ -60,9 +61,7 @@
         </tr>
         } @empty {
         <tr>
-          <td colspan="7" class="sin-registros">
-            No se encontraron registros
-          </td>
+          <td colspan="7" class="sin-registros">No se encontraron transacciones</td>
         </tr>
         }
       </tbody>

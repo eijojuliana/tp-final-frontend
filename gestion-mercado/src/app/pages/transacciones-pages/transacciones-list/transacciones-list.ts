@@ -2,12 +2,13 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { TransaccionService } from '../../../services/transaccion-service';
 import { Transaccion } from '../../../models/transaccion.model';
 import { PedidoService } from '../../../services/pedido-service';
-import { Pedido } from '../../../models/pedido.model';
 import { CurrencyPipe, DatePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-transacciones-list',
-  imports: [DatePipe,CurrencyPipe],
+  standalone: true,
+  imports: [DatePipe, CurrencyPipe, RouterLink],
   templateUrl: './transacciones-list.html',
   styleUrl: './transacciones-list.css',
 })
@@ -15,13 +16,9 @@ export class TransaccionesList {
   private service = inject(TransaccionService);
   public transacciones = this.service.transacciones;
 
-  private pedidoService = inject(PedidoService);
-  private pedidos = this.pedidoService.pedidos;
-
-
   tipoFiltro = signal<'EFECTIVO' | 'TRANSFERENCIA' | ''>('');
-  atributo = signal<'transaccion_id' | 'origen_id' | 'destino_id' | 'monto' | 'fecha'>('transaccion_id');
-  orden = signal<'asc' | 'desc'>('asc');
+  atributo = signal<string>('');
+  orden = signal<'asc' | 'desc' | ''>('');
 
   transaccionesFiltrados = computed(() => {
     const tipo = this.tipoFiltro();
@@ -31,6 +28,7 @@ export class TransaccionesList {
     return this.transacciones()
       .filter(p => (tipo ? p.tipo === tipo : true))
       .sort((a, b) => {
+        if (!ord || !attr) return 0;
         const A = (a as any)[attr];
         const B = (b as any)[attr];
 
@@ -44,23 +42,13 @@ export class TransaccionesList {
       });
   });
 
+  esEntrada(t: Transaccion): boolean {
+    return t.tipo === 'EFECTIVO';
+  }
+
   onTipoChange(event: Event) {
     const value = (event.target as HTMLSelectElement).value as 'EFECTIVO' | 'TRANSFERENCIA' | '';
     this.tipoFiltro.set(value);
-  }
-
-
-  esEntrada(t: Transaccion): boolean {
-
-    const pedidoEncontrado = this.pedidos()
-      .find((p: Pedido) => p.transaccion?.transaccion_id === t.transaccion_id);
-
-    if (!pedidoEncontrado) {
-
-      return false;
-    }
-
-    return pedidoEncontrado.tipo === 'VENTA';
   }
 
   exportarExcel() {

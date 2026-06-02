@@ -3,11 +3,13 @@
     <button type="button" class="btn-agregar" routerLink="/menu/usuarios/form">Agregar</button>
 
     <select (change)="atributo.set($any($event.target).value)">
+      <option value="" disabled selected>Filtrar por...</option>
       <option value="usuarioId">ID</option>
       <option value="email">Email</option>
     </select>
 
     <select (change)="orden.set($any($event.target).value)">
+      <option value="" disabled selected>Ordenar por...</option>
       <option value="asc">Ascendente</option>
       <option value="desc">Descendente</option>
     </select>
@@ -15,7 +17,7 @@
     <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)" />
   </div>
 
-    <div class="tabla-contenedor">
+  <div class="tabla-contenedor">
     <table class="tabla">
       <thead class="encabezado">
         <tr>
@@ -24,14 +26,10 @@
           <th class="celda-acciones">
             <div class="celda-acciones-div">
               Acciones
-
               <div class="acciones-botones">
-                <!-- Botón Excel -->
                 <a (click)="exportarExcel()">
                   <img class="historial-icon" src="/assets/images/excel-icon.png" alt="exportar excel" title="Exportar a Excel">
                 </a>
-
-                <!-- Botón Historial -->
                 <a routerLink="/menu/historial/usuarios">
                   <img class="historial-icon" src="/assets/images/historial-icon.png" alt="historial">
                 </a>
@@ -48,12 +46,12 @@
             <td>{{ usuario.email }}</td>
             <td class="acciones">
               <button class="btnEliminar" (click)="eliminarUsuario(usuario.usuarioId)"> Eliminar </button>
-              <button class="btnEditar"(click)="modificarUsuario(usuario)"> Editar </button>
+              <button class="btnEditar" (click)="modificarUsuario(usuario)"> Editar </button>
             </td>
           </tr>
         } @empty {
           <tr>
-            <td colspan="4" class="sin-registros">
+            <td colspan="3" class="sin-registros">
               No se encontraron registros
             </td>
           </tr>

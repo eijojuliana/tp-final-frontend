@@ -5,20 +5,20 @@ import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-proveedores-list',
+  standalone: true,
   imports: [RouterLink],
   templateUrl: './proveedores-list.html',
   styleUrl: './proveedores-list.css',
 })
-
 export class ProveedoresList {
-  service=inject(ProveedorService);
-  proveedores=this.service.proveedores;
-  router=inject(Router);
+  service = inject(ProveedorService);
+  proveedores = this.service.proveedores;
+  router = inject(Router);
   private toast = inject(ToastService);
 
   filtro = signal('');
-  atributo = signal<'proveedorId' | 'cuit' | 'razonSocial' | 'nombreFantasia' | 'condicion' | 'direccion' | 'telefono' | 'email'>('proveedorId');
-  orden = signal<'asc' | 'desc'>('asc');
+  atributo = signal<string>('');
+  orden = signal<'asc' | 'desc' | ''>('');
 
   proveedoresFiltrados = computed(() => {
     const filtro = this.filtro().toLowerCase().trim();
@@ -26,8 +26,10 @@ export class ProveedoresList {
     const ord = this.orden();
 
     return this.proveedores()
-      .filter(p => filtro ? String((p as any)[attr]).toLowerCase().includes(filtro) : true)
+      .filter(p => (attr && filtro ? String((p as any)[attr]).toLowerCase().includes(filtro) : true))
       .sort((a, b) => {
+        if (!ord || !attr) return 0;
+
         const A = (a as any)[attr];
         const B = (b as any)[attr];
 
@@ -36,25 +38,22 @@ export class ProveedoresList {
         }
 
         return ord === 'asc'
-          ? String(A).toLowerCase().localeCompare(String(B).toLowerCase())
-          : String(B).toLowerCase().localeCompare(String(A).toLowerCase());
+          ? String(A || '').toLowerCase().localeCompare(String(B || '').toLowerCase())
+          : String(B || '').toLowerCase().localeCompare(String(A || '').toLowerCase());
       });
   });
 
-  eliminarProveedor(id:number){
-    if(confirm("¿Desea eliminar este proveedor?")){
+  eliminarProveedor(id: number) {
+    if (confirm("¿Desea eliminar este proveedor?")) {
       this.service.delete(id).subscribe({
-        next: () => {
-          this.toast.success("Proveedor eliminado correctamente");
-          console.log(`Proveedor con el id:${id} eliminado`);
-        }
+        next: () => this.toast.success("Proveedor eliminado correctamente")
       });
     }
   }
 
-  modificarProveedor(proveedor:any){
+  modificarProveedor(proveedor: any) {
     this.service.selectProveedorToEdit(proveedor);
-    this.router.navigate(['menu/proveedores/form']);
+    this.router.navigate(['/menu/proveedores/form']);
   }
 
   exportarExcel() {
