@@ -19,7 +19,7 @@ export class TransaccionesList {
   private pedidos = this.pedidoService.pedidos;
 
 
-  tipoFiltro = signal<'EFECTIVO' | 'DEBITO' | ''>('');
+  tipoFiltro = signal<'EFECTIVO' | 'TRANSFERENCIA' | ''>('');
   atributo = signal<'transaccion_id' | 'origen_id' | 'destino_id' | 'monto' | 'fecha'>('transaccion_id');
   orden = signal<'asc' | 'desc'>('asc');
 
@@ -45,7 +45,7 @@ export class TransaccionesList {
   });
 
   onTipoChange(event: Event) {
-    const value = (event.target as HTMLSelectElement).value as 'EFECTIVO' | 'DEBITO' | '';
+    const value = (event.target as HTMLSelectElement).value as 'EFECTIVO' | 'TRANSFERENCIA' | '';
     this.tipoFiltro.set(value);
   }
 

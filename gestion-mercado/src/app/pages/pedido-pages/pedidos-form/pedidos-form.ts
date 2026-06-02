@@ -63,7 +63,7 @@ export class PedidosForm implements OnInit {
 
   form = this.fb.nonNullable.group({
     tipoPedido: [undefined as unknown as 'COMPRA' | 'VENTA', [Validators.required]],
-    tipoTransaccion: [undefined as unknown as 'EFECTIVO' | 'DEBITO', [Validators.required]],
+    tipoTransaccion: [undefined as unknown as 'EFECTIVO' | 'TRANSFERENCIA', [Validators.required]],
     origen_id: [null as number | null],
     destino_id: [null as number | null, [Validators.min(0)]],
     cuentaBancaria: [null as number | null],
@@ -139,7 +139,7 @@ export class PedidosForm implements OnInit {
     }
     this.form.patchValue({
       tipoPedido: this.pedidoToEdit.tipo,
-      tipoTransaccion: this.pedidoToEdit.transaccion?.tipo as 'EFECTIVO' | 'DEBITO',
+      tipoTransaccion: this.pedidoToEdit.transaccion?.tipo as 'EFECTIVO' | 'TRANSFERENCIA',
       origen_id: this.pedidoToEdit.transaccion?.origen_id,
       destino_id: this.pedidoToEdit.transaccion?.destino_id,
       cuentaBancaria: this.pedidoToEdit.transaccion?.origen_id,
@@ -165,7 +165,7 @@ export class PedidosForm implements OnInit {
       finalOrigenId = TIENDA_ID;
       finalDestinoId = formValue.destino_id as number;
     }
-    if (formValue.tipoTransaccion === 'DEBITO' && formValue.cuentaBancaria) {
+    if (formValue.tipoTransaccion === 'TRANSFERENCIA' && formValue.cuentaBancaria) {
       if(tipoPedido ==='COMPRA'){
         finalOrigenId=formValue.cuentaBancaria;
       }
@@ -188,7 +188,7 @@ export class PedidosForm implements OnInit {
     const dto: NewPedido = {
       tipo: formValue.tipoPedido,
       transaccion: {
-        tipo: formValue.tipoTransaccion as 'EFECTIVO' | 'DEBITO',
+        tipo: formValue.tipoTransaccion as 'EFECTIVO' | 'TRANSFERENCIA',
         origen_id: origenIdValue,
         destino_id: destinoIdValue,
       },

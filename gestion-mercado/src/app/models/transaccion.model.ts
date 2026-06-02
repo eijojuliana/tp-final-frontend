@@ -8,7 +8,7 @@ export interface Transaccion {
 }
 
 export interface NewTransaccion {
-  tipo: 'EFECTIVO' | 'DEBITO',
+  tipo: 'EFECTIVO' | 'TRANSFERENCIA',
   origen_id?: number | null | undefined,
   destino_id: number,
 }

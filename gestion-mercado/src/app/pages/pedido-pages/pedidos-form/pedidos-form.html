@@ -39,7 +39,7 @@
             <select formControlName="tipoTransaccion">
               <option [ngValue]="null" disabled selected>Seleccione el Método</option>
               <option value="EFECTIVO">EFECTIVO</option>
-              <option value="DEBITO">DÉBITO</option>
+              <option value="TRANSFERENCIA">TRANSFERENCIA</option>
             </select>
             @if (form.get('tipoTransaccion')?.invalid && form.get('tipoTransaccion')?.touched) {
               <span class="error">El método de pago es requerido.</span>
@@ -57,7 +57,7 @@
              <button type="button" (click)="irACliente()">Nuevo Cliente</button>
             </div>
 
-            @if (form.get('tipoTransaccion')?.value === 'DEBITO') {
+            @if (form.get('tipoTransaccion')?.value === 'TRANSFERENCIA') {
               <div class="campo">
                 <label>Cuenta bancaria:</label>
                 <select formControlName="cuentaBancaria">
@@ -83,7 +83,7 @@
               <button type="button" (click)="irAProveedor()">Nuevo Proveedor</button>
             </div>
 
-            @if (form.get('tipoTransaccion')?.value === 'DEBITO') {
+            @if (form.get('tipoTransaccion')?.value === 'TRANSFERENCIA') {
               <div class="campo">
                 <label>Cuenta bancaria de la Tienda:</label>
                 <select formControlName="cuentaBancaria">
