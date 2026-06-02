@@ -18,6 +18,7 @@
         <form (ngSubmit)="login()">
 
           <div class="input-group">
+            <label>Email<span class="obligatorio">*</span></label>
             <input
               type="text"
               name="username"
@@ -28,6 +29,7 @@
           </div>
 
           <div class="input-group password-input-wrapper">
+            <label>Contraseña<span class="obligatorio">*</span></label>
             <input
               [type]="passwordVisible ? 'text' : 'password'"
               name="password"

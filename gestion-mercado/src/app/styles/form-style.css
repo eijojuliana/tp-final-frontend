@@ -188,6 +188,11 @@
   color: var(--letra1-leve);
 }
 
+/* ASTERISCO OBLIGATORIO */
+.obligatorio {
+  color: red;
+}
+
 /* ERROR */
 .error {
   background: var(--error-0);

@@ -8,7 +8,7 @@
       <form [formGroup]="form" (ngSubmit)="saveCliente()">
 
         <div class="campo">
-          <label>Nombre*: </label>
+          <label>Nombre<span class="obligatorio">*</span>: </label>
           <input type="text" formControlName="nombre">
           @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
           <span class="error">El campo no puede estar vacío ni contener caracteres no alfabéticos.</span>
@@ -17,7 +17,7 @@
 
         <!-- Campo Apellido -->
         <div class="campo">
-          <label>Apellido*: </label>
+          <label>Apellido<span class="obligatorio">*</span>: </label>
           <input type="text" formControlName="apellido" placeholder="Ingrese el apellido">
           @if (form.get('apellido')?.invalid && form.get('apellido')?.touched) {
           <span class="error">El campo no puede estar vacío ni contener caracteres no alfabéticos.</span>
@@ -25,7 +25,7 @@
         </div>
 
         <div class="campo">
-          <label>Dni*: </label>
+          <label>Dni<span class="obligatorio">*</span>: </label>
           <input type="number" formControlName="dni">
           @if (form.get('dni')?.invalid && form.get('dni')?.touched) {
           <span class="error">El DNI debe tener entre 6 y 9 dígitos</span>
@@ -34,7 +34,7 @@
 
         <!-- Campo Edad -->
         <div class="campo">
-          <label>Fecha de Nacimiento*: </label>
+          <label>Fecha de Nacimiento<span class="obligatorio">*</span>: </label>
           <input type="date" formControlName="fechaNacimiento">
           @if (form.get('fechaNacimiento')?.invalid && form.get('fechaNacimiento')?.touched) {
           <span class="error">El campo no puede estar vacío y debe ser una fecha válida (menor a 120 y mayor a 0

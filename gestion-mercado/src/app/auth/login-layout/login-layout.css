@@ -88,6 +88,15 @@
   position: relative;
 }
 
+.input-group label {
+  display: block;
+  text-align: left;
+  color: var(--vino-tema_claro-2);
+  font-size: 0.85vw;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
 .input-group input {
   width: 100%;
   border: none;

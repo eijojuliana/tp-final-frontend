@@ -23,7 +23,7 @@
         }
         <form [formGroup]="form" (ngSubmit)="savePedido()">
           <div class="campo">
-            <label>Tipo de Pedido: </label>
+            <label>Tipo de Pedido<span class="obligatorio">*</span>: </label>
             <select formControlName="tipoPedido">
               <option [ngValue]="null" disabled selected>Seleccione el Tipo</option>
               <option value="COMPRA">COMPRA</option>
@@ -35,7 +35,7 @@
           </div>
 
           <div class="campo">
-            <label>Método de Pago: </label>
+            <label>Método de Pago<span class="obligatorio">*</span>: </label>
             <select formControlName="tipoTransaccion">
               <option [ngValue]="null" disabled selected>Seleccione el Método</option>
               <option value="EFECTIVO">EFECTIVO</option>

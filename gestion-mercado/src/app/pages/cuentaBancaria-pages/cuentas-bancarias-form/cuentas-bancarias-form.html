@@ -9,21 +9,21 @@
 
       <form [formGroup]="form" (ngSubmit)="saveCuentaBancaria()">
            <div class = "campo">
-          <label>Nombre del banco*: </label>
+          <label>Nombre del banco<span class="obligatorio">*</span>: </label>
           <input type ="text" formControlName="nombre_banco">
           @if (form.get('nombre_banco')?.invalid && form.get('nombre_banco')?.touched) {
             <span class = "error">El nombre del banco es requerido.</span>
           }
         </div>
         <div class = "campo">
-          <label>CBU*: </label>
+          <label>CBU<span class="obligatorio">*</span>: </label>
           <input type ="number" formControlName="cbu">
           @if (form.get('cbu')?.invalid && form.get('cbu')?.touched) {
             <span class = "error">El CBU de la cuenta bancaria es requerido.</span>
           }
         </div>
         <div class = "campo">
-          <label>Saldo*: </label>
+          <label>Saldo<span class="obligatorio">*</span>: </label>
           <input type="number" formControlName="saldo">
           @if (form.get('saldo')?.invalid && form.get('saldo')?.touched) {
             <span class = "error">El saldo de la cuenta bancaria es requerido.</span>
