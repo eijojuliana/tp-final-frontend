@@ -190,7 +190,7 @@
 
 /* ASTERISCO OBLIGATORIO */
 .obligatorio {
-  color: red;
+  color: var(--error-2);
 }
 
 /* ERROR */

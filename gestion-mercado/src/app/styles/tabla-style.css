@@ -89,6 +89,8 @@ DIV TABLA
   width: 100%;
   justify-content: center;
   align-items: center;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .tabla, .tabla-historial {
@@ -269,11 +271,6 @@ DIV TABLA
   .filter-container {
     max-width: 100%;
     flex-wrap: wrap;
-  }
-
-  .tabla-contenedor {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
   }
 
   .tabla {
