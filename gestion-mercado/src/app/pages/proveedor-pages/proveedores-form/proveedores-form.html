@@ -1,3 +1,4 @@
+
 <div class="form-container">
   <div class="card">
 
@@ -8,7 +9,7 @@
 
       <form [formGroup]="form" (ngSubmit)="saveProveedor()">
         <div class="campo">
-          <label>CUIT: </label>
+          <label>CUIT*: </label>
           <input type="number" formControlName="cuit" placeholder="Ej: 20301234567">
           @if (form.get('cuit')?.invalid && form.get('cuit')?.touched) {
             <span class="error">Debe ingresar un CUIT válido (11 dígitos).</span>
@@ -68,12 +69,12 @@
         </div>
 
         <div class="campo">
-          <label>Teléfono: </label>
+          <label>Teléfono*: </label>
           <input type="number" formControlName="telefono" placeholder="Ej: 01145678900">
         </div>
 
         <div class="campo">
-          <label>Email: </label>
+          <label>Email*: </label>
           <input type="email" formControlName="email" placeholder="ejemplo@empresa.com">
         </div>
 
@@ -90,3 +91,4 @@
     </div>
   </div>
 </div>
+

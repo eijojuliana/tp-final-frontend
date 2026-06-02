@@ -1,3 +1,4 @@
+
 <div class="form-container">
   <div class="card">
 
@@ -9,7 +10,7 @@
       <form [formGroup]="form" (ngSubmit)="saveEmpleado()">
 
         <div class = "campo">
-          <label>Nombre: </label>
+          <label>Nombre*: </label>
           <input type="text" formControlName="nombre">
           @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
             <span class = "error">El campo no puede estar vacío ni contener carácteres no alfabéticos.</span>
@@ -18,7 +19,7 @@
 
         <!-- Campo Apellido -->
         <div class="campo">
-          <label>Apellido:</label>
+          <label>Apellido*: </label>
           <input type="text" formControlName="apellido" placeholder="Ingrese el apellido">
           @if (form.get('apellido')?.invalid && form.get('apellido')?.touched) {
           <span class="error">El campo no puede estar vacío ni contener caracteres no alfabéticos.</span>
@@ -26,7 +27,7 @@
         </div>
 
         <div class = "campo">
-          <label>Dni: </label>
+          <label>Dni*: </label>
           <input type="number" formControlName="dni">
           @if (form.get('dni')?.invalid && form.get('dni')?.touched) {
             <span class = "error">El DNI debe tener enter 6 y 9 dígitos</span>
@@ -35,7 +36,7 @@
 
         <!-- Campo Edad -->
         <div class="campo">
-          <label>Fecha de Nacimiento:</label>
+          <label>Fecha de Nacimiento*: </label>
           <input type="date" formControlName="fechaNacimiento">
           @if (form.get('fechaNacimiento')?.invalid && form.get('fechaNacimiento')?.touched) {
           <span class="error">El campo no puede estar vacío y debe ser una fecha válida (menor a 120 y mayor a 0
@@ -44,7 +45,7 @@
         </div>
 
         <div class = "campo">
-          <label>Email: </label>
+          <label>Email*: </label>
           <input type="email" formControlName="email">
           @if (form.get('email')?.invalid && form.get('email')?.touched) {
             <span class = "error">El email debe ser válido.</span>
@@ -52,7 +53,7 @@
         </div>
 
         <div class = "campo">
-          <label>Contraseña: </label>
+          <label>Contraseña*: </label>
 
           <div class="password-input-wrapper">
             <input
@@ -90,3 +91,4 @@
     </div>
   </div>
 </div>
+

@@ -1,3 +1,4 @@
+
 <div class="form-container">
   <div class="card">
 
@@ -8,7 +9,7 @@
 
       <form [formGroup]="form" (ngSubmit)="saveInventario()">
         <div class="campo">
-          <label>Producto:</label>
+          <label>Producto*:</label>
           <select formControlName="producto_id">
             <option [ngValue]="0" disabled selected>Seleccione un producto</option>
 
@@ -25,7 +26,7 @@
 
 
         <div class="campo">
-          <label>Stock Mínimo:</label>
+          <label>Stock Mínimo*:</label>
           <input type="number" formControlName="stockMin" min="0">
           @if (form.get('stockMin')?.invalid && form.get('stockMin')?.touched) {
             <span class="error">El stock mínimo es requerido.</span>
@@ -33,7 +34,7 @@
         </div>
 
         <div class="campo">
-          <label>Precio Venta:</label>
+          <label>Precio Venta*:</label>
           <input type="number" formControlName="precioVenta" step="0.01">
           @if (form.get('precioVenta')?.invalid && form.get('precioVenta')?.touched) {
             <span class="error">El precio de venta debe ser superior a cero (0)</span>
@@ -53,3 +54,4 @@
     </div>
   </div>
 </div>
+

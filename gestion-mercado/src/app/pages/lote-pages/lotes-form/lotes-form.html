@@ -1,3 +1,4 @@
+
 <div class="form-container">
   <div class="card">
 
@@ -9,7 +10,7 @@
       <form [formGroup]="form" (ngSubmit)="saveLote()">
 
         <div class = "campo">
-          <label>Producto: </label>
+          <label>Producto*: </label>
           <select formControlName="producto">
             <option [ngValue]="null" disabled selected>Seleccione un producto</option>
 
@@ -25,7 +26,7 @@
         </div>
 
         <div class = "campo">
-          <label>Cantidad Disponible: </label>
+          <label>Cantidad Disponible*: </label>
           <input type="number" formControlName="cantidadDisponible" min = 0>
           @if (form.get('cantidadDisponible')?.invalid && form.get('cantidadDisponible')?.touched) {
             <span class = "error">El la cantidad disponible es requerida.</span>
@@ -33,7 +34,7 @@
         </div>
 
         <div class = "campo">
-          <label>Costo Unitario: </label>
+          <label>Costo Unitario*: </label>
           <input type="number" formControlName="costoUnitario" min = 0>
           @if (form.get('costoUnitario')?.invalid && form.get('costoUnitario')?.touched) {
             <span class = "error">El costo unitario debe ser superior a 0.</span>
@@ -41,7 +42,7 @@
         </div>
 
         <div class = "campo">
-          <label>Fecha de Ingreso: </label>
+          <label>Fecha de Ingreso*: </label>
           <input type="date" formControlName="fechaIngreso">
           @if (form.get('fechaIngreso')?.invalid && form.get('fechaIngreso')?.touched) {
             <span class = "error">La fecha de ingreso es requerida.</span>
@@ -61,3 +62,4 @@
     </div>
   </div>
 </div>
+
