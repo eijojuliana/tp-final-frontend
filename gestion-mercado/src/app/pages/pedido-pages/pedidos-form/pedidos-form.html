@@ -1,136 +1,127 @@
 <main>
-  <section class="form">
-    <div class="form-toggle" (click)="toggleForm()">
-      <h2>Pedido</h2>
-      <span class="arrow">{{ formCollapsed() ? '▼' : '▲' }}</span>
-    </div>
+  <div class="form-card">
+    <h2 class="form-title">Registrar pedido</h2>
 
-    <div class="form-wrapper" [class.collapsed]="formCollapsed()">
-      <h2 class="form-title">Pedido</h2>
+    @if (pedidoService.isCajaCerradaHoy()) {
+      <div class="caja-cerrada-aviso">
+        <span class="material-icons icon-aviso">lock</span>
+        <div class="texto-aviso">
+          <strong>Atención: La caja de hoy está cerrada</strong>
+          <p>No se admiten compras ni ventas en efectivo por el resto del día.</p>
+        </div>
+      </div>
+    }
 
-      <div class="botones-navegacion">
+    <form [formGroup]="form">
+      <div class="form-row">
+        <label class="form-label">Tipo de pedido</label>
+        <div class="pill-group">
+          <button
+            type="button"
+            class="pill"
+            [class.active]="form.get('tipoPedido')?.value === 'COMPRA'"
+            (click)="form.get('tipoPedido')?.setValue('COMPRA')"
+          >COMPRA</button>
+          <button
+            type="button"
+            class="pill"
+            [class.active]="form.get('tipoPedido')?.value === 'VENTA'"
+            (click)="form.get('tipoPedido')?.setValue('VENTA')"
+          >VENTA</button>
+        </div>
       </div>
 
-      <div class="form-content" [class.collapsed]="formCollapsed()">
-        @if (pedidoService.isCajaCerradaHoy()) {
-          <div class="caja-cerrada-aviso">
-            <span class="material-symbols-outlined icon-aviso">lock</span>
-            <div class="texto-aviso">
-              <strong>Atención: La caja de hoy está cerrada</strong>
-              <p>No se admiten compras ni ventas en efectivo por el resto del día.</p>
-            </div>
-          </div>
-        }
-        <form [formGroup]="form" (ngSubmit)="savePedido()">
-          <div class="campo">
-            <label>Tipo de Pedido<span class="obligatorio">*</span>: </label>
-            <select formControlName="tipoPedido">
-              <option [ngValue]="null" disabled selected>Seleccione el Tipo</option>
-              <option value="COMPRA">COMPRA</option>
-              <option value="VENTA">VENTA</option>
-            </select>
-            @if (form.get('tipoPedido')?.invalid && form.get('tipoPedido')?.touched) {
-              <span class="error">El tipo de pedido es requerido.</span>
-            }
-          </div>
+      <div class="form-row">
+        <label class="form-label">Método de pago</label>
+        <div class="pill-group">
+          <button
+            type="button"
+            class="pill"
+            [class.active]="form.get('tipoTransaccion')?.value === 'EFECTIVO'"
+            (click)="form.get('tipoTransaccion')?.setValue('EFECTIVO')"
+          >EFECTIVO</button>
+          <button
+            type="button"
+            class="pill"
+            [class.active]="form.get('tipoTransaccion')?.value === 'TRANSFERENCIA'"
+            (click)="form.get('tipoTransaccion')?.setValue('TRANSFERENCIA')"
+          >TRANSFERENCIA</button>
+        </div>
+      </div>
 
-          <div class="campo">
-            <label>Método de Pago<span class="obligatorio">*</span>: </label>
-            <select formControlName="tipoTransaccion">
-              <option [ngValue]="null" disabled selected>Seleccione el Método</option>
-              <option value="EFECTIVO">EFECTIVO</option>
-              <option value="TRANSFERENCIA">TRANSFERENCIA</option>
-            </select>
-            @if (form.get('tipoTransaccion')?.invalid && form.get('tipoTransaccion')?.touched) {
-              <span class="error">El método de pago es requerido.</span>
-            }
-          </div>
-
-          @if (form.get('tipoPedido')?.value === 'VENTA') {
-            <div class="campo">
-              <label>Cliente:</label>
-              <app-buscador-generico
-                [datos]="clientesMapeados"
-                placeholder="Buscar cliente por nombre o DNI..."
-                (alSeleccionar)="alSeleccionarCliente($event)">
-              </app-buscador-generico>
-             <button type="button" (click)="irACliente()">Nuevo Cliente</button>
-            </div>
-
-            @if (form.get('tipoTransaccion')?.value === 'TRANSFERENCIA') {
-              <div class="campo">
-                <label>Cuenta bancaria:</label>
-                <select formControlName="cuentaBancaria">
-                  <option [ngValue]="null" disabled selected>Seleccione una cuenta</option>
-                  @for (cuenta of cuentasBancarias(); track $index) {
-                    <option [ngValue]="cuenta.cuentaBancariaId">
-                      CBU: {{ cuenta.cbu }} — Saldo: {{ cuenta.saldo }}
-                    </option>
-                  }
-                </select>
-              </div>
-            }
-          }
-
+      <div class="form-row">
+        <label class="form-label">Destinatario</label>
+        <div class="destinatario-control">
           @if (form.get('tipoPedido')?.value === 'COMPRA') {
-            <div class="campo">
-              <label>Proveedor:</label>
-              <app-buscador-generico
-                [datos]="proveedoresMapeados"
-                placeholder="Buscar proveedor por razón social..."
-                (alSeleccionar)="alSeleccionarProveedor($event)">
-              </app-buscador-generico>
-              <button type="button" (click)="irAProveedor()">Nuevo Proveedor</button>
-            </div>
-
-            @if (form.get('tipoTransaccion')?.value === 'TRANSFERENCIA') {
-              <div class="campo">
-                <label>Cuenta bancaria de la Tienda:</label>
-                <select formControlName="cuentaBancaria">
-                  <option [ngValue]="null" disabled selected>Seleccione una cuenta</option>
-                  @for (cuenta of cuentasBancarias(); track $index) {
-                    <option [ngValue]="cuenta.cuentaBancariaId">
-                      CBU: {{ cuenta.cbu }} — Saldo: {{ cuenta.saldo }}
-                    </option>
-                  }
-                </select>
-              </div>
-            }
+            <app-buscador-generico
+              [datos]="proveedoresMapeados"
+              placeholder="Buscar proveedor..."
+              (alSeleccionar)="alSeleccionarProveedor($event)">
+            </app-buscador-generico>
+            <button type="button" class="btn-nuevo" (click)="irAProveedor()">+ Nuevo</button>
+          } @else if (form.get('tipoPedido')?.value === 'VENTA') {
+            <app-buscador-generico
+              [datos]="clientesMapeados"
+              placeholder="Buscar cliente..."
+              (alSeleccionar)="alSeleccionarCliente($event)">
+            </app-buscador-generico>
+            <button type="button" class="btn-nuevo" (click)="irACliente()">+ Nuevo</button>
+          } @else {
+            <div class="placeholder-selector">Seleccione tipo de pedido primero</div>
           }
+        </div>
+      </div>
 
-          <div class="botones">
-            <button type="submit" [disabled]="form.invalid || (isEditMode() && pedidoToEdit?.estado === 'FINALIZADO')">
-              {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
-            </button>
-
-            @if (isEditMode()) {
-              <button class="btn" type="button" (click)="cancelEdit()">Cancelar</button>
+      @if (form.get('tipoTransaccion')?.value === 'TRANSFERENCIA' && form.get('tipoPedido')?.value) {
+        <div class="form-row">
+          <label class="form-label">Cuenta bancaria</label>
+          <select formControlName="cuentaBancaria" class="select-cuenta">
+            <option [ngValue]="null" disabled selected>Seleccione una cuenta</option>
+            @for (cuenta of cuentasBancarias(); track $index) {
+              <option [ngValue]="cuenta.cuentaBancariaId">
+                CBU: {{ cuenta.cbu }} — Saldo: {{ cuenta.saldo }}
+              </option>
             }
-          </div>
-        </form>
+          </select>
+        </div>
+      }
+    </form>
+
+    <div class="form-actions">
+      <button
+        type="button"
+        class="btn-registrar"
+        [disabled]="form.invalid || (isEditMode() && pedidoToEdit?.estado === 'FINALIZADO')"
+        (click)="savePedido()"
+      >
+        {{ isEditMode() ? 'Actualizar' : 'REGISTRAR' }}
+      </button>
+
+      @if (isEditMode()) {
+        <button type="button" class="btn-cancel" (click)="cancelEdit()">Cancelar</button>
+      }
+    </div>
+  </div>
+
+  @if (showModal() && pedidoCreado(); as pedido) {
+    <div class="modal-overlay" (click)="cerrarModal()">
+      <div class="modal-card" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h2>Detalle Pedido</h2>
+        </div>
+
+        <app-detalles-pedido [pedido]="pedido"></app-detalles-pedido>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-cancelar-modal" (click)="cerrarModal()">CANCELAR</button>
+          <button
+            type="button"
+            class="btn-finalizar-modal"
+            [disabled]="pedido.estado === 'FINALIZADO'"
+            (click)="finalizarPedido()"
+          >FINALIZAR PEDIDO</button>
+        </div>
       </div>
     </div>
-  </section>
-
-  <section class="detalles">
-    @if (pedidoCreado(); as pedido) {
-      <h2>Detalles del Pedido N° {{ pedido.pedidoId }}</h2>
-      <app-detalles-pedido [pedido]="pedido"></app-detalles-pedido>
-<div class="botones-detalles">
-  @if (pedido.estado === 'PENDIENTE') {
-  <button (click)="finalizarPedido()" class="btn-finalizar">
-    Finalizar Pedido
-  </button>
   }
-
-  <button (click)="pedido.pedidoId ? eliminarPedido(pedido.pedidoId) : cancelEdit()" class="btnEliminar">
-    {{ pedido.pedidoId ? 'Eliminar Pedido' : 'Cancelar' }}
-  </button>
-</div>
-    }
-    @else {
-      <h2>Detalles</h2>
-      <p>Primero debe registrar el pedido para poder agregar detalles.</p>
-    }
-  </section>
 </main>

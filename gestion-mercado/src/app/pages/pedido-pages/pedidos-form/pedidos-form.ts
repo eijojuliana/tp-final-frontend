@@ -36,7 +36,7 @@ export class PedidosForm implements OnInit {
   public clientes = this.clientesService.clientes;
 
   private cuentaService = inject(CuentaBancariaService);
-  public cuentasBancarias= this.cuentaService.cuentasBancarias;
+  public cuentasBancarias = this.cuentaService.cuentasBancarias;
 
   private transaccionService = inject(TransaccionService);
   private detallePedidoService = inject(DetallePedidoService);
@@ -44,6 +44,7 @@ export class PedidosForm implements OnInit {
   isEditMode = signal(false);
   public pedidoToEdit: Pedido | null = null;
   pedidoCreado = signal<Pedido | null>(null);
+  showModal = signal(false);
 
   get proveedoresMapeados(): BuscadorItem[] {
     return this.proveedores().map(p => ({
@@ -209,6 +210,7 @@ export class PedidosForm implements OnInit {
       this.pedidoService.post(dto).subscribe((pedidoCreado) => {
         if (pedidoCreado) {
           this.pedidoCreado.set(pedidoCreado);
+          this.showModal.set(true);
         } else {
           this.pedidoCreado.set(null);
         }
@@ -259,5 +261,9 @@ public eliminarPedido(id: number) {
     if (window.matchMedia('(max-aspect-ratio: 1/1)').matches) {
       this.formCollapsed.update(v => !v);
     }
+  }
+
+  cerrarModal() {
+    this.showModal.set(false);
   }
 }

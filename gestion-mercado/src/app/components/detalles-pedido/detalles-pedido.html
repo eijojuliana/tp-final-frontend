@@ -1,79 +1,96 @@
-<section class="detalles">
-
-  @if (pedido.estado === 'PENDIENTE') {
-  <form>
-
-    <div class="campo">
-      <label>Producto:</label>
-      <app-buscador-generico
-        [datos]="productosMapeados()"
-        [mostrarImagen]="true"
-        placeholder="Seleccione un producto..."
-        (alSeleccionar)="alSeleccionarProducto($event)">
-      </app-buscador-generico>
-    </div>
-
-    <div class="campo">
-      <label for="cantidad">Cantidad:</label>
-      <input type="number" id="cantidad" [(ngModel)]="nuevoDetalle.cantidad" name="cantidad">
-    </div>
-
-    @if (pedido.tipo === 'COMPRA') {
-      <div class="campo">
-        <label for="costoUnitario">Costo Unitario:</label>
-        <input type="number" id="costoUnitario" [(ngModel)]="nuevoDetalle.costoUnitario" name="costoUnitario">
+<section class="detalle-content">
+  <div class="detalle-columns">
+    <div class="detalle-left">
+      <div class="info-card">
+        <h3>Información de tu pedido:</h3>
+        <p class="info-resumen">{{ pedido.tipo }} - {{ pedido.transaccion.tipo }} - {{ destinatarioLabel() }}</p>
       </div>
-    }
 
-    <div class="acciones-form">
-      <button type="button" class="agregar-detalle" (click)="agregarDetalle()">
-        {{ detalleEnEdicion() ? 'Actualizar' : 'Agregar' }}
-      </button>
+      <div class="search-card">
+        <h3>Buscá los productos a pedir...</h3>
+        <app-buscador-generico
+          [datos]="productosMapeados()"
+          [mostrarImagen]="true"
+          placeholder="Buscar productos"
+          (alSeleccionar)="alSeleccionarProducto($event)">
+        </app-buscador-generico>
+        <button type="button" class="btn-nuevo-producto" (click)="irAProducto()">+ Nuevo producto</button>
+        <div class="add-product-row">
+          <input
+            type="number"
+            class="cantidad-input"
+            [(ngModel)]="nuevoDetalle.cantidad"
+            placeholder="Cant."
+            min="1"
+          />
+          @if (pedido.tipo === 'COMPRA') {
+            <input
+              type="number"
+              class="cantidad-input costo-input"
+              [(ngModel)]="nuevoDetalle.costoUnitario"
+              placeholder="Costo unit."
+              min="0"
+              step="0.01"
+            />
+          }
+          <button class="btn-agregar-producto" (click)="agregarDetalle()">
+            {{ detalleEnEdicion() ? 'Actualizar' : 'Agregar' }}
+          </button>
+          @if (detalleEnEdicion()) {
+            <button class="btn-cancel-edit" (click)="cancelarEdicionDetalle()">
+              <span class="material-icons">close</span>
+            </button>
+          }
+        </div>
+      </div>
+    </div>
 
-      @if (detalleEnEdicion()) {
-        <button type="button" class="btn-cancelar" (click)="cancelarEdicionDetalle()">Cancelar</button>
+    <div class="detalle-right">
+      <h3 class="cart-title">Como se ve tu carrito</h3>
+
+      @if (detallesPedido().length === 0) {
+        <div class="cart-empty">
+          <span class="material-icons cart-empty-icon">shopping_cart</span>
+          <p>Tu carrito está vacío</p>
+        </div>
+      } @else {
+        <div class="cart-list">
+          @for (detalle of detallesPedido(); track detalle.producto_id) {
+            <div class="cart-item">
+              <div class="item-imagen">
+                <img
+                  [src]="getProductImage(detalle.producto_id)"
+                  alt="{{ detalle.producto_nombre }}"
+                />
+              </div>
+              <div class="item-info">
+                <span class="item-nombre">{{ detalle.producto_nombre }}</span>
+                @if (pedido.tipo === 'COMPRA' && detalle.costoUnitario) {
+                  <span class="item-precio">${{ detalle.costoUnitario }} c/u</span>
+                }
+              </div>
+              <div class="item-subtotal">
+                <span class="subtotal-valor">{{ detalle.subtotal | currency:'ARS':'symbol-narrow':'1.2-2' }}</span>
+              </div>
+              <div class="item-cantidad">
+                <button class="qty-btn" (click)="decrementarCantidad(detalle)">−</button>
+                <span class="qty-value">{{ detalle.cantidad }}</span>
+                <button class="qty-btn" (click)="incrementarCantidad(detalle)">+</button>
+              </div>
+              <button class="btn-delete-item" (click)="eliminarDetalle(detalle.detallePedidoId)">
+                <span class="material-icons">delete</span>
+              </button>
+            </div>
+          }
+        </div>
       }
     </div>
-
-  </form>
-  }
+  </div>
 
   @if (detallesPedido().length > 0) {
-    <div class="tabla-contenedor">
-      <table class="tabla">
-        <thead class="encabezado">
-          <tr>
-            <th>ID</th>
-            <th>Cod.Prod</th>
-            <th>Nombre</th>
-            <th>Cantidad</th>
-            <th>Costo Unit</th>
-            <th>Subtotal</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody class="tablaBody">
-          @for (detalle of detallesPedido(); track detalle.producto_id) {
-            <tr>
-              <td>{{ detalle.detallePedidoId }}</td>
-              <td>{{ detalle.producto_id }}</td>
-              <td>{{ detalle.producto_nombre }}</td>
-              <td>{{ detalle.cantidad }}</td>
-              <td>{{ detalle.costoUnitario | currency:'ARS':'symbol-narrow':'1.2-2' }}</td>
-              <td>{{ detalle.subtotal | currency:'ARS':'symbol-narrow':'1.2-2' }}</td>
-              <td class="botones">
-                <button class="btnEditar" (click)="editarDetalle(detalle)" [disabled]="pedido.estado === 'FINALIZADO'">Editar</button>
-                <button class="btnEliminar" (click)="eliminarDetalle(detalle.detallePedidoId)" [disabled]="pedido.estado === 'FINALIZADO'">Eliminar</button>
-              </td>
-            </tr>
-          }
-        </tbody>
-      </table>
-    </div>
-
-    <div class="total-pedido">
-      <p>Total a Pagar:</p>
-      <span>{{ total() | currency:'ARS':'symbol-narrow':'1.2-2' }}</span>
+    <div class="total-section">
+      <span class="total-label">Total de tu orden</span>
+      <span class="total-value">{{ total() | currency:'ARS':'symbol-narrow':'1.2-2' }}</span>
     </div>
   }
 </section>

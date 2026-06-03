@@ -1,5 +1,6 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, computed, inject, Input, signal, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { DetallePedidoService } from '../../services/detallePedido-service';
 import { DetallePedido } from '../../models/detallePedido.model';
 import { FormsModule } from '@angular/forms';
@@ -18,6 +19,7 @@ import { BuscadorItem } from '../buscador/buscador-item';
 export class DetallesPedido {
   @Input({ required: true }) pedido!: Pedido;
 
+  private router = inject(Router);
   private productService = inject(ProductService);
   public productos = this.productService.productos;
 
@@ -47,6 +49,25 @@ export class DetallesPedido {
     }));
   });
 
+  destinatarioLabel = computed(() => {
+    const pedido = this.pedido;
+    if (!pedido?.transaccion) return '-';
+    const trans = pedido.transaccion;
+    if (pedido.tipo === 'COMPRA') {
+      return `Proveedor #${trans.destino_id || '-'}`;
+    }
+    return `Cliente #${trans.origen_id || '-'}`;
+  });
+
+  getProductImage(productoId: number): string {
+    const prod = this.productos().find(p => p.producto_id === productoId);
+    return prod?.url || 'assets/images/default-product.png';
+  }
+
+  irAProducto() {
+    this.router.navigate(['/menu/productos/form']);
+  }
+
   public alSeleccionarProducto(id: number | string): void {
     this.nuevoDetalle.productoId = id as number;
   }
@@ -71,16 +92,12 @@ export class DetallesPedido {
 
     const edicion = this.detalleEnEdicion();
     if (edicion) {
-      // MODO EDICIÓN - Usando tu método update real
       this.detallePedidoService.update(edicion.detallePedidoId, dto).subscribe(() => {
-        this.toast.success("Detalle actualizado correctamente");
         this.obtenerDetallesDelPedido(this.pedido.pedidoId);
         this.cancelarEdicionDetalle();
       });
     } else {
-      // MODO CREACIÓN - Usando tu método post real
       this.detallePedidoService.post(this.pedido.pedidoId, dto).subscribe(() => {
-        this.toast.success("Detalle agregado correctamente");
         this.obtenerDetallesDelPedido(this.pedido.pedidoId);
         this.nuevoDetalle = { productoId: undefined, cantidad: undefined, costoUnitario: undefined };
       });
@@ -96,10 +113,35 @@ export class DetallesPedido {
   }
 
   eliminarDetalle(detalleId: number){
-    this.detallePedidoService.delete(detalleId).subscribe( () => {
+    this.detallePedidoService.delete(detalleId).subscribe(() => {
         this.obtenerDetallesDelPedido(this.pedido.pedidoId);
       }
     );
+  }
+
+  incrementarCantidad(detalle: DetallePedido) {
+    const nuevaCantidad = detalle.cantidad + 1;
+    const dto: any = {
+      productoId: detalle.producto_id,
+      cantidad: nuevaCantidad,
+      costoUnitario: detalle.costoUnitario ?? 0,
+    };
+    this.detallePedidoService.update(detalle.detallePedidoId, dto).subscribe(() => {
+      this.obtenerDetallesDelPedido(this.pedido.pedidoId);
+    });
+  }
+
+  decrementarCantidad(detalle: DetallePedido) {
+    if (detalle.cantidad <= 1) return;
+    const nuevaCantidad = detalle.cantidad - 1;
+    const dto: any = {
+      productoId: detalle.producto_id,
+      cantidad: nuevaCantidad,
+      costoUnitario: detalle.costoUnitario ?? 0,
+    };
+    this.detallePedidoService.update(detalle.detallePedidoId, dto).subscribe(() => {
+      this.obtenerDetallesDelPedido(this.pedido.pedidoId);
+    });
   }
 
   editarDetalle(detalle: DetallePedido) {
