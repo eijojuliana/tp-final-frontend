@@ -28,30 +28,29 @@
             >
           </div>
 
-          <div class="input-group password-input-wrapper">
+          <div class="input-group">
             <label>Contraseña<span class="obligatorio">*</span></label>
-            <input
-              [type]="passwordVisible ? 'text' : 'password'"
-              name="password"
-              placeholder="Contraseña"
-              [(ngModel)]="password"
-              required
-            >
-
-            <button
-              type="button"
-              class="toggle-password"
-              (click)="togglePasswordVisibility()"
-            >
-              <span class="material-icons">
-                {{ passwordVisible ? 'visibility_off' : 'visibility' }}
-              </span>
-            </button>
-
+            <div class="password-input-wrapper">
+              <input
+                [type]="passwordVisible ? 'text' : 'password'"
+                name="password"
+                placeholder="Contraseña"
+                [(ngModel)]="password"
+                required
+              >
+              <button
+                type="button"
+                class="toggle-password"
+                (click)="togglePasswordVisibility()"
+              >
+                <span class="material-icons">
+                  {{ passwordVisible ? 'visibility_off' : 'visibility' }}
+                </span>
+              </button>
+            </div>
             @if (errorMsg!='') {
               <p class="error">{{ errorMsg }}</p>
             }
-
           </div>
 
           <button type="submit" class="btn-login">Login</button>
@@ -63,5 +62,4 @@
     </div>
 
   </div>
-
 </div>
