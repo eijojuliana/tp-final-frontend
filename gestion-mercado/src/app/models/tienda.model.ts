@@ -20,7 +20,6 @@ export interface Tienda {
   puntoDeVenta: number;
   direccion?: Domicilio;
   caja: number;
-  duenioDni: number;
 }
 
 export interface newTienda {
@@ -34,6 +33,5 @@ export interface newTienda {
   puntoDeVenta: number;
   direccion?: Domicilio;
   caja: number;
-  duenioDni: number;
 }
 

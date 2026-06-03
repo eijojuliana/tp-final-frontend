@@ -24,7 +24,6 @@ export class TiendaPage implements OnInit {
     razonSocial: ['', Validators.required],
     nombreFantasia: [''],
     cuit: [0, Validators.required],
-    duenioDni: [0, Validators.required],
     condicion: ['Monotributo'],
     url: ['', [Validators.required]],
     ingresosBrutos: [''],
