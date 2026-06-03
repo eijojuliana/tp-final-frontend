@@ -22,7 +22,7 @@ h2 {
 .card-caja h3 {
   font-size: 1.6rem;
   font-weight: bold;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.05rem;
   margin-top: 0;
   margin-bottom: 2rem;
   color: var(--letra1-leve);
@@ -231,4 +231,59 @@ hr {
   background: var(--error-2);
   color: var(--letra3);
   border-color: var(--error-2);
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .cierre-container {
+    padding: 1rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  .comparador-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .simbolo-operador {
+    margin-top: 0;
+    width: auto;
+    font-size: 3rem;
+  }
+  .fila-movimiento {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-aspect-ratio: 9/16) {
+  .card-caja {
+    padding: 1.2rem;
+  }
+  .card-caja h3 {
+    font-size: 1.3rem;
+  }
+  .monto-grande {
+    font-size: 2rem;
+    height: 4.5rem;
+  }
+  .input-monto-wrapper input {
+    font-size: 2rem;
+  }
+  .diferencia-box {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+  .alerta-bloque {
+    flex-direction: column;
+    text-align: center;
+  }
+  .btn-ajuste {
+    width: 100%;
+  }
+}
+
+.card-caja.caja-cerrada {
+  border-color: #555;
+  background: rgba(80, 80, 80, 0.15);
+  opacity: 0.8;
 }

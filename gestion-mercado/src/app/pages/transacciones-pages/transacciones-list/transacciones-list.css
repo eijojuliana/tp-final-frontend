@@ -1,12 +1,3 @@
 @import '../../../styles/tabla-style.css';
 
 
-.tablaBody td.monto-entrada {
-  color: var(--verde);
-  font-weight: bold;
-}
-
-.tablaBody td.monto-salida {
-  color: var(--rojo);
-  font-weight: bold;
-}

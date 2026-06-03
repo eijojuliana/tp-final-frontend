@@ -1,6 +1,6 @@
 @import '../../../styles/form-style.css';
 
-@media screen and (max-width: 1024px) {
+@media (max-aspect-ratio: 1/1) {
   .image {
     width: 30%;
   }

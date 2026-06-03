@@ -1,15 +1,9 @@
 <!-- SIDEBAR -->
-<button class="mobile-toggle" (click)="toggleMobileMenu()" aria-label="Menu">
-  <span class="bar" [class.open]="isMobileMenuOpen"></span>
-  <span class="bar" [class.open]="isMobileMenuOpen"></span>
-  <span class="bar" [class.open]="isMobileMenuOpen"></span>
-</button>
-
-@if (isMobileMenuOpen) {
+@if (isSidebarOpen) {
   <div class="sidebar-overlay" (click)="closeMobileMenu()"></div>
 }
 
-<aside class="sidebar" [class.mobile-open]="isMobileMenuOpen">
+<aside class="sidebar" [class.collapsed]="!isSidebarOpen">
   <div class="logo-container">
     @if (tiendaService.tienda(); as infoTienda) {
       @if (infoTienda.url) {
@@ -43,12 +37,14 @@
       </a>
     }
 
+    @if(currentRole != "EMPLEADO"){
     <a routerLink="/menu/estadisticas" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
       <div class="item-content">
         <img src="assets/images/excel-icon.png" class="menu-icon">
         <span>Resumen del negocio</span>
       </div>
     </a>
+    }
 
     <div>
       <div class="item dropdown-header" (click)="toggleMenu('inventario')">
@@ -101,7 +97,7 @@
           <a routerLink="/menu/cuentas-bancarias" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
             <div class="item-content">
               <img src="assets/images/cuentaB-icon.png" class="menu-icon">
-              <span>Cuentas Bancarias</span>
+              <span>Caja y Banco</span>
             </div>
           </a>
         </div>

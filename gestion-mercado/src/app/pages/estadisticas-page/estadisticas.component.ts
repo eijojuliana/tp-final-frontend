@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ChartData } from 'chart.js';
 import { ChartConfiguration } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { environment } from '../../services/ip';
 
 @Component({
   selector: 'app-estadisticas',
@@ -63,7 +64,7 @@ export class EstadisticasComponent implements OnInit {
   }
 
   cargarDatos(inicio: string, fin: string) {
-    const url = `http://localhost:8080/api/stats/dashboard?inicio=${inicio}&fin=${fin}`;
+    const url = `${environment.apiBaseUrl}/stats/dashboard?inicio=${inicio}&fin=${fin}`;
     this.http.get(url).subscribe((res: any) => {
       if (!res) return;
       this.stats.set(res);
@@ -174,7 +175,7 @@ const centerTextPlugin = {
     ctx.fillStyle = 'white';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText(`$${total.toFixed(2)}`, width / 2, (height / 2) + top + 10);
+    ctx.fillText(new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(total), width / 2, (height / 2) + top + 10);
     ctx.restore();
   }
 };

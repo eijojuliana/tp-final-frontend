@@ -3,5 +3,9 @@ export const environment = {
   production: false,
   apiBaseUrl: 'http://localhost:8080/api',
   apiIp: 'localhost',
-  apiPort: 8080,
+  // PARA NGROK
+  //apiBaseUrl: '/api',
+  //apiPort: 4200,
+
+  apiPort: 8080
 };

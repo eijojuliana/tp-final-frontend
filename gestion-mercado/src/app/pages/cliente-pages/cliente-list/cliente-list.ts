@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { ClienteService } from '../../../services/cliente-service';
 import { Router, RouterLink } from '@angular/router';
 import { ToastService } from '../../../services/toast.service';
@@ -11,7 +11,12 @@ import { Cliente } from '../../../models/cliente.model';
   templateUrl: './cliente-list.html',
   styleUrl: './cliente-list.css',
 })
-export class ClienteList {
+export class ClienteList implements OnInit {
+
+  ngOnInit() {
+    this.service.load();
+  }
+
   service = inject(ClienteService);
   clientes = this.service.clientes;
   router = inject(Router);

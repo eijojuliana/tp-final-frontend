@@ -5,14 +5,14 @@ section.detalles {
   position: relative;
   z-index: 2;
   background: rgba(0, 0, 0, 0.05);
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
+  backdrop-filter: blur(2rem);
+  border-radius: 2.4rem;
   padding: 3rem;
   width: 100%;
   box-shadow:
-    0 8px 32px rgba(255, 182, 193, 0.15),
-    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+    0 0.8rem 3.2rem rgba(255, 182, 193, 0.15),
+    0 0 0 0.1rem rgba(255, 255, 255, 0.1) inset;
+  border: 0.1rem solid rgba(255, 255, 255, 0.4);
   overflow-x: auto;
 }
 
@@ -21,7 +21,7 @@ section.detalles h2 {
   text-align: center;
   margin-bottom: 2rem;
   font-size: 2.8rem;
-  letter-spacing: 1px;
+  letter-spacing: 0.1rem;
 }
 
 section.detalles .campo {
@@ -35,16 +35,16 @@ section.detalles .campo label {
   color: rgba(255, 255, 255, 0.9);
   font-size: 1.5rem;
   font-weight: 500;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.3);
 }
 
 section.detalles .campo input,
 section.detalles .campo select {
   padding: 1rem 1.25rem;
-  border: 2px solid rgba(255, 197, 208, 0.3);
-  border-radius: 12px;
+  border: 0.2rem solid rgba(255, 197, 208, 0.3);
+  border-radius: 1.2rem;
   background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(1rem);
   color: #fff;
   font-size: 1.5rem;
   outline: none;
@@ -61,14 +61,14 @@ section.detalles .campo input:focus,
 section.detalles .campo select:focus {
   border-color: #ffa6c9;
   background: rgba(255, 255, 255, 0.18);
-  box-shadow: 0 0 0 3px rgba(255, 166, 201, 0.2);
+  box-shadow: 0 0 0 0.3rem rgba(255, 166, 201, 0.2);
 }
 
 
 section.detalles button.agregar-detalle {
   margin-top: 0;
   padding: 1rem 2.5rem;
-  border-radius: 12px;
+  border-radius: 1.2rem;
   border: none;
   font-size: 1.4rem;
   font-weight: 600;
@@ -76,23 +76,23 @@ section.detalles button.agregar-detalle {
   transition: 0.3s;
   background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
   color: white;
-  box-shadow: 0 4px 15px rgba(255, 154, 158, 0.3);
+  box-shadow: 0 0.4rem 1.5rem rgba(255, 154, 158, 0.3);
   width: fit-content;
 }
 
 section.detalles button.agregar-detalle:hover {
-  transform: translateY(-2px);
+  transform: translateY(-0.2rem);
   background: linear-gradient(135deg, #ff6b81 0%, #fda4ba 100%);
 }
 
 
 section.detalles .btn-cancel-detalle {
   padding: 1rem 2.5rem;
-  border-radius: 12px;
+  border-radius: 1.2rem;
   font-size: 1.4rem;
   background: rgba(255, 255, 255, 0.15);
   color: white;
-  border: 2px solid rgba(255, 182, 193, 0.3);
+  border: 0.2rem solid rgba(255, 182, 193, 0.3);
   cursor: pointer;
   transition: 0.3s;
 }
@@ -100,7 +100,7 @@ section.detalles .btn-cancel-detalle {
 section.detalles .btn-cancel-detalle:hover {
   background: rgba(255, 255, 255, 0.25);
   border-color: rgba(255, 182, 193, 0.5);
-  transform: translateY(-2px);
+  transform: translateY(-0.2rem);
 }
 
 section.detalles table {
@@ -108,8 +108,8 @@ section.detalles table {
   border-collapse: collapse;
   margin-top: 1.5rem;
   background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(15px);
-  border-radius: 14px;
+  backdrop-filter: blur(1.5rem);
+  border-radius: 1.4rem;
   overflow: hidden;
 }
 
@@ -124,14 +124,14 @@ section.detalles tbody td {
   padding: 1rem;
   font-size: 1.3rem;
   color: #fff;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 0.1rem solid rgba(255, 255, 255, 0.1);
 }
 
 section.detalles .btnEditar {
   padding: 0.7rem 1.5rem;
   background: rgba(120, 179, 255, 0.4);
-  border: 2px solid rgba(120, 190, 255, 0.6);
-  border-radius: 10px;
+  border: 0.2rem solid rgba(120, 190, 255, 0.6);
+  border-radius: 1rem;
   color: white;
   font-weight: 600;
   cursor: pointer;
@@ -141,14 +141,14 @@ section.detalles .btnEditar {
 section.detalles .btnEditar:hover {
   background: rgba(100, 141, 255, 0.7);
   border-color: rgba(83, 80, 255, 0.7);
-  transform: translateY(-2px);
+  transform: translateY(-0.2rem);
 }
 
 section.detalles .btnEliminar {
   padding: 0.7rem 1.5rem;
   background: rgba(255, 120, 120, 0.4);
-  border: 2px solid rgba(255, 120, 120, 0.6);
-  border-radius: 10px;
+  border: 0.2rem solid rgba(255, 120, 120, 0.6);
+  border-radius: 1rem;
   color: white;
   font-weight: 600;
   cursor: pointer;
@@ -158,7 +158,7 @@ section.detalles .btnEliminar {
 section.detalles .btnEliminar:hover {
   background: rgba(255, 100, 100, 0.7);
   border-color: rgba(255, 80, 80, 0.7);
-  transform: translateY(-2px);
+  transform: translateY(-0.2rem);
 }
 
 section.detalles form {
@@ -181,7 +181,7 @@ h3{
   gap: 2rem;
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 2px dashed rgba(255, 182, 193, 0.5);
+  border-top: 0.2rem dashed rgba(255, 182, 193, 0.5);
 }
 
 .total-pedido p {
@@ -198,12 +198,12 @@ h3{
   color: #fff;
   background: rgba(255, 255, 255, 0.15);
   padding: 0.5rem 1.5rem;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 1.2rem;
+  border: 0.1rem solid rgba(255, 255, 255, 0.4);
 }
 
 section.detalles .tablaBody tr {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 0.1rem solid rgba(255, 255, 255, 0.1);
 }
 
 section.detalles tbody td {
@@ -222,7 +222,7 @@ section.detalles .tablaBody td.botones {
   margin-top: 1rem;
 }
  /* detalle pedido pa celu */
- @media (max-width: 901px) {
+ @media (max-aspect-ratio: 1/1) {
   section.detalles {
     width: 100% !important;
     padding: 1.2rem !important;
@@ -286,7 +286,7 @@ section.detalles .tablaBody td.botones {
     gap: .3rem;
   }
 
-  @media (max-width: 901px) {
+  @media (max-aspect-ratio: 1/1) {
     section.detalles h2,
     section.detalles h3 {
       font-size: 2rem;

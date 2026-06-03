@@ -6,7 +6,7 @@
   margin-bottom: 1rem;
   font-size: 1.1rem;
   background: var(--bg-pag2);
-  border: 1px solid var(--borde);
+  border: 0.1rem solid var(--borde);
   border-radius: 0.8rem;
   width: fit-content;
   margin: 0.5rem 0 0 1rem;
@@ -41,7 +41,7 @@
 
 /*ESTA CAGADA NO ESTÁ CONFIG AÚN SABÉS*/
 
-@media screen and (max-width: 768px) {
+@media (max-aspect-ratio: 1/1) {
   .breadcrumbs {
     padding: 0.2rem 1.25rem;
   }

@@ -10,8 +10,8 @@
       <form [formGroup]="form" (ngSubmit)="saveCuentaBancaria()">
            <div class = "campo">
           <label>Nombre del banco<span class="obligatorio">*</span>: </label>
-          <input type ="text" formControlName="nombre_banco">
-          @if (form.get('nombre_banco')?.invalid && form.get('nombre_banco')?.touched) {
+          <input type ="text" formControlName="nombreBanco">
+          @if (form.get('nombreBanco')?.invalid && form.get('nombreBanco')?.touched) {
             <span class = "error">El nombre del banco es requerido.</span>
           }
         </div>

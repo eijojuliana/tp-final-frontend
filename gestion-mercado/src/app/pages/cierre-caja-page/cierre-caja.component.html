@@ -61,14 +61,14 @@
       </div>
     }
 
-    @if (ajusteRegistrado() !== null) {
+    @if (ajustesHoy() !== 0) {
       <div class="ajuste-exitoso">
         <span class="ajuste-icono">✓</span>
-        <span>Ajuste registrado: <strong>$ {{ ajusteRegistrado()! > 0 ? '+' : '' }}{{ ajusteRegistrado() | number:'1.2-2' }}</strong></span>
+        <span>Ajuste registrado: <strong>$ {{ ajustesHoy() > 0 ? '+' : '' }}{{ ajustesHoy() | number:'1.2-2' }}</strong></span>
       </div>
     }
 
-    @if (diferencia() !== 0 && diferencia() !== null && ajusteRegistrado() === null) {
+    @if (diferencia() !== 0 && diferencia() !== null && !pedidoService.isCajaCerradaHoy()) {
       <div class="btn-container-derecha">
         <button type="button" class="btn-ajuste" (click)="registrarAjusteAutocalculado()">
           Registrar Ajuste
@@ -77,16 +77,22 @@
     }
   </div>
 
-  <div class="card-caja alerta-borde">
-    <h3 class="estado-error">CERRAR CAJA</h3>
-
-    <div class="alerta-bloque">
-      <img src="/assets/images/warning-icon-white.png">
-      <p>Una vez cerrada la caja no se podrán agregar más movimientos en este turno. Esta acción no se puede deshacer.</p>
-    </div>
-
-    <button class="btn-cierre-total" (click)="cerrarCajaDelDia()">
-      🔒 Cerrar caja del día
-    </button>
+  <div class="card-caja" [class.alerta-borde]="!pedidoService.isCajaCerradaHoy()" [class.caja-cerrada]="pedidoService.isCajaCerradaHoy()">
+    @if (pedidoService.isCajaCerradaHoy()) {
+      <h3 style="color: #888;">CAJA CERRADA</h3>
+      <div class="alerta-bloque">
+        <span class="material-symbols-outlined" style="font-size: 3rem; color: #888;">lock</span>
+        <p style="color: #888;">La caja ya fue cerrada por el día de hoy. No se pueden registrar más movimientos.</p>
+      </div>
+    } @else {
+      <h3 class="estado-error">CERRAR CAJA</h3>
+      <div class="alerta-bloque">
+        <img src="/assets/images/warning-icon-white.png">
+        <p>Una vez cerrada la caja no se podrán agregar más movimientos en este turno. Esta acción no se puede deshacer.</p>
+      </div>
+      <button class="btn-cierre-total" (click)="cerrarCajaDelDia()">
+        🔒 Cerrar caja del día
+      </button>
+    }
   </div>
 </section>

@@ -11,7 +11,7 @@
       </select>
 
       <select (change)="orden.set($any($event.target).value)">
-        <option value="" disabled selected>Ordenar por...</option>
+        <option value="" disabled selected>Orden</option>
         <option value="asc">Ascendente</option>
         <option value="desc">Descendente</option>
       </select>
@@ -63,11 +63,11 @@
             </div>
             <div class="stat">
               <span class="stat-label">Precio Venta</span>
-              <span class="stat-value">{{ p.inventario?.precioVenta ? ('$' + p.inventario?.precioVenta) : '—' }}</span>
+              <span class="stat-value">{{ p.inventario?.precioVenta | currency:'ARS':'symbol-narrow':'1.2-2' }}</span>
             </div>
             <div class="stat">
               <span class="stat-label">Costo Adq.</span>
-              <span class="stat-value">{{ p.inventario?.costoAdquisicion ? ('$' + p.inventario?.costoAdquisicion) : '—' }}</span>
+              <span class="stat-value">{{ p.inventario?.costoAdquisicion | currency:'ARS':'symbol-narrow':'1.2-2' }}</span>
             </div>
           </div>
         </div>

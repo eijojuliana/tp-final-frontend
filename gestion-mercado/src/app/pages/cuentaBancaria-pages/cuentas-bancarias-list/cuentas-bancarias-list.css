@@ -1,6 +1,6 @@
 .dashboard-container {
   width: 95%;
-  max-width: 1200px;
+  max-width: 120rem;
   margin: 2rem auto;
 }
 
@@ -32,8 +32,8 @@
   background: var(--bg-pag2);
   border: 1px solid rgba(255, 255, 255, 0.05);
   padding: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 2rem;
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.2);
 }
 
 .card h3 {
@@ -55,10 +55,10 @@
 
 .accounts-section {
   background: var(--bg-pag2);
-  border-radius: 25px;
+  border-radius: 2.5rem;
   border: 1px solid rgba(255, 255, 255, 0.05);
   padding: 2.5rem;
-  box-shadow: 0 20px 40px rgba(95, 7, 51, 0.2);
+  box-shadow: 0 2rem 4rem rgba(95, 7, 51, 0.2);
 }
 
 .accounts-header {
@@ -90,8 +90,8 @@
 }
 
 .btn-icon img {
-  width: 25px;
-  height: 25px;
+  width: 2.5rem;
+  height: 2.5rem;
   transition: transform 0.2s;
 }
 
@@ -106,14 +106,14 @@
   padding: 0.8rem 1.8rem;
   font-size: 1rem;
   font-weight: 600;
-  border-radius: 30px;
+  border-radius: 3rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .btn-agregar:hover {
   background-color: var(--borde-hover);
-  transform: translateY(-2px);
+  transform: translateY(-0.2rem);
 }
 
 .accounts-list {
@@ -129,7 +129,7 @@
   padding: 1.2rem 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   transition: background 0.2s;
-  border-radius: 10px;
+  border-radius: 1rem;
 }
 
 .account-item:hover {
@@ -147,9 +147,9 @@
 }
 
 .account-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
+  width: 4.2rem;
+  height: 4.2rem;
+  border-radius: 1rem;
 }
 
 .icon-purple { background-color: #a144b7; }
@@ -200,7 +200,7 @@
   background: rgba(255, 255, 255, 0.05);
   border: none;
   padding: 0.4rem 0.6rem;
-  border-radius: 8px;
+  border-radius: 0.8rem;
   cursor: pointer;
   transition: background 0.2s;
 }
@@ -212,4 +212,47 @@
   text-align: center;
   color: var(--letra1-leve);
   padding: 2rem;
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .dashboard-container {
+    width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+  .summary-cards {
+    grid-template-columns: 1fr;
+  }
+  .dashboard-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .accounts-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+}
+
+@media (max-aspect-ratio: 9/16) {
+  .accounts-section {
+    padding: 1.5rem;
+  }
+  .account-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .account-balance-wrapper {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .card .amount {
+    font-size: 1.6rem;
+  }
 }

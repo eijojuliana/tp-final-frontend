@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { TiendaService } from '../../services/tienda-service';
 import { ToastService } from '../../services/toast.service';
 import { PedidoService } from '../../services/pedido-service';
+import { environment } from '../../services/ip';
 
 @Component({
   selector: 'app-cierre-caja',
@@ -16,15 +17,14 @@ import { PedidoService } from '../../services/pedido-service';
 export class CierreCajaComponent implements OnInit {
   private http = inject(HttpClient);
   private tiendaService = inject(TiendaService);
-  private pedidoService = inject(PedidoService);
+  protected pedidoService = inject(PedidoService);
   private toast = inject(ToastService);
 
-  saldoInicial = signal<number>(120);
+  saldoInicial = signal<number>(0);
   ingresosEfectivo = signal<number>(0);
   egresosGastos = signal<number>(0);
   saldoRealContado = signal<number | null>(null);
   ajustesHoy = signal<number>(0);
-  ajusteRegistrado = signal<number | null>(null);
 
   saldoBase = computed(() => {
     return this.saldoInicial() + this.ingresosEfectivo() - this.egresosGastos();
@@ -46,24 +46,26 @@ export class CierreCajaComponent implements OnInit {
 
   cargarDatosDelDia(onDone?: () => void) {
     const hoy = new Date().toLocaleDateString('en-CA');
-    const url = `http://localhost:8080/api/stats/caja-diaria?fecha=${hoy}`;
+    const url = `${environment.apiBaseUrl}/stats/caja-diaria?fecha=${hoy}`;
 
     this.http.get(url).subscribe((res: any) => {
       if (res) {
         this.ingresosEfectivo.set(res.ingresosEfectivo || 0);
         this.egresosGastos.set(res.egresosGastos || 0);
+        this.ajustesHoy.set(res.ajustesHoy || 0);
       }
       onDone?.();
     });
   }
 
   cargarSaldoCaja() {
-    this.http.get<any>('http://localhost:8080/api/configuracion-tienda/1').subscribe({
+    this.http.get<any>(`${environment.apiBaseUrl}/configuracion-tienda/1`).subscribe({
       next: (tienda) => {
         const saldoBD = tienda.caja ?? 0;
-        this.ajustesHoy.set(saldoBD - this.saldoBase());
+        const neto = this.ingresosEfectivo() - this.egresosGastos() - this.ajustesHoy();
+        this.saldoInicial.set(saldoBD - neto);
       },
-      error: () => this.ajustesHoy.set(0)
+      error: () => this.saldoInicial.set(0)
     });
   }
 
@@ -71,12 +73,11 @@ export class CierreCajaComponent implements OnInit {
     const diff = this.diferencia();
     if (diff === null || diff === 0) return;
 
-    const url = 'http://localhost:8080/api/pedidos/ajustar-caja';
+    const url = `${environment.apiBaseUrl}/pedidos/ajustar-caja`;
 
     this.http.put(url, { monto: diff }).subscribe({
       next: () => {
         this.ajustesHoy.update(a => a + diff);
-        this.ajusteRegistrado.set(diff);
         this.toast.success('Ajuste de caja registrado correctamente.');
         this.preguntarCierre();
       },

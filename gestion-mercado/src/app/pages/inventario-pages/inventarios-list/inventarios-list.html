@@ -57,8 +57,8 @@
             <td>{{ getNombreProducto(i.producto_id) }}</td>
             <td>{{ i.cantidad }}</td>
             <td>{{ i.stockMin }}</td>
-            <td>{{ i.precioVenta }}</td>
-            <td>{{ i.costoAdquisicion }}</td>
+            <td>{{ i.precioVenta | currency:'ARS':'symbol-narrow':'1.2-2' }}</td>
+            <td>{{ i.costoAdquisicion | currency:'ARS':'symbol-narrow':'1.2-2' }}</td>
             <td class="acciones">
               <button class="btnEliminar" (click)="deleteInventario(i.inventario_id)">Eliminar</button>
               <button class="btnEditar" (click)="updateInventario(i)">Editar</button>

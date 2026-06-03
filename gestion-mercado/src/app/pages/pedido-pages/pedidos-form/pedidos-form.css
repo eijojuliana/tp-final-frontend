@@ -1,11 +1,11 @@
 /* ==== CONTENEDOR GENERAL ==== */
 main {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: 20% 1fr;
   gap: 1rem;
   padding: 5rem;
+  align-items: start;
 
   background: linear-gradient(135deg, #2c1b2e 0%, #1a0e1f 50%, #2c1b2e 100%);
   position: relative;
@@ -21,28 +21,37 @@ main::before {
 }
 
 /* ==== FORMULARIO (SECCIÓN IZQ) ==== */
-section.form,
+section.form {
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(2rem);
+  border-radius: 2.4rem;
+  padding: 3rem;
+  min-height: 70dvh;
+
+  box-shadow:
+    0 0.8rem 3.2rem rgba(255, 182, 193, 0.15),
+    0 0 0 0.1rem rgba(255, 255, 255, 0.1) inset;
+  border: 0.1rem solid rgba(255, 255, 255, 0.4);
+
+}
+
 section.detalles {
   position: relative;
   z-index: 2;
   background: rgba(0, 0, 0, 0.05);
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
+  backdrop-filter: blur(2rem);
+  border-radius: 2.4rem;
   padding: 3rem;
-  width: 100%;
   min-height: 70dvh;
 
   box-shadow:
-    0 8px 32px rgba(255, 182, 193, 0.15),
-    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-}
+    0 0.8rem 3.2rem rgba(255, 182, 193, 0.15),
+    0 0 0 0.1rem rgba(255, 255, 255, 0.1) inset;
+  border: 0.1rem solid rgba(255, 255, 255, 0.4);
 
-section.form{
-  width: 20%;
-}
-section.detalles{
-width: 80%;
+  overflow-x: auto;
 }
 
 /* ==== TÍTULOS ==== */
@@ -53,7 +62,7 @@ h3 {
   text-align: center;
   margin-bottom: 2rem;
   font-size: 2.8rem;
-  letter-spacing: 1px;
+  letter-spacing: 0.1rem;
 }
 
 /* ==== CAMPOS ==== */
@@ -69,21 +78,21 @@ h3 {
   color: rgba(255, 255, 255, 0.9);
   font-size: 1.5rem;
   font-weight: 500;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.3);
 }
 
 .campo input,
 .campo select {
   padding: 1rem 1.25rem;
-  border: 2px solid rgba(255, 197, 208, 0.3);
-  border-radius: 12px;
+  border: 0.2rem solid rgba(255, 197, 208, 0.3);
+  border-radius: 1.2rem;
   background: rgba(255, 255, 255, 0.12);
   color: #fff;
   width: 100%;
   font-size: 1.5rem;
   outline: none;
   transition: 0.3s;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(1rem);
 }
 
 .campo input:hover,
@@ -96,7 +105,7 @@ h3 {
 .campo select:focus {
   border-color: #ffa6c9;
   background: rgba(255, 255, 255, 0.18);
-  box-shadow: 0 0 0 3px rgba(255, 166, 201, 0.2);
+  box-shadow: 0 0 0 0.3rem rgba(255, 166, 201, 0.2);
 }
 
 /* ==== BOTONES FORM PRINCIPAL ==== */
@@ -110,7 +119,7 @@ h3 {
 button.btnEliminar {
   padding: 1rem 2.5rem;
   border: none;
-  border-radius: 12px;
+  border-radius: 1.2rem;
   font-size: 1.4rem;
   font-weight: 600;
   cursor: pointer;
@@ -122,11 +131,11 @@ button.btnEliminar {
 .botones button[type="submit"] {
   background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
   color: white;
-  box-shadow: 0 4px 15px rgba(255, 154, 158, 0.3);
+  box-shadow: 0 0.4rem 1.5rem rgba(255, 154, 158, 0.3);
 }
 
 .botones button[type="submit"]:hover:not(:disabled) {
-  transform: translateY(-2px);
+  transform: translateY(-0.2rem);
   background: linear-gradient(135deg, #ff6b81 0%, #fda4ba 100%);
 }
 
@@ -141,14 +150,14 @@ button.btn,
 button.btn-cancel {
   background: rgba(255, 255, 255, 0.15);
   color: white;
-  border: 2px solid rgba(255, 182, 193, 0.3);
+  border: 0.2rem solid rgba(255, 182, 193, 0.3);
 }
 
 button.btn:hover,
 button.btn-cancel:hover {
   background: rgba(255, 255, 255, 0.25);
   border-color: rgba(255, 182, 193, 0.5);
-  transform: translateY(-2px);
+  transform: translateY(-0.2rem);
 }
 
 /* ASTERISCO OBLIGATORIO */
@@ -160,12 +169,12 @@ button.btn-cancel:hover {
 .error {
   background: rgba(255, 123, 156, 0.15);
   color: #ffb3c1;
-  border: 2px solid rgba(255, 123, 156, 0.4);
-  border-radius: 12px;
+  border: 0.2rem solid rgba(255, 123, 156, 0.4);
+  border-radius: 1.2rem;
   font-size: 1.3rem;
   padding: 0.75rem 1rem;
   margin-top: 0.25rem;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(1rem);
 }
 
 
@@ -173,25 +182,24 @@ button.btn-cancel:hover {
 /* botón eliminar */
 .btnEliminar {
   background: rgba(255, 120, 120, 0.4);
-  border: 2px solid rgba(255, 120, 120, 0.6);
+  border: 0.2rem solid rgba(255, 120, 120, 0.6);
   color: white;
 }
 
 .btnEliminar:hover {
   background: rgba(255, 100, 100, 0.7);
   border-color: rgba(255, 80, 80, 0.7);
-  transform: translateY(-2px);
+  transform: translateY(-0.2rem);
 }
 
 /* ===== RESPONSIVE ===== */
-@media (max-width: 900px) {
+@media (max-aspect-ratio: 1/1) {
   main {
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-aspect-ratio: 9/16) {
   section.form,
   section.detalles {
     padding: 2rem 1.5rem;
@@ -212,11 +220,11 @@ button.btn-cancel:hover {
   align-items: center;
   gap: 1.2rem;
   background: rgba(255, 77, 141, 0.12); 
-  border: 1px solid #ff4d8d;
-  border-radius: 16px;
+  border: 0.1rem solid #ff4d8d;
+  border-radius: 1.6rem;
   padding: 1.2rem 1.5rem;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 15px rgba(255, 77, 141, 0.2);
+  box-shadow: 0 0.4rem 1.5rem rgba(255, 77, 141, 0.2);
   animation: fadeIn 0.3s ease-in-out;
 }
 
@@ -240,7 +248,7 @@ button.btn-cancel:hover {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
+  from { opacity: 0; transform: translateY(-0.5rem); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -264,17 +272,17 @@ section.detalles .campo label {
   color: rgba(255, 255, 255, 0.9);
   font-size: 1.5rem;
   font-weight: 500;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.3);
 }
 
 /* Inputs y selects */
 section.detalles .campo input,
 section.detalles .campo select {
   padding: 1rem 1.25rem;
-  border: 2px solid rgba(255, 197, 208, 0.3);
-  border-radius: 12px;
+  border: 0.2rem solid rgba(255, 197, 208, 0.3);
+  border-radius: 1.2rem;
   background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(1rem);
   color: #fff;
   width: 100%;
   font-size: 1.5rem;
@@ -292,38 +300,38 @@ section.detalles .campo input:focus,
 section.detalles .campo select:focus {
   border-color: #ffa6c9;
   background: rgba(255, 255, 255, 0.18);
-  box-shadow: 0 0 0 3px rgba(255, 166, 201, 0.2);
+  box-shadow: 0 0 0 0.3rem rgba(255, 166, 201, 0.2);
 }
 
 /* Boton "Agregar Detalle" */
 section.detalles button[type="button"]:not(.btnEliminar) {
   padding: 1rem 2rem;
   border: none;
-  border-radius: 12px;
+  border-radius: 1.2rem;
   font-size: 1.5rem;
   font-weight: 600;
   cursor: pointer;
   transition: 0.3s ease;
   background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
   color: white;
-  box-shadow: 0 4px 15px rgba(255, 154, 158, 0.3);
+  box-shadow: 0 0.4rem 1.5rem rgba(255, 154, 158, 0.3);
   width: fit-content;
   margin-top: 1rem;
 }
 
 section.detalles button[type="button"]:not(.btnEliminar):hover {
-  transform: translateY(-2px);
+  transform: translateY(-0.2rem);
   background: linear-gradient(135deg, #ff6b81 0%, #fda4ba 100%);
 }
 
 /* Botón Cancelar Pedido */
 section.detalles .botones-detalles button {
   padding: 1rem 2.5rem;
-  border-radius: 12px;
+  border-radius: 1.2rem;
   font-size: 1.4rem;
   background: rgba(255, 255, 255, 0.15);
   color: white;
-  border: 2px solid rgba(255, 182, 193, 0.3);
+  border: 0.2rem solid rgba(255, 182, 193, 0.3);
   cursor: pointer;
   transition: 0.3s ease;
   margin-top: 1.5rem;
@@ -332,7 +340,7 @@ section.detalles .botones-detalles button {
 section.detalles .botones-detalles button:hover {
   background: rgba(255, 255, 255, 0.25);
   border-color: rgba(255, 182, 193, 0.5);
-  transform: translateY(-2px);
+  transform: translateY(-0.2rem);
 }
 
 /* Igualar separación y centrado */
@@ -346,8 +354,8 @@ section.detalles .botones-detalles {
 section.detalles .btnEliminar {
   padding: 0.7rem 1.5rem;
   background: rgba(255, 120, 120, 0.4);
-  border: 2px solid rgba(255, 120, 120, 0.6);
-  border-radius: 10px;
+  border: 0.2rem solid rgba(255, 120, 120, 0.6);
+  border-radius: 1rem;
   color: white;
   font-weight: 600;
   cursor: pointer;
@@ -357,7 +365,7 @@ section.detalles .btnEliminar {
 section.detalles .btnEliminar:hover {
   background: rgba(255, 100, 100, 0.7);
   border-color: rgba(255, 80, 80, 0.7);
-  transform: translateY(-2px);
+  transform: translateY(-0.2rem);
 }
 
 /* Evitar que el contenido del detalle se salga de la tarjeta */
@@ -381,11 +389,11 @@ section.detalles .botones-detalles button.btn-finalizar {
   color: #1f5f48;
   border: none;
   font-weight: 700;
-  box-shadow: 0 4px 15px rgba(120, 255, 214, 0.4);
+  box-shadow: 0 0.4rem 1.5rem rgba(120, 255, 214, 0.4);
 }
 
 section.detalles .botones-detalles button.btn-finalizar:hover {
-  transform: translateY(-2px);
+  transform: translateY(-0.2rem);
   background: linear-gradient(135deg, #86e65a 0%, #4aeec3 100%);
 }
 
@@ -398,14 +406,14 @@ section.detalles .botones-detalles button.btn-finalizar:hover {
   padding: 1.5rem 2rem;
   border-radius: 1rem;
   background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(1rem);
   margin-bottom: 1rem;
 }
 
 .form-content {
   overflow: hidden;
   transition: max-height 0.35s ease;
-  max-height: 2000px;
+  max-height: 200rem;
 }
 
 .form-title {
@@ -416,7 +424,7 @@ section.detalles .botones-detalles button.btn-finalizar:hover {
 }
 
 /* 901 px porque es cuando el form de pedidos pasa a estar arriba y se ve feo je*/
-@media (max-width: 901px) {
+@media (max-aspect-ratio: 1/1) {
   section.form {
     min-height: auto !important;
     height: auto !important;
@@ -440,7 +448,7 @@ section.detalles .botones-detalles button.btn-finalizar:hover {
   .form-wrapper {
     width: 100%;
     overflow: hidden;
-    max-height: 2000px;
+    max-height: 200rem;
     padding: 1.5rem;
     transition: max-height .35s ease, padding .25s ease;
     background: #1b0f1f;
@@ -454,7 +462,7 @@ section.detalles .botones-detalles button.btn-finalizar:hover {
   }
 
   .form-content {
-    max-height: 2000px;
+    max-height: 200rem;
     transition: max-height .35s ease;
     width: 100%;
   }
@@ -463,7 +471,7 @@ section.detalles .botones-detalles button.btn-finalizar:hover {
 }
 
 /* --- menu detalles de pedido para el celular tonto --- */
-@media (max-width: 901px) {
+@media (max-aspect-ratio: 1/1) {
 
   main {
     padding: 0.5rem;

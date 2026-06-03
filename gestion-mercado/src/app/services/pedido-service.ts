@@ -86,8 +86,6 @@ export class PedidoService {
 
     this.http.get<string>(`${environment.apiBaseUrl}/configuracion-tienda/ultimoCierre`).subscribe({
       next: (fechaCierre) => {
-        console.log(fechaCierre);
-        console.log(hoy);
         // Si la fecha que devuelve el back es igual a hoy, el semáforo pasa a true
         if (!fechaCierre) {
           this.isCajaCerradaHoy.set(false);

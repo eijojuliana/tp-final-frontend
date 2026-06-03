@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { UsuarioService } from '../../../services/usuario-service';
 import { Router, RouterLink } from '@angular/router';
 import { ToastService } from '../../../services/toast.service';
@@ -10,7 +10,12 @@ import { ToastService } from '../../../services/toast.service';
   templateUrl: './usuarios-list.html',
   styleUrl: './usuarios-list.css',
 })
-export class UsuariosList {
+export class UsuariosList implements OnInit {
+
+  ngOnInit() {
+    this.usuarioService.load();
+  }
+
   private usuarioService = inject(UsuarioService);
   public usuarios = this.usuarioService.usuarios;
   router = inject(Router);

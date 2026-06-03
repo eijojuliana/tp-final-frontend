@@ -1,13 +1,13 @@
 .footer-container {
   background: var(--bg-pag2, rgba(30, 20, 40, 0.5));
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 0.1rem solid rgba(255, 255, 255, 0.05);
   padding: 2.5rem 2rem 1.5rem 2rem;
   margin-top: 5rem;
-  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 -1rem 3rem rgba(0, 0, 0, 0.2);
 }
 
 .footer-content {
-  max-width: 1200px;
+  max-width: 120rem;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -15,16 +15,16 @@
   flex-wrap: wrap;
   gap: 2.5rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 0.1rem solid rgba(255, 255, 255, 0.05);
 }
 
 .footer-brand {
   flex: 1;
-  min-width: 250px;
+  min-width: 25rem;
 }
 
 .brand-logo img {
-  height: 28px;
+  height: 2.8rem;
   width: auto;
   object-fit: contain;
   display: block;
@@ -47,7 +47,7 @@
 }
 
 .footer-links, .footer-contact {
-  min-width: 180px;
+  min-width: 18rem;
 }
 
 .footer-links h3, .footer-contact h3 {
@@ -85,7 +85,7 @@
 }
 
 .footer-bottom {
-  max-width: 1200px;
+  max-width: 120rem;
   margin: 1.5rem auto 0 auto;
   display: flex;
   justify-content: space-between;
@@ -102,7 +102,7 @@
   font-family: monospace;
 }
 
-@media (max-width: 768px) {
+@media (max-aspect-ratio: 1/1) {
   .footer-content {
     flex-direction: column;
     gap: 2rem;

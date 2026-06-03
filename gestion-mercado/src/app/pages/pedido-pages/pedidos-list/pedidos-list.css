@@ -3,22 +3,22 @@
 .filtros-stats {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 2rem;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 }
 
 .botones-rango {
   display: flex;
-  gap: 10px;
+  gap: 1rem;
 }
 
 .botones-rango button {
   background: var(--bg-pag2);
-  border: 1px solid var(--borde);
+  border: 0.1rem solid var(--borde);
   color: white;
-  padding: 8px 20px;
-  border-radius: 50px;
+  padding: 0.8rem 2rem;
+  border-radius: 5rem;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -35,34 +35,78 @@
   font-weight: bold;
 }
 
+.botones-estado {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.botones-estado button {
+  background: var(--bg-pag2);
+  border: 0.1rem solid var(--borde);
+  color: white;
+  padding: 0.6rem 1.4rem;
+  border-radius: 5rem;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 0.9rem;
+}
+
+.botones-estado button:hover {
+  background: #5b8cbf;
+  border-color: #5b8cbf;
+}
+
+.botones-estado button.active {
+  background: #2e6b9e;
+  border-color: #3578b0;
+  color: white;
+  font-weight: bold;
+}
+
 .filtros-stats input {
-  border-radius: 50px;
-  padding: 8px 15px;
-  border: 1px solid var(--borde);
+  border-radius: 5rem;
+  padding: 0.8rem 1.5rem;
+  border: 0.1rem solid var(--borde);
   background: var(--bg-pag2);
   color: white;
 }
 
-.tablaBody td.tipo-compra {
-  color: #d93025;
-  font-weight: bold;
-}
 
-.tablaBody td.tipo-venta {
-  color: #0f9d58;
-  font-weight: bold;
-}
-
-.tablaBody td.monto-compra {
-  color: #d93025;
-  font-weight: bold;
-}
-
-.tablaBody td.monto-venta {
-  color: #0f9d58;
-  font-weight: bold;
-}
-
-.btnDetalle {
-    
+@media (max-aspect-ratio: 1/1) {
+  .filtros-stats {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+  }
+  .botones-rango {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .botones-rango button {
+    flex: 1;
+    min-width: calc(33% - 0.4rem);
+    padding: 0.6rem 0.5rem;
+    font-size: 0.85rem;
+    text-align: center;
+  }
+  .inputs-fecha {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .inputs-fecha input {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+  }
+  .botones-estado {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .botones-estado button {
+    flex: 1;
+    min-width: calc(33% - 0.4rem);
+    padding: 0.6rem 0.5rem;
+    font-size: 0.85rem;
+    text-align: center;
+  }
 }

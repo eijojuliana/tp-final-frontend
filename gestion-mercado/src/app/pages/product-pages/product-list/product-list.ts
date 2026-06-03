@@ -1,4 +1,5 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal, OnInit } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { ProductService } from '../../../services/product-service';
 import { InventarioService } from '../../../services/inventario-service';
@@ -6,11 +7,17 @@ import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-product-list',
-  imports: [RouterLink],
+  imports: [RouterLink, CurrencyPipe],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })
-export class ProductList {
+export class ProductList implements OnInit {
+
+  ngOnInit() {
+    this.productService.load();
+    this.inventarioService.load();
+  }
+
   private productService = inject(ProductService);
   private inventarioService = inject(InventarioService);
   private toast = inject(ToastService);

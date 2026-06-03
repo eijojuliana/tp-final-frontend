@@ -251,7 +251,7 @@ export class PedidosForm implements OnInit {
 
   formCollapsed = signal(true);
   toggleForm() {
-    if (window.innerWidth <= 1000) {
+    if (window.matchMedia('(max-aspect-ratio: 1/1)').matches) {
       this.formCollapsed.update(v => !v);
     }
   }

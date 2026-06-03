@@ -17,6 +17,7 @@ export class PedidosList implements OnInit {
 
   filtro = signal('');
   tipoFiltro = signal<'VENTA' | 'COMPRA' | ''>('');
+  estadoFiltro = signal<'PENDIENTE' | 'FINALIZADO' | ''>('');
   atributo = signal<string>('');
   orden = signal<'asc' | 'desc' | ''>('');
 
@@ -25,11 +26,28 @@ export class PedidosList implements OnInit {
   fechaFinManual = signal<string>('');
 
   ngOnInit() {
+    this.pedidoService.load();
     this.seleccionarRango('todo');
   }
 
   seleccionarRango(rango: string) {
     this.rangoSeleccionado.set(rango);
+  }
+
+  seleccionarEstado(estado: 'PENDIENTE' | 'FINALIZADO' | '') {
+    this.estadoFiltro.set(estado);
+  }
+
+  filtroBusqueda(p: any, attr: string): boolean {
+    const txt = this.filtro().toLowerCase();
+    if (!txt) return true;
+    if (!attr) return JSON.stringify(p).toLowerCase().includes(txt);
+    let val: any;
+    if (attr === 'transaccionId') val = p.transaccion?.transaccion_id;
+    else if (attr === 'fecha') val = p.transaccion?.fecha;
+    else if (attr === 'total') val = p.transaccion?.monto;
+    else val = p[attr as keyof typeof p];
+    return String(val ?? '').toLowerCase().includes(txt);
   }
 
   cambioFechaManual(inicio: string, fin: string) {
@@ -54,6 +72,8 @@ export class PedidosList implements OnInit {
 
     return this.pedidos()
       .filter(p => (tipo ? p.tipo === tipo : true))
+      .filter(p => (this.estadoFiltro() ? p.estado === this.estadoFiltro() : true))
+      .filter(p => this.filtroBusqueda(p, attr))
       .filter(p => {
         const fechaPed = new Date(p.transaccion.fecha).getTime();
         switch (this.rangoSeleccionado()) {

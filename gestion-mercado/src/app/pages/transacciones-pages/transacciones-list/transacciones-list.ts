@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { TransaccionService } from '../../../services/transaccion-service';
 import { Transaccion } from '../../../models/transaccion.model';
 import { PedidoService } from '../../../services/pedido-service';
@@ -12,7 +12,12 @@ import { RouterLink } from '@angular/router';
   templateUrl: './transacciones-list.html',
   styleUrl: './transacciones-list.css',
 })
-export class TransaccionesList {
+export class TransaccionesList implements OnInit {
+
+  ngOnInit() {
+    this.service.load();
+  }
+
   private service = inject(TransaccionService);
   public transacciones = this.service.transacciones;
 

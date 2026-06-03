@@ -30,6 +30,7 @@ export class BreadcrumbComponent {
     personas: 'Personas',
     tienda: 'Tienda',
     historial: 'Historial',
+    estadisticas: 'Estadísticas',
   };
 
   constructor(private router: Router) {

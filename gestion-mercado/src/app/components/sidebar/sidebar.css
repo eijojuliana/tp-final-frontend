@@ -2,15 +2,46 @@
    SIDEBAR
 ========================= */
 .sidebar {
-  width: 280px;
+  width: 28rem;
   height: 100%;
   background: var(--bg-pag2);
   padding: 2rem 1.2rem;
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
-  border-right: 1px solid var(--borde);
+  border-right: 0.1rem solid var(--borde);
   overflow-y: auto;
+  transition: width 0.3s ease, padding 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 6rem;
+  padding: 2rem 0.6rem;
+}
+
+.sidebar.collapsed .titulo,
+.sidebar.collapsed .item-content span,
+.sidebar.collapsed .icon-arrow,
+.sidebar.collapsed .submenu {
+  display: none;
+}
+
+.sidebar.collapsed .item-content {
+  justify-content: center;
+}
+
+.sidebar.collapsed .menu-icon {
+  width: 2.6rem;
+  height: 2.6rem;
+}
+
+.sidebar.collapsed .dropdown-header {
+  justify-content: center;
+}
+
+.sidebar.collapsed .logo-container {
+  justify-content: center;
+  gap: 0;
 }
 
 .logo-container {
@@ -20,8 +51,8 @@
 }
 
 .logo {
-  width: 45px;
-  height: 45px;
+  width: 4.5rem;
+  height: 4.5rem;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -45,8 +76,8 @@
 }
 
 .menu-icon {
-  width: 22px;
-  height: 22px;
+  width: 2.2rem;
+  height: 2.2rem;
   object-fit: contain;
   opacity: 0.7;
   transition: 0.2s;
@@ -100,7 +131,7 @@
   margin-left: 1rem;
   margin-top: 0.2rem;
   gap: 0.2rem;
-  border-left: 1px solid var(--borde);
+  border-left: 0.1rem solid var(--borde);
   padding-left: 0.5rem;
   color: var(--letra1-leve);
 }
@@ -111,71 +142,56 @@
 }
 
 .submenu .menu-icon {
-  width: 18px;
-  height: 18px;
+  width: 1.8rem;
+  height: 1.8rem;
 }
 
-.mobile-toggle {
-  display: none;
-}
 .sidebar-overlay {
   display: none;
 }
 
-@media (max-width: 1024px) {
+@media (max-aspect-ratio: 1/1) {
   .sidebar {
     position: fixed;
     top: 0;
     left: 0;
     z-index: 999;
-    height: 100vh;
-    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.15);
+    height: 100dvh;
+    width: 28rem;
+    padding-top: 6rem;
+    box-shadow: 0.5rem 0 2.5rem rgba(0, 0, 0, 0.15);
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
   }
 
-  .sidebar.mobile-open {
+  .sidebar.collapsed {
+    transform: translateX(-100%);
+    width: 28rem;
+    padding: 6rem 1.2rem 2rem;
+  }
+
+  .sidebar:not(.collapsed) {
     transform: translateX(0);
   }
 
-  .mobile-toggle {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 2rem;
-    height: 2rem;
-    background: var(--bg-pag2);
-    border: 1px solid var(--borde);
-    border-radius: 0.5rem;
-    cursor: pointer;
-    padding: 0.4rem;
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
-    z-index: 1000;
-    box-shadow: var(--sombra);
+  .sidebar.collapsed .titulo,
+  .sidebar.collapsed .item-content span,
+  .sidebar.collapsed .icon-arrow,
+  .sidebar.collapsed .submenu {
+    display: unset;
   }
 
-  .bar {
-    width: 1.2rem;
-    height: 2px;
-    background-color: var(--letra1);
-    border-radius: 10px;
-    transition: all 0.3s linear;
-    position: relative;
-    transform-origin: 1px;
+  .sidebar.collapsed .item-content {
+    justify-content: unset;
   }
 
-  /* esto es para que el botoncito d las barritas se convierta en la X*/
-  .bar.open:nth-child(1) {
-    transform: rotate(45deg);
+  .sidebar.collapsed .menu-icon {
+    width: 2.2rem;
+    height: 2.2rem;
   }
-  .bar.open:nth-child(2) {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  .bar.open:nth-child(3) {
-    transform: rotate(-45deg);
+
+  .sidebar.collapsed .dropdown-header {
+    justify-content: space-between;
   }
 
   .sidebar-overlay {
@@ -183,10 +199,10 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100dvw;
+    height: 100dvh;
     background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(0.2rem);
     z-index: 998;
   }
 }

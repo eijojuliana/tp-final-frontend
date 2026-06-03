@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { PersonaService } from '../../../services/persona-service';
 import { Router, RouterLink } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -11,7 +11,12 @@ import { Persona } from '../../../models/persona.model';
   templateUrl: './persona-list.html',
   styleUrl: './persona-list.css',
 })
-export class PersonaList {
+export class PersonaList implements OnInit {
+
+  ngOnInit() {
+    this.personaService.load();
+  }
+
   personaService = inject(PersonaService);
   personas = this.personaService.personas;
   router = inject(Router);

@@ -3,6 +3,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { ThemeService } from '../../styles/theme.service';
 import { TiendaService } from '../../services/tienda-service';
+import { SidebarStateService } from './sidebar-state.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,6 +16,7 @@ export class Sidebar implements OnInit {
   public auth = inject(AuthService);
   public theme = inject(ThemeService);
   public tiendaService = inject(TiendaService);
+  public sidebarState = inject(SidebarStateService);
 
   get currentRole(): string | null {
     return this.auth.getRole();
@@ -22,8 +24,9 @@ export class Sidebar implements OnInit {
 
   openMenu: string | null = null;
 
-  // para habilitar el sidebar en el celu
-  isMobileMenuOpen: boolean = false;
+  get isSidebarOpen(): boolean {
+    return this.sidebarState.isOpen();
+  }
 
   ngOnInit() {
     const tiendaActual = this.tiendaService.tienda();
@@ -32,14 +35,19 @@ export class Sidebar implements OnInit {
   }
 
   toggleMenu(menu: string) {
+    if (!this.isSidebarOpen) {
+      this.sidebarState.open();
+    }
     this.openMenu = this.openMenu === menu ? null : menu;
   }
 
   toggleMobileMenu() {
-    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    this.sidebarState.toggle();
   }
 
   closeMobileMenu() {
-    this.isMobileMenuOpen = false;
+    if (window.matchMedia('(max-aspect-ratio: 1/1)').matches) {
+      this.sidebarState.close();
+    }
   }
 }

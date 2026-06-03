@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ThemeService } from '../../styles/theme.service';
 import { TiendaService } from '../../services/tienda-service';
 import { CuentaBancariaService } from '../../services/cuenta-bancaria-service';
+import { SidebarStateService } from '../sidebar/sidebar-state.service';
 
 @Component({
   selector: 'app-header',
@@ -26,6 +27,7 @@ export class Header implements OnInit {
   private cuentaBancariaService = inject(CuentaBancariaService);
   public pedidoService = inject(PedidoService);
   private route = inject(Router);
+  private sidebarState = inject(SidebarStateService);
 
   // Trae el efectivo en caja directamente de la tienda
   efectivoEnCaja = computed(() => {
@@ -51,6 +53,14 @@ export class Header implements OnInit {
 
   toggleMenu() {
     this.menuAbierto = !this.menuAbierto;
+  }
+
+  get sidebarOpen(): boolean {
+    return this.sidebarState.isOpen();
+  }
+
+  toggleSidebar(): void {
+    this.sidebarState.toggle();
   }
 
   toggleTheme(): void {

@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component, computed, inject, Input, signal, SimpleChanges } from '@angular/core';
 import { DetallePedidoService } from '../../services/detallePedido-service';
 import { DetallePedido } from '../../models/detallePedido.model';
@@ -10,7 +11,7 @@ import { BuscadorItem } from '../buscador/buscador-item';
 
 @Component({
   selector: 'app-detalles-pedido',
-  imports: [FormsModule, BuscadorGenericoComponent],
+  imports: [FormsModule, BuscadorGenericoComponent, CurrencyPipe],
   templateUrl: './detalles-pedido.html',
   styleUrl: './detalles-pedido.css',
 })

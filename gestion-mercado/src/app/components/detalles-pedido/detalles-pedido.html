@@ -59,8 +59,8 @@
               <td>{{ detalle.producto_id }}</td>
               <td>{{ detalle.producto_nombre }}</td>
               <td>{{ detalle.cantidad }}</td>
-              <td>${{ detalle.costoUnitario }}</td>
-              <td>{{ detalle.subtotal }}</td>
+              <td>{{ detalle.costoUnitario | currency:'ARS':'symbol-narrow':'1.2-2' }}</td>
+              <td>{{ detalle.subtotal | currency:'ARS':'symbol-narrow':'1.2-2' }}</td>
               <td class="botones">
                 <button class="btnEditar" (click)="editarDetalle(detalle)" [disabled]="pedido.estado === 'FINALIZADO'">Editar</button>
                 <button class="btnEliminar" (click)="eliminarDetalle(detalle.detallePedidoId)" [disabled]="pedido.estado === 'FINALIZADO'">Eliminar</button>
@@ -73,7 +73,7 @@
 
     <div class="total-pedido">
       <p>Total a Pagar:</p>
-      <span>${{ total() }}</span>
+      <span>{{ total() | currency:'ARS':'symbol-narrow':'1.2-2' }}</span>
     </div>
   }
 </section>

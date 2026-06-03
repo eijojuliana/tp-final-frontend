@@ -1,6 +1,6 @@
 import { Router, RouterLink } from '@angular/router';
 import { LoteService } from '../../../services/lote-service';
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { Lote } from '../../../models/lote.model';
 import { ToastService } from '../../../services/toast.service';
 import { CurrencyPipe } from '@angular/common';
@@ -11,7 +11,12 @@ import { CurrencyPipe } from '@angular/common';
   templateUrl: './lotes-list.html',
   styleUrl: './lotes-list.css',
 })
-export class LotesList {
+export class LotesList implements OnInit {
+
+  ngOnInit() {
+    this.loteService.load();
+  }
+
   private loteService = inject(LoteService);
   lotes = this.loteService.lotes;
   private router = inject(Router);

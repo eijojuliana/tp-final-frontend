@@ -1,5 +1,6 @@
+import { CurrencyPipe } from '@angular/common';
 import { Producto } from './../../../models/producto.model';
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { InventarioService } from '../../../services/inventario-service';
 import { Router} from '@angular/router';
 import { Inventario } from '../../../models/inventario.model';
@@ -9,11 +10,17 @@ import { ProductService } from '../../../services/product-service';
 
 @Component({
   selector: 'app-inventarios-list',
-  imports: [],
+  imports: [CurrencyPipe],
   templateUrl: './inventarios-list.html',
   styleUrl: './inventarios-list.css',
 })
-export class InventariosList {
+export class InventariosList implements OnInit {
+
+  ngOnInit() {
+    this.inventarioService.load();
+    this.productService.load();
+  }
+
   private inventarioService = inject(InventarioService);
   private router = inject(Router);
   inventarios = this.inventarioService.inventarios;

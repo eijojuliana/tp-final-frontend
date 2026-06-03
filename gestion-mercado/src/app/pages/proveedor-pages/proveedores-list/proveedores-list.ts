@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { ProveedorService } from '../../../services/proveedor-service';
 import { Router, RouterLink } from '@angular/router';
 import { ToastService } from '../../../services/toast.service';
@@ -10,7 +10,12 @@ import { ToastService } from '../../../services/toast.service';
   templateUrl: './proveedores-list.html',
   styleUrl: './proveedores-list.css',
 })
-export class ProveedoresList {
+export class ProveedoresList implements OnInit {
+
+  ngOnInit() {
+    this.service.load();
+  }
+
   service = inject(ProveedorService);
   proveedores = this.service.proveedores;
   router = inject(Router);

@@ -9,3 +9,11 @@
   pointer-events: none;
   z-index: 0;
 }
+
+@media (max-aspect-ratio: 9/16) {
+  .sakura-watermark {
+    width: 2.5rem;
+    bottom: 0.8rem;
+    right: 0.8rem;
+  }
+}

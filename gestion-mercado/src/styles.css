@@ -191,7 +191,7 @@ img {
 .app-wrapper {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100dvh;
 }
 
 .contenido {
@@ -199,6 +199,7 @@ img {
   width: 100%;
   flex: 1;
   align-items: stretch;
+  min-width: 0;
 }
 
 app-sidebar {
@@ -208,6 +209,7 @@ app-sidebar {
 main {
   flex-grow: 1;
   width: auto;
+  min-width: 0;
   padding: 2rem;
   box-sizing: border-box;
   display: flex;
@@ -279,6 +281,50 @@ input, select {
     padding: 1rem;
     border-radius: 1rem;
     color: var(--letra1);
+    box-sizing: border-box;
+}
+
+input, select, textarea, button {
+    box-sizing: border-box;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-aspect-ratio: 9/16) {
+  main {
+    padding: 0.5rem;
+  }
+}
+
+
+@media (orientation: landscape) and (max-height: 600px) {
+  html {
+    font-size: 50%;
+  }
+
+  .sidebar {
+    width: 24rem;
+  }
+
+  .list-container .botones {
+    flex-direction: row !important;
+    height: auto !important;
+    flex-wrap: wrap;
+  }
+
+  .list-container .botones .btn-agregar {
+    width: auto !important;
+    padding: 0.5rem 1.5rem !important;
+  }
+
+  .brand-title {
+    display: inline !important;
+  }
+
+  .stat-card .nombre {
+    display: block !important;
+  }
 }
 
 /* =========================

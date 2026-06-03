@@ -4,21 +4,63 @@
   justify-content: space-between;
   height: 6.5rem;
   padding: 0 3rem;
-  position: relative;
-  z-index: 3;
+  position: sticky;
+  top: 0;
+  z-index: 100;
   box-sizing: border-box;
   background: linear-gradient(
     135deg,
     var(--salmon-tema_claro-2),
     var(--vino-tema_claro-0)
   );
-  border-bottom: 1px solid var(--borde);
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+  border-bottom: 0.1rem solid var(--borde);
+  box-shadow: 0 0.6rem 2.5rem rgba(0, 0, 0, 0.12);
 }
 
 .header-izq {
   display: flex;
   align-items: center;
+  gap: 0.8rem;
+}
+
+.mobile-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  border: 0.1rem solid rgba(255,255,255,0.3);
+  border-radius: 0.4rem;
+  cursor: pointer;
+  padding: 0.3rem;
+  box-sizing: border-box;
+}
+
+.mobile-toggle .bar {
+  width: 100%;
+  height: 0.2rem;
+  background-color: var(--letra1, #ffffff);
+  border-radius: 1rem;
+  transition: all 0.3s linear;
+  transform-origin: 0.1rem;
+  display: block;
+}
+
+.mobile-toggle .bar.open:nth-child(1) {
+  transform: rotate(45deg) translate(0.1rem, 0rem);
+}
+.mobile-toggle .bar.open:nth-child(2) {
+  opacity: 0;
+}
+.mobile-toggle .bar.open:nth-child(3) {
+  transform: rotate(-45deg) translate(0.1rem, 0rem);
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .mobile-toggle {
+    display: flex;
+  }
 }
 
 .brand-title {
@@ -26,8 +68,8 @@
   font-weight: 800;
   color: var(--letra1, #ffffff);
   margin: 0;
-  letter-spacing: -0.5px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  letter-spacing: -0.05rem;
+  text-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.15);
 }
 
 .header-der {
@@ -45,28 +87,30 @@
 .stat-card {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-  padding: 0.6rem 1.2rem;
-  border-radius: 14px;
+  width: auto;
+  padding: 0.4rem 1.2rem;
+  border-radius: 1.4rem;
   background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  min-width: 150px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border: 0.1rem solid rgba(255, 255, 255, 0.1);
+  min-height: 4rem;
+  box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
   transition: transform 0.2s;
+  gap: 0.6rem;
 }
 
 .stat-info {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .stat-card .nombre {
   font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.08rem;
   color: var(--letra1-leve, rgba(255, 255, 255, 0.6));
   margin-bottom: 0.1rem;
 }
@@ -75,6 +119,7 @@
   font-size: 1.4rem;
   font-weight: 700;
   color: var(--letra1, #ffffff);
+  white-space: nowrap;
 }
 
 .stat-card.caja .monto {
@@ -85,13 +130,26 @@
   color: var(--letra1);
 }
 
+/* ==== ICONOS DE STAT CARDS (caja / banco) ==== */
+.icono-stat {
+  font-size: 2.8rem;
+  color: var(--letra1, #ffffff);
+  opacity: 0.7;
+  flex-shrink: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
 /* ==== INDICADOR DE ESTADO DE CAJA ==== */
 .icono-candado {
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   color: #8cd49d;
-  margin-left: 1rem;
   opacity: 0.95;
-  text-shadow: none;
+  flex-shrink: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
 }
 
 .icono-candado.caja-cerrada {
@@ -109,7 +167,7 @@
 
 .theme-btn:hover {
   transform: scale(1.1) rotate(15deg);
-  filter: drop-shadow(0 0 6px var(--salmon-tema_claro-3));
+  filter: drop-shadow(0 0 0.6rem var(--salmon-tema_claro-3));
 }
 
 /* ==== PERFIL ==== */
@@ -119,7 +177,7 @@
   gap: 0.3rem;
   cursor: pointer;
   padding: 0.4rem;
-  border-radius: 50px;
+  border-radius: 5rem;
   transition: background 0.2s;
 }
 
@@ -132,7 +190,8 @@
   width: 3.8rem;
   height: 3.8rem;
   object-fit: cover;
-  border: 2px solid var(--salmon-tema_claro-3);
+  border: 0.2rem solid var(--salmon-tema_claro-3);
+  box-sizing: border-box;
   background: white;
   transition: 0.25s;
 }
@@ -143,7 +202,7 @@
 }
 
 .flecha-menu {
-  font-size: 22px;
+  font-size: 2.2rem;
   color: var(--letra1, #ffffff);
   transition: transform 0.3s ease;
 }
@@ -154,13 +213,14 @@
 
 .menu-desplegable {
   background: var(--bg-pag2);
-  border: 1px solid var(--borde);
+  border: 0.1rem solid var(--borde);
   border-radius: 1.2rem;
   position: absolute;
   top: 105%;
   right: 3rem;
   width: 26rem;
   max-height: 0;
+  box-sizing: border-box;
   overflow: hidden;
   transform: scaleY(0);
   transform-origin: top;
@@ -191,7 +251,7 @@
 .menu-desplegable hr {
   margin: 1rem 0;
   border: none;
-  height: 1px;
+  height: 0.1rem;
   background: var(--borde);
 }
 
@@ -230,26 +290,87 @@
   color: var(--letra1);
 }
 
-@media (max-width: 992px) {
+@media (max-aspect-ratio: 1/1) {
   .brand-title {
     font-size: 1.8rem;
   }
   .stat-card {
-    min-width: 110px;
-    padding: 0.5rem 1rem;
+    min-height: 3.6rem;
+    padding: 0.4rem 0.8rem;
+    gap: 0.4rem;
   }
   .stat-card .monto {
     font-size: 1.2rem;
   }
+  .icono-stat {
+    font-size: 2.2rem;
+  }
+  .icono-candado {
+    font-size: 1.4rem;
+  }
 }
 
-@media (max-width: 768px) {
+@media (max-aspect-ratio: 1/1) {
   .brand-title {
     display: none;
   }
   .container {
     padding: 0 1.5rem;
     height: 5.8rem;
+  }
+  .stat-card {
+    padding: 0.4rem 0.8rem;
+    gap: 0.4rem;
+    min-height: 3.6rem;
+  }
+  .stat-card .nombre {
+    display: none;
+  }
+  .stat-card .monto {
+    font-size: 1.1rem;
+  }
+  .icono-stat {
+    font-size: 2rem;
+  }
+  .icono-candado {
+    font-size: 1.3rem;
+    margin: 0;
+  }
+}
+
+@media (max-aspect-ratio: 9/16) {
+  .container {
+    padding: 0 0.5rem;
+    height: 5.2rem;
+  }
+  .header-der {
+    gap: 0.4rem;
+  }
+  .estadisticas {
+    gap: 0.3rem;
+  }
+  .stat-card {
+    min-height: 3.2rem;
+    padding: 0.3rem 0.6rem;
+    gap: 0.3rem;
+  }
+  .stat-card .monto {
+    font-size: 0.9rem;
+  }
+  .icono-stat {
+    font-size: 1.6rem;
+  }
+  .stat-card.caja .icono-candado {
+    font-size: 1rem;
+    margin: 0;
+  }
+  .user-icon {
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+  .menu-desplegable {
+    right: 0.5rem;
+    width: 20rem;
   }
 }
 

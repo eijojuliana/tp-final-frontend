@@ -17,13 +17,13 @@
 .valor-viejo {
   color: var(--rojo);
   text-decoration: line-through;
-  margin: 0 5px;
+  margin: 0 0.5rem;
 }
 
 .valor-nuevo {
   color: var(--verde);
   font-weight: bold;
-  margin: 0 5px;
+  margin: 0 0.5rem;
 }
 
 .flecha {

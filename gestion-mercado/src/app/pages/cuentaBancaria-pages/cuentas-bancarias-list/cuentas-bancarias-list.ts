@@ -22,6 +22,7 @@ export class CuentasBancariasList implements OnInit {
   public cuentasBancarias = this.cuentaBancariaService.cuentasBancarias;
 
   ngOnInit() {
+    this.cuentaBancariaService.load();
     this.tiendaService.load();
   }
 

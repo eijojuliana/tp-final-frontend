@@ -21,7 +21,7 @@ export class CuentasBancariasForm {
   private cuentaBancariaToEdit: CuentaBancaria | null = null
 
   form = this.fb.nonNullable.group({
-    nombre_banco:['',[Validators.required]],
+    nombreBanco:['',[Validators.required]],
     cbu: [0, [Validators.required, Validators.min(1)]],
     saldo: [0, [Validators.required]]
   });
@@ -33,7 +33,7 @@ export class CuentasBancariasForm {
       if(this.cuentaBancariaToEdit) {
         this.isEditMode.set(true);
         this.form.patchValue({
-          nombre_banco:this.cuentaBancariaToEdit.nombre_banco,
+          nombreBanco:this.cuentaBancariaToEdit.nombreBanco,
           cbu: this.cuentaBancariaToEdit.cbu,
           saldo: this.cuentaBancariaToEdit.saldo
         });
@@ -62,6 +62,7 @@ export class CuentasBancariasForm {
         }
       });
     } else {
+      console.log(nuevosValores);
       this.cuentaBancariaService.post(nuevosValores).subscribe({
         next: () => {
           this.toast.success("Cuenta Bancaria Registrada con éxito");

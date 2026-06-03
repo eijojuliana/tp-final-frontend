@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { DuenioService } from '../../../services/duenio-service';
 import { Router, RouterLink } from '@angular/router';
 import { ToastService } from '../../../services/toast.service';
@@ -10,7 +10,12 @@ import { ToastService } from '../../../services/toast.service';
   templateUrl: './duenios-list.html',
   styleUrl: './duenios-list.css',
 })
-export class DueniosList {
+export class DueniosList implements OnInit {
+
+  ngOnInit() {
+    this.service.load();
+  }
+
   service = inject(DuenioService);
   duenios = this.service.duenios;
   router = inject(Router);

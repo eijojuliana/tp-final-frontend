@@ -8,7 +8,7 @@
       <p class="amount text-yellow">{{ efectivoEnCaja() | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</p>
     </div>
     <div class="card">
-      <h3>Saldo en cuentas</h3>
+      <h3>Saldo cuentas bancarias</h3>
       <p class="amount text-pink">{{ saldoEnCuentas() | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</p>
     </div>
     <div class="card">
@@ -49,8 +49,8 @@
           <div class="account-info">
             <div class="account-icon icon-blue"></div>
             <div>
-              <h4 class="account-name">CBU: {{ c.cbu }}</h4>
-              <span class="account-detail">ID: {{ c.cuentaBancariaId }} · Bancaria</span>
+              <h4 class="account-name">{{ c.nombreBanco }}</h4>
+              <span class="account-detail">CBU: {{ c.cbu }} · ID: {{ c.cuentaBancariaId }}</span>
             </div>
           </div>
           <div class="account-balance-wrapper">

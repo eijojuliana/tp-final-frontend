@@ -16,7 +16,7 @@
     </select>
 
     <select (change)="orden.set($any($event.target).value)">
-      <option value="" disabled selected>Ordenar por...</option>
+      <option value="" disabled selected>Orden</option>
       <option value="asc">Ascendente</option>
       <option value="desc">Descendente</option>
     </select>
@@ -58,6 +58,7 @@
             {{ !esEntrada(transaccion) ? '- ' : '+ ' }}{{ transaccion.monto | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}
           </td>
           <td>{{ transaccion.fecha | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td class="acciones"></td>
         </tr>
         } @empty {
         <tr>

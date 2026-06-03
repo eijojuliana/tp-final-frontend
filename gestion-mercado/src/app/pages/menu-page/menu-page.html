@@ -9,12 +9,50 @@
     <section class="dashboard">
 
       <!-- RESUMEN -->
-      <div class="card grande">
-        <h3>Resumen</h3>
+      <div class="card resumen">
+        <h3>Resumen del {{ hoy | date:'EEEE d \'de\' MMMM' }}</h3>
+        @if (cargandoStats()) {
+          <p class="cargando">Cargando...</p>
+        } @else {
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <span class="kpi-label">Ventas</span>
+              <span class="kpi-value ventas">{{ stats()?.ventasTotales | currency:'ARS':'symbol-narrow':'1.2-2' }}</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-label">Gastos</span>
+              <span class="kpi-value gastos">{{ stats()?.gastosTotales | currency:'ARS':'symbol-narrow':'1.2-2' }}</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-label">Ganancia</span>
+              <span class="kpi-value ganancia">{{ (stats()?.ventasTotales - stats()?.gastosTotales) | currency:'ARS':'symbol-narrow':'1.2-2' }}</span>
+            </div>
+          </div>
+        }
       </div>
 
-      <!-- CARD DERECHA -->
-      <div class="card lateral"></div>
+      <!-- CARD DERECHA - MOVIMIENTOS -->
+      <div class="card lateral">
+        <h3>Movimientos de hoy</h3>
+        @if (cargandoMovimientos()) {
+          <p class="cargando">Cargando...</p>
+        } @else {
+          <div class="movimientos-lista">
+            @for (mov of movimientosHoy(); track mov.transaccion_id) {
+              <div class="movimiento-item">
+                <span class="mov-tipo" [class.efectivo]="mov.tipo === 'EFECTIVO'" [class.transferencia]="mov.tipo === 'TRANSFERENCIA'">
+                  {{ mov.tipo === 'EFECTIVO' ? 'Efectivo' : 'Transf.' }}
+                </span>
+                <span class="mov-monto">{{ mov.monto | currency:'ARS':'symbol-narrow':'1.2-2' }}</span>
+                <span class="mov-hora">{{ mov.fecha | date:'HH:mm' }}</span>
+              </div>
+            }
+            @empty {
+              <p class="sin-movimientos">Sin movimientos hoy</p>
+            }
+          </div>
+        }
+      </div>
 
       <!-- ACCESOS -->
       <div class="card accesos">
@@ -24,36 +62,46 @@
 
           @if (auth.hasRole(['ADMIN'])){
           <a routerLink="/menu/personas" class="mini-card">
-            <img src="/assets/images/persona-icon.png">
+            <div class="mini-icon">
+              <img src="/assets/images/persona-icon.png">
+            </div>
             <span>Personas</span>
           </a>
           }
 
           @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
           <a routerLink="/menu/productos" class="mini-card">
-            <img src="/assets/images/productos-icon.png">
+            <div class="mini-icon">
+              <img src="/assets/images/productos-icon.png">
+            </div>
             <span>Productos</span>
           </a>
           }
 
           @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
           <a routerLink="/menu/pedidos" class="mini-card">
-            <img src="/assets/images/pedido-icon.png">
+            <div class="mini-icon">
+              <img src="/assets/images/pedido-icon.png">
+            </div>
             <span>Pedidos</span>
           </a>
           }
 
           @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
           <a routerLink="/menu/clientes" class="mini-card">
-            <img src="/assets/images/clientes-icon.png">
+            <div class="mini-icon">
+              <img src="/assets/images/clientes-icon.png">
+            </div>
             <span>Clientes</span>
           </a>
           }
 
           @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
           <a routerLink="/menu/cuentas-bancarias" class="mini-card">
-            <img src="/assets/images/cuentaB-icon.png">
-            <span>Cuentas Bancarias</span>
+            <div class="mini-icon">
+              <img src="/assets/images/cuentaB-icon.png">
+            </div>
+            <span>Caja y Banco</span>
           </a>
           }
 

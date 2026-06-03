@@ -1,6 +1,6 @@
 /* FONDO */
 .login-page {
-  height: 100vh;
+  height: 100dvh;
   background: var(--login-bg-pantalla);
   display: flex;
   justify-content: center;
@@ -12,7 +12,7 @@
   width: 70%;
   height: 70%;
   display: flex;
-  border-radius: 30px;
+  border-radius: 3rem;
   overflow: hidden;
 }
 
@@ -32,9 +32,9 @@
   color: var(--vino-tema_claro-2);
 
   padding: 2.5% 10%;
-  border-radius: 20px;
+  border-radius: 2rem;
 
-  font-size: 1vw;
+  font-size: 1dvw;
   font-weight: 700;
   letter-spacing: 10%;
 
@@ -70,8 +70,8 @@
   justify-content: center;
   align-items: center;
   color: white;
-  font-size: 2vw;
-  box-shadow: 0px 0.5vw 1.5vw rgba(0,0,0,0.25);
+  font-size: 2dvw;
+  box-shadow: 0px 0.5dvw 1.5dvw rgba(0,0,0,0.25);
 }
 
 /* TITULO */
@@ -79,7 +79,7 @@
   color: var(--vino-tema_claro-2);
   margin-bottom: 5%;
   font-weight: 500;
-  font-size: 1.5vw;
+  font-size: 1.5dvw;
 }
 
 /* INPUTS */
@@ -92,19 +92,20 @@
   display: block;
   text-align: left;
   color: var(--vino-tema_claro-2);
-  font-size: 0.85vw;
+  font-size: 0.85dvw;
   font-weight: 600;
   margin-bottom: 0.3rem;
 }
 
 .input-group input {
   width: 100%;
+  box-sizing: border-box;
   border: none;
-  border-bottom: 0.2vw solid var(--salmon-tema_claro-2);
+  border-bottom: 0.2dvw solid var(--salmon-tema_claro-2);
   padding: 2% 3%;
   background: transparent;
   outline: none;
-  font-size: 0.9vw;
+  font-size: 0.9dvw;
   color: var(--salmon-tema_claro-4);
 }
 
@@ -120,11 +121,11 @@
   color: var(--base-tema_claro-2);
   border: none;
   padding: 2% 8%;
-  border-radius: 2vw;
+  border-radius: 2dvw;
   margin-top: 5%;
   cursor: pointer;
   transition: 0.25s;
-  font-size: 0.9vw;
+  font-size: 0.9dvw;
 }
 
 /* HOVER */
@@ -146,7 +147,7 @@
   background: var(--base-tema_claro-2);
   border: 0.1rem solid var(--salmon-tema_claro-4);
   padding: 0.1rem 0.4rem;
-  border-radius: 30px;
+  border-radius: 3rem;
 
   white-space: nowrap;
 }
@@ -165,11 +166,71 @@
   border: none;
   cursor: pointer;
   color: var(--vino-tema_claro-2);
-  font-size: 1.5vw;
+  font-size: 1.5dvw;
   display: flex;
   align-items: center;
 }
 
 .toggle-password:hover {
   opacity: 0.7;
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .login-card {
+    width: 92%;
+    height: auto;
+    flex-direction: column;
+  }
+  .login-izquierda {
+    display: none;
+  }
+  .login-derecha {
+    width: 100%;
+    padding: 3rem 2rem;
+  }
+  .login-content {
+    width: 100%;
+  }
+  .login-content h2 {
+    font-size: 1.5rem;
+  }
+  .input-group label {
+    font-size: 0.9rem;
+  }
+  .input-group input {
+    font-size: 1rem;
+    border-bottom-width: 0.2rem;
+  }
+  .btn-login {
+    font-size: 1rem;
+    padding: 0.8rem 2rem;
+    border-radius: 3rem;
+  }
+  .icon {
+    width: 6rem;
+    height: 6rem;
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-aspect-ratio: 9/16) {
+  .login-page {
+    padding: 1rem;
+  }
+  .login-card {
+    width: 100%;
+  }
+  .login-derecha {
+    padding: 2rem 1.5rem;
+  }
+  .badge {
+    display: none;
+  }
+  .password-input-wrapper input {
+    padding-right: 2.5rem;
+  }
+  .toggle-password {
+    font-size: 1.1rem;
+    right: 0.25rem;
+  }
 }
