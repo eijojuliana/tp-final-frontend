@@ -29,9 +29,10 @@ export class Sidebar implements OnInit {
   }
 
   ngOnInit() {
-    const tiendaActual = this.tiendaService.tienda();
-
-    if (!tiendaActual || !tiendaActual.tiendaId || tiendaActual.tiendaId <= 0) { this.tiendaService.load(); }
+    if (this.auth.isLoggedIn()) {
+      const tiendaActual = this.tiendaService.tienda();
+      if (!tiendaActual || !tiendaActual.tiendaId || tiendaActual.tiendaId <= 0) { this.tiendaService.load(); }
+    }
   }
 
   toggleMenu(menu: string) {

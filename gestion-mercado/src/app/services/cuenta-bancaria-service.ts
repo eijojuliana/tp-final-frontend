@@ -16,12 +16,13 @@ export class CuentaBancariaService {
   private cuentaBancariaToEditState = signal<CuentaBancaria | null>(null);
   public cuentaBancariaToEdit = this.cuentaBancariaToEditState.asReadonly();
 
-  constructor(private http:HttpClient) { this.load(); }
+  constructor(private http:HttpClient) { }
 
   load() {
-    this.http.get<CuentaBancaria[]>(this.url).subscribe(data =>
-      this.cuentaBancariaState.set(data)
-    )
+    this.http.get<CuentaBancaria[]>(this.url).subscribe({
+      next: data => this.cuentaBancariaState.set(data),
+      error: () => {}
+    });
   }
 
   post(cuentaBancaria:newCuentaBancaria):Observable<CuentaBancaria> {

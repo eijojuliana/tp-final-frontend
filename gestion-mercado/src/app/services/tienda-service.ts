@@ -16,7 +16,6 @@ export class TiendaService {
   private loadedState = signal<boolean>(false);
 
   constructor(private http: HttpClient, private injector: Injector) {
-    this.load();
   }
 
   load(): void {

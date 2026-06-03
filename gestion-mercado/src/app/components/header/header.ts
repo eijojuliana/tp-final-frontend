@@ -41,9 +41,11 @@ export class Header implements OnInit {
   });
 
   ngOnInit(): void {
-    this.pedidoService.verificarEstadoCaja();
+    if (this.authService.isLoggedIn()) {
+      this.pedidoService.verificarEstadoCaja();
+      this.tiendaService.load();
+    }
     this.theme.init();
-    this.tiendaService.load(); // Asegura que la info de la tienda esté cargada para la caja
   }
 
   cerrarSesion() {

@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { filter, first, map, Observable, tap } from 'rxjs';
 import { environment } from './ip';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,25 +20,17 @@ export class DuenioService {
 
   private loadedState = signal<boolean>(false);
 
-  constructor(private http: HttpClient, private injector:Injector,private auth:AuthService){
-
-    const rol = this.auth.getRole();
-
-
-  if (!rol || rol === 'ADMIN' || rol === 'DUENIO') {
-
-    this.load();
-  }
-
+  constructor(private http: HttpClient, private injector:Injector){
   }
 
 load(): void {
-    this.http.get<Duenio[]>(this.url).pipe(
-      tap(data => {
+    this.http.get<Duenio[]>(this.url).subscribe({
+      next: data => {
         this.dueniosState.set(data);
         this.loadedState.set(true);
-      })
-    ).subscribe();
+      },
+      error: () => this.loadedState.set(true)
+    });
   }
 
   public get loaded$(): Observable<boolean> {

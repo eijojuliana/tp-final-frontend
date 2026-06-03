@@ -19,13 +19,13 @@ export class PedidoService {
   isCajaCerradaHoy = signal<boolean>(false);
 
   constructor(private http: HttpClient) {
-    this.load();
   }
 
   load() {
-    this.http.get<Pedido[]>(this.url).subscribe(
-      data => this.pedidosState.set(data)
-    );
+    this.http.get<Pedido[]>(this.url).subscribe({
+      next: data => this.pedidosState.set(data),
+      error: () => {}
+    });
   }
 
   getById(id: number): Observable<Pedido> {

@@ -14,42 +14,38 @@ export const setupGuard: CanActivateFn = (route, state): Observable<boolean | Ur
   const tiendaService = inject(TiendaService);
   const toast = inject(ToastService);
 
-  const rol = auth.getRole(); // 'ADMIN', 'DUENIO' o 'EMPLEADO'
+  const rol = auth.getRole();
   const currentUrl = state.url;
 
-  // Los empleados no configuran la tienda, pasan directo
   if (rol == 'EMPLEADO' || rol == 'Empleado') {
     return true;
   }
+
+  duenioService.load();
+  tiendaService.load();
 
   return forkJoin({
     dueniosReady: duenioService.loaded$,
     tiendaReady: tiendaService.loaded$,
   }).pipe(
     map(() => {
-      const verificarTienda = tiendaService.verificarTienda;
       const hayDuenios = duenioService.hayDuenios;
+      const hayTienda = tiendaService.hayTienda;
 
-      // Si ya estamos en el formulario de tienda, permitir acceso
       if (currentUrl === '/configuracion-tienda') {
         return true;
       }
-      console.log('Buscando registros...')
 
-      // Si no hay dueños, obligar a crear uno primero
       if (!hayDuenios) {
         if (currentUrl === '/menu/duenios/form') return true;
         toast.error('Debe registrar un dueño primero.');
         return router.parseUrl('/menu/duenios/form');
       }
-      console.log('Dueño encontrado...')
 
-      // Si hay dueños pero no hay tienda, obligar a configurar tienda
-      if (!verificarTienda) {
+      if (!hayTienda) {
         toast.error('Debe configurar los datos de la tienda.');
         return router.parseUrl('/configuracion-tienda');
       }
-      console.log('Tienda encontrada...')
 
       return true;
     })
