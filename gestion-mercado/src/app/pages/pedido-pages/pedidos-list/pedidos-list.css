@@ -16,7 +16,7 @@
 .botones-rango button {
   background: var(--bg-pag2);
   border: 0.1rem solid var(--borde);
-  color: white;
+  color: var(--letra1);
   padding: 0.8rem 2rem;
   border-radius: 5rem;
   cursor: pointer;
@@ -43,7 +43,7 @@
 .botones-estado button {
   background: var(--bg-pag2);
   border: 0.1rem solid var(--borde);
-  color: white;
+  color: var(--letra1);
   padding: 0.6rem 1.4rem;
   border-radius: 5rem;
   cursor: pointer;
@@ -68,7 +68,7 @@
   padding: 0.8rem 1.5rem;
   border: 0.1rem solid var(--borde);
   background: var(--bg-pag2);
-  color: white;
+  color: var(--letra1);
 }
 
 

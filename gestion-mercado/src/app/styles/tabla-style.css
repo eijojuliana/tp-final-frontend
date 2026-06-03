@@ -195,7 +195,8 @@ DIV TABLA
 }
 
 .btnDetalle:hover {
-  background: var(--btn-detalle-hover)
+  background: var(--btn-detalle-hover);
+  border-color: var(--btn-detalle-borde-hover);
 }
 
 .btnEliminar:disabled,

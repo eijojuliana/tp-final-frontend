@@ -28,7 +28,7 @@
       </div>
     </a>
 
-    @if(currentRole == "ADMIN"){
+    @if(currentRole == "ADMIN" || currentRole == "DUENIO"){
       <a routerLink="/configuracion-tienda" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
         <div class="item-content">
           <img src="assets/images/shop-icon.png" class="menu-icon">
