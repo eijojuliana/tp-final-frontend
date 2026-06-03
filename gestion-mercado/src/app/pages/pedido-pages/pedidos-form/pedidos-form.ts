@@ -221,11 +221,16 @@ export class PedidosForm implements OnInit {
     this.router.navigate(['/menu/pedidos']);
   }
 
-  cancelarCreacion() {
-    this.pedidoCreado.set(null);
-    this.form.reset();
-    this.router.navigate(['/menu/pedidos']);
+public eliminarPedido(id: number) {
+  if (confirm('¿Desea eliminar este pedido permanentemente?')) {
+    this.pedidoService.delete(id).subscribe({
+      next: () => {
+        this.pedidoService.clearPedidoToEdit();
+        this.router.navigate(['/menu/pedidos']);
+      }
+    });
   }
+}
 
   finalizarPedido() {
     const pedido = this.pedidoCreado();
