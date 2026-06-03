@@ -1,5 +1,11 @@
 @import '../../../styles/form-style.css';
 
+[formGroupName="direccion"] {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
 @media (max-aspect-ratio: 1/1) {
   .image {
     width: 30%;
@@ -12,4 +18,5 @@
   .form-container{
     gap: 1rem;
   }
+
 }
