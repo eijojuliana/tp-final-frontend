@@ -32,6 +32,18 @@ import { YaLogueado } from './pages/ya-logueado-page/ya-logueado/ya-logueado';
 import { PersonaForm } from './pages/persona-pages/persona-form/persona-form';
 import { HistorialPersonaListComponent } from './pages/historial-pages/historial-persona-page/historial-persona-list';
 import { HistorialClienteListComponent } from './pages/historial-pages/historial-cliente-page/historial-cliente-list';
+import { HistorialUsuarioListComponent } from './pages/historial-pages/historial-usuario-page/historial-usuario-list';
+import { HistorialProveedorListComponent } from './pages/historial-pages/historial-proveedor-page/historial-proveedor-list';
+import { HistorialEmpleadoListComponent } from './pages/historial-pages/historial-empleado-page/historial-empleado-list';
+import { HistorialDuenioListComponent } from './pages/historial-pages/historial-duenio-page/historial-duenio-list';
+import { HistorialTiendaListComponent } from './pages/historial-pages/historial-tienda-page/historial-tienda-list';
+import { HistorialProductoListComponent } from './pages/historial-pages/historial-producto-page/historial-producto-list';
+import { HistorialInventarioListComponent } from './pages/historial-pages/historial-inventario-page/historial-inventario-list';
+import { HistorialLoteListComponent } from './pages/historial-pages/historial-lote-page/historial-lote-list';
+import { HistorialCuentaBancariaListComponent } from './pages/historial-pages/historial-cuentaBancaria-page/historial-cuenta-bancaria-list';
+import { HistorialTransaccionListComponent } from './pages/historial-pages/historial-transaccion-page/historial-transaccion-list';
+import { HistorialPedidoListComponent } from './pages/historial-pages/historial-pedido-page/historial-pedido-list';
+import { HistorialDetallePedidoListComponent } from './pages/historial-pages/historial-detallePedido-page/historial-detalle-pedido-list';
 import { EstadisticasComponent } from './pages/estadisticas-page/estadisticas.component';
 import { CierreCajaComponent } from './pages/cierre-caja-page/cierre-caja.component';
 
@@ -79,7 +91,7 @@ export const routes: Routes = [
   // Rutas usuarios
   {path:'menu/usuarios', component: UsuariosList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
   {path:'menu/usuarios/form', component: UsuarioForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO}},
-
+  { path:'menu/historial/usuarios',component:HistorialUsuarioListComponent, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
   // Rutas duenios (Estas rutas SÍ deben estar protegidas)
   {path:'menu/duenios', component: DueniosList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO}},
   {path:'menu/duenios/form', component: DuenioForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO}},
@@ -91,7 +103,19 @@ export const routes: Routes = [
   //Rutas clientes
   { path: 'menu/clientes', component: ClienteList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
   { path: 'menu/clientes/form', component: ClienteForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
-{ path:'menu/historial/clientes',component:HistorialClienteListComponent, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  { path:'menu/historial/clientes',component:HistorialClienteListComponent, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+
+  { path:'menu/historial/proveedores',component:HistorialProveedorListComponent, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  { path:'menu/historial/empleados',component:HistorialEmpleadoListComponent, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  { path:'menu/historial/duenios',component:HistorialDuenioListComponent, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  { path:'menu/historial/tiendas',component:HistorialTiendaListComponent, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  { path:'menu/historial/productos',component:HistorialProductoListComponent, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  { path:'menu/historial/inventarios',component:HistorialInventarioListComponent, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  { path:'menu/historial/lotes',component:HistorialLoteListComponent, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  { path:'menu/historial/cuentas-bancarias',component:HistorialCuentaBancariaListComponent, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  { path:'menu/historial/transacciones',component:HistorialTransaccionListComponent, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  { path:'menu/historial/pedidos',component:HistorialPedidoListComponent, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  { path:'menu/historial/detalles-pedido',component:HistorialDetallePedidoListComponent, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
   //Rutas transacciones
   { path: 'menu/transacciones', component: TransaccionesList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
   { path: 'menu/transacciones/form', component: TransaccionForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},

@@ -1,0 +1,51 @@
+<section class="list-container">
+  <div class="botones">
+    <select (change)="atributo.set($any($event.target).value); cargar()">
+      <option value="" disabled selected>Filtrar por...</option>
+      <option value="fecha">Fecha</option>
+      <option value="accion">Acción</option>
+      <option value="inventarioId">Inventario ID</option>
+    </select>
+    <select (change)="orden.set($any($event.target).value); cargar()">
+      <option value="" disabled selected>Orden</option>
+      <option value="asc">Ascendente</option>
+      <option value="desc">Descendente</option>
+    </select>
+    <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value); cargar()" />
+  </div>
+  <div class="tabla-contenedor">
+    <table class="tabla-historial">
+      <thead class="encabezado">
+        <tr>
+          <th>ID Hist</th><th>ID Inventario</th><th>Acción</th><th>Detalle</th><th>Fecha</th>
+          <th class="celda-acciones">
+            <a class="volver-link" routerLink="/menu/productos"><img class="volver-icon" src="/assets/images/volver-icon.png" alt="volver"></a>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="tablaBody">
+        @for (h of historial(); track h.historialInventarioId) {
+          <tr>
+            <td>{{ h.historialInventarioId }}</td>
+            <td>{{ h.inventarioId }}</td>
+            <td>{{ h.accion }}</td>
+            <td>
+              @if (h.accion === 'UPDATE' && h.campoModificado) {
+                <span class="atributo-nombre">{{ h.campoModificado }}:</span>
+                <span class="valor-viejo">{{ h.valorAnterior }}</span>
+                <span class="flecha">→</span>
+                <span class="valor-nuevo">{{ h.valorNuevo }}</span>
+              } @else if (h.accion === 'INSERT') { <span> Registro </span>
+              } @else if (h.accion === 'DELETE') { <span> Eliminación </span>
+              } @else { <span>-</span> }
+            </td>
+            <td>{{ h.fechaEvento | date:'dd/MM/yyyy HH:mm' }}</td>
+            <td></td>
+          </tr>
+        } @empty {
+          <tr><td class="sin-registros" colspan="6">No se encontraron registros</td></tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
