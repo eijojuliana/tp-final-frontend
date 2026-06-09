@@ -1,127 +1,102 @@
-<main>
-  <div class="form-card">
-    <h2 class="form-title">Registrar pedido</h2>
 
-    @if (pedidoService.isCajaCerradaHoy()) {
-      <div class="caja-cerrada-aviso">
-        <span class="material-icons icon-aviso">lock</span>
-        <div class="texto-aviso">
-          <strong>Atención: La caja de hoy está cerrada</strong>
-          <p>No se admiten compras ni ventas en efectivo por el resto del día.</p>
+<div class="form-container">
+  <div class="card">
+    <div class="rectangulito"></div>
+
+    <div>
+      <h2>{{ isEditMode() ? 'Editar Pedido' : 'Registrar Pedido' }}</h2>
+
+      @if (pedidoService.isCajaCerradaHoy()) {
+        <div class="caja-cerrada-aviso">
+          <span class="material-icons icon-aviso">lock</span>
+          <div class="texto-aviso">
+            <strong>Atención: La caja de hoy está cerrada</strong>
+            <p>No se admiten compras ni ventas en efectivo por el resto del día.</p>
+          </div>
         </div>
-      </div>
-    }
+      }
 
-    <form [formGroup]="form">
-      <div class="form-row">
-        <label class="form-label">Tipo de pedido</label>
-        <div class="pill-group">
-          <button
-            type="button"
-            class="pill"
-            [class.active]="form.get('tipoPedido')?.value === 'COMPRA'"
-            (click)="form.get('tipoPedido')?.setValue('COMPRA')"
-          >COMPRA</button>
-          <button
-            type="button"
-            class="pill"
-            [class.active]="form.get('tipoPedido')?.value === 'VENTA'"
-            (click)="form.get('tipoPedido')?.setValue('VENTA')"
-          >VENTA</button>
+      <form [formGroup]="form">
+        <div class="campo">
+          <label>Tipo de pedido<span class="obligatorio">*</span></label>
+          <div class="pill-group">
+            <button type="button" class="pill" [class.active]="form.get('tipoPedido')?.value === 'COMPRA'" (click)="form.get('tipoPedido')?.setValue('COMPRA')">COMPRA</button>
+            <button type="button" class="pill" [class.active]="form.get('tipoPedido')?.value === 'VENTA'" (click)="form.get('tipoPedido')?.setValue('VENTA')">VENTA</button>
+          </div>
         </div>
-      </div>
 
-      <div class="form-row">
-        <label class="form-label">Método de pago</label>
-        <div class="pill-group">
-          <button
-            type="button"
-            class="pill"
-            [class.active]="form.get('tipoTransaccion')?.value === 'EFECTIVO'"
-            (click)="form.get('tipoTransaccion')?.setValue('EFECTIVO')"
-          >EFECTIVO</button>
-          <button
-            type="button"
-            class="pill"
-            [class.active]="form.get('tipoTransaccion')?.value === 'TRANSFERENCIA'"
-            (click)="form.get('tipoTransaccion')?.setValue('TRANSFERENCIA')"
-          >TRANSFERENCIA</button>
+        <div class="campo">
+          <label>Método de pago<span class="obligatorio">*</span></label>
+          <div class="pill-group">
+            <button type="button" class="pill" [class.active]="form.get('tipoTransaccion')?.value === 'EFECTIVO'" (click)="form.get('tipoTransaccion')?.setValue('EFECTIVO')">EFECTIVO</button>
+            <button type="button" class="pill" [class.active]="form.get('tipoTransaccion')?.value === 'TRANSFERENCIA'" (click)="form.get('tipoTransaccion')?.setValue('TRANSFERENCIA')">TRANSFERENCIA</button>
+          </div>
         </div>
-      </div>
 
-      <div class="form-row">
-        <label class="form-label">Destinatario</label>
-        <div class="destinatario-control">
-          @if (form.get('tipoPedido')?.value === 'COMPRA') {
-            <app-buscador-generico
-              [datos]="proveedoresMapeados"
-              placeholder="Buscar proveedor..."
-              (alSeleccionar)="alSeleccionarProveedor($event)">
-            </app-buscador-generico>
-            <button type="button" class="btn-nuevo" (click)="irAProveedor()">+ Nuevo</button>
-          } @else if (form.get('tipoPedido')?.value === 'VENTA') {
-            <app-buscador-generico
-              [datos]="clientesMapeados"
-              placeholder="Buscar cliente..."
-              (alSeleccionar)="alSeleccionarCliente($event)">
-            </app-buscador-generico>
-            <button type="button" class="btn-nuevo" (click)="irACliente()">+ Nuevo</button>
-          } @else {
-            <div class="placeholder-selector">Seleccione tipo de pedido primero</div>
+        <div class="campo">
+          <label>Destinatario<span class="obligatorio">*</span></label>
+          <div class="destinatario-control">
+            @if (form.get('tipoPedido')?.value === 'COMPRA') {
+              <app-buscador-generico
+                [datos]="proveedoresMapeados"
+                placeholder="Buscar proveedor..."
+                (alSeleccionar)="alSeleccionarProveedor($event)">
+              </app-buscador-generico>
+              <button type="button" class="btn-nuevo" (click)="irAProveedor()">+ Nuevo</button>
+            } @else if (form.get('tipoPedido')?.value === 'VENTA') {
+              <app-buscador-generico
+                [datos]="clientesMapeados"
+                placeholder="Buscar cliente..."
+                (alSeleccionar)="alSeleccionarCliente($event)">
+              </app-buscador-generico>
+              <button type="button" class="btn-nuevo" (click)="irACliente()">+ Nuevo</button>
+            } @else {
+              <div class="placeholder-selector">Seleccione tipo de pedido primero</div>
+            }
+          </div>
+        </div>
+
+        @if (form.get('tipoTransaccion')?.value === 'TRANSFERENCIA' && form.get('tipoPedido')?.value) {
+          <div class="campo">
+            <label>Cuenta bancaria</label>
+            <select formControlName="cuentaBancaria" class="form-select">
+              <option [ngValue]="null" disabled selected>Seleccione una cuenta</option>
+              @for (cuenta of cuentasBancarias(); track $index) {
+                <option [ngValue]="cuenta.cuentaBancariaId">
+                  CBU: {{ cuenta.cbu }} — Saldo: {{ cuenta.saldo }}
+                </option>
+              }
+            </select>
+          </div>
+        }
+
+        <div class="botones">
+          <button type="submit" [disabled]="form.invalid || (isEditMode() && pedidoToEdit?.estado === 'FINALIZADO')" (click)="savePedido()">
+            {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
+          </button>
+
+          @if (isEditMode()) {
+            <button type="button" (click)="cancelEdit()">Cancelar</button>
           }
         </div>
-      </div>
-
-      @if (form.get('tipoTransaccion')?.value === 'TRANSFERENCIA' && form.get('tipoPedido')?.value) {
-        <div class="form-row">
-          <label class="form-label">Cuenta bancaria</label>
-          <select formControlName="cuentaBancaria" class="select-cuenta">
-            <option [ngValue]="null" disabled selected>Seleccione una cuenta</option>
-            @for (cuenta of cuentasBancarias(); track $index) {
-              <option [ngValue]="cuenta.cuentaBancariaId">
-                CBU: {{ cuenta.cbu }} — Saldo: {{ cuenta.saldo }}
-              </option>
-            }
-          </select>
-        </div>
-      }
-    </form>
-
-    <div class="form-actions">
-      <button
-        type="button"
-        class="btn-registrar"
-        [disabled]="form.invalid || (isEditMode() && pedidoToEdit?.estado === 'FINALIZADO')"
-        (click)="savePedido()"
-      >
-        {{ isEditMode() ? 'Actualizar' : 'REGISTRAR' }}
-      </button>
-
-      @if (isEditMode()) {
-        <button type="button" class="btn-cancel" (click)="cancelEdit()">Cancelar</button>
-      }
+      </form>
     </div>
   </div>
+</div>
 
-  @if (showModal() && pedidoCreado(); as pedido) {
-    <div class="modal-overlay" (click)="cerrarModal()">
-      <div class="modal-card" (click)="$event.stopPropagation()">
-        <div class="modal-header">
-          <h2>Detalle Pedido</h2>
-        </div>
+@if (showModal() && pedidoCreado(); as pedido) {
+  <div class="modal-overlay" (click)="cerrarModal()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Detalle Pedido</h2>
+      </div>
 
-        <app-detalles-pedido [pedido]="pedido"></app-detalles-pedido>
+      <app-detalles-pedido [pedido]="pedido"></app-detalles-pedido>
 
-        <div class="modal-footer">
-          <button type="button" class="btn-cancelar-modal" (click)="cerrarModal()">CANCELAR</button>
-          <button
-            type="button"
-            class="btn-finalizar-modal"
-            [disabled]="pedido.estado === 'FINALIZADO'"
-            (click)="finalizarPedido()"
-          >FINALIZAR PEDIDO</button>
-        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-cancelar-modal" (click)="cerrarModal()">CANCELAR</button>
+        <button type="button" class="btn-finalizar-modal" [disabled]="pedido.estado === 'FINALIZADO'" (click)="finalizarPedido()">FINALIZAR PEDIDO</button>
       </div>
     </div>
-  }
-</main>
+  </div>
+}
