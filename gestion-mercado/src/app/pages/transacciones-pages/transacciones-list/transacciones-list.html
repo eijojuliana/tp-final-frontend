@@ -9,8 +9,8 @@
     <select (change)="atributo.set($any($event.target).value)">
       <option value="" disabled selected>Filtrar por...</option>
       <option value="transaccion_id">Transacción ID</option>
-      <option value="origen_id">Origen ID</option>
-      <option value="destino_id">Destino ID</option>
+      <option value="origen_id">Origen</option>
+      <option value="destino_id">Destino</option>
       <option value="monto">Monto</option>
       <option value="fecha">Fecha</option>
     </select>
@@ -28,8 +28,8 @@
         <tr>
           <th> ID </th>
           <th> Tipo </th>
-          <th> ID Origen </th>
-          <th> ID Destino </th>
+          <th> Origen </th>
+          <th> Destino </th>
           <th> Monto </th>
           <th> Fecha </th>
           <th class="celda-acciones">
