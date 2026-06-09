@@ -35,7 +35,10 @@
       <div class="card" [class.stock-bajo]="p.stockBajo" [title]="p.stockBajo ? 'Stock por debajo del mínimo' : ''">
         @if (p.stockBajo) {
           <div class="stock-alert">
-            <span class="material-icons">warning_amber</span>
+            <span class="stock-badge">
+              <span class="material-icons">warning_amber</span>
+              Stock bajo
+            </span>
             <div class="stock-tooltip">
               Stock actual: {{ p.inventario?.cantidad }} / Mínimo: {{ p.inventario?.stockMin }}
             </div>
