@@ -183,12 +183,31 @@
   color: var(--letra2);
 }
 
-.form-select {
+.form-select, .campo select {
   width: 100%;
-  max-width: 65%;
-  border-radius: 5rem;
-  border-color: var(--borde-hover);
-  color: var(--letra1-leve);
+  max-width: 60%;
+  padding: 1rem 1.2rem;
+  border-radius: 99.9rem;
+  border: 0.15rem solid var(--borde-hover);
+  background: var(--bg-input);
+  color: var(--letra1);
+  font-size: 1rem;
+  font-family: var(--font-body);
+  outline: none;
+  transition: 0.25s ease;
+  cursor: pointer;
+  appearance: auto;
+}
+
+.form-select:hover, .campo select:hover {
+  border-color: var(--borde-focus);
+  background: var(--bg-tabla);
+}
+
+.form-select:focus, .campo select:focus {
+  border-color: var(--borde-focus);
+  box-shadow: 0 0 0 0.4rem rgba(236, 143, 161, 0.18);
+  background: var(--bg-tabla);
 }
 
 /* ASTERISCO OBLIGATORIO */
