@@ -1,1 +1,53 @@
-<p>transaccion-form works!</p>
+<div class="form-container">
+  <div class="card">
+    <div class="rectangulito"></div>
+    <div>
+      <h2>Registrar Movimiento</h2>
+
+      <form [formGroup]="form" (ngSubmit)="saveMovimiento()">
+        <div class="campo">
+          <label>Tipo de movimiento<span class="obligatorio">*</span>:</label>
+          <select class="form-select" formControlName="tipo" (change)="onTipoChange($event)">
+            <option value="INGRESO_MANUAL">Ingreso (entra dinero)</option>
+            <option value="EGRESO_MANUAL">Egreso (sale dinero)</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label>Monto ($)<span class="obligatorio">*</span>:</label>
+          <input type="number" step="0.01" min="0.01" formControlName="monto" placeholder="0.00">
+          @if (form.get('monto')?.invalid && form.get('monto')?.touched) {
+            <span class="error">El monto debe ser un valor positivo.</span>
+          }
+        </div>
+
+        <div class="campo">
+          <label>Motivo<span class="obligatorio">*</span>:</label>
+          <input type="text" formControlName="motivo" placeholder="Ej: Aporte para cambio, Pago a proveedor...">
+          @if (form.get('motivo')?.invalid && form.get('motivo')?.touched) {
+            <span class="error">El motivo es requerido.</span>
+          }
+        </div>
+
+        <div class="campo">
+          <label>{{ tipoMovimiento() === 'INGRESO_MANUAL' ? 'Destino (dónde entra)' : 'Origen (de dónde sale)' }}<span class="obligatorio">*</span>:</label>
+          <select class="form-select" formControlName="destinoId">
+            <option [value]="1">Caja (Efectivo)</option>
+            @for (cb of cuentasBancarias(); track cb.cuentaBancariaId) {
+              <option [value]="cb.cuentaBancariaId">
+                {{ cb.nombreBanco }} - ${{ cb.saldo | number:'1.2-2' }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <div class="botones">
+          <button type="submit" [disabled]="form.invalid">
+            Registrar {{ tipoMovimiento() === 'INGRESO_MANUAL' ? 'Ingreso' : 'Egreso' }}
+          </button>
+          <button type="button" routerLink="/menu/transacciones">Volver</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

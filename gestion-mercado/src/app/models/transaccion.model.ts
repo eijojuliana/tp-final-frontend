@@ -5,10 +5,13 @@ export interface Transaccion {
   monto: number,
   origen_id: number | null,
   destino_id: number,
+  motivo?: string,
 }
 
 export interface NewTransaccion {
-  tipo: 'EFECTIVO' | 'TRANSFERENCIA',
+  tipo: 'EFECTIVO' | 'TRANSFERENCIA' | 'INGRESO_MANUAL' | 'EGRESO_MANUAL',
+  monto?: number,
   origen_id?: number | null | undefined,
-  destino_id: number,
+  destino_id?: number,
+  motivo?: string,
 }

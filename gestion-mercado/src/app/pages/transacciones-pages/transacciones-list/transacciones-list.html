@@ -1,9 +1,12 @@
 <section class="list-container">
-  <div>
+  <h2>Listado de Transacciones</h2>
+  <div class="botones">
     <select (change)="onTipoChange($event)">
       <option value="">Todos los tipos</option>
       <option value="EFECTIVO">Efectivo</option>
       <option value="TRANSFERENCIA">Transferencia</option>
+      <option value="INGRESO_MANUAL">Ingreso Manual</option>
+      <option value="EGRESO_MANUAL">Egreso Manual</option>
     </select>
 
     <select (change)="atributo.set($any($event.target).value)">
@@ -20,6 +23,8 @@
       <option value="asc">Ascendente</option>
       <option value="desc">Descendente</option>
     </select>
+
+    <a class="btn-agregar" routerLink="/menu/transacciones/form">+ Nuevo Movimiento</a>
   </div>
 
   <div class="tabla-contenedor">
@@ -32,8 +37,10 @@
           <th> Destino </th>
           <th> Monto </th>
           <th> Fecha </th>
+          <th> Motivo </th>
           <th class="celda-acciones">
             <div class="celda-acciones-div">
+              Acciones
               <div class="acciones-botones">
                 <a (click)="exportarExcel()">
                   <img class="historial-icon" src="/assets/images/excel-icon.png" alt="exportar excel" title="Exportar a Excel">
@@ -48,7 +55,7 @@
       </thead>
 
       <tbody class="tablaBody">
-        @for (transaccion of transaccionesFiltrados(); track $index){
+        @for (transaccion of transaccionesFiltrados(); track transaccion.transaccion_id){
         <tr [class.entrada]="esEntrada(transaccion)" [class.salida]="!esEntrada(transaccion)">
           <td>{{ transaccion.transaccion_id }}</td>
           <td>{{ transaccion.tipo }}</td>
@@ -58,11 +65,12 @@
             {{ !esEntrada(transaccion) ? '- ' : '+ ' }}{{ transaccion.monto | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}
           </td>
           <td>{{ transaccion.fecha | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td>{{ transaccion.motivo || '-' }}</td>
           <td class="acciones"></td>
         </tr>
         } @empty {
         <tr>
-          <td colspan="7" class="sin-registros">No se encontraron transacciones</td>
+          <td colspan="8" class="sin-registros">No se encontraron transacciones</td>
         </tr>
         }
       </tbody>

@@ -1,7 +1,6 @@
 import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { TransaccionService } from '../../../services/transaccion-service';
 import { Transaccion } from '../../../models/transaccion.model';
-import { PedidoService } from '../../../services/pedido-service';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -21,7 +20,7 @@ export class TransaccionesList implements OnInit {
   private service = inject(TransaccionService);
   public transacciones = this.service.transacciones;
 
-  tipoFiltro = signal<'EFECTIVO' | 'TRANSFERENCIA' | ''>('');
+  tipoFiltro = signal<'EFECTIVO' | 'TRANSFERENCIA' | 'INGRESO_MANUAL' | 'EGRESO_MANUAL' | ''>('');
   atributo = signal<string>('');
   orden = signal<'asc' | 'desc' | ''>('');
 
@@ -48,11 +47,11 @@ export class TransaccionesList implements OnInit {
   });
 
   esEntrada(t: Transaccion): boolean {
-    return t.tipo === 'EFECTIVO';
+    return t.tipo === 'EFECTIVO' || t.tipo === 'INGRESO_MANUAL';
   }
 
   onTipoChange(event: Event) {
-    const value = (event.target as HTMLSelectElement).value as 'EFECTIVO' | 'TRANSFERENCIA' | '';
+    const value = (event.target as HTMLSelectElement).value as 'EFECTIVO' | 'TRANSFERENCIA' | 'INGRESO_MANUAL' | 'EGRESO_MANUAL' | '';
     this.tipoFiltro.set(value);
   }
 
