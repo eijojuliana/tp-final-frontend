@@ -3,6 +3,7 @@ import { Lote, newLote } from '../models/lote.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { environment } from './ip';
+import { InventarioService } from './inventario-service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class LoteService {
   private loteToEditState = signal<Lote | null>(null);
   public loteToEdit = this.loteToEditState.asReadonly();
 
-  constructor(private http:HttpClient) { this.load() }
+  constructor(private http:HttpClient, private inventarioService: InventarioService) { this.load() }
 
   load() {
     this.http.get<Lote[]>(this.url).subscribe(data =>
@@ -26,7 +27,7 @@ export class LoteService {
 
   post(lote:newLote):Observable<Lote> {
     return this.http.post<Lote>(this.url, lote).pipe(
-      tap( () => this.load() )
+      tap( () => { this.load(); this.inventarioService.load(); })
     );
   }
 
@@ -35,14 +36,15 @@ export class LoteService {
       tap(() => {
         this.loteState.update(currentLotes =>
           currentLotes.filter(l => l.lote_id !== id)
-        )
+        );
+        this.inventarioService.load();
       })
     )
   }
 
   update(lote:Lote):Observable<Lote> {
     return this.http.put<Lote>(`${this.url}/${lote.lote_id}`, lote).pipe(
-      tap( () => this.load() )
+      tap( () => { this.load(); this.inventarioService.load(); })
     );
   }
 
