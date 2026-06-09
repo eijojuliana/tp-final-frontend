@@ -22,7 +22,7 @@ export class CuentasBancariasForm {
 
   form = this.fb.nonNullable.group({
     nombreBanco:['',[Validators.required]],
-    cbu: [0, [Validators.required, Validators.min(1)]],
+    cbu: ['', [Validators.required, Validators.pattern('^\\d{22}$')]],
     saldo: [0, [Validators.required]]
   });
 

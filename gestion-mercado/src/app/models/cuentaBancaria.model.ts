@@ -1,12 +1,12 @@
 export interface CuentaBancaria {
   cuentaBancariaId: number,
   nombreBanco:string,
-  cbu: number,
+  cbu: string,
   saldo: number
 }
 
 export interface newCuentaBancaria {
   nombreBanco:string,
-  cbu: number,
+  cbu: string,
   saldo: number
 }

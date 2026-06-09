@@ -17,9 +17,14 @@
         </div>
         <div class = "campo">
           <label>CBU<span class="obligatorio">*</span>: </label>
-          <input type ="number" formControlName="cbu">
+          <input type ="text" formControlName="cbu" maxlength="22" inputmode="numeric" pattern="\d*">
           @if (form.get('cbu')?.invalid && form.get('cbu')?.touched) {
-            <span class = "error">El CBU de la cuenta bancaria es requerido.</span>
+            @if (form.get('cbu')?.errors?.['required']) {
+              <span class = "error">El CBU de la cuenta bancaria es requerido.</span>
+            }
+            @if (form.get('cbu')?.errors?.['pattern']) {
+              <span class = "error">El CBU debe tener exactamente 22 dígitos.</span>
+            }
           }
         </div>
         <div class = "campo">
