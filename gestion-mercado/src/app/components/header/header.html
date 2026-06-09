@@ -5,10 +5,8 @@
   <nav class="container" [style]="theme.isOscuro() ? 'background:#3A335C; box-shadow: inset 0 0 30px rgba(36,33,57,0.7);': ''">
 
     <div class="header-izq">
-      <button class="mobile-toggle" (click)="toggleSidebar()" aria-label="Menu">
-        <span class="bar" [class.open]="sidebarOpen"></span>
-        <span class="bar" [class.open]="sidebarOpen"></span>
-        <span class="bar" [class.open]="sidebarOpen"></span>
+      <button class="mobile-toggle" (click)="toggleSidebar()" [attr.aria-label]="sidebarOpen ? 'Cerrar menú' : 'Abrir menú'">
+        <span class="material-symbols-outlined">{{ sidebarOpen ? 'arrow_back_ios' : 'menu' }}</span>
       </button>
       <h1 class="brand-title">
         {{ tiendaService.tienda()?.nombreFantasia || 'Mercado del Cerezo' }}
@@ -61,13 +59,13 @@
             <div class="opcion" routerLink="/menu" (click)="toggleMenu()">
               <span class="material-symbols-outlined">home</span>
               <p>Menú</p>
-              <span>></span>
+              <span class="material-symbols-outlined flecha-opcion">chevron_right</span>
             </div>
 
             <div class="opcion" (click)="cerrarSesion()" (click)="toggleMenu()">
               <span class="material-symbols-outlined">logout</span>
               <p>Cerrar Sesión</p>
-              <span>></span>
+              <span class="material-symbols-outlined flecha-opcion">chevron_right</span>
             </div>
           </div>
         </div>

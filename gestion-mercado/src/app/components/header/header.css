@@ -25,36 +25,17 @@
 
 .mobile-toggle {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 2rem;
-  height: 2rem;
+  align-items: center;
+  justify-content: center;
   background: transparent;
-  border: 0.1rem solid rgba(255,255,255,0.3);
-  border-radius: 0.4rem;
+  border: none;
   cursor: pointer;
-  padding: 0.3rem;
-  box-sizing: border-box;
+  color: var(--letra1);
+  padding: 0;
 }
 
-.mobile-toggle .bar {
-  width: 100%;
-  height: 0.2rem;
-  background-color: var(--letra1, #ffffff);
-  border-radius: 1rem;
-  transition: all 0.3s linear;
-  transform-origin: 0.1rem;
-  display: block;
-}
-
-.mobile-toggle .bar.open:nth-child(1) {
-  transform: rotate(45deg) translate(0.1rem, 0rem);
-}
-.mobile-toggle .bar.open:nth-child(2) {
-  opacity: 0;
-}
-.mobile-toggle .bar.open:nth-child(3) {
-  transform: rotate(-45deg) translate(0.1rem, 0rem);
+.mobile-toggle .material-symbols-outlined {
+  font-size: 2rem;
 }
 
 @media (max-aspect-ratio: 1/1) {
@@ -288,6 +269,13 @@
   margin-left: 1rem;
   font-size: 1rem;
   color: var(--letra1);
+}
+
+.flecha-opcion {
+  font-size: 1.2rem !important;
+  color: var(--letra1-leve) !important;
+  background: transparent !important;
+  padding: 0 !important;
 }
 
 @media (max-aspect-ratio: 1/1) {

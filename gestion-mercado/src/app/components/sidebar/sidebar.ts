@@ -47,8 +47,6 @@ export class Sidebar implements OnInit {
   }
 
   closeMobileMenu() {
-    if (window.matchMedia('(max-aspect-ratio: 1/1)').matches) {
-      this.sidebarState.close();
-    }
+    this.sidebarState.close();
   }
 }

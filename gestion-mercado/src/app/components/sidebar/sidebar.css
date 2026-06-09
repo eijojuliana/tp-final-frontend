@@ -48,6 +48,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  position: relative;
 }
 
 .logo {
@@ -150,11 +151,36 @@
   display: none;
 }
 
-.mobile-close-btn {
+.sidebar-close-btn {
   display: none;
 }
 
 @media (max-aspect-ratio: 1/1) {
+  .sidebar-close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 1.5rem;
+    left: 24rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--letra1);
+    z-index: 1001;
+    padding: 0;
+  }
+
+  .sidebar.collapsed .sidebar-close-btn {
+    left: -100%;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .sidebar-close-btn .material-symbols-outlined {
+    font-size: 2rem;
+  }
+
   .sidebar {
     position: fixed;
     top: 0;
@@ -166,31 +192,6 @@
     box-shadow: 0.5rem 0 2.5rem rgba(0, 0, 0, 0.15);
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
-  }
-
-  .mobile-close-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 1.2rem;
-    right: 1.2rem;
-    width: 3.2rem;
-    height: 3.2rem;
-    background: transparent;
-    border: 0.1rem solid var(--borde);
-    border-radius: 0.6rem;
-    cursor: pointer;
-    color: var(--letra1);
-    z-index: 1000;
-  }
-
-  .mobile-close-btn:hover {
-    background: var(--btn);
-  }
-
-  .mobile-close-btn .material-symbols-outlined {
-    font-size: 2rem;
   }
 
   .sidebar.collapsed {

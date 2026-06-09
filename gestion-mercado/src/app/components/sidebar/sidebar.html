@@ -18,10 +18,10 @@
       <img class="logo" [src]="theme.isOscuro() ? 'assets/images/Logo-oscuro-MercadoCerezo.png' : 'assets/images/Logo-MercadoCerezo.png'" alt="Logo Defecto">
       <h2 class="titulo">Mercado del Cerezo</h2>
     }
-    <button class="mobile-close-btn" (click)="closeMobileMenu()" aria-label="Cerrar menú">
-      <span class="material-symbols-outlined">close</span>
-    </button>
   </div>
+  <button class="sidebar-close-btn" (click)="closeMobileMenu()" aria-label="Cerrar menú">
+    <span class="material-symbols-outlined">arrow_back_ios</span>
+  </button>
 
   <nav class="sidebar-menu">
     <a routerLink="/menu" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="item" (click)="closeMobileMenu()">
