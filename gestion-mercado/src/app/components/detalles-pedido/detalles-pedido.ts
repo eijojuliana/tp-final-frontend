@@ -18,6 +18,7 @@ import { BuscadorItem } from '../buscador/buscador-item';
 })
 export class DetallesPedido {
   @Input({ required: true }) pedido!: Pedido;
+  @Input() showInfoCard: boolean = true;
 
   private router = inject(Router);
   private productService = inject(ProductService);

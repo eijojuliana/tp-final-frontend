@@ -1,20 +1,24 @@
 <section class="detalle-content">
   <div class="detalle-columns">
     <div class="detalle-left">
+      @if (showInfoCard) {
       <div class="info-card">
         <h3>Información de tu pedido:</h3>
         <p class="info-resumen">{{ pedido.tipo }} - {{ pedido.transaccion.tipo }} - {{ destinatarioLabel() }}</p>
       </div>
+      }
 
       <div class="search-card">
         <h3>Buscá los productos a pedir...</h3>
-        <app-buscador-generico
-          [datos]="productosMapeados()"
-          [mostrarImagen]="true"
-          placeholder="Buscar productos"
-          (alSeleccionar)="alSeleccionarProducto($event)">
-        </app-buscador-generico>
-        <button type="button" class="btn-nuevo-producto" (click)="irAProducto()">+ Nuevo producto</button>
+        <div class="search-row">
+          <app-buscador-generico
+            [datos]="productosMapeados()"
+            [mostrarImagen]="true"
+            placeholder="Buscar productos"
+            (alSeleccionar)="alSeleccionarProducto($event)">
+          </app-buscador-generico>
+          <button type="button" class="btn-nuevo-producto" (click)="irAProducto()">+ Nuevo producto</button>
+        </div>
         <div class="add-product-row">
           <input
             type="number"

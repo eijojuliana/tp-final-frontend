@@ -1,5 +1,54 @@
 @import '../../../styles/form-style.css';
 
+.card.edit-mode {
+  max-width: 100rem;
+}
+
+.card > .card-body {
+  flex: 1;
+  padding: 3rem 0 3rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  overflow: hidden;
+}
+
+.card.edit-mode > .card-body {
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.detalles-column {
+  border-top: 0.1rem solid var(--borde);
+  padding-top: 2rem;
+  margin-right: 3rem;
+}
+
+.detalles-column .detalle-columns {
+  padding: 0;
+  gap: 2rem;
+}
+
+.detalles-column .detalle-left {
+  gap: 1.5rem;
+}
+
+.detalles-column .total-section {
+  padding: 1.2rem 0;
+}
+
+.form-column .campo input,
+.form-column .form-select,
+.form-column .campo select {
+  max-width: 60%;
+}
+
+.botones .btn-cancel {
+  background: var(--letra1-leve);
+  color: var(--letra1);
+  border: 0.1rem solid var(--borde-focus);
+}
+
 .pill-group {
   display: flex;
   gap: 0;
@@ -235,6 +284,25 @@
   .caja-cerrada-aviso {
     flex-direction: column;
     text-align: center;
+  }
+
+  .card.edit-mode > .card-body {
+    flex-direction: column;
+  }
+
+  .card > .card-body {
+    padding: 1.5rem;
+  }
+
+  .form-column {
+    flex: none;
+  }
+
+  .detalles-column {
+    border-left: none;
+    padding-left: 0;
+    border-top: 0.1rem solid var(--borde);
+    padding-top: 1.5rem;
   }
 
   .modal-overlay {
