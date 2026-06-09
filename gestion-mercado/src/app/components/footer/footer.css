@@ -114,3 +114,24 @@
     text-align: center;
   }
 }
+
+@media (max-aspect-ratio: 9/16) {
+  .brand-title {
+    font-size: 1.5rem;
+  }
+  .brand-slogan {
+    font-size: 1.1rem;
+  }
+  .footer-links h3, .footer-contact h3 {
+    font-size: 1.2rem;
+  }
+  .footer-links a {
+    font-size: 1.1rem;
+  }
+  .contact-email {
+    font-size: 1.1rem;
+  }
+  .footer-bottom {
+    font-size: 1rem;
+  }
+}

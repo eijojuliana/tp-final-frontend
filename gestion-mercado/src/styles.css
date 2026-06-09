@@ -196,6 +196,7 @@ img {
     display: flex;
     flex-direction: column;
     background: transparent;
+    min-width: 0;
 }
 
 .app-wrapper {
@@ -301,9 +302,20 @@ input, select, textarea, button {
 /* =========================
    RESPONSIVE
 ========================= */
+@media (max-aspect-ratio: 1/1) {
+  html {
+    font-size: 70%;
+  }
+}
+
 @media (max-aspect-ratio: 9/16) {
+  html {
+    font-size: 75%;
+  }
+
   main {
     padding: 0.5rem;
+    overflow-x: hidden;
   }
 }
 

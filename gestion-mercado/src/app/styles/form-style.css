@@ -281,8 +281,13 @@
     font-size: 1.8rem;
   }
 
+  .campo label {
+    font-size: 1.3rem;
+  }
+
   .campo input {
     max-width: 100%;
+    font-size: 1.2rem;
   }
 
   .form-select {
@@ -291,6 +296,10 @@
 
   .password-input-wrapper {
     max-width: 100%;
+  }
+
+  .botones button {
+    font-size: 1.2rem;
   }
 
   .botones button[type="submit"] {
@@ -310,11 +319,15 @@
     padding: 1rem !important;
   }
   .card h2 {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     margin-bottom: 1.2rem;
+  }
+  .campo label {
+    font-size: 1.3rem;
   }
   .campo input {
     max-width: 100%;
+    font-size: 1.2rem;
   }
   .form-select {
     max-width: 100%;
@@ -327,5 +340,6 @@
   }
   .botones button {
     width: 100%;
+    font-size: 1.2rem;
   }
 }

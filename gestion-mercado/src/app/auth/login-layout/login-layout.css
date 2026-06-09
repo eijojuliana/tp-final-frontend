@@ -230,6 +230,18 @@
   .badge {
     display: none;
   }
+  .login-content h2 {
+    font-size: 1.8rem;
+  }
+  .input-group label {
+    font-size: 1.2rem;
+  }
+  .input-group input {
+    font-size: 1.3rem;
+  }
+  .btn-login {
+    font-size: 1.3rem;
+  }
   .password-input-wrapper input {
     padding-right: 2.5rem;
   }

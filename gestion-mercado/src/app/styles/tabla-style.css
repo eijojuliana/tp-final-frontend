@@ -40,7 +40,7 @@ select {
   border-radius: 0.8rem;
   background-color: var(--bg-input);
   color: var(--letra1);
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -64,7 +64,7 @@ input[type="text"] {
   border-radius: 0.8rem;
   background-color: var(--bg-input);
   color: var(--letra1);
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   transition: all 0.3s ease;
   outline: none;
 }
@@ -306,6 +306,7 @@ DIV TABLA
 @media (max-aspect-ratio: 1/1) {
   .list-container {
     padding: 1rem;
+    overflow-x: hidden;
   }
 
   .botones {
@@ -325,6 +326,7 @@ DIV TABLA
   .botones input[type="text"] {
     width: 100%;
     min-width: 0;
+    font-size: 1.3rem;
   }
 
   .filter-container {
@@ -346,13 +348,14 @@ DIV TABLA
 
   .encabezado th {
     padding: 0.75rem 0.5rem;
-    font-size: 1.2rem;
-    white-space: normal;
+    font-size: 1.4rem;
+    white-space: nowrap;
   }
 
   .tablaBody td {
     padding: 0.75rem 0.5rem;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+    white-space: nowrap;
   }
 
   .acciones {
@@ -365,7 +368,7 @@ DIV TABLA
   .btnDetalle,
   .btnEliminar,
   .btnEditar {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     padding: 0.7rem 0.8rem;
     border-radius: 0.6rem;
   }
@@ -374,6 +377,10 @@ DIV TABLA
 @media (max-aspect-ratio: 9/16) {
   .list-container {
     padding: 0.5rem;
+    overflow-x: hidden;
+  }
+  .list-container h2 {
+    font-size: 1.8rem;
   }
   .list-container .botones {
     flex-direction: column;
@@ -390,6 +397,7 @@ DIV TABLA
   .list-container .botones input[type="text"] {
     width: 100%;
     min-width: 0;
+    font-size: 1.3rem;
   }
   .tabla-contenedor {
     overflow: auto hidden;
@@ -400,13 +408,14 @@ DIV TABLA
     min-width: 100%;
   }
   .encabezado th {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     padding: 0.6rem 0.5rem;
     white-space: nowrap;
   }
   .tablaBody td {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     padding: 0.6rem 0.5rem;
+    white-space: nowrap;
   }
   .celda-acciones {
     width: auto;
@@ -422,7 +431,7 @@ DIV TABLA
   .btnDetalle,
   .btnEliminar,
   .btnEditar {
-    font-size: 1rem;
+    font-size: 1.2rem;
     padding: 0.5rem 0.7rem;
   }
 }

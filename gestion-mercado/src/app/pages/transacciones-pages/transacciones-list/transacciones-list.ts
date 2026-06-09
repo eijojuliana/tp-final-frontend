@@ -20,17 +20,20 @@ export class TransaccionesList implements OnInit {
   private service = inject(TransaccionService);
   public transacciones = this.service.transacciones;
 
+  filtro = signal('');
   tipoFiltro = signal<'EFECTIVO' | 'TRANSFERENCIA' | 'INGRESO_MANUAL' | 'EGRESO_MANUAL' | ''>('');
   atributo = signal<string>('');
   orden = signal<'asc' | 'desc' | ''>('');
 
   transaccionesFiltrados = computed(() => {
+    const filtro = this.filtro().toLowerCase().trim();
     const tipo = this.tipoFiltro();
     const attr = this.atributo();
     const ord = this.orden();
 
     return this.transacciones()
       .filter(p => (tipo ? p.tipo === tipo : true))
+      .filter(p => (attr && filtro ? String((p as any)[attr]).toLowerCase().includes(filtro) : true))
       .sort((a, b) => {
         if (!ord || !attr) return 0;
         const A = (a as any)[attr];

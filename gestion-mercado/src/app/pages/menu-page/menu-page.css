@@ -252,7 +252,7 @@ main.contenido {
     padding: 1rem;
   }
   .topbar h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
   .kpi-grid {
     flex-direction: column;
@@ -264,13 +264,26 @@ main.contenido {
   }
   .kpi-label {
     margin-bottom: 0;
+    font-size: 1.1rem;
   }
   .kpi-value {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
+  }
+  .mov-monto {
+    font-size: 1.2rem;
+  }
+  .mov-hora {
+    font-size: 1rem;
+  }
+  .mov-tipo {
+    font-size: 1rem;
   }
   .mini-card {
     width: 8rem;
     height: 8rem;
+  }
+  .mini-card span {
+    font-size: 1rem;
   }
   .mini-icon {
     width: 3.6rem;

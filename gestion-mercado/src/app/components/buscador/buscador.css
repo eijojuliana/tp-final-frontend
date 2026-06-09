@@ -78,6 +78,18 @@
   color: var(--letra1-leve);
 }
 
+@media (max-aspect-ratio: 9/16) {
+  .input-busqueda {
+    font-size: 1.2rem;
+  }
+  .titulo-item {
+    font-size: 1.2rem;
+  }
+  .subtexto-item {
+    font-size: 0.95rem;
+  }
+}
+
 .mini-imagen {
   width: 3.2rem;
   height: 3.2rem;
