@@ -105,6 +105,24 @@
           </a>
           }
 
+          @if (auth.hasRole(['ADMIN','DUENIO'])){
+          <a routerLink="/menu/empleados" class="mini-card">
+            <div class="mini-icon">
+              <img src="/assets/images/empleado-icon.png">
+            </div>
+            <span>Empleados</span>
+          </a>
+          }
+
+          @if (auth.hasRole(['ADMIN','DUENIO'])){
+          <a routerLink="/menu/duenios" class="mini-card">
+            <div class="mini-icon">
+              <img src="/assets/images/duenio-icon.png">
+            </div>
+            <span>Dueños</span>
+          </a>
+          }
+
         </div>
       </div>
 

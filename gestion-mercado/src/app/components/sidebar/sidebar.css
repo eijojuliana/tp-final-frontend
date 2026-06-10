@@ -156,14 +156,22 @@
 }
 
 @media (max-aspect-ratio: 9/16) {
+  .menu-icon {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
+  .submenu .menu-icon {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
   .item-content span {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
   }
   .submenu .item-content span {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
   .titulo {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
 }
 

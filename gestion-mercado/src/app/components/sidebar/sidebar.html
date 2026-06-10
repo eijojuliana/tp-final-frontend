@@ -43,11 +43,18 @@
     @if(currentRole != "EMPLEADO"){
     <a routerLink="/menu/estadisticas" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
       <div class="item-content">
-        <img src="assets/images/excel-icon.png" class="menu-icon">
+        <img src="assets/images/estadisticas-icon.png" class="menu-icon">
         <span>Resumen del negocio</span>
       </div>
     </a>
     }
+
+    <a routerLink="/menu/cierre-caja" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
+      <div class="item-content">
+        <img src="assets/images/caja-icon.png" class="menu-icon">
+        <span>Cierre de Caja</span>
+      </div>
+    </a>
 
     <div>
       <div class="item dropdown-header" (click)="toggleMenu('inventario')">
@@ -110,7 +117,7 @@
     <div>
       <div class="item dropdown-header" (click)="toggleMenu('entidades')">
         <div class="item-content">
-          <img src="assets/images/user-icon.png" class="menu-icon">
+          <img src="assets/images/clientes-icon.png" class="menu-icon">
           <span>Personas</span>
         </div>
         <span class="icon-arrow" [class.rotated]="openMenu === 'entidades'">▼</span>
@@ -258,12 +265,5 @@
         </div>
       }
     </div>
-
-    <a routerLink="/menu/cierre-caja" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
-      <div class="item-content">
-        <img src="assets/images/warning-icon-white.png" class="menu-icon">
-        <span>Cierre de Caja</span>
-      </div>
-    </a>
   </nav>
 </aside>
