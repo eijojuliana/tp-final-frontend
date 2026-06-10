@@ -19,6 +19,27 @@ export class EstadisticasComponent implements OnInit {
   rangoSeleccionado = signal<string>('mes');
   public donutPlugins = [centerTextPlugin];
 
+  private mesesEn: Record<string, string> = {
+    january: 'Enero', jan: 'Enero',
+    february: 'Febrero', feb: 'Febrero',
+    march: 'Marzo', mar: 'Marzo',
+    april: 'Abril', apr: 'Abril',
+    may: 'Mayo',
+    june: 'Junio', jun: 'Junio',
+    july: 'Julio', jul: 'Julio',
+    august: 'Agosto', aug: 'Agosto',
+    september: 'Septiembre', sep: 'Septiembre',
+    october: 'Octubre', oct: 'Octubre',
+    november: 'Noviembre', nov: 'Noviembre',
+    december: 'Diciembre', dec: 'Diciembre'
+  };
+
+  private traducirMes(valor: string): string {
+    if (!valor) return valor;
+    const lower = valor.toLowerCase().trim();
+    return this.mesesEn[lower] || valor;
+  }
+
   // Signal para los datos del backend (contiene todo este tanto kpi base como avanzados)
   stats = signal<any>(null);
 
@@ -67,6 +88,7 @@ export class EstadisticasComponent implements OnInit {
     const url = `${environment.apiBaseUrl}/stats/dashboard?inicio=${inicio}&fin=${fin}`;
     this.http.get(url).subscribe((res: any) => {
       if (!res) return;
+      if (res.mejorMes) res.mejorMes = this.traducirMes(res.mejorMes);
       this.stats.set(res);
 
       // Actualizar Gráfico de Torta
@@ -80,7 +102,7 @@ export class EstadisticasComponent implements OnInit {
 
       // Actualizar Gráfico de Líneas
       this.lineData = {
-        labels: (res.tendenciaVentas || []).map((t: any) => t.mes),
+        labels: (res.tendenciaVentas || []).map((t: any) => this.traducirMes(t.mes)),
         datasets: [
           {
             data: (res.tendenciaVentas || []).map((t: any) => t.ventas),
