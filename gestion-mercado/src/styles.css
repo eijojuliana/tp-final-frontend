@@ -102,10 +102,10 @@
     --btn-eliminar-hover: linear-gradient(135deg, var(--error-2), var(--error-1));
     --btn-eliminar-borde: var(--error-1);
 
-    --btn-detalle: linear-gradient(135deg, var(--exito-1), var(--exito-0));
-    --btn-detalle-hover: linear-gradient(135deg, var(--exito-2), var(--exito-1));
-    --btn-detalle-borde: var(--exito-1);
-    --btn-detalle-borde-hover: var(--exito-2);
+    --btn-detalle: var(--btn);
+    --btn-detalle-hover: var(--btn-hover);
+    --btn-detalle-borde: var(--borde);
+    --btn-detalle-borde-hover: var(--borde-hover);
 
     /* FORM */
     --form-bg: var(--base-tema_claro-1);
@@ -159,10 +159,10 @@
     --btn-eliminar-hover: linear-gradient(135deg, var(--vino-tema_claro-3), var(--vino-tema_claro-2));
     --btn-eliminar-borde: var(--vino-tema_claro-2);
 
-    --btn-detalle: linear-gradient(135deg, var(--rosita-tema_oscuro-2), var(--rosita-tema_oscuro-1));
-    --btn-detalle-hover: linear-gradient(135deg, var(--rosita-tema_oscuro-3), var(--rosita-tema_oscuro-2));
-    --btn-detalle-borde: var(--rosita-tema_oscuro-2);
-    --btn-detalle-borde-hover: var(--rosita-tema_oscuro-3);
+    --btn-detalle: var(--btn);
+    --btn-detalle-hover: var(--btn-hover);
+    --btn-detalle-borde: var(--borde);
+    --btn-detalle-borde-hover: var(--borde-hover);
 
     /* FORM */
     --form-bg: linear-gradient(135deg, var(--base-tema_oscuro-4), var(--base-tema_oscuro-1));

@@ -52,13 +52,13 @@
 }
 
 .botones-estado button:hover {
-  background: #5b8cbf;
-  border-color: #5b8cbf;
+  background: var(--salmon-tema_claro-4);
+  border-color: var(--salmon-tema_claro-4);
 }
 
 .botones-estado button.active {
-  background: #2e6b9e;
-  border-color: #3578b0;
+  background: var(--vino-tema_claro-2);
+  border-color: var(--vino-tema_claro-1);
   color: white;
   font-weight: bold;
 }
