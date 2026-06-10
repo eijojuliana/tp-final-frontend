@@ -148,7 +148,7 @@ DIV TABLA
 
 .tabla .acciones {
   display: flex;
-  justify-content: space-evenly;
+  gap: 1rem;
   width: auto;
 }
 
