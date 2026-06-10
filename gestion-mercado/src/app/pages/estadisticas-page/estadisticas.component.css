@@ -72,6 +72,7 @@
 /* Cards simples */
 .card-stat {
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -94,19 +95,26 @@
   font-weight: bold;
   margin-top: 1rem;
   color: #ff4d8d;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
 }
 
 .charts-grid {
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 2rem;
+  min-width: 0;
 }
 
 .card-grafico {
+  min-width: 0;
+  max-width: 100%;
   background: var(--bg-pag2);
   border: 1px solid var(--borde);
   border-radius: 1.5rem;
   padding: 2rem;
+  overflow: hidden;
 }
 
 .card-grafico h3 {
@@ -119,6 +127,7 @@
 .canvas-container {
   height: 30rem;
   position: relative;
+  max-width: 100%;
 }
 
 .descripcion-card {
@@ -216,12 +225,26 @@
 }
 
 @media (max-aspect-ratio: 9/16) {
+  .stats-container {
+    padding: 0.5rem;
+    gap: 1rem;
+  }
+
   .analiticas-subgrid {
     grid-template-columns: 1fr;
   }
 
   .charts-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .card-grafico {
+    padding: 1rem;
+  }
+
+  .canvas-container {
+    height: 20rem;
   }
 }
 
@@ -238,16 +261,25 @@
   }
   .card-stat {
     padding: 0.8rem;
-    min-height: 8rem;
+    min-height: 6rem;
   }
   .card-stat .label {
     font-size: 1rem;
   }
   .card-stat .valor {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
   .operador {
-    font-size: 2rem;
+    font-size: 1.6rem;
     padding: 0 0.2rem;
+  }
+}
+
+@media (max-aspect-ratio: 1/1) and (min-aspect-ratio: 9/16) {
+  .canvas-container {
+    height: 24rem;
+  }
+  .card-grafico {
+    padding: 1.5rem;
   }
 }
