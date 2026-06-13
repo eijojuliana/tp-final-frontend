@@ -49,4 +49,10 @@ export class Sidebar implements OnInit {
   closeMobileMenu() {
     this.sidebarState.close();
   }
+
+  iconPath(base: string): string {
+    return this.theme.isOscuro()
+      ? `assets/images/${base}.png`
+      : `assets/images/${base}-oscuro.png`;
+  }
 }

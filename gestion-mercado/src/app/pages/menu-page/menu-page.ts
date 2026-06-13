@@ -72,4 +72,9 @@ export class MenuPage implements OnInit {
     return this.auth.getRole();
   }
 
+  iconPath(base: string): string {
+    return this.theme.isOscuro()
+      ? `/assets/images/${base}.png`
+      : `/assets/images/${base}-oscuro.png`;
+  }
 }

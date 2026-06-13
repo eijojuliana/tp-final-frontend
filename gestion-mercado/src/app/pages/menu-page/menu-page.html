@@ -63,7 +63,7 @@
           @if (auth.hasRole(['ADMIN'])){
           <a routerLink="/menu/personas" class="mini-card">
             <div class="mini-icon">
-              <img src="/assets/images/persona-icon.png">
+              <img [src]="iconPath('persona-icon')">
             </div>
             <span>Personas</span>
           </a>
@@ -72,7 +72,7 @@
           @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
           <a routerLink="/menu/productos" class="mini-card">
             <div class="mini-icon">
-              <img src="/assets/images/productos-icon.png">
+              <img [src]="iconPath('productos-icon')">
             </div>
             <span>Productos</span>
           </a>
@@ -81,7 +81,7 @@
           @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
           <a routerLink="/menu/pedidos" class="mini-card">
             <div class="mini-icon">
-              <img src="/assets/images/pedido-icon.png">
+              <img [src]="iconPath('pedido-icon')">
             </div>
             <span>Pedidos</span>
           </a>
@@ -90,7 +90,7 @@
           @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
           <a routerLink="/menu/clientes" class="mini-card">
             <div class="mini-icon">
-              <img src="/assets/images/clientes-icon.png">
+              <img [src]="iconPath('clientes-icon')">
             </div>
             <span>Clientes</span>
           </a>
@@ -99,7 +99,7 @@
           @if (auth.hasRole(['ADMIN','DUENIO','EMPLEADO'])){
           <a routerLink="/menu/cuentas-bancarias" class="mini-card">
             <div class="mini-icon">
-              <img src="/assets/images/cuentaB-icon.png">
+              <img [src]="iconPath('cuentaB-icon')">
             </div>
             <span>Caja y Banco</span>
           </a>
@@ -108,7 +108,7 @@
           @if (auth.hasRole(['ADMIN','DUENIO'])){
           <a routerLink="/menu/empleados" class="mini-card">
             <div class="mini-icon">
-              <img src="/assets/images/empleado-icon.png">
+              <img [src]="iconPath('empleado-icon')">
             </div>
             <span>Empleados</span>
           </a>
@@ -117,7 +117,7 @@
           @if (auth.hasRole(['ADMIN','DUENIO'])){
           <a routerLink="/menu/duenios" class="mini-card">
             <div class="mini-icon">
-              <img src="/assets/images/duenio-icon.png">
+              <img [src]="iconPath('duenio-icon')">
             </div>
             <span>Dueños</span>
           </a>
