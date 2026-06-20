@@ -35,7 +35,9 @@ export class TransaccionesList implements OnInit {
       .filter(p => (tipo ? p.tipo === tipo : true))
       .filter(p => (attr && filtro ? String((p as any)[attr]).toLowerCase().includes(filtro) : true))
       .sort((a, b) => {
-        if (!ord || !attr) return 0;
+        const fechaA = new Date(a.fecha).getTime();
+        const fechaB = new Date(b.fecha).getTime();
+        if (!ord || !attr) return fechaB - fechaA;
         const A = (a as any)[attr];
         const B = (b as any)[attr];
 

@@ -98,10 +98,26 @@ export class DetallesPedido {
         this.cancelarEdicionDetalle();
       });
     } else {
-      this.detallePedidoService.post(this.pedido.pedidoId, dto).subscribe(() => {
-        this.obtenerDetallesDelPedido(this.pedido.pedidoId);
-        this.nuevoDetalle = { productoId: undefined, cantidad: undefined, costoUnitario: undefined };
-      });
+      const mismoPrecio = this.detallesPedido().find(d =>
+        d.producto_id === this.nuevoDetalle.productoId &&
+        d.costoUnitario === (this.nuevoDetalle.costoUnitario ?? 0)
+      );
+      if (mismoPrecio) {
+        const dtoMerge: any = {
+          productoId: mismoPrecio.producto_id,
+          cantidad: mismoPrecio.cantidad + (this.nuevoDetalle.cantidad ?? 0),
+          costoUnitario: this.nuevoDetalle.costoUnitario ?? mismoPrecio.costoUnitario ?? 0,
+        };
+        this.detallePedidoService.update(mismoPrecio.detallePedidoId, dtoMerge).subscribe(() => {
+          this.obtenerDetallesDelPedido(this.pedido.pedidoId);
+          this.nuevoDetalle = { productoId: undefined, cantidad: undefined, costoUnitario: undefined };
+        });
+      } else {
+        this.detallePedidoService.post(this.pedido.pedidoId, dto).subscribe(() => {
+          this.obtenerDetallesDelPedido(this.pedido.pedidoId);
+          this.nuevoDetalle = { productoId: undefined, cantidad: undefined, costoUnitario: undefined };
+        });
+      }
     }
   }
 

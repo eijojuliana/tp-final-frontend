@@ -95,7 +95,9 @@ export class PedidosList implements OnInit {
         }
       })
       .sort((a, b) => {
-        if (!ord || !attr) return 0;
+        const fechaA = new Date(a.transaccion.fecha).getTime();
+        const fechaB = new Date(b.transaccion.fecha).getTime();
+        if (!ord || !attr) return fechaB - fechaA;
         const A = getValue(a);
         const B = getValue(b);
         return ord === 'asc' ? (A > B ? 1 : -1) : (A < B ? 1 : -1);
