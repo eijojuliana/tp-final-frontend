@@ -100,30 +100,6 @@ export class EstadisticasComponent implements OnInit {
         }]
       };
 
-      // Actualizar Gráfico de Líneas
-      this.lineData = {
-        labels: (res.tendenciaVentas || []).map((t: any) => this.traducirMes(t.mes)),
-        datasets: [
-          {
-            data: (res.tendenciaVentas || []).map((t: any) => t.ventas),
-            label: 'Ventas',
-            borderColor: '#ff4d8d',
-            backgroundColor: 'rgba(255, 77, 141, 0.1)',
-            tension: 0.4,
-            fill: true
-          },
-          {
-            data: (res.tendenciaVentas || []).map((t: any) => t.ganancias),
-            label: 'Ganancias',
-            borderColor: '#7c4dff',
-            backgroundColor: 'rgba(124, 77, 255, 0.1)',
-            tension: 0.4,
-            fill: true
-          }
-        ]
-      };
-      this.lineOptions = { ...this.lineOptions };
-
       // Actualizar gráfico de los 5 más vendiditos
       this.barData = {
         labels: (res.topProductos || []).map((p: any) => p.label),
@@ -155,36 +131,6 @@ export class EstadisticasComponent implements OnInit {
     cutout: '70%'
   };
 
-  // Configuración de Gráfico de Líneas (Tendencia)
-  public lineData: ChartData<'line'> = {
-    labels: [],
-    datasets: [
-      { data: [], label: 'Ventas', borderColor: '#ff4d8d', tension: 0.4 },
-      { data: [], label: 'Ganancias', borderColor: '#7c4dff', tension: 0.4 }
-    ]
-  };
-
-  public lineOptions: ChartConfiguration<'line'>['options'] = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      y: {
-        beginAtZero: true,
-        ticks: { color: 'white' },
-        grid: { color: 'rgba(255, 255, 255, 0.1)' }
-      },
-      x: {
-        ticks: { color: 'white' },
-        grid: { display: false }
-      }
-    },
-    plugins: {
-      legend: {
-        position: 'bottom',
-        labels: { color: 'white', padding: 20 }
-      }
-    }
-  };
 }
 
 const centerTextPlugin = {

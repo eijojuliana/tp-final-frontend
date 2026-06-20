@@ -57,24 +57,9 @@
         </canvas>
       </div>
     </div>
+  </div>
 
-    <div class="card-grafico">
-      <h3>
-        Tendencia
-        {{ rangoSeleccionado() === 'hoy' ? 'por Hora' :
-          (rangoSeleccionado() === 'mes' ? 'Diaria' : 'Mensual')}}
-        (probablemente lo borramo)
-      </h3>
-      <div class="canvas-container">
-        <canvas baseChart
-          [data]="lineData"
-          [type]="'line'"
-          [options]="lineOptions">
-        </canvas>
-      </div>
-    </div>
-
-</div> <div class="categoria-separador">
+  <div class="categoria-separador">
     <span>Estadísticas avanzadas</span>
   </div>
 
