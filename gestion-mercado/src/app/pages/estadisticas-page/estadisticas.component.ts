@@ -139,11 +139,18 @@ const centerTextPlugin = {
     const { ctx, chartArea: { top, width, height } } = chart;
     ctx.save();
     const total = chart.data.datasets[0].data.reduce((a: number, b: number) => a + b, 0);
-    ctx.font = 'bold 2.5rem Poppins';
+    const text = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(total);
+    const maxW = Math.min(width, height) * 0.55;
+    let fontSize = 2.5;
+    ctx.font = `bold ${fontSize}rem Poppins`;
+    if (ctx.measureText(text).width > maxW) {
+      fontSize = Math.max(0.7, fontSize * (maxW / ctx.measureText(text).width));
+      ctx.font = `bold ${fontSize}rem Poppins`;
+    }
     ctx.fillStyle = 'white';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText(new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(total), width / 2, (height / 2) + top + 10);
+    ctx.fillText(text, width / 2, (height / 2) + top + 10);
     ctx.restore();
   }
 };
