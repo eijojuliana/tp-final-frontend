@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, computed, inject, Input, signal, SimpleChanges } from '@angular/core';
+import { Component, computed, inject, Input, OnChanges, OnInit, signal, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { DetallePedidoService } from '../../services/detallePedido-service';
 import { DetallePedido } from '../../models/detallePedido.model';
@@ -16,9 +16,13 @@ import { BuscadorItem } from '../buscador/buscador-item';
   templateUrl: './detalles-pedido.html',
   styleUrl: './detalles-pedido.css',
 })
-export class DetallesPedido {
+export class DetallesPedido implements OnInit {
   @Input({ required: true }) pedido!: Pedido;
   @Input() showInfoCard: boolean = true;
+
+  ngOnInit() {
+    this.obtenerDetallesDelPedido(this.pedido.pedidoId);
+  }
 
   private router = inject(Router);
   private productService = inject(ProductService);
@@ -99,8 +103,7 @@ export class DetallesPedido {
       });
     } else {
       const mismoPrecio = this.detallesPedido().find(d =>
-        d.producto_id === this.nuevoDetalle.productoId &&
-        d.costoUnitario === (this.nuevoDetalle.costoUnitario ?? 0)
+        Number(d.producto_id) === Number(this.nuevoDetalle.productoId)
       );
       if (mismoPrecio) {
         const dtoMerge: any = {
