@@ -1,57 +1,97 @@
-/* FONDO */
 .login-page {
   height: 100dvh;
   background: var(--login-bg-pantalla);
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background 0.3s ease;
 }
 
-/* CARD */
 .login-card {
   width: 70%;
   height: 70%;
   display: flex;
   border-radius: 3rem;
   overflow: hidden;
+  box-shadow: var(--sombra);
 }
 
-/* IZQUIERDA */
 .login-izquierda {
   width: 42%;
   background: var(--login-bg-card-izq);
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: background 0.3s ease;
+}
+
+.login-izquierda::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/assets/images/login-background.png') center / cover no-repeat;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.login-branding {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: var(--letra1);
+  padding: 2rem;
+}
+
+.brand-icon {
+  font-size: 4dvw !important;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+.login-branding h1 {
+  font-family: var(--font-heading);
+  font-size: 1.8dvw;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  color: var(--letra1);
+}
+
+.login-branding p {
+  font-family: var(--font-body);
+  font-size: 0.9dvw;
+  opacity: 0.7;
+  margin: 0;
+  color: var(--letra1);
 }
 
 .badge {
   position: absolute;
   top: 22%;
   right: -5%;
-
-  background: var(--base-tema_claro-2);
-  color: var(--vino-tema_claro-2);
-
+  z-index: 2;
+  background: var(--btn);
+  color: white;
   padding: 2.5% 10%;
   border-radius: 2rem;
-
   font-size: 1dvw;
   font-weight: 700;
-  letter-spacing: 10%;
-
+  letter-spacing: 0.1em;
   display: flex;
   justify-content: center;
   align-items: center;
-
   white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* DERECHA */
 .login-derecha {
   width: 58%;
   background: var(--login-bg-card-der);
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background 0.3s ease;
 }
 
 .login-content {
@@ -59,11 +99,10 @@
   text-align: center;
 }
 
-/* ICONO */
 .icon {
   width: 18%;
   aspect-ratio: 1;
-  background: var(--vino-tema_claro-2);
+  background: var(--btn);
   border-radius: 50%;
   margin: 0 auto 3%;
   display: flex;
@@ -71,18 +110,18 @@
   align-items: center;
   color: white;
   font-size: 2dvw;
-  box-shadow: 0px 0.5dvw 1.5dvw rgba(0,0,0,0.25);
+  box-shadow: 0 0.5dvw 1.5dvw rgba(0,0,0,0.25);
+  transition: background 0.3s ease;
 }
 
-/* TITULO */
 .login-content h2 {
-  color: var(--vino-tema_claro-2);
+  color: var(--letra1);
   margin-bottom: 5%;
   font-weight: 500;
   font-size: 1.5dvw;
+  transition: color 0.3s ease;
 }
 
-/* INPUTS */
 .input-group {
   margin-bottom: 5%;
   position: relative;
@@ -91,72 +130,78 @@
 .input-group label {
   display: block;
   text-align: left;
-  color: var(--vino-tema_claro-2);
+  color: var(--letra1);
   font-size: 0.85dvw;
   font-weight: 600;
   margin-bottom: 0.3rem;
+  transition: color 0.3s ease;
+}
+
+.obligatorio {
+  color: var(--error-2);
+  margin-left: 2px;
 }
 
 .input-group input {
   width: 100%;
   box-sizing: border-box;
   border: none;
-  border-bottom: 0.2dvw solid var(--salmon-tema_claro-2);
-  padding: 2% 3%;
+  border-bottom: 0.2dvw solid var(--borde);
+  padding: 2% 3% 2% 1.5%;
   background: transparent;
   outline: none;
   font-size: 0.9dvw;
-  color: var(--salmon-tema_claro-4);
+  color: var(--letra1);
+  transition: border-color 0.3s ease, color 0.3s ease;
 }
 
-/* PLACEHOLDER */
+.input-group input:focus {
+  border-bottom-color: var(--borde-focus);
+}
+
 .input-group input::placeholder {
-  color: var(--salmon-tema_claro-2);
-  padding: 0% 4%;
+  color: var(--letra1-leve);
+  transition: color 0.3s ease;
 }
 
-/* BOTÓN */
 .btn-login {
-  background: var(--vino-tema_claro-2);
-  color: var(--base-tema_claro-2);
+  background: var(--btn);
+  color: var(--letra2);
   border: none;
   padding: 2% 8%;
   border-radius: 2dvw;
   margin-top: 5%;
   cursor: pointer;
-  transition: 0.25s;
+  transition: background 0.25s, transform 0.2s;
   font-size: 0.9dvw;
+  font-weight: 600;
+  letter-spacing: 0.03em;
 }
 
-/* HOVER */
 .btn-login:hover {
-  background: var(--vino-tema_claro-2);
+  background: var(--btn-hover);
+  transform: translateY(-2px);
+}
+
+.btn-login:active {
+  transform: translateY(0);
 }
 
 .error {
   position: absolute;
   top: 100%;
   left: 0;
-
   margin-top: 0.3rem;
-
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  color: var(--salmon-tema_claro-4);
-
-  background: var(--base-tema_claro-2);
-  border: 0.1rem solid var(--salmon-tema_claro-4);
-  padding: 0.1rem 0.4rem;
+  color: var(--error-2);
+  background: var(--error-0);
+  border: 0.1rem solid var(--error-1);
+  padding: 0.15rem 0.6rem;
   border-radius: 3rem;
-
   white-space: nowrap;
 }
 
-.password-input-wrapper {
-  position: relative;
-}
-
-/* ICONO DEL OJARDOVICH*/
 .password-input-wrapper {
   position: relative;
   display: flex;
@@ -165,18 +210,23 @@
 
 .toggle-password {
   position: absolute;
-  right: 0.5rem;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--vino-tema_claro-2);
+  color: var(--letra1-leve);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
   height: 100%;
+  transition: color 0.3s ease;
+}
+
+.toggle-password:hover {
+  color: var(--letra1);
 }
 
 @media (max-aspect-ratio: 1/1) {
