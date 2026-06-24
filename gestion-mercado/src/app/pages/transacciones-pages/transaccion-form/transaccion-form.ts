@@ -64,9 +64,6 @@ export class TransaccionForm implements OnInit {
         this.form.reset({ tipo: 'INGRESO_MANUAL', monto: 0, motivo: '', destinoId: 1 });
         this.tipoMovimiento.set('INGRESO_MANUAL');
         this.router.navigate(['/menu/transacciones']);
-      },
-      error: () => {
-        this.toast.error('Error al registrar el movimiento');
       }
     });
   }

@@ -16,11 +16,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
       if (status === 401 && req.url.includes('/auth/profile')) {
         msg = 'Usuario o contraseña incorrectos';
-      } else if (status === 500) {
-        msg = 'URL no reconocida por la API:';
-      }
-      else {
-        // Resto de errores: uso mensaje del back o genérico
+      } else {
         msg =
           err?.error?.mensaje ||
           err?.error?.message ||
