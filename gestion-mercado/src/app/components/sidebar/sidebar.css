@@ -30,18 +30,12 @@
   justify-content: center;
 }
 
-.sidebar.collapsed .menu-icon {
-  width: 2.6rem;
-  height: 2.6rem;
-}
-
 .sidebar.collapsed .dropdown-header {
   justify-content: center;
 }
 
 .sidebar.collapsed .logo-container {
   justify-content: center;
-  gap: 0;
 }
 
 .logo-container {
@@ -49,6 +43,8 @@
   align-items: center;
   gap: 1rem;
   position: relative;
+  height: 4.5rem;
+  overflow: hidden;
 }
 
 .logo {
@@ -74,11 +70,12 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  overflow: hidden;
 }
 
 .menu-icon {
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 2.6rem;
+  height: 2.6rem;
   object-fit: contain;
   opacity: 0.7;
   transition: 0.2s;
