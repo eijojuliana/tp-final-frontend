@@ -84,6 +84,9 @@
         <span class="material-symbols-outlined" style="font-size: 3rem; color: #888;">lock</span>
         <p style="color: #888;">La caja ya fue cerrada por el día de hoy. No se pueden registrar más movimientos.</p>
       </div>
+      <button class="btn-cierre-total btn-abrir" (click)="mostrarModalAbrir.set(true)">
+        &#128275; Abrir caja
+      </button>
     } @else {
       <h3 class="estado-error">CERRAR CAJA</h3>
       <div class="alerta-bloque">
@@ -96,3 +99,33 @@
     }
   </div>
 </section>
+
+@if (mostrarModalAbrir()) {
+  <div class="modal-overlay" (click)="mostrarModalAbrir.set(false)">
+    <div class="modal-card credenciales-modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Abrir Caja</h2>
+        <p>Ingresá las credenciales de un administrador o dueño para abrir la caja.</p>
+      </div>
+      <div class="modal-body">
+        <div class="campo">
+          <label>Email</label>
+          <input type="email" [(ngModel)]="credencialEmail" placeholder="admin@ejemplo.com">
+        </div>
+        <div class="campo">
+          <label>Contraseña</label>
+          <input type="password" [(ngModel)]="credencialPassword" placeholder="••••••••">
+        </div>
+        @if (errorAbrirCaja()) {
+          <div class="error-msg">{{ errorAbrirCaja() }}</div>
+        }
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancelar-modal" (click)="mostrarModalAbrir.set(false)">Cancelar</button>
+        <button class="btn-finalizar-modal" (click)="confirmarAbrirCaja()" [disabled]="!credencialEmail || !credencialPassword">
+          Abrir caja
+        </button>
+      </div>
+    </div>
+  </div>
+}

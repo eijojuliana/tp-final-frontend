@@ -26,6 +26,31 @@ export class CierreCajaComponent implements OnInit {
   saldoRealContado = signal<number | null>(null);
   ajustesHoy = signal<number>(0);
 
+  mostrarModalAbrir = signal(false);
+  credencialEmail = '';
+  credencialPassword = '';
+  errorAbrirCaja = signal('');
+
+  confirmarAbrirCaja() {
+    this.errorAbrirCaja.set('');
+    this.tiendaService.abrirCaja(this.credencialEmail, this.credencialPassword).subscribe({
+      next: (res: any) => {
+        if (res.exito) {
+          this.toast.success('Caja abierta correctamente');
+          this.mostrarModalAbrir.set(false);
+          this.credencialEmail = '';
+          this.credencialPassword = '';
+          this.pedidoService.verificarEstadoCaja();
+        } else {
+          this.errorAbrirCaja.set(res.mensaje || 'Error al abrir la caja');
+        }
+      },
+      error: (err) => {
+        this.errorAbrirCaja.set(err.error?.mensaje || 'Credenciales inválidas');
+      }
+    });
+  }
+
   saldoBase = computed(() => {
     return this.saldoInicial() + this.ingresosEfectivo() - this.egresosGastos();
   });

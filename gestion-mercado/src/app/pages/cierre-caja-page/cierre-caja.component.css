@@ -233,6 +233,155 @@ hr {
   border-color: var(--error-2);
 }
 
+.btn-cierre-total.btn-abrir {
+  border-color: var(--exito-2);
+  color: var(--exito-2);
+  margin-top: 1rem;
+}
+
+.btn-cierre-total.btn-abrir:hover {
+  background: var(--exito-2);
+  color: var(--letra3);
+}
+
+/* --- MODAL CREDENCIALES --- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.modal-card.credenciales-modal {
+  width: 100%;
+  max-width: 40rem;
+  background: var(--bg-pag2);
+  border-radius: 2.4rem;
+  box-shadow: 0 1.6rem 4rem rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: modalIn 0.25s ease-out;
+}
+
+.modal-header {
+  padding: 2rem 2.5rem 0;
+  text-align: center;
+}
+
+.modal-header h2 {
+  margin: 0 0 0.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--letra1);
+}
+
+.modal-header p {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--letra1-leve);
+}
+
+.modal-body {
+  padding: 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.modal-body .campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.modal-body .campo label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--letra1);
+}
+
+.modal-body .campo input {
+  padding: 0.8rem 1.2rem;
+  border-radius: 99.9rem;
+  border: 0.1rem solid var(--borde);
+  background: var(--form-input-bg);
+  color: var(--letra1);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.modal-body .campo input:focus {
+  border-color: var(--borde-focus);
+}
+
+.error-msg {
+  background: rgba(244, 67, 54, 0.1);
+  border: 1px solid var(--error-2);
+  color: var(--error-2);
+  padding: 0.8rem 1.2rem;
+  border-radius: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1.5rem 2.5rem 2rem;
+}
+
+.btn-cancelar-modal {
+  padding: 0.8rem 2rem;
+  border-radius: 99.9rem;
+  border: 0.15rem solid var(--borde-hover);
+  background: transparent;
+  color: var(--letra1-leve);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-cancelar-modal:hover {
+  background: var(--bg-pag3);
+  color: var(--letra2);
+}
+
+.btn-finalizar-modal {
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 99.9rem;
+  background: var(--vino-tema_claro-2);
+  color: var(--letra2);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-finalizar-modal:hover:not(:disabled) {
+  background: var(--vino-tema_claro-3);
+}
+
+.btn-finalizar-modal:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.95) translateY(1rem); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
 @media (max-aspect-ratio: 1/1) {
   .cierre-container {
     padding: 1rem;

@@ -66,6 +66,12 @@ export class TiendaService {
     );
   }
 
+  abrirCaja(email: string, password: string): Observable<any> {
+    return this.http.post(`${this.url}/abrir-caja`, { email, password }).pipe(
+      tap(() => this.load())
+    );
+  }
+
   update(tienda: any): Observable<boolean> {
     return this.http.put<any>(`${this.url}/${tienda.tiendaId}`, tienda).pipe(
       map(() => true), // Si no hay error, asumimos éxito
