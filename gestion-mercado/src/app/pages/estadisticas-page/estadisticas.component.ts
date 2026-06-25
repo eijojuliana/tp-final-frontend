@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit, ElementRef } from '@angular/core';
+import { Component, computed, inject, signal, OnInit, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ChartData } from 'chart.js';
@@ -18,6 +18,26 @@ export class EstadisticasComponent implements OnInit {
   private http = inject(HttpClient);
   private el = inject(ElementRef);
   rangoSeleccionado = signal<string>('mes');
+  fechaInicio = signal<string>('');
+  fechaFin = signal<string>('');
+
+  tituloTop5 = computed(() => {
+    const r = this.rangoSeleccionado();
+    if (r === 'hoy') return 'Top 5 más vendidos hoy';
+    if (r === 'mes') return 'Top 5 más vendidos del mes';
+    if (r === 'año') return 'Top 5 más vendidos del año';
+    if (r === 'todo') return 'Top 5 más vendidos (histórico)';
+    return `Top 5 más vendidos del ${this.fechaInicio()} al ${this.fechaFin()}`;
+  });
+
+  tituloVentas = computed(() => {
+    const r = this.rangoSeleccionado();
+    if (r === 'hoy') return 'Ventas: efectivo VS transferencia hoy';
+    if (r === 'mes') return 'Ventas: efectivo VS transferencia del mes';
+    if (r === 'año') return 'Ventas: efectivo VS transferencia del año';
+    if (r === 'todo') return 'Ventas: efectivo VS transferencia (histórico)';
+    return 'Ventas: efectivo VS transferencia';
+  });
 
   private centerTextPlugin = {
     id: 'centerText',
@@ -119,6 +139,8 @@ export class EstadisticasComponent implements OnInit {
         inicio = '2000-01-01';
         break;
     }
+    this.fechaInicio.set(inicio);
+    this.fechaFin.set(fin);
     this.cargarDatos(inicio, fin);
   }
 

@@ -21,6 +21,10 @@
     </div>
   </div>
 
+  <div class="categoria-separador">
+    <span>Estadísticas avanzadas</span>
+  </div>
+
   <!-- KPIs Superiores-->
   <div class="kpi-grid">
     <div class="card-stat">
@@ -48,7 +52,7 @@
   <!-- Gráficos Principales -->
   <div class="charts-grid">
     <div class="card-grafico">
-      <h3>Ventas: efectivo VS transferencia </h3>
+      <h3>{{ tituloVentas() }}</h3>
       <div class="canvas-container">
         <canvas baseChart [plugins]="donutPlugins"
           [data]="donutData"
@@ -57,15 +61,9 @@
         </canvas>
       </div>
     </div>
-  </div>
 
-  <div class="categoria-separador">
-    <span>Estadísticas avanzadas</span>
-  </div>
-
-  <div class="charts-grid">
     <div class="card-grafico">
-      <h3>TOP 5 Productos más vendidos</h3>
+      <h3>{{ tituloTop5() }}</h3>
       <div class="canvas-container">
         <canvas baseChart
           [data]="barData"
@@ -74,8 +72,9 @@
         </canvas>
       </div>
     </div>
+  </div>
 
-    <div class="analiticas-subgrid">
+  <div class="analiticas-subgrid">
 
       <div class="card-mini-stat">
         <span class="mini-label">Producto menos vendido</span>
@@ -102,6 +101,4 @@
       </div>
 
     </div>
-
-  </div>
 </section>
