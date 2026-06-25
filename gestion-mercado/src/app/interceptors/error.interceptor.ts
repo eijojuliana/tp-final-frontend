@@ -16,6 +16,8 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
       if (status === 401 && req.url.includes('/auth/profile')) {
         msg = 'Usuario o contraseña incorrectos';
+      } else if (status === 500) {
+        msg = 'Error interno del servidor';
       } else {
         msg =
           err?.error?.mensaje ||
