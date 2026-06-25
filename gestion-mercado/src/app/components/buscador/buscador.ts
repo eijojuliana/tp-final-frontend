@@ -46,6 +46,12 @@ export class BuscadorGenericoComponent implements OnInit {
     this.alSeleccionar.emit(item.id);
   }
 
+  public limpiar(): void {
+    this.textoBusqueda = '';
+    this.resultadosFiltrados = [];
+    this.mostrarDropdown = false;
+  }
+
   @HostListener('document:click', ['$event'])
   public hacerClicAfuera(event: Event): void {
     if (!this.elementRef.nativeElement.contains(event.target)) {

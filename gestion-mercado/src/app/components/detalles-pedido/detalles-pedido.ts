@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, computed, inject, Input, OnChanges, OnInit, signal, SimpleChanges } from '@angular/core';
+import { Component, computed, inject, Input, OnChanges, OnInit, signal, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DetallePedidoService } from '../../services/detallePedido-service';
 import { DetallePedido } from '../../models/detallePedido.model';
@@ -34,6 +34,8 @@ export class DetallesPedido implements OnInit {
 
   private detallePedidoService = inject(DetallePedidoService);
   private toast = inject(ToastService);
+
+  @ViewChild('buscadorProd') buscadorComp!: BuscadorGenericoComponent;
 
   detallesPedido = signal<DetallePedido[]>([]);
 
@@ -123,11 +125,13 @@ export class DetallesPedido implements OnInit {
         this.detallePedidoService.update(mismoPrecio.detallePedidoId, dtoMerge).subscribe(() => {
           this.obtenerDetallesDelPedido(this.pedido.pedidoId);
           this.nuevoDetalle = { productoId: undefined, cantidad: undefined, costoUnitario: undefined };
+          this.buscadorComp?.limpiar();
         });
       } else {
         this.detallePedidoService.post(this.pedido.pedidoId, dto).subscribe(() => {
           this.obtenerDetallesDelPedido(this.pedido.pedidoId);
           this.nuevoDetalle = { productoId: undefined, cantidad: undefined, costoUnitario: undefined };
+          this.buscadorComp?.limpiar();
         });
       }
     }
