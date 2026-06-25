@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { CuentaBancaria } from '../../../models/cuentaBancaria.model';
 import { ToastService } from '../../../services/toast.service';
 import { CommonModule } from '@angular/common';
+import { ThemeService } from '../../../styles/theme.service';
 
 @Component({
   selector: 'app-cuentas-bancarias-list',
@@ -18,6 +19,7 @@ export class CuentasBancariasList implements OnInit {
   private tiendaService = inject(TiendaService);
   private router = inject(Router);
   private toast = inject(ToastService);
+  public theme = inject(ThemeService);
 
   public cuentasBancarias = this.cuentaBancariaService.cuentasBancarias;
 
@@ -56,5 +58,11 @@ export class CuentasBancariasList implements OnInit {
 
   exportarExcel() {
     this.cuentaBancariaService.exportarExcel();
+  }
+
+  iconPath(base: string): string {
+    return this.theme.isOscuro()
+      ? `/assets/images/${base}.png`
+      : `/assets/images/${base}-oscuro.png`;
   }
 }

@@ -1,9 +1,7 @@
 <section class="list-container">
   <div class="botones">
-    <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)" />
-
     <select (change)="atributo.set($any($event.target).value)">
-      <option value="" disabled selected>Filtrar por...</option>
+      <option value="" disabled selected>Buscar por...</option>
       <option value="personaId">ID Persona</option>
       <option value="duenioId">ID Dueño</option>
       <option value="nombre">Nombre</option>
@@ -12,6 +10,8 @@
       <option value="fechaNacimiento">Fecha Nac.</option>
       <option value="email">Email</option>
     </select>
+
+    <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)" />
 
     <select (change)="orden.set($any($event.target).value)">
       <option value="" disabled selected>Orden</option>

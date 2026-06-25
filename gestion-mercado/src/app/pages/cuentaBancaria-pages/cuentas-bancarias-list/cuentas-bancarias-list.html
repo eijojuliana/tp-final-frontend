@@ -5,15 +5,15 @@
   <section class="summary-cards">
     <div class="card">
       <h3>Efectivo en caja</h3>
-      <p class="amount text-yellow">{{ efectivoEnCaja() | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</p>
+      <p class="amount text-caja">{{ efectivoEnCaja() | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</p>
     </div>
     <div class="card">
       <h3>Saldo cuentas bancarias</h3>
-      <p class="amount text-pink">{{ saldoEnCuentas() | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</p>
+      <p class="amount text-banco">{{ saldoEnCuentas() | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</p>
     </div>
     <div class="card">
       <h3>Total disponible</h3>
-      <p class="amount text-green">{{ totalDisponible() | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</p>
+      <p class="amount text-total">{{ totalDisponible() | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}</p>
     </div>
   </section>
 
@@ -27,14 +27,14 @@
         <button type="button" class="btn-icon" routerLink="/menu/historial/cuentas-bancarias">
           <img src="/assets/images/historial-icon.png" alt="historial">
         </button>
-        <button type="button" class="btn-agregar" routerLink="/menu/cuentas-bancarias/form"> Agregar cuenta </button>
+        <button type="button" class="btn-agregar" routerLink="/menu/cuentas-bancarias/form"> Agregar Cuenta Bancaria </button>
       </div>
     </div>
 
     <div class="accounts-list">
       <div class="account-item box-caja">
         <div class="account-info">
-          <div class="account-icon icon-purple"></div>
+          <img [src]="iconPath('caja-icon')" class="account-icon-img">
           <div>
             <h4 class="account-name">Caja chica</h4>
           </div>
@@ -47,7 +47,7 @@
       @for (c of cuentasBancarias(); track c.cuentaBancariaId) {
         <div class="account-item">
           <div class="account-info">
-            <div class="account-icon icon-blue"></div>
+            <img [src]="iconPath('cuentaB-icon')" class="account-icon-img">
             <div>
               <h4 class="account-name">{{ c.nombreBanco }}</h4>
               <span class="account-detail">CBU: {{ c.cbu }} · ID: {{ c.cuentaBancariaId }}</span>

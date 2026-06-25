@@ -15,13 +15,13 @@
 }
 
 .valor-viejo {
-  color: var(--rojo);
+  color: var(--gris);
   text-decoration: line-through;
   margin: 0 0.5rem;
 }
 
 .valor-nuevo {
-  color: var(--verde);
+  color: var(--color-valor-nuevo);
   font-weight: bold;
   margin: 0 0.5rem;
 }

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, HostListener, ElementRef, inject } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener, ElementRef, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BuscadorItem } from './buscador-item';
@@ -10,16 +10,23 @@ import { BuscadorItem } from './buscador-item';
   templateUrl: './buscador.html',
   styleUrl: './buscador.css'
 })
-export class BuscadorGenericoComponent {
+export class BuscadorGenericoComponent implements OnInit {
   @Input() datos: BuscadorItem[] = [];
   @Input() placeholder: string = 'Buscar...';
   @Input() mostrarImagen: boolean = false;
+  @Input() valorInicial: string = '';
 
   @Output() alSeleccionar = new EventEmitter<number | string>();
 
   public textoBusqueda: string = '';
   public resultadosFiltrados: BuscadorItem[] = [];
   public mostrarDropdown: boolean = false;
+
+  ngOnInit() {
+    if (this.valorInicial) {
+      this.textoBusqueda = this.valorInicial;
+    }
+  }
 
   private elementRef = inject(ElementRef);
 

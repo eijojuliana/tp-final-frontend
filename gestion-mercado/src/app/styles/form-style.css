@@ -37,12 +37,13 @@
     var(--borde-focus),
     var(--borde-hover)
   );
+  border-right: 0.1rem solid var(--borde-focus);
 }
 
 /* CONTENIDO */
 .card > div:last-child {
   flex: 1;
-  padding: 3rem 0rem 3rem 3rem;
+  padding: 3rem;
 }
 
 /* TITULO */
@@ -316,7 +317,7 @@
     border-radius: 1.2rem;
   }
   .card > div:last-child {
-    padding: 1rem !important;
+    padding: 1rem;
   }
   .card h2 {
     font-size: 1.8rem;

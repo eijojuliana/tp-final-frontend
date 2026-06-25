@@ -14,6 +14,7 @@ import { DetallePedidoService } from '../../../services/detallePedido-service';
 import { BuscadorGenericoComponent } from '../../../components/buscador/buscador';
 import { BuscadorItem } from '../../../components/buscador/buscador-item';
 import { PedidoPersistenceService } from '../../../services/pedido-persistence-service';
+import { TiendaService } from '../../../services/tienda-service';
 
 @Component({
   selector: 'app-pedidos-form',
@@ -40,6 +41,7 @@ export class PedidosForm implements OnInit {
 
   private transaccionService = inject(TransaccionService);
   private detallePedidoService = inject(DetallePedidoService);
+  private tiendaService = inject(TiendaService);
 
   isEditMode = signal(false);
   public pedidoToEdit: Pedido | null = null;
@@ -117,6 +119,18 @@ export class PedidosForm implements OnInit {
     public irACliente() {
     this.persistenceService.saveState(this.form.getRawValue());
     this.router.navigate([`/menu/clientes/form`]);
+  }
+
+  get destinatarioNombreCompra(): string {
+    if (!this.pedidoToEdit?.transaccion?.destino_id) return '';
+    const prov = this.proveedores().find(p => p.proveedorId === this.pedidoToEdit!.transaccion.destino_id);
+    return prov ? prov.razonSocial : '';
+  }
+
+  get destinatarioNombreVenta(): string {
+    if (!this.pedidoToEdit?.transaccion?.origen_id) return '';
+    const cli = this.clientes().find(c => c.clienteId === this.pedidoToEdit!.transaccion.origen_id);
+    return cli ? `${cli.nombre} ${cli.apellido}` : '';
   }
 
   public alSeleccionarProveedor(id: number | string): void {
@@ -248,6 +262,7 @@ public eliminarPedido(id: number) {
             next: () => {
               this.pedidoService.clearPedidoToEdit();
               this.transaccionService.load();
+              this.tiendaService.load();
               this.router.navigate(['/menu/pedidos']);
             }
           });

@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, signal, OnInit, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ChartData } from 'chart.js';
@@ -16,8 +16,25 @@ import { environment } from '../../services/ip';
 export class EstadisticasComponent implements OnInit {
 
   private http = inject(HttpClient);
+  private el = inject(ElementRef);
   rangoSeleccionado = signal<string>('mes');
-  public donutPlugins = [centerTextPlugin];
+
+  private centerTextPlugin = {
+    id: 'centerText',
+    afterDraw: (chart: any) => {
+      const { ctx, chartArea: { top, width, height } } = chart;
+      ctx.save();
+      const total = chart.data.datasets[0].data.reduce((a: number, b: number) => a + b, 0);
+      ctx.font = 'bold 2.5rem Poppins';
+      ctx.fillStyle = this.textColor;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(total), width / 2, (height / 2) + top + 10);
+      ctx.restore();
+    }
+  };
+
+  public donutPlugins = [this.centerTextPlugin];
 
   private mesesEn: Record<string, string> = {
     january: 'Enero', jan: 'Enero',
@@ -43,21 +60,42 @@ export class EstadisticasComponent implements OnInit {
   // Signal para los datos del backend (contiene todo este tanto kpi base como avanzados)
   stats = signal<any>(null);
 
+  private cssVar(name: string): string {
+    return getComputedStyle(this.el.nativeElement).getPropertyValue(name).trim();
+  }
+
+  private get textColor(): string {
+    return this.cssVar('--chart-text') || '#333';
+  }
+
+  private get gridColor(): string {
+    return this.cssVar('--chart-grid') || 'rgba(0, 0, 0, 0.1)';
+  }
+
+  private crearBarOptions(): ChartConfiguration<'bar'>['options'] {
+    const tc = this.textColor;
+    const gc = this.gridColor;
+    return {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      color: tc,
+      scales: {
+        x: { beginAtZero: true, ticks: { color: tc }, grid: { color: gc }, border: { color: tc } },
+        y: { ticks: { color: tc }, grid: { display: false }, border: { color: tc } }
+      },
+      plugins: { legend: { display: false } }
+    };
+  }
+
   // TOP 5 PRODUCTITOS
   public barData: ChartData<'bar'> = { labels: [], datasets: [] };
-  public barOptions: ChartConfiguration<'bar'>['options'] = {
-    indexAxis: 'y',
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      x: { beginAtZero: true, ticks: { color: 'white' }, grid: { color: 'rgba(255, 255, 255, 0.1)' } },
-      y: { ticks: { color: 'white' }, grid: { display: false } }
-    },
-    plugins: { legend: { display: false } }
-  };
+  public barOptions: ChartConfiguration<'bar'>['options'] = {};
 
   ngOnInit() {
-    this.seleccionarRango('mes'); // Carga el mes actual por defecto
+    this.barOptions = this.crearBarOptions();
+    this.donutOptions = this.crearDonutOptions();
+    this.seleccionarRango('mes');
   }
 
   seleccionarRango(rango: string) {
@@ -109,8 +147,25 @@ export class EstadisticasComponent implements OnInit {
           borderRadius: 6
         }]
       };
-      this.barOptions = { ...this.barOptions };
+      this.barOptions = this.crearBarOptions();
+      this.donutOptions = this.crearDonutOptions();
     });
+  }
+
+  private crearDonutOptions(): ChartConfiguration<'doughnut'>['options'] {
+    const tc = this.textColor;
+    return {
+      responsive: true,
+      maintainAspectRatio: false,
+      color: tc,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { color: tc, padding: 20 }
+        }
+      },
+      cutout: '70%'
+    };
   }
 
   // Configuración de Gráfico de Torta
@@ -119,17 +174,7 @@ export class EstadisticasComponent implements OnInit {
     datasets: [{ data: [], backgroundColor: ['#ff4d8d', '#7c4dff'] }]
   };
 
-  public donutOptions: ChartConfiguration<'doughnut'>['options'] = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: 'bottom',
-        labels: { color: 'white', padding: 20 }
-      }
-    },
-    cutout: '70%'
-  };
+  public donutOptions: ChartConfiguration<'doughnut'>['options'] = {};
 
 }
 

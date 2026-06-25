@@ -2,8 +2,8 @@
   background: var(--bg-pag2, rgba(30, 20, 40, 0.5));
   border-top: 0.1rem solid rgba(255, 255, 255, 0.05);
   padding: 2.5rem 2rem 1.5rem 2rem;
-  margin-top: 5rem;
-  box-shadow: 0 -1rem 3rem rgba(0, 0, 0, 0.2);
+  margin-top: 0;
+  box-shadow: 0 -0.3rem 0.8rem rgba(0, 0, 0, 0.1);
 }
 
 .footer-content {

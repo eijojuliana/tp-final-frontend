@@ -1,8 +1,6 @@
 <section class="list-container">
   <h2>Listado de Transacciones</h2>
   <div class="botones" class="botones">
-    <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)" />
-
     <select (change)="onTipoChange($event)">
       <option value="">Todos los tipos</option>
       <option value="EFECTIVO">Efectivo</option>
@@ -12,13 +10,15 @@
     </select>
 
     <select (change)="atributo.set($any($event.target).value)">
-      <option value="" disabled selected>Filtrar por...</option>
+      <option value="" disabled selected>Buscar por...</option>
       <option value="transaccion_id">Transacción ID</option>
       <option value="origen_id">Origen</option>
       <option value="destino_id">Destino</option>
       <option value="monto">Monto</option>
       <option value="fecha">Fecha</option>
     </select>
+
+    <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)" />
 
     <select (change)="orden.set($any($event.target).value)">
       <option value="" disabled selected>Orden</option>
@@ -33,7 +33,7 @@
     <table class="tabla-historial">
       <thead class="encabezado">
         <tr>
-          <th> ID </th>
+          <th class="columna-id"> ID </th>
           <th> Tipo </th>
           <th> Origen </th>
           <th> Destino </th>
@@ -59,8 +59,8 @@
       <tbody class="tablaBody">
         @for (transaccion of transaccionesFiltrados(); track transaccion.transaccion_id){
         <tr [class.entrada]="esEntrada(transaccion)" [class.salida]="!esEntrada(transaccion)">
-          <td>{{ transaccion.transaccion_id }}</td>
-          <td>{{ transaccion.tipo }}</td>
+          <td class="columna-id">{{ transaccion.transaccion_id }}</td>
+          <td [class.monto-entrada]="esEntrada(transaccion)" [class.monto-salida]="!esEntrada(transaccion)">{{ transaccion.tipo }}</td>
           <td>{{ transaccion.origen_id }}</td>
           <td>{{ transaccion.destino_id }}</td>
           <td [class.monto-entrada]="esEntrada(transaccion)" [class.monto-salida]="!esEntrada(transaccion)">

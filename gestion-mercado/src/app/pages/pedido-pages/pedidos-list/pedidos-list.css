@@ -79,15 +79,22 @@
     gap: 0.6rem;
   }
   .botones-rango {
-    flex-wrap: wrap;
+    display: flex;
+    flex-wrap: nowrap;
     gap: 0.4rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.4rem;
+    scrollbar-width: none;
+  }
+  .botones-rango::-webkit-scrollbar {
+    display: none;
   }
   .botones-rango button {
-    flex: 1;
-    min-width: calc(33% - 0.4rem);
-    padding: 0.6rem 0.5rem;
-    font-size: 0.85rem;
-    text-align: center;
+    flex: 0 0 auto;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
   }
   .inputs-fecha {
     display: flex;
@@ -108,5 +115,20 @@
     padding: 0.6rem 0.5rem;
     font-size: 0.85rem;
     text-align: center;
+  }
+  .btn-agregar {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    width: calc(100% - 3rem);
+    max-width: 30rem;
+    padding: 1rem;
+    font-size: 1rem;
+    box-shadow: 0 0.4rem 1.6rem rgba(0,0,0,0.3);
+  }
+  .list-container {
+    padding-bottom: 6rem;
   }
 }

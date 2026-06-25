@@ -37,8 +37,8 @@
                 <span class="valor-viejo">{{ h.valorAnterior }}</span>
                 <span class="flecha">→</span>
                 <span class="valor-nuevo">{{ h.valorNuevo }}</span>
-              } @else if (h.accion === 'INSERT') { <span> Registro </span>
-              } @else if (h.accion === 'DELETE') { <span> Eliminación </span>
+              } @else if (h.accion === 'INSERT') { <span class="accion-insert"> Registro </span>
+              } @else if (h.accion === 'DELETE') { <span class="accion-delete"> Eliminación </span>
               } @else { <span>-</span> }
             </td>
             <td>{{ h.fechaEvento | date:'dd/MM/yyyy HH:mm' }}</td>

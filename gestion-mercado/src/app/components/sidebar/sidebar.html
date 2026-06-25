@@ -26,7 +26,7 @@
   <nav class="sidebar-menu">
     <a routerLink="/menu" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="item" (click)="closeMobileMenu()">
       <div class="item-content">
-        <img src="assets/images/sakura-white-icon.png" class="menu-icon">
+        <img [src]="iconPath('sakura-icon')" class="menu-icon">
         <span>Inicio</span>
       </div>
     </a>
@@ -241,7 +241,7 @@
           <a routerLink="/menu/historial/cuentas-bancarias" routerLinkActive="active" class="item" (click)="closeMobileMenu()">
             <div class="item-content">
               <img [src]="iconPath('historial-icon')" class="menu-icon">
-              <span>Historial Cuentas Bancarias</span>
+              <span>Historial Banco y Caja</span>
             </div>
           </a>
           <a routerLink="/menu/historial/transacciones" routerLinkActive="active" class="item" (click)="closeMobileMenu()">

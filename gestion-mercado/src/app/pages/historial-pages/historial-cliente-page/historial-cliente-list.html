@@ -47,9 +47,9 @@
                 <span class="flecha">→</span>
                 <span class="valor-nuevo">{{ h.valorNuevo }}</span>
               } @else if (h.accion === 'INSERT') {
-                <span> Nuevo Cliente </span>
+                <span class="accion-insert"> Nuevo Cliente </span>
               } @else if (h.accion === 'DELETE') {
-                <span> Cliente Eliminado </span>
+                <span class="accion-delete"> Cliente Eliminado </span>
               }
             </td>
             <td> {{ h.fechaEvento | date:'dd/MM/yyyy HH:mm' }} </td>

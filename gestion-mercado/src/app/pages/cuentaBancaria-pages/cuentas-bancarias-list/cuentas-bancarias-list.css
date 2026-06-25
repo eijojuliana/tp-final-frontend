@@ -49,9 +49,9 @@
   margin: 0;
 }
 
-.text-yellow { color: #ffca28; }
-.text-pink { color: #f48fb1; }
-.text-green { color: #69f0ae; }
+.text-caja { color: #69f0ae; }
+.text-banco { color: #42a5f5; }
+.text-total { color: var(--letra1); }
 
 .accounts-section {
   background: var(--bg-pag2);
@@ -152,8 +152,11 @@
   border-radius: 1rem;
 }
 
-.icon-purple { background-color: #a144b7; }
-.icon-blue { background-color: #1e88e5; }
+.account-icon-img {
+  width: 4.2rem;
+  height: 4.2rem;
+  object-fit: contain;
+}
 
 .account-name {
   color: var(--letra1);

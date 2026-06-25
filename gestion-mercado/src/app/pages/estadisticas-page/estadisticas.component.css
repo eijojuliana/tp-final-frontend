@@ -28,11 +28,15 @@
 .botones-rango button {
   background: var(--bg-pag2);
   border: 1px solid var(--borde);
-  color: white;
+  color: var(--letra1);
   padding: 0.8rem 2rem;
   border-radius: 5rem;
   cursor: pointer;
   transition: 0.3s;
+}
+
+:host-context(.tema-oscuro) .botones-rango button {
+  color: white;
 }
 
 .botones-rango button:hover {

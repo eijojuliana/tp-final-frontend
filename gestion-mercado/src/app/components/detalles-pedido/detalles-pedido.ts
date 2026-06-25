@@ -9,6 +9,8 @@ import { ProductService } from '../../services/product-service';
 import { ToastService } from '../../services/toast.service';
 import { BuscadorGenericoComponent } from '../buscador/buscador';
 import { BuscadorItem } from '../buscador/buscador-item';
+import { ProveedorService } from '../../services/proveedor-service';
+import { ClienteService } from '../../services/cliente-service';
 
 @Component({
   selector: 'app-detalles-pedido',
@@ -27,6 +29,8 @@ export class DetallesPedido implements OnInit {
   private router = inject(Router);
   private productService = inject(ProductService);
   public productos = this.productService.productos;
+  private proveedorService = inject(ProveedorService);
+  private clienteService = inject(ClienteService);
 
   private detallePedidoService = inject(DetallePedidoService);
   private toast = inject(ToastService);
@@ -46,12 +50,15 @@ export class DetallesPedido implements OnInit {
   };
 
   productosMapeados = computed<BuscadorItem[]>(() => {
-    return this.productos().map(p => ({
-      id: p.producto_id,
-      textoPrincipal: p.nombre,
-      subtexto: `Categoría: ${p.categoria}`,
-      imagenUrl: p.url || 'assets/images/default-product.png'
-    }));
+    return this.productos()
+      .slice()
+      .sort((a, b) => a.nombre.localeCompare(b.nombre))
+      .map(p => ({
+        id: p.producto_id,
+        textoPrincipal: p.nombre,
+        subtexto: `Categoría: ${p.categoria}`,
+        imagenUrl: p.url || 'assets/images/default-product.png'
+      }));
   });
 
   destinatarioLabel = computed(() => {
@@ -59,9 +66,11 @@ export class DetallesPedido implements OnInit {
     if (!pedido?.transaccion) return '-';
     const trans = pedido.transaccion;
     if (pedido.tipo === 'COMPRA') {
-      return `Proveedor #${trans.destino_id || '-'}`;
+      const prov = this.proveedorService.proveedores().find(p => p.proveedorId === trans.destino_id);
+      return prov ? `Proveedor: ${prov.razonSocial}` : `Proveedor #${trans.destino_id || '-'}`;
     }
-    return `Cliente #${trans.origen_id || '-'}`;
+    const cli = this.clienteService.clientes().find(c => c.clienteId === trans.origen_id);
+    return cli ? `Cliente: ${cli.nombre} ${cli.apellido}` : `Cliente #${trans.origen_id || '-'}`;
   });
 
   getProductImage(productoId: number): string {

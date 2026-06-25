@@ -1,5 +1,6 @@
 <section class="detalle-content">
   <div class="detalle-columns">
+    @if (showInfoCard || pedido.estado !== 'FINALIZADO') {
     <div class="detalle-left">
       @if (showInfoCard) {
       <div class="info-card">
@@ -8,6 +9,7 @@
       </div>
       }
 
+      @if (pedido.estado !== 'FINALIZADO') {
       <div class="search-card">
         <h3>Buscá los productos a pedir...</h3>
         <div class="search-row">
@@ -47,7 +49,9 @@
           }
         </div>
       </div>
+      }
     </div>
+    }
 
     <div class="detalle-right">
       <h3 class="cart-title">Como se ve tu carrito</h3>
@@ -77,13 +81,15 @@
                 <span class="subtotal-valor">{{ detalle.subtotal | currency:'ARS':'symbol-narrow':'1.2-2' }}</span>
               </div>
               <div class="item-cantidad">
-                <button class="qty-btn" (click)="decrementarCantidad(detalle)">−</button>
+                <button class="qty-btn" (click)="decrementarCantidad(detalle)" [disabled]="pedido.estado === 'FINALIZADO'">−</button>
                 <span class="qty-value">{{ detalle.cantidad }}</span>
-                <button class="qty-btn" (click)="incrementarCantidad(detalle)">+</button>
+                <button class="qty-btn" (click)="incrementarCantidad(detalle)" [disabled]="pedido.estado === 'FINALIZADO'">+</button>
               </div>
+              @if (pedido.estado !== 'FINALIZADO') {
               <button class="btn-delete-item" (click)="eliminarDetalle(detalle.detallePedidoId)">
                 <span class="material-icons">delete</span>
               </button>
+              }
             </div>
           }
         </div>

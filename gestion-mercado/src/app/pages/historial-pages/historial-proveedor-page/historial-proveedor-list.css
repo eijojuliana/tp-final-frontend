@@ -2,6 +2,6 @@
 
 .paginacion { display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; }
 .atributo-nombre { font-weight: bold; text-transform: uppercase; color: var(--gris) }
-.valor-viejo { color: var(--rojo); text-decoration: line-through; margin: 0 0.5rem; }
-.valor-nuevo { color: var(--verde); font-weight: bold; margin: 0 0.5rem; }
+.valor-viejo { color: var(--gris); text-decoration: line-through; margin: 0 0.5rem; }
+.valor-nuevo { color: var(--color-valor-nuevo); font-weight: bold; margin: 0 0.5rem; }
 .flecha { color: var(--gris); }

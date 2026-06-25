@@ -16,16 +16,16 @@
   </div>
 
   <div class="botones">
-    <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)"/>
-
     <select (change)="atributo.set($any($event.target).value)">
-      <option value="" disabled selected>Filtrar por...</option>
+      <option value="" disabled selected>Buscar por...</option>
       <option value="pedidoId">ID Pedido</option>
       <option value="transaccionId">ID Transacción</option>
       <option value="tipo">Tipo</option>
       <option value="fecha">Fecha</option>
       <option value="total">Monto</option>
     </select>
+
+    <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)"/>
 
     <select (change)="orden.set($any($event.target).value)">
       <option value="" disabled selected>Orden</option>
@@ -52,8 +52,8 @@
     <table class="tabla">
       <thead class="encabezado">
         <tr>
-          <th>ID Pedido</th>
-          <th>ID Trans.</th>
+          <th class="columna-id">ID</th>
+          <th class="columna-id">ID Trans.</th>
           <th>Tipo</th>
           <th>Fecha</th>
           <th>Estado</th>
@@ -64,11 +64,11 @@
       <tbody class="tablaBody">
         @for(pedido of pedidosFiltrados(); track pedido.pedidoId) {
         <tr>
-          <td>{{ pedido.pedidoId }}</td>
-          <td>{{ pedido.transaccion.transaccion_id }}</td>
-          <td [class.tipo-compra]="pedido.tipo === 'COMPRA'" [class.tipo-venta]="pedido.tipo === 'VENTA'">{{ pedido.transaccion.tipo }}</td>
+          <td class="columna-id">{{ pedido.pedidoId }}</td>
+          <td class="columna-id">{{ pedido.transaccion.transaccion_id }}</td>
+          <td [class.tipo-compra]="pedido.tipo === 'COMPRA'" [class.tipo-venta]="pedido.tipo === 'VENTA'">{{ pedido.tipo }}</td>
           <td>{{ pedido.transaccion.fecha | date:'dd/MM/yyyy HH:mm' }}</td>
-          <td>{{ pedido.estado }}</td>
+          <td [class.estado-finalizado]="pedido.estado === 'FINALIZADO'" [class.estado-pendiente]="pedido.estado === 'PENDIENTE'">{{ pedido.estado }}</td>
           <td [class.monto-compra]="pedido.tipo === 'COMPRA'" [class.monto-venta]="pedido.tipo === 'VENTA'">
             {{ pedido.tipo === 'COMPRA' ? '- ' : '+ ' }}{{ pedido.transaccion.monto | currency: 'ARS' : 'symbol-narrow' : '1.2-2' }}
           </td>

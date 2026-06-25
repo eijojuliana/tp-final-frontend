@@ -37,7 +37,7 @@ export const BasicAuthInterceptorFn: HttpInterceptorFn = (req: HttpRequest<unkno
   if (authHeaderValue) {
     // 2. Clona y añade el encabezado 'Authorization'
     const cloned = req.clone({
-      headers: req.headers.set('Authorization', authHeaderValue)
+      setHeaders: { Authorization: authHeaderValue }
     });
     return next(cloned);
   }

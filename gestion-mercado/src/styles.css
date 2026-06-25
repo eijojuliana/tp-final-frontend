@@ -47,6 +47,15 @@
     --base-tema_oscuro-3:#322D4E;
     --base-tema_oscuro-4:#242139;
 
+    /* -------- COLORES SEMÁNTICOS -------- */
+    --rojo: #e63946;
+    --verde: #06d6a0;
+    --azul: #218BFF;
+    --gris: #6c757d;
+    --color-valor-nuevo: #6c757d;
+    --chart-text: #333;
+    --chart-grid: rgba(0, 0, 0, 0.1);
+
     /* -------- ESTADOS -------- */
     --error-0:#FCDBDA;
     --error-1:#F17A78;
@@ -169,6 +178,22 @@
     --form-card-bg: rgba(0,0,0,0.4);
     --form-input-bg: rgba(255,255,255,0.05);
     --form-input-border: var(--violeta-tema_oscuro-3);
+    --color-valor-nuevo: white;
+    --chart-text: white;
+    --chart-grid: rgba(255, 255, 255, 0.1);
+  }
+
+/* =========================
+   MODO OSCURO — montos totales
+========================= */
+:root.tema-oscuro .total-section {
+  background: transparent;
+}
+
+:root.tema-oscuro .total-value,
+:root.tema-oscuro .subtotal-valor,
+:root.tema-oscuro .total-label {
+  color: white;
 }
 
 /* =========================

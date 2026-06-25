@@ -260,6 +260,56 @@ DIV TABLA
 }
 
 /* =========================================
+  COLORES DE ESTADO
+========================================= */
+.tablaBody td.estado-finalizado {
+  color: var(--gris);
+  font-weight: bold;
+}
+
+.tablaBody td.estado-pendiente {
+  color: var(--verde);
+  font-weight: bold;
+}
+
+/* =========================================
+  HISTORIAL — ACCIONES
+========================================= */
+.accion-insert {
+  color: var(--verde);
+  font-weight: bold;
+}
+
+.accion-delete {
+  color: var(--rojo);
+  font-weight: bold;
+}
+
+/* =========================================
+  HISTORIAL — VALORES VIEJO / NUEVO
+========================================= */
+.valor-viejo {
+  color: var(--gris);
+  text-decoration: line-through;
+  margin: 0 0.5rem;
+}
+
+.valor-nuevo {
+  color: var(--color-valor-nuevo);
+  font-weight: bold;
+  margin: 0 0.5rem;
+}
+
+/* =========================================
+  COLUMNA DE ID (angosta)
+========================================= */
+.columna-id {
+  width: 6rem;
+  min-width: 4rem;
+  max-width: 8rem;
+}
+
+/* =========================================
   COLORES DE DATOS FINANCIEROS
 ========================================= */
 .texto-negativo {

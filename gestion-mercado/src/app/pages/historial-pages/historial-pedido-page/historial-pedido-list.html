@@ -1,13 +1,13 @@
 <section class="list-container">
   <div class="botones">
-    <select (change)="atributo.set($any($event.target).value); cargar()">
-      <option value="" disabled selected>Filtrar por...</option>
+    <select [value]="atributo()" (change)="atributo.set($any($event.target).value); cargar()">
+      <option value="" disabled>Filtrar por...</option>
       <option value="fecha">Fecha</option>
       <option value="accion">Acción</option>
       <option value="pedidoId">Pedido ID</option>
     </select>
-    <select (change)="orden.set($any($event.target).value); cargar()">
-      <option value="" disabled selected>Orden</option>
+    <select [value]="orden()" (change)="orden.set($any($event.target).value); cargar()">
+      <option value="" disabled>Orden</option>
       <option value="asc">Ascendente</option>
       <option value="desc">Descendente</option>
     </select>
@@ -35,8 +35,8 @@
                 <span class="valor-viejo">{{ h.valorAnterior }}</span>
                 <span class="flecha">→</span>
                 <span class="valor-nuevo">{{ h.valorNuevo }}</span>
-              } @else if (h.accion === 'INSERT') { <span> Registro </span>
-              } @else if (h.accion === 'DELETE') { <span> Eliminación </span>
+              } @else if (h.accion === 'INSERT') { <span class="accion-insert"> Registro </span>
+              } @else if (h.accion === 'DELETE') { <span class="accion-delete"> Eliminación </span>
               } @else { <span>-</span> }
             </td>
             <td>{{ h.fechaEvento | date:'dd/MM/yyyy HH:mm' }}</td>

@@ -5,7 +5,7 @@
 
     <div class="card-body">
       <div class="form-column">
-        <h2>{{ isEditMode() ? 'Editar Pedido' : 'Registrar Pedido' }}</h2>
+        <h2>{{ isEditMode() && pedidoToEdit?.estado === 'FINALIZADO' ? 'Detalle Pedido' : isEditMode() ? 'Editar Pedido' : 'Registrar Pedido' }}</h2>
 
         @if (pedidoService.isCajaCerradaHoy()) {
           <div class="caja-cerrada-aviso">
@@ -21,16 +21,16 @@
           <div class="campo">
             <label>Tipo de pedido<span class="obligatorio">*</span></label>
             <div class="pill-group">
-              <button type="button" class="pill" [class.active]="form.get('tipoPedido')?.value === 'COMPRA'" (click)="form.get('tipoPedido')?.setValue('COMPRA')">COMPRA</button>
-              <button type="button" class="pill" [class.active]="form.get('tipoPedido')?.value === 'VENTA'" (click)="form.get('tipoPedido')?.setValue('VENTA')">VENTA</button>
+              <button type="button" class="pill" [class.active]="form.get('tipoPedido')?.value === 'COMPRA'" (click)="form.get('tipoPedido')?.setValue('COMPRA')" [disabled]="pedidoToEdit?.estado === 'FINALIZADO'">COMPRA</button>
+              <button type="button" class="pill" [class.active]="form.get('tipoPedido')?.value === 'VENTA'" (click)="form.get('tipoPedido')?.setValue('VENTA')" [disabled]="pedidoToEdit?.estado === 'FINALIZADO'">VENTA</button>
             </div>
           </div>
 
           <div class="campo">
             <label>Método de pago<span class="obligatorio">*</span></label>
             <div class="pill-group">
-              <button type="button" class="pill" [class.active]="form.get('tipoTransaccion')?.value === 'EFECTIVO'" (click)="form.get('tipoTransaccion')?.setValue('EFECTIVO')">EFECTIVO</button>
-              <button type="button" class="pill" [class.active]="form.get('tipoTransaccion')?.value === 'TRANSFERENCIA'" (click)="form.get('tipoTransaccion')?.setValue('TRANSFERENCIA')">TRANSFERENCIA</button>
+              <button type="button" class="pill" [class.active]="form.get('tipoTransaccion')?.value === 'EFECTIVO'" (click)="form.get('tipoTransaccion')?.setValue('EFECTIVO')" [disabled]="pedidoToEdit?.estado === 'FINALIZADO'">EFECTIVO</button>
+              <button type="button" class="pill" [class.active]="form.get('tipoTransaccion')?.value === 'TRANSFERENCIA'" (click)="form.get('tipoTransaccion')?.setValue('TRANSFERENCIA')" [disabled]="pedidoToEdit?.estado === 'FINALIZADO'">TRANSFERENCIA</button>
             </div>
           </div>
 
@@ -41,6 +41,7 @@
                 <app-buscador-generico
                   [datos]="proveedoresMapeados"
                   placeholder="Buscar proveedor..."
+                  [valorInicial]="destinatarioNombreCompra"
                   (alSeleccionar)="alSeleccionarProveedor($event)">
                 </app-buscador-generico>
                 <button type="button" class="btn-nuevo" (click)="irAProveedor()">+ Nuevo</button>
@@ -48,6 +49,7 @@
                 <app-buscador-generico
                   [datos]="clientesMapeados"
                   placeholder="Buscar cliente..."
+                  [valorInicial]="destinatarioNombreVenta"
                   (alSeleccionar)="alSeleccionarCliente($event)">
                 </app-buscador-generico>
                 <button type="button" class="btn-nuevo" (click)="irACliente()">+ Nuevo</button>
@@ -60,24 +62,31 @@
           @if (form.get('tipoTransaccion')?.value === 'TRANSFERENCIA' && form.get('tipoPedido')?.value) {
             <div class="campo">
               <label>Cuenta bancaria</label>
-              <select formControlName="cuentaBancaria" class="form-select">
-                <option [ngValue]="null" disabled selected>Seleccione una cuenta</option>
-                @for (cuenta of cuentasBancarias(); track $index) {
-                  <option [ngValue]="cuenta.cuentaBancariaId">
-                    CBU: {{ cuenta.cbu }} — Saldo: {{ cuenta.saldo }}
-                  </option>
-                }
-              </select>
+              <div class="cuenta-control">
+                <select formControlName="cuentaBancaria" class="form-select">
+                  <option [ngValue]="null" disabled selected>Seleccione una cuenta</option>
+                  @for (cuenta of cuentasBancarias(); track $index) {
+                    <option [ngValue]="cuenta.cuentaBancariaId">
+                      CBU: {{ cuenta.cbu }} — Saldo: {{ cuenta.saldo }}
+                    </option>
+                  }
+                </select>
+                <button type="button" class="btn-nuevo" routerLink="/menu/cuentas-bancarias/form">+ Nueva</button>
+              </div>
             </div>
           }
 
           <div class="botones">
-            <button type="submit" [disabled]="form.invalid || (isEditMode() && pedidoToEdit?.estado === 'FINALIZADO')" (click)="savePedido()">
+            <button [disabled]="form.invalid || (isEditMode() && pedidoToEdit?.estado === 'FINALIZADO')" (click)="savePedido()">
               {{ isEditMode() ? 'Actualizar' : 'Registrar' }}
             </button>
 
             @if (isEditMode()) {
-              <button type="button" class="btn-cancel" (click)="cancelEdit()">Cancelar</button>
+              <button (click)="cancelEdit()">Cancelar</button>
+            }
+
+            @if (isEditMode() && pedidoToEdit?.estado === 'PENDIENTE') {
+              <button (click)="finalizarPedido()">Finalizar</button>
             }
           </div>
         </form>

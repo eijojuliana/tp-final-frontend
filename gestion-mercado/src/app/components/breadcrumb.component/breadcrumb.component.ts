@@ -26,7 +26,7 @@ export class BreadcrumbComponent {
     proveedores: 'Proveedores',
     pedidos: 'Pedidos',
     transacciones: 'Transacciones',
-    'cuentas-bancarias': 'Cuentas Bancarias',
+    'cuentas-bancarias': 'Banco y Caja',
     personas: 'Personas',
     tienda: 'Tienda',
     historial: 'Historial',
