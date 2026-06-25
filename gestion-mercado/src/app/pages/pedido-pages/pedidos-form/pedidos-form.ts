@@ -1,7 +1,7 @@
 import { Component, effect, inject, signal, OnInit } from '@angular/core';
 import { PedidoService } from '../../../services/pedido-service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NewPedido, Pedido } from '../../../models/pedido.model';
 import { ProveedorService } from '../../../services/proveedor-service';
 import { DetallesPedido } from "../../../components/detalles-pedido/detalles-pedido";
@@ -119,6 +119,11 @@ export class PedidosForm implements OnInit {
     public irACliente() {
     this.persistenceService.saveState(this.form.getRawValue());
     this.router.navigate([`/menu/clientes/form`]);
+  }
+
+  public irACuentaBancaria() {
+    this.persistenceService.saveState(this.form.getRawValue());
+    this.router.navigate([`/menu/cuentas-bancarias/form`]);
   }
 
   get destinatarioNombreCompra(): string {

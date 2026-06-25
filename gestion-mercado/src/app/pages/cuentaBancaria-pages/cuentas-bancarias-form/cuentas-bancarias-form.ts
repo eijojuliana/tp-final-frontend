@@ -4,6 +4,7 @@ import { CuentaBancariaService } from '../../../services/cuenta-bancaria-service
 import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastService } from '../../../services/toast.service';
+import { PedidoPersistenceService } from '../../../services/pedido-persistence-service';
 
 @Component({
   selector: 'app-cuentas-bancarias-form',
@@ -16,6 +17,7 @@ export class CuentasBancariasForm {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private toast = inject(ToastService);
+  private persistenceService = inject(PedidoPersistenceService);
 
   public isEditMode = signal(false);
   private cuentaBancariaToEdit: CuentaBancaria | null = null
@@ -67,7 +69,12 @@ export class CuentasBancariasForm {
         next: () => {
           this.toast.success("Cuenta Bancaria Registrada con éxito");
           this.form.reset();
-          this.router.navigate(['/menu/cuentas-bancarias']);
+          const estadoPedido = this.persistenceService.getState();
+          if (estadoPedido) {
+            this.router.navigate(['/menu/pedidos/form']);
+          } else {
+            this.router.navigate(['/menu/cuentas-bancarias']);
+          }
         }
       });
     }
