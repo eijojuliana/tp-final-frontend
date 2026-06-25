@@ -68,7 +68,7 @@ export class ClienteForm {
     } else {
       this.clienteService.post(formValue).subscribe({
         next: () => {
-          this.toast.success("Dueño registrado correctamente");
+          this.toast.success("Cliente registrado correctamente");
           console.log('Cliente Registrado');
           this.form.reset();
           const estadoPedido = this.persistenceService.getState();
