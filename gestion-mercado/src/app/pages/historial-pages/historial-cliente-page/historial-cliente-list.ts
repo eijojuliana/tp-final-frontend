@@ -1,4 +1,4 @@
-import { Component, signal, OnInit } from '@angular/core';
+import { Component, computed, signal, OnInit } from '@angular/core';
 import { HistorialClienteService } from './historial-cliente.service';
 import { DatePipe } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -13,21 +13,45 @@ import { RouterLink } from '@angular/router';
 })
 export class HistorialClienteListComponent implements OnInit {
   historial = signal<any[]>([]);
-
-  atributo = signal<string>('');
-  orden = signal<string>('');
+  atributo = signal<string>('fecha');
+  orden = signal<string>('desc');
   filtro = signal<string>('');
+
+  historialFiltrado = computed(() => {
+    const data = this.historial();
+    const f = this.filtro().toLowerCase().trim();
+    const attr = this.atributo();
+    const ord = this.orden();
+
+    let result = data;
+    if (f) {
+      result = result.filter(h =>
+        String(h.historialClienteId).includes(f) ||
+        String(h.clienteId).includes(f) ||
+        String(h.nombre).toLowerCase().includes(f) ||
+        String(h.apellido).toLowerCase().includes(f) ||
+        String(h.accion).toLowerCase().includes(f) ||
+        String(h.fechaEvento).toLowerCase().includes(f)
+      );
+    }
+
+    result = result.slice().sort((a: any, b: any) => {
+      let cmp = 0;
+      switch (attr) {
+        case 'clienteId': cmp = (a.clienteId ?? 0) - (b.clienteId ?? 0); break;
+        case 'accion': cmp = String(a.accion).localeCompare(String(b.accion)); break;
+        default: cmp = new Date(a.fechaEvento).getTime() - new Date(b.fechaEvento).getTime(); break;
+      }
+      return ord === 'desc' ? -cmp : cmp;
+    });
+
+    return result;
+  });
 
   constructor(private historialService: HistorialClienteService) {}
 
   ngOnInit(): void {
-    this.atributo.set('fecha');
-    this.orden.set('desc');
-    this.cargar();
-  }
-
-  cargar(): void {
-    this.historialService.getHistorial(this.atributo(), this.orden(), this.filtro())
+    this.historialService.getHistorial('fecha', 'desc', '')
       .subscribe({
         next: (data) => this.historial.set(data),
         error: (err) => console.error("Error", err)

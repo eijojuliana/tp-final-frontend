@@ -1,17 +1,17 @@
 <section class="list-container">
   <div class="botones">
-    <select [value]="atributo()" (change)="atributo.set($any($event.target).value); cargar()">
+    <select [value]="atributo()" (change)="atributo.set($any($event.target).value)">
       <option value="" disabled>Filtrar por...</option>
       <option value="fecha">Fecha</option>
       <option value="accion">Acción</option>
       <option value="pedidoId">Pedido ID</option>
     </select>
-    <select [value]="orden()" (change)="orden.set($any($event.target).value); cargar()">
+    <select [value]="orden()" (change)="orden.set($any($event.target).value)">
       <option value="" disabled>Orden</option>
       <option value="asc">Ascendente</option>
       <option value="desc">Descendente</option>
     </select>
-    <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value); cargar()" />
+    <input type="text" placeholder="Buscar..." (input)="filtro.set($any($event.target).value)" />
   </div>
   <div class="tabla-contenedor">
     <table class="tabla-historial">
@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <tbody class="tablaBody">
-        @for (h of historial(); track h.historialPedidoId) {
+        @for (h of historialFiltrado(); track h.historialPedidoId) {
           <tr>
             <td>{{ h.historialPedidoId }}</td>
             <td>{{ h.pedidoId }}</td>
