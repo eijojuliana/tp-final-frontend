@@ -65,7 +65,9 @@ export class ProductList implements OnInit {
     return this.productos()
       .filter(p => (filtro && attr ? String((p as any)[attr]).toLowerCase().includes(filtro) : true))
       .sort((a, b) => {
-        if (!ord || !attr) return 0;
+        if (!ord || !attr) {
+          return a.nombre.localeCompare(b.nombre);
+        }
         const A = (a as any)[attr];
         const B = (b as any)[attr];
         if (typeof A === 'number' && typeof B === 'number') {
