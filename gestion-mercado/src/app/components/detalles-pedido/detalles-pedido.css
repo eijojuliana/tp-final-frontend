@@ -273,8 +273,11 @@
 }
 
 .item-subtotal {
-  flex-shrink: 0;
+  flex-shrink: 1;
+  min-width: 0;
   text-align: right;
+  max-width: 14rem;
+  overflow: hidden;
 }
 
 .subtotal-valor {
@@ -283,6 +286,8 @@
   font-weight: 700;
   color: var(--vino-tema_claro-2);
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .costo-input {
@@ -296,7 +301,9 @@
   border: 0.1rem solid var(--borde-hover);
   border-radius: 99.9rem;
   overflow: hidden;
-  flex-shrink: 0;
+  flex-shrink: 1;
+  min-width: 0;
+  max-width: 14rem;
 }
 
 .qty-btn {
@@ -326,12 +333,15 @@
 
 .qty-value {
   min-width: 2.4rem;
+  max-width: 6rem;
   text-align: center;
   font-family: var(--font-body);
   font-size: 1.2rem;
   font-weight: 600;
   color: var(--letra1);
   padding: 0 0.4rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .btn-delete-item {
