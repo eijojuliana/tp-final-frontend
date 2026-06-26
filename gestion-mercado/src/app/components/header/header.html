@@ -64,6 +64,14 @@
               <span class="material-symbols-outlined flecha-opcion">chevron_right</span>
             </div>
 
+            @if(authService.getRole() == 'ADMIN' || authService.getRole() == 'DUENIO'){
+            <div class="opcion" routerLink="/configuracion-tienda" (click)="toggleMenu()">
+              <span class="material-symbols-outlined">store</span>
+              <p>Configuración de Tienda</p>
+              <span class="material-symbols-outlined flecha-opcion">chevron_right</span>
+            </div>
+            }
+
             <div class="opcion" (click)="cerrarSesion()" (click)="toggleMenu()">
               <span class="material-symbols-outlined">logout</span>
               <p>Cerrar Sesión</p>
