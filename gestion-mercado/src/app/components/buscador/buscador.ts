@@ -21,6 +21,7 @@ export class BuscadorGenericoComponent implements OnInit {
   public textoBusqueda: string = '';
   public resultadosFiltrados: BuscadorItem[] = [];
   public mostrarDropdown: boolean = false;
+  private itemSeleccionado: boolean = false;
 
   ngOnInit() {
     if (this.valorInicial) {
@@ -31,6 +32,7 @@ export class BuscadorGenericoComponent implements OnInit {
   private elementRef = inject(ElementRef);
 
   public alEscribir(): void {
+    this.itemSeleccionado = false;
     const textoLimpio = this.textoBusqueda.toLowerCase().trim();
 
     this.resultadosFiltrados = this.datos.filter(item =>
@@ -41,14 +43,22 @@ export class BuscadorGenericoComponent implements OnInit {
   }
 
   public seleccionarItem(item: BuscadorItem): void {
+    this.itemSeleccionado = true;
     this.textoBusqueda = item.textoPrincipal;
     this.mostrarDropdown = false;
     this.alSeleccionar.emit(item.id);
   }
 
   public limpiar(): void {
+    this.itemSeleccionado = false;
     this.textoBusqueda = '';
     this.resultadosFiltrados = [];
+    this.mostrarDropdown = false;
+  }
+
+  public setValor(texto: string): void {
+    this.textoBusqueda = texto;
+    this.itemSeleccionado = !!texto;
     this.mostrarDropdown = false;
   }
 
@@ -56,6 +66,9 @@ export class BuscadorGenericoComponent implements OnInit {
   public hacerClicAfuera(event: Event): void {
     if (!this.elementRef.nativeElement.contains(event.target)) {
       this.mostrarDropdown = false;
+      if (!this.itemSeleccionado && !this.valorInicial) {
+        this.textoBusqueda = '';
+      }
     }
   }
 }

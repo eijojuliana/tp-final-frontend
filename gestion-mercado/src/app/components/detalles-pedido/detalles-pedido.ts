@@ -184,10 +184,13 @@ export class DetallesPedido implements OnInit {
       cantidad: detalle.cantidad,
       costoUnitario: detalle.costoUnitario,
     };
+    const prod = this.productos().find(p => p.producto_id === detalle.producto_id);
+    this.buscadorComp?.setValor(prod ? prod.nombre : '');
   }
 
   cancelarEdicionDetalle() {
     this.detalleEnEdicion.set(null);
     this.nuevoDetalle = { productoId: undefined, cantidad: undefined, costoUnitario: undefined };
+    this.buscadorComp?.limpiar();
   }
 }
