@@ -30,7 +30,7 @@ export class TransaccionForm implements OnInit {
   form = this.fb.nonNullable.group({
     tipo: ['INGRESO_MANUAL', Validators.required],
     monto: [0, [Validators.required, Validators.min(0.01)]],
-    motivo: ['', [Validators.required, this.validacion.sinEspacios]],
+    motivo: ['', [Validators.required, this.validacion.sinEspacios, this.validacion.sinNumeros]],
     destinoId: [1, Validators.required],
   });
 

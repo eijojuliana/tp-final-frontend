@@ -8,6 +8,7 @@ import { Producto } from '../../../models/producto.model';
 import { ProductService } from '../../../services/product-service';
 import { ToastService } from '../../../services/toast.service';
 import { Validaciones } from '../../../validations/Validaciones';
+import { TiendaService } from '../../../services/tienda-service';
 
 @Component({
   selector: 'app-lotes-form',
@@ -23,17 +24,22 @@ export class LotesForm {
   private router = inject(Router);
   private toast = inject(ToastService);
   private validacion = inject(Validaciones);
+  private tiendaService = inject(TiendaService);
 
   isEditMode = signal(false);
   private loteToEdit: Lote | null = null;
 
   productos = this.productService.productos;
 
+  compararProductos(a: Producto | null, b: Producto | null): boolean {
+    return !!a && !!b && a.producto_id === b.producto_id;
+  }
+
   form = this.fb.nonNullable.group({
     producto: [undefined as unknown as Producto, Validators.required],
     cantidadDisponible: [0, Validators.required],
     costoUnitario: [0, [Validators.required, Validators.min(1)]],
-    fechaIngreso: ['', [Validators.required, this.validacion.fechaValida]],
+    fechaIngreso: ['', [Validators.required, this.validacion.fechaValida, this.validacion.fechaNoAnteriorA(() => this.tiendaService.tienda()?.fechaInicioActividades)]],
   });
 
   constructor() {
@@ -61,12 +67,8 @@ export class LotesForm {
 
     const formValue = this.form.getRawValue();
 
-    // CAMBIAMOS LA FECHA yyyy-MM-dd A dd/MM/yyyy
-    const fechaObj = new Date(formValue.fechaIngreso);
-    const fechaFormateada =
-      fechaObj.getDate().toString().padStart(2, '0') + '/' +
-      (fechaObj.getMonth() + 1).toString().padStart(2, '0') + '/' +
-      fechaObj.getFullYear();
+    const [anio, mes, dia] = formValue.fechaIngreso.split('-');
+    const fechaFormateada = `${dia}/${mes}/${anio}`;
 
     const dto = {
       producto: formValue.producto,

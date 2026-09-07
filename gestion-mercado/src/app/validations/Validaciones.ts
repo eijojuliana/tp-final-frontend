@@ -25,4 +25,26 @@ export class Validaciones {
         }
         return null;
   }
+
+  public sinNumeros(control: any) {
+        const valor = control?.value;
+        if (valor == null || valor === '') return null;
+        if (/\d/.test(String(valor))) {
+            return { contieneNumeros: true };
+        }
+        return null;
+  }
+
+  public fechaNoAnteriorA(fechaMinima: () => string | null | undefined) {
+        return (control: any) => {
+            const seleccionada = control?.value;
+            if (!seleccionada) return null;
+            const minima = fechaMinima();
+            if (!minima) return null;
+            if (new Date(seleccionada) < new Date(minima)) {
+                return { anteriorAInicio: true };
+            }
+            return null;
+        };
+  }
 }

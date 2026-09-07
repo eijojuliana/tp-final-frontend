@@ -11,7 +11,7 @@
 
         <div class = "campo">
           <label>Producto<span class="obligatorio">*</span>: </label>
-          <select formControlName="producto">
+          <select formControlName="producto" [compareWith]="compararProductos">
             <option [ngValue]="null" disabled selected>Seleccione un producto</option>
 
             @for(prod of productos(); track $index) {
@@ -44,8 +44,12 @@
         <div class = "campo">
           <label>Fecha de Ingreso<span class="obligatorio">*</span>: </label>
           <input type="date" formControlName="fechaIngreso">
-          @if (form.get('fechaIngreso')?.invalid && form.get('fechaIngreso')?.touched) {
+          @if (form.get('fechaIngreso')?.hasError('required') && form.get('fechaIngreso')?.touched) {
             <span class = "error">La fecha de ingreso es requerida.</span>
+          } @else if (form.get('fechaIngreso')?.hasError('anteriorAInicio') && form.get('fechaIngreso')?.touched) {
+            <span class = "error">La fecha de ingreso no puede ser anterior al inicio de actividades de la tienda.</span>
+          } @else if (form.get('fechaIngreso')?.invalid && form.get('fechaIngreso')?.touched) {
+            <span class = "error">La fecha de ingreso no es válida.</span>
           }
         </div>
 

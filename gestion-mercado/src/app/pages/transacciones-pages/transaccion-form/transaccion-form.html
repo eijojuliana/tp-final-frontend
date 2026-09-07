@@ -24,8 +24,12 @@
         <div class="campo">
           <label>Motivo<span class="obligatorio">*</span>:</label>
           <input type="text" formControlName="motivo" placeholder="Ej: Aporte para cambio, Pago a proveedor...">
-          @if (form.get('motivo')?.invalid && form.get('motivo')?.touched) {
+          @if (form.get('motivo')?.hasError('required') && form.get('motivo')?.touched) {
             <span class="error">El motivo es requerido.</span>
+          } @else if (form.get('motivo')?.hasError('soloEspacios') && form.get('motivo')?.touched) {
+            <span class="error">El motivo no puede quedar vacío.</span>
+          } @else if (form.get('motivo')?.hasError('contieneNumeros') && form.get('motivo')?.touched) {
+            <span class="error">El motivo no puede contener números.</span>
           }
         </div>
 
