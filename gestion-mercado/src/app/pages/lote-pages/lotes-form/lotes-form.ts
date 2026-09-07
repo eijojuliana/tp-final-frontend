@@ -7,6 +7,7 @@ import { Lote, newLote } from '../../../models/lote.model';
 import { Producto } from '../../../models/producto.model';
 import { ProductService } from '../../../services/product-service';
 import { ToastService } from '../../../services/toast.service';
+import { Validaciones } from '../../../validations/Validaciones';
 
 @Component({
   selector: 'app-lotes-form',
@@ -21,6 +22,7 @@ export class LotesForm {
   productService = inject(ProductService);
   private router = inject(Router);
   private toast = inject(ToastService);
+  private validacion = inject(Validaciones);
 
   isEditMode = signal(false);
   private loteToEdit: Lote | null = null;
@@ -31,7 +33,7 @@ export class LotesForm {
     producto: [undefined as unknown as Producto, Validators.required],
     cantidadDisponible: [0, Validators.required],
     costoUnitario: [0, [Validators.required, Validators.min(1)]],
-    fechaIngreso: ['', Validators.required],
+    fechaIngreso: ['', [Validators.required, this.validacion.fechaValida]],
   });
 
   constructor() {

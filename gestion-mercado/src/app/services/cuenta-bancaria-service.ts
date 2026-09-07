@@ -25,6 +25,19 @@ export class CuentaBancariaService {
     });
   }
 
+  // Actualiza el saldo de una cuenta de forma optimista (cambia al instante en
+  // pantalla) y después re-sincroniza con el servidor para el valor real.
+  aplicarCambioSaldo(cuentaId: number, delta: number): void {
+    this.cuentaBancariaState.update(cuentas =>
+      cuentas.map(c =>
+        c.cuentaBancariaId === cuentaId
+          ? { ...c, saldo: (Number(c.saldo) || 0) + delta }
+          : c
+      )
+    );
+    this.load();
+  }
+
   post(cuentaBancaria:newCuentaBancaria):Observable<CuentaBancaria> {
     return this.http.post<CuentaBancaria>(this.url, cuentaBancaria).pipe(
       tap( () => this.load() )

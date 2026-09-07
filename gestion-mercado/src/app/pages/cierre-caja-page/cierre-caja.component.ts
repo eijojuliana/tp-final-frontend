@@ -42,11 +42,15 @@ export class CierreCajaComponent implements OnInit {
           this.credencialPassword = '';
           this.pedidoService.verificarEstadoCaja();
         } else {
-          this.errorAbrirCaja.set(res.mensaje || 'Error al abrir la caja');
+          const msg = res.mensaje || 'Error al abrir la caja';
+          this.errorAbrirCaja.set(msg);
+          this.toast.error(msg);
         }
       },
       error: (err) => {
-        this.errorAbrirCaja.set(err.error?.mensaje || 'Credenciales inválidas');
+        const msg = err.error?.mensaje || 'No se pudo abrir la caja. Verificá las credenciales o su rol.';
+        this.errorAbrirCaja.set(msg);
+        this.toast.error(msg);
       }
     });
   }
@@ -87,7 +91,7 @@ export class CierreCajaComponent implements OnInit {
     this.http.get<any>(`${environment.apiBaseUrl}/configuracion-tienda/1`).subscribe({
       next: (tienda) => {
         const saldoBD = tienda.caja ?? 0;
-        const neto = this.ingresosEfectivo() - this.egresosGastos() - this.ajustesHoy();
+        const neto = this.ingresosEfectivo() - this.egresosGastos() + this.ajustesHoy();
         this.saldoInicial.set(saldoBD - neto);
       },
       error: () => this.saldoInicial.set(0)

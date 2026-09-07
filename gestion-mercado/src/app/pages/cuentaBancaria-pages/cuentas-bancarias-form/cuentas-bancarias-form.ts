@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastService } from '../../../services/toast.service';
 import { PedidoPersistenceService } from '../../../services/pedido-persistence-service';
+import { Validaciones } from '../../../validations/Validaciones';
 
 @Component({
   selector: 'app-cuentas-bancarias-form',
@@ -18,12 +19,13 @@ export class CuentasBancariasForm {
   private router = inject(Router);
   private toast = inject(ToastService);
   private persistenceService = inject(PedidoPersistenceService);
+  private validacion = inject(Validaciones);
 
   public isEditMode = signal(false);
   private cuentaBancariaToEdit: CuentaBancaria | null = null
 
   form = this.fb.nonNullable.group({
-    nombreBanco:['',[Validators.required]],
+    nombreBanco:['',[Validators.required, this.validacion.sinEspacios]],
     cbu: ['', [Validators.required, Validators.pattern('^\\d{22}$')]],
     saldo: [0, [Validators.required]]
   });

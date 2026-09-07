@@ -19,6 +19,7 @@ export class TiendaService {
   }
 
   load(): void {
+    this.loadedState.set(false);
     this.http.get<Tienda>(`${this.url}/1`).subscribe({
       next: (data) => {
         if (data && Object.keys(data).length > 0 && data.tiendaId > 0) {
@@ -29,10 +30,27 @@ export class TiendaService {
         this.loadedState.set(true);
       },
       error: () => {
-        this.tiendaState.set(null);
+        // Si ya teníamos datos, no los piso con null (evita que el saldo
+        // mostrado "se ponga en 0" por un error transitorio de la petición).
+        if (!this.tienda()) {
+          this.tiendaState.set(null);
+        }
         this.loadedState.set(true);
       }
     });
+  }
+
+  // Actualiza el saldo de la caja de forma optimista (cambia al instante en
+  // pantalla) y después re-sincroniza con el servidor para el valor real.
+  aplicarCambioCaja(delta: number): void {
+    const actual = this.tienda();
+    if (actual) {
+      this.tiendaState.set({
+        ...actual,
+        caja: (Number(actual.caja) || 0) + delta,
+      });
+    }
+    this.load();
   }
 
   public get loaded$(): Observable<boolean> {

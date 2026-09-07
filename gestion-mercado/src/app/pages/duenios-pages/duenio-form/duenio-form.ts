@@ -28,11 +28,11 @@ export class DuenioForm {
   private rutaListado: string = '/menu/duenios';
 
   form = this.fb.nonNullable.group({
-    nombre: ['', [Validators.required]],
-    apellido: ['', [Validators.required]],
+    nombre: ['', [Validators.required, this.validacion.sinEspacios]],
+    apellido: ['', [Validators.required, this.validacion.sinEspacios]],
     dni: [0, [Validators.required, Validators.min(100000), Validators.max(999999999)]],
     fechaNacimiento: ['',[Validators.required, this.validacion.fechaValida]],
-    email: ['', [Validators.required, Validators.email]],
+    email: ['', [Validators.required, this.validacion.sinEspacios, Validators.email]],
     contraseña: ['']
   });
 

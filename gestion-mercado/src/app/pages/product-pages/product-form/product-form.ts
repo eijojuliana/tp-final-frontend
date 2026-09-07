@@ -6,6 +6,7 @@ import { InventarioService } from '../../../services/inventario-service';
 import { nuevoProducto, Producto } from '../../../models/producto.model';
 import { Inventario } from '../../../models/inventario.model';
 import { ToastService } from '../../../services/toast.service';
+import { Validaciones } from '../../../validations/Validaciones';
 
 @Component({
   selector: 'app-product-form',
@@ -20,15 +21,16 @@ export class ProductRegister {
   private inventarioService = inject(InventarioService);
   private router = inject(Router);
   private toast = inject(ToastService);
+  private validacion = inject(Validaciones);
 
   isEditMode = signal(false);
   private productToEdit: Producto | null = null;
   private inventarioToEdit: Inventario | null = null;
 
   form = this.fb.nonNullable.group({
-    nombre: ['', [Validators.required]],
-    categoria: ['', [Validators.required]],
-    url: ['', [Validators.required]],
+    nombre: ['', [Validators.required, this.validacion.sinEspacios]],
+    categoria: ['', [Validators.required, this.validacion.sinEspacios]],
+    url: ['', [Validators.required, this.validacion.sinEspacios]],
     stockMin: [0, [Validators.required, Validators.min(0)]],
     precioVenta: [0, [Validators.required, Validators.min(0.01)]]
   });

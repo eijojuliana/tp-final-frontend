@@ -24,6 +24,7 @@ export class DuenioService {
   }
 
 load(): void {
+    this.loadedState.set(false);
     this.http.get<Duenio[]>(this.url).subscribe({
       next: data => {
         this.dueniosState.set(data);

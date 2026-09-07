@@ -16,4 +16,13 @@ export class Validaciones {
 
         return null;
   }
+
+  public sinEspacios(control: any) {
+        const valor = control?.value;
+        if (valor == null) return null;
+        if (typeof valor === 'string' && valor.trim() === '') {
+            return { soloEspacios: true };
+        }
+        return null;
+  }
 }

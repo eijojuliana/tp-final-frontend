@@ -168,6 +168,7 @@
       }
     </div>
 
+    @if(currentRole == "ADMIN" || currentRole == "DUENIO") {
     <div>
       <div class="item dropdown-header" (click)="toggleMenu('historial')">
         <div class="item-content">
@@ -265,5 +266,6 @@
         </div>
       }
     </div>
+    }
   </nav>
 </aside>

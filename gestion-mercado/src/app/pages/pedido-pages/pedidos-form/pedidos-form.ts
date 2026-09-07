@@ -267,7 +267,23 @@ public eliminarPedido(id: number) {
             next: () => {
               this.pedidoService.clearPedidoToEdit();
               this.transaccionService.load();
-              this.tiendaService.load();
+              const monto = Number(pedido.transaccion?.monto || 0);
+              if (pedido.transaccion?.tipo === 'EFECTIVO') {
+                // Venta/comprá en efectivo: actualiza la caja al instante
+                this.tiendaService.aplicarCambioCaja(pedido.tipo === 'VENTA' ? monto : -monto);
+              } else if (pedido.transaccion?.tipo === 'TRANSFERENCIA') {
+                // Venta/comprá por transferencia: actualiza el saldo bancario al instante
+                const cuentaId = pedido.tipo === 'VENTA'
+                  ? pedido.transaccion?.destino_id
+                  : pedido.transaccion?.origen_id;
+                if (cuentaId) {
+                  this.cuentaService.aplicarCambioSaldo(cuentaId, pedido.tipo === 'VENTA' ? monto : -monto);
+                } else {
+                  this.cuentaService.load();
+                }
+              } else {
+                this.tiendaService.load();
+              }
               this.router.navigate(['/menu/pedidos']);
             }
           });

@@ -40,13 +40,13 @@
 }
 
 .botones-rango button:hover {
-  background: #ff4d8d;
-  border-color: #ff4d8d;
+  background: var(--chart-color-1);
+  border-color: var(--chart-color-1);
 }
 
 .botones-rango button.active {
-  background: #a32e59;
-  border-color: #b13562;
+  background: var(--btn-active-bg, #a32e59);
+  border-color: var(--btn-active-border, #b13562);
   color: white;
   font-weight: bold;
 }
@@ -103,7 +103,7 @@
   font-size: 2.5rem;
   font-weight: bold;
   margin-top: 1rem;
-  color: #ff4d8d;
+  color: var(--chart-color-1);
   overflow-wrap: break-word;
   word-break: break-word;
   max-width: 100%;

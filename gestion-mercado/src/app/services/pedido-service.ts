@@ -1,14 +1,18 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { Observable, of, switchMap, tap } from 'rxjs';
 import { Pedido, NewPedido } from '../models/pedido.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './ip';
+import { TiendaService } from './tienda-service';
+import { CuentaBancariaService } from './cuenta-bancaria-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PedidoService {
   private url = environment.apiBaseUrl + "/pedidos";
+  private tiendaService = inject(TiendaService);
+  private cuentaBancariaService = inject(CuentaBancariaService);
 
   private pedidosState = signal<Pedido[]>([]);
   public pedidos = this.pedidosState.asReadonly();
@@ -64,7 +68,15 @@ export class PedidoService {
 
   finalizar(id: number): Observable<boolean> {
     return this.http.put<boolean>(`${this.url}/${id}/finalizar`, {}).pipe(
-      tap(()=>this.load())
+      tap(() => {
+        this.load();
+        // Al finalizar un pedido la caja puede cambiar (venta EFECTIVO acredita,
+        // compra EFECTIVO debita), por eso refrescamos el saldo de la tienda.
+        this.tiendaService.load();
+        // Una venta/comprá por TRANSFERENCIA mueve el saldo de una cuenta
+        // bancaria, así que también la refrescamos.
+        this.cuentaBancariaService.load();
+      })
     );
   }
 

@@ -4,6 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsuarioService } from '../../../services/usuario-service';
 import { Router } from '@angular/router';
 import { ToastService } from '../../../services/toast.service';
+import { Validaciones } from '../../../validations/Validaciones';
 
 @Component({
   selector: 'app-usuario-form',
@@ -17,13 +18,14 @@ export class UsuarioForm {
   private usuarioService = inject(UsuarioService);
   private router = inject(Router);
   private toast = inject(ToastService);
+  private validacion = inject(Validaciones);
 
   passwordVisible: boolean = false;
   public editMode = signal(false);
   private usuarioToEdit: Usuario | null = null;
 
   form = this.fb.nonNullable.group({
-    email: ['',Validators.required],
+    email: ['', [Validators.required, this.validacion.sinEspacios]],
     contraseña: [''],
   });
 

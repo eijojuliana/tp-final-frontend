@@ -6,6 +6,7 @@ import { Router, RouterLink } from '@angular/router';
 import { TransaccionService } from '../../../services/transaccion-service';
 import { ToastService } from '../../../services/toast.service';
 import { CuentaBancariaService } from '../../../services/cuenta-bancaria-service';
+import { Validaciones } from '../../../validations/Validaciones';
 
 @Component({
   selector: 'app-transaccion-form',
@@ -19,6 +20,7 @@ export class TransaccionForm implements OnInit {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private toast = inject(ToastService);
+  private validacion = inject(Validaciones);
 
   cuentasBancarias = this.cuentaBancariaService.cuentasBancarias;
   loadingCuentas = signal(true);
@@ -28,7 +30,7 @@ export class TransaccionForm implements OnInit {
   form = this.fb.nonNullable.group({
     tipo: ['INGRESO_MANUAL', Validators.required],
     monto: [0, [Validators.required, Validators.min(0.01)]],
-    motivo: ['', Validators.required],
+    motivo: ['', [Validators.required, this.validacion.sinEspacios]],
     destinoId: [1, Validators.required],
   });
 

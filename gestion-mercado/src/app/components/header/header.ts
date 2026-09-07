@@ -9,6 +9,7 @@ import { ThemeService } from '../../styles/theme.service';
 import { TiendaService } from '../../services/tienda-service';
 import { CuentaBancariaService } from '../../services/cuenta-bancaria-service';
 import { SidebarStateService } from '../sidebar/sidebar-state.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-header',
@@ -27,6 +28,7 @@ export class Header implements OnInit {
   public tiendaService = inject(TiendaService);
   private cuentaBancariaService = inject(CuentaBancariaService);
   public pedidoService = inject(PedidoService);
+  private toast = inject(ToastService);
   private route = inject(Router);
   private sidebarState = inject(SidebarStateService);
 
@@ -45,6 +47,7 @@ export class Header implements OnInit {
     if (this.authService.isLoggedIn()) {
       this.pedidoService.verificarEstadoCaja();
       this.tiendaService.load();
+      this.cuentaBancariaService.load();
     }
     this.theme.init();
   }
@@ -91,13 +94,19 @@ export class Header implements OnInit {
       next: (res: any) => {
         if (res.exito) {
           this.mostrarModalAbrirCaja = false;
+          this.credencialEmail = '';
+          this.credencialPassword = '';
+          this.toast.success('Caja abierta correctamente');
           this.pedidoService.verificarEstadoCaja();
         } else {
           this.errorAbrirCaja = res.mensaje || 'Error al abrir la caja';
+          this.toast.error(this.errorAbrirCaja);
         }
       },
       error: (err) => {
-        this.errorAbrirCaja = err.error?.mensaje || 'Credenciales inválidas';
+        const msg = err.error?.mensaje || 'No se pudo abrir la caja. Verificá las credenciales o su rol.';
+        this.errorAbrirCaja = msg;
+        this.toast.error(msg);
       }
     });
   }

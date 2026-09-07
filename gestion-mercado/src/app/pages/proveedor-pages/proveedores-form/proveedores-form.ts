@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { NewProveedor, Proveedor } from '../../../models/proveedor.model';
 import { ToastService } from '../../../services/toast.service';
 import { PedidoPersistenceService } from '../../../services/pedido-persistence-service';
+import { Validaciones } from '../../../validations/Validaciones';
 
 @Component({
   selector: 'app-proveedores-form',
@@ -18,17 +19,18 @@ export class ProveedoresForm {
   private router=inject(Router);
   private toast = inject(ToastService);
    private persistenceService = inject(PedidoPersistenceService);
+   private validacion = inject(Validaciones);
 
   isEditMode=signal(false);
   private proveedorToEdit:Proveedor|null=null;
 
   form = this.fb.nonNullable.group({
     cuit: [0, [Validators.required, Validators.pattern(/^\d{11}$/)]],
-    razonSocial: ['', [Validators.required]],
-    nombreFantasia: ['', [Validators.required]],
+    razonSocial: ['', [Validators.required, this.validacion.sinEspacios]],
+    nombreFantasia: ['', [Validators.required, this.validacion.sinEspacios]],
     condicion: ['Monotributo', [Validators.required]],
     telefono: [0, [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
+    email: ['', [Validators.required, this.validacion.sinEspacios, Validators.email]],
     direccion: this.fb.group({
       calle: [''],
       altura: [''],

@@ -4,6 +4,7 @@ import { TiendaService } from '../../../services/tienda-service';
 import { ToastService } from '../../../services/toast.service';
 import { newTienda} from '../../../models/tienda.model';
 import { Router } from '@angular/router';
+import { Validaciones } from '../../../validations/Validaciones';
 
 @Component({
   selector: 'app-tienda-page',
@@ -17,15 +18,16 @@ export class TiendaPage implements OnInit {
   private fb = inject(FormBuilder);
   private tiendaService = inject(TiendaService);
   private toast = inject(ToastService);
+  private validacion = inject(Validaciones);
   public isEditMode = signal(false);
 
   public form = this.fb.group({
     tiendaId: [1],
-    razonSocial: ['', Validators.required],
+    razonSocial: ['', [Validators.required, this.validacion.sinEspacios]],
     nombreFantasia: [''],
     cuit: [0, Validators.required],
     condicion: ['Monotributo'],
-    url: ['', [Validators.required]],
+    url: ['', [Validators.required, this.validacion.sinEspacios]],
     ingresosBrutos: [''],
     fechaInicioActividades: ['', Validators.required],
     puntoDeVenta: [1, Validators.required],
