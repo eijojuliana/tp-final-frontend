@@ -2,6 +2,7 @@ import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { UsuarioService } from '../../../services/usuario-service';
 import { Router, RouterLink } from '@angular/router';
 import { ToastService } from '../../../services/toast.service';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-usuarios-list',
@@ -20,6 +21,11 @@ export class UsuariosList implements OnInit {
   public usuarios = this.usuarioService.usuarios;
   router = inject(Router);
   private toast = inject(ToastService);
+  private auth = inject(AuthService);
+
+  esMiUsuario(email: string): boolean {
+    return !!email && email === this.auth.getUsername();
+  }
 
   filtro = signal('');
   atributo = signal<string>('');

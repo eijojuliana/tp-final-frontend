@@ -60,7 +60,9 @@
             <td>{{ duenio.dni }}</td>
             <td>{{ duenio.email }}</td>
             <td class="acciones">
-              <button class="btnEliminar" (click)="eliminarDuenio(duenio.duenioId)"> Eliminar </button>
+              @if (!esMiDuenio(duenio.email)) {
+                <button class="btnEliminar" (click)="eliminarDuenio(duenio.duenioId)"> Eliminar </button>
+              }
               <button class="btnEditar" (click)="modificarDuenio(duenio)"> Editar </button>
             </td>
           </tr>

@@ -2,6 +2,7 @@ import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { DuenioService } from '../../../services/duenio-service';
 import { Router, RouterLink } from '@angular/router';
 import { ToastService } from '../../../services/toast.service';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-duenio-list',
@@ -20,6 +21,11 @@ export class DueniosList implements OnInit {
   duenios = this.service.duenios;
   router = inject(Router);
   private toast = inject(ToastService);
+  private auth = inject(AuthService);
+
+  esMiDuenio(email: string): boolean {
+    return !!email && email === this.auth.getUsername();
+  }
 
   filtro = signal('');
   atributo = signal<string>('');

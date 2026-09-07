@@ -2,6 +2,7 @@ import { Router, RouterLink } from '@angular/router';
 import { EmpleadoService } from './../../../services/empleado-service';
 import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { ToastService } from '../../../services/toast.service';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-empleado-list',
@@ -20,6 +21,11 @@ export class EmpleadoList implements OnInit {
   empleados = this.service.empleados;
   router = inject(Router);
   private toast = inject(ToastService);
+  private auth = inject(AuthService);
+
+  esMiEmpleado(email: string): boolean {
+    return !!email && email === this.auth.getUsername();
+  }
 
   filtro = signal('');
   atributo = signal<string>('');

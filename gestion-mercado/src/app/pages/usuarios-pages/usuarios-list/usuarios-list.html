@@ -45,7 +45,9 @@
             <td>{{ usuario.usuarioId }}</td>
             <td>{{ usuario.email }}</td>
             <td class="acciones">
-              <button class="btnEliminar" (click)="eliminarUsuario(usuario.usuarioId)"> Eliminar </button>
+              @if (!esMiUsuario(usuario.email)) {
+                <button class="btnEliminar" (click)="eliminarUsuario(usuario.usuarioId)"> Eliminar </button>
+              }
               <button class="btnEditar" (click)="modificarUsuario(usuario)"> Editar </button>
             </td>
           </tr>

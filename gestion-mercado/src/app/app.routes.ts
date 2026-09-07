@@ -52,6 +52,7 @@ import { CierreCajaComponent } from './pages/cierre-caja-page/cierre-caja.compon
 const AUTH_AND_SETUP = [authGuard];
 const ADMIN_DUENIO_EMPLEADO = ['ADMIN','DUENIO','EMPLEADO'];
 const ADMIN_DUENIO = ['ADMIN','DUENIO'];
+const SOLO_ADMIN = ['ADMIN'];
 
 export const routes: Routes = [
   // Ruta por defecto que dirige a /login
@@ -89,8 +90,8 @@ export const routes: Routes = [
   { path:'configuracion-tienda', component: TiendaPage , canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO}},
 
   // Rutas usuarios
-  {path:'menu/usuarios', component: UsuariosList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO}},
-  {path:'menu/usuarios/form', component: UsuarioForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO}},
+  {path:'menu/usuarios', component: UsuariosList, canActivate:AUTH_AND_SETUP, data:{roles:SOLO_ADMIN}},
+  {path:'menu/usuarios/form', component: UsuarioForm, canActivate:AUTH_AND_SETUP, data:{roles:SOLO_ADMIN}},
   { path:'menu/historial/usuarios',component:HistorialUsuarioListComponent, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
   // Rutas duenios (Estas rutas SÍ deben estar protegidas)
   {path:'menu/duenios', component: DueniosList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO}},
@@ -133,8 +134,8 @@ export const routes: Routes = [
   { path: 'acceso-denegado', component: AccesoDenegado },
 
   // Estadisticas
-  { path: 'menu/estadisticas', component: EstadisticasComponent },
-  { path: 'menu/cierre-caja', component: CierreCajaComponent }
+  { path: 'menu/estadisticas', component: EstadisticasComponent, canActivate:[authGuard], data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  { path: 'menu/cierre-caja', component: CierreCajaComponent, canActivate:[authGuard], data:{roles:ADMIN_DUENIO_EMPLEADO}}
 
 ];
 

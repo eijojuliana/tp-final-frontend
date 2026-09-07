@@ -59,7 +59,9 @@
           <td>{{ empleado.dni }}</td>
           <td>{{ empleado.email }}</td>
           <td class="acciones">
-            <button class="btnEliminar" (click)="eliminarEmpleado(empleado.empleadoId)"> Eliminar </button>
+            @if (!esMiEmpleado(empleado.email)) {
+              <button class="btnEliminar" (click)="eliminarEmpleado(empleado.empleadoId)"> Eliminar </button>
+            }
             <button class="btnEditar" (click)="modificarEmpleado(empleado)"> Editar </button>
           </td>
         </tr>
