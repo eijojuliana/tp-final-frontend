@@ -77,8 +77,8 @@ export const routes: Routes = [
   { path:'menu/inventarios/form', component:ProductRegister, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
 
   // Rutas personas
-  { path:'menu/personas', component: PersonaList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO} },
-  { path:'menu/personas/form', component: PersonaForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO} },
+  { path:'menu/personas', component: PersonaList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO} },
+  { path:'menu/personas/form', component: PersonaForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO} },
   { path:'menu/historial/personas',component:HistorialPersonaListComponent, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
 
   // Rutas de Cuentas Bancarias
@@ -89,7 +89,7 @@ export const routes: Routes = [
   { path:'configuracion-tienda', component: TiendaPage , canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO}},
 
   // Rutas usuarios
-  {path:'menu/usuarios', component: UsuariosList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  {path:'menu/usuarios', component: UsuariosList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO}},
   {path:'menu/usuarios/form', component: UsuarioForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO}},
   { path:'menu/historial/usuarios',component:HistorialUsuarioListComponent, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
   // Rutas duenios (Estas rutas SÍ deben estar protegidas)
@@ -97,7 +97,7 @@ export const routes: Routes = [
   {path:'menu/duenios/form', component: DuenioForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO}},
 
   //Rutas empleados
-  { path: 'menu/empleados', component: EmpleadoList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO_EMPLEADO}},
+  { path: 'menu/empleados', component: EmpleadoList, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO}},
   { path: 'menu/empleados/form', component: EmpleadoForm, canActivate:AUTH_AND_SETUP, data:{roles:ADMIN_DUENIO}},
 
   //Rutas clientes
