@@ -37,11 +37,17 @@ export const BasicAuthInterceptorFn: HttpInterceptorFn = (req: HttpRequest<unkno
   if (authHeaderValue) {
     // 2. Clona y añade el encabezado 'Authorization'
     const cloned = req.clone({
-      setHeaders: { Authorization: authHeaderValue }
+      setHeaders: {
+        Authorization: authHeaderValue,
+        'ngrok-skip-browser-warning': 'true'
+      }
     });
     return next(cloned);
   }
 
   // 3. Pasa la solicitud original si no hay encabezado
-  return next(req);
+  const reqWithNgrok = req.clone({
+    setHeaders: { 'ngrok-skip-browser-warning': 'true' }
+  });
+  return next(reqWithNgrok);
 };

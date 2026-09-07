@@ -64,6 +64,21 @@ export class PedidosForm implements OnInit {
     }));
   }
 
+  seleccionarTipoPedido(tipo: 'COMPRA' | 'VENTA') {
+    this.form.get('tipoPedido')?.setValue(tipo);
+    this.form.get('tipoPedido')?.markAsTouched();
+    if (tipo === 'COMPRA') {
+      this.form.get('destino_id')?.markAsTouched();
+    } else {
+      this.form.get('origen_id')?.markAsTouched();
+    }
+  }
+
+  seleccionarTipoTransaccion(tipo: 'EFECTIVO' | 'TRANSFERENCIA') {
+    this.form.get('tipoTransaccion')?.setValue(tipo);
+    this.form.get('tipoTransaccion')?.markAsTouched();
+  }
+
   form = this.fb.nonNullable.group({
     tipoPedido: [undefined as unknown as 'COMPRA' | 'VENTA', [Validators.required]],
     tipoTransaccion: [undefined as unknown as 'EFECTIVO' | 'TRANSFERENCIA', [Validators.required]],

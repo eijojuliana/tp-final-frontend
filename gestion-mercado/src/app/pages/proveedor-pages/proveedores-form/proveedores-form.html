@@ -19,11 +19,21 @@
         <div class="campo">
           <label>Razón Social<span class="obligatorio">*</span>: </label>
           <input type="text" formControlName="razonSocial" placeholder="Ej: Logística S.A.">
+          @if (form.get('razonSocial')?.hasError('required') && form.get('razonSocial')?.touched) {
+            <span class="error">La razón social es requerida.</span>
+          } @else if (form.get('razonSocial')?.hasError('soloEspacios') && form.get('razonSocial')?.touched) {
+            <span class="error">La razón social no puede quedar vacía.</span>
+          }
         </div>
 
         <div class="campo">
           <label>Nombre Fantasía<span class="obligatorio">*</span>: </label>
           <input type="text" formControlName="nombreFantasia" placeholder="Ej: Transportes Rápidos">
+          @if (form.get('nombreFantasia')?.hasError('required') && form.get('nombreFantasia')?.touched) {
+            <span class="error">El nombre de fantasía es requerido.</span>
+          } @else if (form.get('nombreFantasia')?.hasError('soloEspacios') && form.get('nombreFantasia')?.touched) {
+            <span class="error">El nombre de fantasía no puede quedar vacío.</span>
+          }
         </div>
 
         <div class="campo">
@@ -35,6 +45,9 @@
             <option value="Exento">Exento</option>
             <option value="ConsumidorFinal">Consumidor Final</option>
           </select>
+          @if (form.get('condicion')?.invalid && form.get('condicion')?.touched) {
+            <span class="error">Debe seleccionar una condición de IVA.</span>
+          }
         </div>
 
         <div formGroupName="direccion">
@@ -71,11 +84,21 @@
         <div class="campo">
           <label>Teléfono<span class="obligatorio">*</span>: </label>
           <input type="number" formControlName="telefono" placeholder="Ej: 01145678900">
+          @if (form.get('telefono')?.invalid && form.get('telefono')?.touched) {
+            <span class="error">El teléfono es requerido.</span>
+          }
         </div>
 
         <div class="campo">
           <label>Email<span class="obligatorio">*</span>: </label>
           <input type="email" formControlName="email" placeholder="ejemplo@empresa.com">
+          @if (form.get('email')?.hasError('required') && form.get('email')?.touched) {
+            <span class="error">El email es requerido.</span>
+          } @else if (form.get('email')?.hasError('soloEspacios') && form.get('email')?.touched) {
+            <span class="error">El email no puede quedar vacío.</span>
+          } @else if (form.get('email')?.hasError('email') && form.get('email')?.touched) {
+            <span class="error">Debe ingresar un email válido.</span>
+          }
         </div>
 
         <div class="botones">

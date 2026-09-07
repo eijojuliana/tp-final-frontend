@@ -29,7 +29,7 @@ export class ClienteForm {
     nombre: ['', [Validators.required, this.validacion.sinEspacios, Validators.pattern(/^[A-Za-zÁÉÍÓÚÜáéíóúüÑñ\s]+$/)]],
     apellido: ['', [Validators.required, this.validacion.sinEspacios, Validators.pattern(/^[A-Za-zÁÉÍÓÚÜáéíóúüÑñ\s]+$/)]],
     dni: [0, [Validators.required, Validators.pattern(/^\d{6,9}$/)]],
-    fechaNacimiento: ['',[Validators.required, this.validacion.fechaValida]],
+    fechaNacimiento: ['',[Validators.required, this.validacion.fechaValida, this.validacion.edadMinima(16)]],
   });
 
   constructor() {

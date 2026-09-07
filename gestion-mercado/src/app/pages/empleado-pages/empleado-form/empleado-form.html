@@ -38,7 +38,11 @@
         <div class="campo">
           <label>Fecha de Nacimiento<span class="obligatorio">*</span>: </label>
           <input type="date" formControlName="fechaNacimiento">
-          @if (form.get('fechaNacimiento')?.invalid && form.get('fechaNacimiento')?.touched) {
+          @if (form.get('fechaNacimiento')?.hasError('required') && form.get('fechaNacimiento')?.touched) {
+          <span class="error">La fecha de nacimiento es requerida.</span>
+          } @else if (form.get('fechaNacimiento')?.hasError('edadMinima') && form.get('fechaNacimiento')?.touched) {
+          <span class="error">El empleado debe ser mayor o igual a 16 años.</span>
+          } @else if (form.get('fechaNacimiento')?.invalid && form.get('fechaNacimiento')?.touched) {
           <span class="error">El campo no puede estar vacío y debe ser una fecha válida (menor a 120 y mayor a 0
             años)</span>
           }

@@ -47,4 +47,22 @@ export class Validaciones {
             return null;
         };
   }
+
+  public edadMinima(edad: number) {
+        return (control: any) => {
+            const valor = control?.value;
+            if (!valor) return null;
+            const nacimiento = new Date(valor);
+            const hoy = new Date();
+            let anos = hoy.getFullYear() - nacimiento.getFullYear();
+            const mes = hoy.getMonth() - nacimiento.getMonth();
+            if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) {
+                anos--;
+            }
+            if (anos < edad) {
+                return { edadMinima: { requerida: edad, actual: anos } };
+            }
+            return null;
+        };
+  }
 }

@@ -21,17 +21,23 @@
           <div class="campo">
             <label>Tipo de pedido<span class="obligatorio">*</span></label>
             <div class="pill-group">
-              <button type="button" class="pill" [class.active]="form.get('tipoPedido')?.value === 'COMPRA'" (click)="form.get('tipoPedido')?.setValue('COMPRA')" [disabled]="pedidoToEdit?.estado === 'FINALIZADO'">COMPRA</button>
-              <button type="button" class="pill" [class.active]="form.get('tipoPedido')?.value === 'VENTA'" (click)="form.get('tipoPedido')?.setValue('VENTA')" [disabled]="pedidoToEdit?.estado === 'FINALIZADO'">VENTA</button>
+              <button type="button" class="pill" [class.active]="form.get('tipoPedido')?.value === 'COMPRA'" (click)="seleccionarTipoPedido('COMPRA')" [disabled]="pedidoToEdit?.estado === 'FINALIZADO'">COMPRA</button>
+              <button type="button" class="pill" [class.active]="form.get('tipoPedido')?.value === 'VENTA'" (click)="seleccionarTipoPedido('VENTA')" [disabled]="pedidoToEdit?.estado === 'FINALIZADO'">VENTA</button>
             </div>
+            @if (form.get('tipoPedido')?.invalid && form.get('tipoPedido')?.touched) {
+              <span class="error">Debe seleccionar un tipo de pedido (COMPRA o VENTA).</span>
+            }
           </div>
 
           <div class="campo">
             <label>Método de pago<span class="obligatorio">*</span></label>
             <div class="pill-group">
-              <button type="button" class="pill" [class.active]="form.get('tipoTransaccion')?.value === 'EFECTIVO'" (click)="form.get('tipoTransaccion')?.setValue('EFECTIVO')" [disabled]="pedidoToEdit?.estado === 'FINALIZADO'">EFECTIVO</button>
-              <button type="button" class="pill" [class.active]="form.get('tipoTransaccion')?.value === 'TRANSFERENCIA'" (click)="form.get('tipoTransaccion')?.setValue('TRANSFERENCIA')" [disabled]="pedidoToEdit?.estado === 'FINALIZADO'">TRANSFERENCIA</button>
+              <button type="button" class="pill" [class.active]="form.get('tipoTransaccion')?.value === 'EFECTIVO'" (click)="seleccionarTipoTransaccion('EFECTIVO')" [disabled]="pedidoToEdit?.estado === 'FINALIZADO'">EFECTIVO</button>
+              <button type="button" class="pill" [class.active]="form.get('tipoTransaccion')?.value === 'TRANSFERENCIA'" (click)="seleccionarTipoTransaccion('TRANSFERENCIA')" [disabled]="pedidoToEdit?.estado === 'FINALIZADO'">TRANSFERENCIA</button>
             </div>
+            @if (form.get('tipoTransaccion')?.invalid && form.get('tipoTransaccion')?.touched) {
+              <span class="error">Debe seleccionar un método de pago (EFECTIVO o TRANSFERENCIA).</span>
+            }
           </div>
 
           <div class="campo">
@@ -57,6 +63,11 @@
                 <div class="placeholder-selector">Seleccione tipo de pedido primero</div>
               }
             </div>
+            @if (form.get('tipoPedido')?.value === 'COMPRA' && form.get('destino_id')?.touched && !form.get('destino_id')?.value) {
+              <span class="error">Debe seleccionar un proveedor.</span>
+            } @else if (form.get('tipoPedido')?.value === 'VENTA' && form.get('origen_id')?.touched && !form.get('origen_id')?.value) {
+              <span class="error">Debe seleccionar un cliente.</span>
+            }
           </div>
 
           @if (form.get('tipoTransaccion')?.value === 'TRANSFERENCIA' && form.get('tipoPedido')?.value) {
